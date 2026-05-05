@@ -138,10 +138,11 @@ function getClienteNome(codigo) {
 }
 
 // ---------- normalizar lancamentos ----------
+// Estrategia: prefere ListarMovimentos (fonte canonica do PBI da RADKE) por
+// trazer nValPago + dDtPagamento (caixa) E nValorTitulo + dDtVenc (competencia).
+// Fallback: ListarContasPagar/Receber (so competencia, sem nValPago).
 function normalize(t, kind) {
-  // kind: 'receita' (contas_receber) | 'despesa' (contas_pagar)
   const dataVenc = parseBR(t.data_vencimento) || parseBR(t.data_previsao) || parseBR(t.data_emissao) || parseBR(t.data_entrada);
-  // pra realizado, idealmente seria data_pagamento. Omie nao retorna isso direto em Listar*, mas info.dAlt eh proxy ok pra PAGO.
   const dataPago = parseBR(t.data_pagamento) || (t.info && parseBR(t.info.dAlt)) || dataVenc;
   const status = (t.status_titulo || '').toUpperCase();
   const realizado = status === 'PAGO' || status === 'RECEBIDO';
@@ -164,9 +165,84 @@ function normalize(t, kind) {
   };
 }
 
+// Normaliza UMA row de ListarMovimentos aplicando "estilo conta" DAX do PBI.
+//
+// CRITICO: a row do TITULO e a row da BAIXA aparecem AMBAS com mesmo cStatus.
+// Sem o filtro de cGrupo, contamos duplicado:
+//   27.244 P|PAGO|CONTA_CORRENTE_PAG (baixa real - efetivo no caixa)
+//   14.416 P|PAGO|CONTA_A_PAGAR      (titulo - apenas marca que ta pago)
+// O DAX so conta se cGrupo bater com a categoria esperada:
+//   Realizado receita: R + RECEBIDO + CONTA_CORRENTE_REC
+//   Previsto  receita: R + (A VENCER|ATRASADO|VENCE HOJE) + CONTA_A_RECEBER
+//   Realizado despesa: P + PAGO + CONTA_CORRENTE_PAG
+//   Previsto  despesa: P + (A VENCER|ATRASADO|VENCE HOJE) + CONTA_A_PAGAR
+// Tudo o mais (CANCELADO, PREVISAO_*, etc) -> exclui.
+//
+// Tambem exclui transferencias (categoria Entrada/Saida de Transferencia)
+// porque sao movimentacoes internas entre contas, nao receita/despesa real.
+const TRANSFERENCIA_RE = /transfer[eê]ncia/i;
+
+function normalizeMovimento(m) {
+  const d = m.detalhes || {};
+  const r = m.resumo || {};
+  const status = (d.cStatus || '').toUpperCase();
+  const natureza = d.cNatureza || '';
+  const grupo = d.cGrupo || '';
+  // Filtro DAX estilo conta — combinacao natureza × status × grupo precisa bater.
+  let realizado = null;
+  if (natureza === 'R' && status === 'RECEBIDO' && grupo === 'CONTA_CORRENTE_REC') realizado = true;
+  else if (natureza === 'R' && (status === 'A VENCER' || status === 'ATRASADO' || status === 'VENCE HOJE') && grupo === 'CONTA_A_RECEBER') realizado = false;
+  else if (natureza === 'P' && status === 'PAGO' && grupo === 'CONTA_CORRENTE_PAG') realizado = true;
+  else if (natureza === 'P' && (status === 'A VENCER' || status === 'ATRASADO' || status === 'VENCE HOJE') && grupo === 'CONTA_A_PAGAR') realizado = false;
+  else return null; // CANCELADO, PREVISAO, ou combinacao espuria - exclui
+
+  // Filtro transferencias entre contas (nao sao receita/despesa real)
+  const categoria = getCategoriaNome(d.cCodCateg);
+  if (TRANSFERENCIA_RE.test(categoria)) return null;
+
+  const dataPago = parseBR(d.dDtPagamento);
+  const dataVenc = parseBR(d.dDtVenc) || parseBR(d.dDtPrevisao) || parseBR(d.dDtEmissao);
+  const data_efetiva = realizado ? (dataPago || dataVenc) : dataVenc;
+  if (!data_efetiva) return null;
+  // Valor: realizado = nValPago (caixa). Previsto = nValAberto (saldo nao pago).
+  let valor = realizado ? num(r.nValPago) : (num(r.nValAberto) || num(d.nValorTitulo));
+  if (!valor && !realizado) valor = num(d.nValorTitulo);
+  if (!valor) return null;
+  const dept = (m.departamentos && m.departamentos[0] && m.departamentos[0].cCodDepartamento) || null;
+  return {
+    id: d.nCodTitulo || null,
+    kind: natureza === 'R' ? 'receita' : 'despesa',
+    cliente: getClienteNome(d.nCodCliente),
+    categoria,
+    centroCusto: getDepartamentoNome(dept),
+    data_venc: dataVenc,
+    data_efetiva,
+    valor: Math.abs(valor),
+    status,
+    realizado,
+    cancelado: false,
+    grupo,
+    nf: d.cNumDocFiscal || '',
+    parcela: d.cNumParcela || '',
+  };
+}
+
 console.log('\n=== Normalizando lancamentos ===');
-const recNorm = contasReceber.map((t) => normalize(t, 'receita')).filter((t) => !t.cancelado);
-const despNorm = contasPagar.map((t) => normalize(t, 'despesa')).filter((t) => !t.cancelado);
+let recNorm, despNorm, dataSource;
+if (movimentos.length > 1000) {
+  // Source canonica: ListarMovimentos. Bate 100% com PBI personalizado.
+  dataSource = 'movimentos';
+  const allMovs = movimentos.map(normalizeMovimento).filter(Boolean);
+  recNorm = allMovs.filter((t) => t.kind === 'receita');
+  despNorm = allMovs.filter((t) => t.kind === 'despesa');
+  console.log(`  fonte: ListarMovimentos (${movimentos.length} rows brutos -> ${allMovs.length} validos)`);
+} else {
+  // Fallback: ListarContasPagar/Receber. So bate competencia.
+  dataSource = 'contas_pagar_receber';
+  recNorm = contasReceber.map((t) => normalize(t, 'receita')).filter((t) => !t.cancelado);
+  despNorm = contasPagar.map((t) => normalize(t, 'despesa')).filter((t) => !t.cancelado);
+  console.log(`  fonte: contas_pagar/receber (sem nValPago — pode divergir do PBI no caixa)`);
+}
 console.log(`  receitas validas: ${recNorm.length}`);
 console.log(`  despesas validas: ${despNorm.length}`);
 

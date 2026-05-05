@@ -22,6 +22,7 @@ const SOURCES = [
   'pages-1.jsx',
   'pages-2.jsx',
   'pages-3.jsx',
+  'pages-4.jsx',
 ];
 
 (async () => {
@@ -56,6 +57,10 @@ const SOURCES = [
     curva_abc: '10 Curva ABC',
     marketing: '11 Marketing ADS',
     valuation: '12 Valuation',
+    hierarquia: '13 Hierarquia ADS',
+    detalhado: '14 Detalhado',
+    profunda_cliente: '15 Profunda Cliente',
+    crm: '16 CRM',
   };
   function App() {
     var p = useState('overview'); var page = p[0], setPage = p[1];
@@ -116,6 +121,10 @@ const SOURCES = [
       curva_abc: PageCurvaABC,
       marketing: PageMarketing,
       valuation: PageValuation,
+      hierarquia: PageHierarquia,
+      detalhado: PageDetalhado,
+      profunda_cliente: PageProfundaCliente,
+      crm: PageCRM,
     })[page];
 
     return (

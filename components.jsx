@@ -54,6 +54,10 @@ const Sidebar = ({ active, onSelect, open }) => {
     { id: "curva_abc", icon: "chart", label: "Curva ABC" },
     { id: "marketing", icon: "invest", label: "Marketing ADS" },
     { id: "valuation", icon: "invest", label: "Valuation" },
+    { id: "hierarquia", icon: "chart", label: "Hierarquia ADS" },
+    { id: "detalhado", icon: "report", label: "Detalhado" },
+    { id: "profunda_cliente", icon: "user", label: "Profunda Cliente" },
+    { id: "crm", icon: "money", label: "CRM" },
     { id: "settings", icon: "settings", label: "Configurações", badge: "EM BREVE" },
   ];
   const renderItem = (it) => (
@@ -103,6 +107,10 @@ const PAGE_TITLES = {
   curva_abc: "Curva ABC de Produtos",
   marketing: "Marketing ADS",
   valuation: "Valuation",
+  hierarquia: "Hierarquia ADS",
+  detalhado: "Detalhado",
+  profunda_cliente: "Profunda Cliente",
+  crm: "CRM",
 };
 
 const DATE_RANGES = [

@@ -100,13 +100,24 @@ async function fetchAllPaginated(path, method, baseParam, dataKey, label, opts) 
   writePage(1, first[dataKey] || []);
   console.log(`  [${label}] ${totalRegs} registros em ${totalPages} paginas`);
 
+  let failed = 0;
   for (let p = 2; p <= totalPages; p++) {
     let arr = readCachedPage(p);
     if (!arr) {
       await sleep(PAGE_DELAY_MS);
-      const r = await call(path, method, buildParams(p, PAGE_SIZE));
-      arr = r[dataKey] || [];
-      writePage(p, arr);
+      try {
+        const r = await call(path, method, buildParams(p, PAGE_SIZE));
+        arr = r[dataKey] || [];
+        writePage(p, arr);
+      } catch (e) {
+        failed++;
+        console.error(`\n  [${label}] pag ${p} FAIL: ${e.message.slice(0, 80)} — pulando, segue`);
+        if (failed > 50) {
+          console.error(`  [${label}] ABORT: >50 falhas seguidas, parando esse metodo`);
+          break;
+        }
+        continue;
+      }
     }
     if (p % 10 === 0 || p === totalPages) process.stdout.write(`  [${label}] pag ${p}/${totalPages}\r`);
   }
