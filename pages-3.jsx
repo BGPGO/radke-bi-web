@@ -905,8 +905,8 @@ const PageValuation = () => {
 
   return (
     <div className="page">
-      <div className="report-toolbar no-print">
-        <div>
+      <div className="report-toolbar no-print" style={{ flexWrap: "wrap", minWidth: 0 }}>
+        <div style={{ minWidth: 0 }}>
           <h1 style={{ margin: 0 }}>Valuation — Fluxo de Caixa Descontado</h1>
           <div className="status-line">
             Projecao de 5 anos · YTD {monthCount} {monthCount === 1 ? "mes" : "meses"} de {REF_YEAR} · WACC {premissas.wacc}% · g {premissas.perpetuity_growth}%
@@ -921,21 +921,21 @@ const PageValuation = () => {
       </div>
 
       {/* ============ Premissas editaveis ============ */}
-      <div className="card">
+      <div className="card" style={{ minWidth: 0 }}>
         <h2 className="card-title">Premissas editaveis</h2>
-        <div className="row" style={{ gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)", gap: 16 }}>
-          <div>
+        <div className="row" style={{ gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)", gap: 16, minWidth: 0 }}>
+          <div style={{ minWidth: 0 }}>
             <h3 style={{ fontSize: 12, color: "var(--fg-3)", textTransform: "uppercase", letterSpacing: 0.6, marginBottom: 12 }}>Crescimento da Receita</h3>
-            <div className="row" style={{ gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div className="row" style={{ gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)", gap: 12, minWidth: 0 }}>
               <PctSlider label={`Ano 2 (${REF_YEAR + 1})`} value={premissas.growth_year2} onChange={(v) => updatePremissa({ growth_year2: v })} min={-20} max={100} />
               <PctSlider label={`Ano 3 (${REF_YEAR + 2})`} value={premissas.growth_year3} onChange={(v) => updatePremissa({ growth_year3: v })} min={-20} max={100} />
               <PctSlider label="IPCA (anos 4-5)" value={premissas.ipca} onChange={(v) => updatePremissa({ ipca: v })} min={0} max={20} step={0.1} />
               <PctSlider label="Crescimento perpetuo (g)" value={premissas.perpetuity_growth} onChange={(v) => updatePremissa({ perpetuity_growth: v })} min={0} max={20} step={0.5} />
             </div>
           </div>
-          <div>
+          <div style={{ minWidth: 0 }}>
             <h3 style={{ fontSize: 12, color: "var(--fg-3)", textTransform: "uppercase", letterSpacing: 0.6, marginBottom: 12 }}>Taxa de desconto e margem</h3>
-            <div className="row" style={{ gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+            <div className="row" style={{ gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)", gap: 12, minWidth: 0 }}>
               <PctSlider label="WACC" value={premissas.wacc} onChange={(v) => updatePremissa({ wacc: v })} min={5} max={50} />
               <PctSlider label="Margem simulada" value={premissas.simulated_margin} onChange={(v) => updatePremissa({ simulated_margin: v })} min={-20} max={50} />
             </div>
@@ -961,9 +961,9 @@ const PageValuation = () => {
       </div>
 
       {/* ============ Tabela de projecao 5 anos ============ */}
-      <div className="card">
+      <div className="card" style={{ minWidth: 0 }}>
         <h2 className="card-title">Projecao 5 anos — Receita, EBITDA, FCF, Valor Presente</h2>
-        <div className="t-scroll">
+        <div className="t-scroll" style={{ overflowX: "auto" }}>
           <table className="t">
             <thead>
               <tr>
@@ -1021,27 +1021,28 @@ const PageValuation = () => {
       <div className="card" style={{
         background: "linear-gradient(135deg, rgba(34,211,238,0.10), rgba(34,211,238,0.02))",
         borderColor: "rgba(34,211,238,0.30)",
+        minWidth: 0,
       }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
-          <div>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16, minWidth: 0 }}>
+          <div style={{ minWidth: 0 }}>
             <div style={{ fontSize: 11, color: "var(--fg-3)", textTransform: "uppercase", letterSpacing: 0.8, marginBottom: 6 }}>
               Valuation Total (Enterprise Value)
             </div>
-            <div style={{ fontSize: 38, fontWeight: 800, color: dcf.totalValuation >= 0 ? "var(--cyan)" : "var(--red)", lineHeight: 1.1 }}>
+            <div style={{ fontSize: 38, fontWeight: 800, color: dcf.totalValuation >= 0 ? "var(--cyan)" : "var(--red)", lineHeight: 1.1, wordBreak: "break-word" }}>
               {fmtMoneyM(dcf.totalValuation)}
             </div>
             <div style={{ fontSize: 12, color: "var(--fg-3)", marginTop: 6 }}>
               WACC {premissas.wacc}% · Crescimento perpetuo {premissas.perpetuity_growth}% · Margem {dcf.margemPct.toFixed(1).replace(".", ",")}%
             </div>
           </div>
-          <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
-            <div>
+          <div style={{ display: "flex", gap: 24, flexWrap: "wrap", minWidth: 0 }}>
+            <div style={{ minWidth: 0 }}>
               <div style={{ fontSize: 11, color: "var(--fg-3)", textTransform: "uppercase" }}>VP Fluxos (5a)</div>
-              <div style={{ fontSize: 18, fontWeight: 700, color: "var(--green)" }}>R$ {formatBR(dcf.pvFCF, 0)}</div>
+              <div style={{ fontSize: 18, fontWeight: 700, color: "var(--green)", wordBreak: "break-word" }}>R$ {formatBR(dcf.pvFCF, 0)}</div>
             </div>
-            <div>
+            <div style={{ minWidth: 0 }}>
               <div style={{ fontSize: 11, color: "var(--fg-3)", textTransform: "uppercase" }}>VP Terminal</div>
-              <div style={{ fontSize: 18, fontWeight: 700, color: "var(--cyan)" }}>R$ {formatBR(dcf.pvTerminal, 0)}</div>
+              <div style={{ fontSize: 18, fontWeight: 700, color: "var(--cyan)", wordBreak: "break-word" }}>R$ {formatBR(dcf.pvTerminal, 0)}</div>
             </div>
           </div>
         </div>
@@ -1052,35 +1053,39 @@ const PageValuation = () => {
       </div>
 
       {/* ============ Análise textual (export-friendly) ============ */}
-      <div className="card" style={{ marginTop: 16 }}>
+      <div className="card" style={{ marginTop: 16, minWidth: 0 }}>
         <h2 className="card-title">Memória de Cálculo e Premissas</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)", gap: 24, marginTop: 12 }}>
-          <div>
+        <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)", gap: 24, marginTop: 12, minWidth: 0 }}>
+          <div style={{ minWidth: 0 }}>
             <h3 style={{ fontSize: 12, color: "var(--fg-3)", textTransform: "uppercase", letterSpacing: 0.6, marginBottom: 10 }}>Inputs do período</h3>
-            <table className="t" style={{ width: "100%" }}>
-              <tbody>
-                <tr><td>Ano de referência</td><td className="num"><b>{REF_YEAR}</b></td></tr>
-                <tr><td>Meses com dados</td><td className="num"><b>{monthCount} {monthCount === 1 ? "mês" : "meses"}</b></td></tr>
-                <tr><td>Receita YTD</td><td className="num">R$ {formatBR(totalRecYTD, 0)}</td></tr>
-                <tr><td>Despesa YTD</td><td className="num">R$ {formatBR(totalDespYTD, 0)}</td></tr>
-                <tr><td>Resultado YTD</td><td className="num"><b>R$ {formatBR(resultadoYTD, 0)}</b></td></tr>
-                <tr><td>Margem efetiva (YTD)</td><td className="num">{margemEfetiva.toFixed(2).replace(".", ",")}%</td></tr>
-                <tr><td>Receita anualizada (Ano 1)</td><td className="num"><b>R$ {formatBR(dcf.ano1Receita, 0)}</b></td></tr>
-              </tbody>
-            </table>
+            <div style={{ overflowX: "auto" }}>
+              <table className="t" style={{ width: "100%" }}>
+                <tbody>
+                  <tr><td>Ano de referência</td><td className="num"><b>{REF_YEAR}</b></td></tr>
+                  <tr><td>Meses com dados</td><td className="num"><b>{monthCount} {monthCount === 1 ? "mês" : "meses"}</b></td></tr>
+                  <tr><td>Receita YTD</td><td className="num">R$ {formatBR(totalRecYTD, 0)}</td></tr>
+                  <tr><td>Despesa YTD</td><td className="num">R$ {formatBR(totalDespYTD, 0)}</td></tr>
+                  <tr><td>Resultado YTD</td><td className="num"><b>R$ {formatBR(resultadoYTD, 0)}</b></td></tr>
+                  <tr><td>Margem efetiva (YTD)</td><td className="num">{margemEfetiva.toFixed(2).replace(".", ",")}%</td></tr>
+                  <tr><td>Receita anualizada (Ano 1)</td><td className="num"><b>R$ {formatBR(dcf.ano1Receita, 0)}</b></td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-          <div>
+          <div style={{ minWidth: 0 }}>
             <h3 style={{ fontSize: 12, color: "var(--fg-3)", textTransform: "uppercase", letterSpacing: 0.6, marginBottom: 10 }}>Premissas aplicadas</h3>
-            <table className="t" style={{ width: "100%" }}>
-              <tbody>
-                <tr><td>Crescimento Ano 2</td><td className="num">{premissas.growth_year2.toFixed(1).replace(".", ",")}%</td></tr>
-                <tr><td>Crescimento Ano 3</td><td className="num">{premissas.growth_year3.toFixed(1).replace(".", ",")}%</td></tr>
-                <tr><td>IPCA (anos 4-5)</td><td className="num">{premissas.ipca.toFixed(1).replace(".", ",")}%</td></tr>
-                <tr><td>WACC</td><td className="num"><b>{premissas.wacc.toFixed(1).replace(".", ",")}%</b></td></tr>
-                <tr><td>Crescimento perpétuo (g)</td><td className="num">{premissas.perpetuity_growth.toFixed(1).replace(".", ",")}%</td></tr>
-                <tr><td>Margem aplicada</td><td className="num"><b>{dcf.margemPct.toFixed(2).replace(".", ",")}%</b> ({premissas.use_simulated_margin ? "simulada" : "efetiva"})</td></tr>
-              </tbody>
-            </table>
+            <div style={{ overflowX: "auto" }}>
+              <table className="t" style={{ width: "100%" }}>
+                <tbody>
+                  <tr><td>Crescimento Ano 2</td><td className="num">{premissas.growth_year2.toFixed(1).replace(".", ",")}%</td></tr>
+                  <tr><td>Crescimento Ano 3</td><td className="num">{premissas.growth_year3.toFixed(1).replace(".", ",")}%</td></tr>
+                  <tr><td>IPCA (anos 4-5)</td><td className="num">{premissas.ipca.toFixed(1).replace(".", ",")}%</td></tr>
+                  <tr><td>WACC</td><td className="num"><b>{premissas.wacc.toFixed(1).replace(".", ",")}%</b></td></tr>
+                  <tr><td>Crescimento perpétuo (g)</td><td className="num">{premissas.perpetuity_growth.toFixed(1).replace(".", ",")}%</td></tr>
+                  <tr><td>Margem aplicada</td><td className="num"><b>{dcf.margemPct.toFixed(2).replace(".", ",")}%</b> ({premissas.use_simulated_margin ? "simulada" : "efetiva"})</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 

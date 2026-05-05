@@ -1,8 +1,13 @@
 /* BIT/BGP Finance — Pages 2: Fluxo, Tesouraria, Comparativo */
-const { useState, useMemo } = React;
+const { useState, useMemo, useEffect } = React;
+
+// useIsMobile é declarado em pages-1.jsx e disponibilizado globalmente no bundle
+// concatenado (build-jsx.cjs). Reutilizado aqui pra ajustar height/showLabels dos
+// TrendCharts em mobile.
 
 const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, month }) => {
   const B = useMemo(() => window.getBit(statusFilter, drilldown, year, month), [statusFilter, drilldown, year, month]);
+  const isMobile = useIsMobile();
   const [view, setView] = useState("horizontal");
   const [range, setRange] = useState("12M");
   const months6 = B.MONTHS_FULL.slice(0, 6);
@@ -234,7 +239,8 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
           values={B.SALDOS_MES}
           labels={B.MONTHS.map(m => m.charAt(0).toUpperCase() + m.slice(1) + " " + String((B.META && B.META.ref_year) || "").slice(-2))}
           color="var(--cyan)"
-          height={300}
+          height={isMobile ? 200 : 300}
+          showLabels={!isMobile}
           gradientId="fl-saldos"
         />
       </div>
@@ -244,6 +250,7 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
 
 const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, month }) => {
   const B = useMemo(() => window.getBit(statusFilter, drilldown, year, month), [statusFilter, drilldown, year, month]);
+  const isMobile = useIsMobile();
   const SEG = window.BIT_SEGMENTS || {};
   const recebido = (SEG.realizado && SEG.realizado.KPIS && SEG.realizado.KPIS.TOTAL_RECEITA) || 0;
   const aReceber = (SEG.a_pagar_receber && SEG.a_pagar_receber.KPIS && SEG.a_pagar_receber.KPIS.TOTAL_RECEITA) || 0;
@@ -394,7 +401,7 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
             </div>
             <div style={{ marginTop: 8 }}>
               <div className="kpi-label" style={{ marginBottom: 6 }}>Projeção mensal (saldo + a receber − a pagar)</div>
-              <TrendChart values={series} labels={labels} color="var(--cyan)" height={200} showPoints={true} showLabels={true} gradientId="ts-proj" />
+              <TrendChart values={series} labels={labels} color="var(--cyan)" height={isMobile ? 160 : 200} showPoints={true} showLabels={!isMobile} gradientId="ts-proj" />
               <div style={{ display: 'flex', gap: 24, marginTop: 8, fontSize: 11, color: 'var(--mute)' }}>
                 <span>Mínima projetada: <b style={{ color: minProj >= 0 ? 'var(--green)' : 'var(--red)' }}>{B.fmt(minProj)}</b></span>
                 <span>Máxima projetada: <b style={{ color: 'var(--green)' }}>{B.fmt(maxProj)}</b></span>
@@ -416,7 +423,7 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
               <div><div className="kpi-label">Saldo atual (planilha)</div><div style={{ fontFamily: "var(--font-mono)", fontWeight: 600, color: "var(--cyan)" }}>{B.fmt(SALDOS_REAIS.last.total)}</div></div>
             )}
           </div>
-          <TrendChart values={saldosCum} labels={B.MONTHS} color="var(--cyan)" height={200} showPoints={true} showLabels={true} gradientId="ts-saldo" />
+          <TrendChart values={saldosCum} labels={B.MONTHS} color="var(--cyan)" height={isMobile ? 160 : 200} showPoints={true} showLabels={!isMobile} gradientId="ts-saldo" />
           <div className="status-line" style={{ marginTop: 6 }}>
             Saldo cumulativo: parte de R$ {(B.fmt(saldoInicial) || "0").replace("R$ ", "")} no início do ano e acumula receitas − despesas mês a mês.
           </div>

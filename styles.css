@@ -698,13 +698,24 @@ table.t tr.total td {
 .bar-row .pct { font-family: var(--font-mono); font-size: 10.5px; color: var(--mute); margin-left: 6px; }
 
 .bar-list.with-bars { gap: 12px; }
-.bar-list.with-bars .bar-row { grid-template-columns: 1fr; }
+.bar-list.with-bars .bar-row { grid-template-columns: 1fr; min-width: 0; }
 .bar-list.with-bars .row-meta {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  gap: 8px;
+  min-width: 0;
   margin-bottom: 5px;
 }
+/* Garante que rótulos longos encolham com ellipsis e o valor não seja empurrado pra fora */
+.bar-list.with-bars .row-meta .label {
+  min-width: 0;
+  flex: 1 1 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bar-list.with-bars .row-meta .val { flex-shrink: 0; }
 .bar-list.with-bars .track {
   height: 4px;
   background: var(--surface-3);
@@ -1377,10 +1388,19 @@ table.t tr.total td {
     transform: translateX(-100%);
     transition: transform 240ms cubic-bezier(.2,.7,.2,1);
     box-shadow: 30px 0 60px -10px rgba(0,0,0,0);
+    /* V2-1: drawer mobile precisa scrollar verticalmente — sobrescreve overflow:hidden da regra base */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
   }
   .sidebar.open {
     transform: translateX(0);
     box-shadow: 30px 0 60px -10px rgba(0,0,0,0.7);
+  }
+  /* V2-1: spacer não pode forçar altura grande no drawer; sb-user flui no fim */
+  .sidebar .sb-spacer { flex: 0 0 12px; }
+  .sidebar .sb-user {
+    background: linear-gradient(180deg, transparent, rgba(34,211,238,0.05));
   }
   .sidebar-backdrop {
     position: fixed;
@@ -1463,9 +1483,21 @@ table.t tr.total td {
   .header .btn-primary { padding: 0; width: 38px; height: 38px; justify-content: center; gap: 0; }
   .header .btn-primary .btn-text { display: none; }
 
-  /* Brand smaller */
-  .sb-brand { padding: 0 18px; height: 64px; }
-  .sb-logo-img { max-width: 140px; }
+  /* Brand smaller — V2-1: ganha altura comprimindo área da logo */
+  .sb-brand { padding: 0 18px; height: 58px; }
+  .sb-logo-img { max-width: 130px; }
+
+  /* V2-1: sub-headers Geral/Outros mais compactos pra ganhar ~20px */
+  .sb-section { padding: 14px 16px 6px; }
+
+  /* V2-1: spacer zerado em phone — sb-user flui logo após o último item */
+  .sidebar .sb-spacer { flex: 0 0 4px; }
+
+  /* V2-1: rodapé do usuário mais enxuto, com border-top mantida */
+  .sb-user { padding: 10px 14px 12px; gap: 8px; }
+  .sb-user .avatar { width: 32px; height: 32px; font-size: 11px; }
+  .sb-user .who b { font-size: 12.5px; }
+  .sb-user .who span { font-size: 10.5px; }
 
   /* OV bars compress */
   .ov-bars { padding-left: 38px; padding-top: 24px; }
@@ -1506,8 +1538,8 @@ table.t tr.total td {
   /* Drawer takes full width */
   .drawer { width: 100vw; }
 
-  /* Sidebar items denser */
-  .sb-item { padding: 10px 12px; font-size: 13px; }
+  /* Sidebar items denser — V2-1: padding vertical reduzido pra caber 18 items + 2 headers */
+  .sb-item { padding: 8px 12px; font-size: 13px; margin-bottom: 1px; }
 
   /* Trend / indicator chart compact */
   .trend, .ind-line { height: 200px !important; }
@@ -1534,6 +1566,25 @@ table.t tr.total td {
   .indicator-card { padding: 12px 14px; }
 
   /* Resultado-card border keep */
+
+  /* Fluxo de Caixa — .metric-strip vira 1 coluna pra valores R$ caberem em 1 linha
+     (em ≤820px estava em 2x2, mas R$2.531.934,25 cortava em 354px de largura). */
+  .metric-strip { grid-template-columns: 1fr; }
+  .metric-strip .metric {
+    padding: 14px 16px;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .metric-strip .metric:nth-child(odd) { border-right: 0; }
+  .metric-strip .metric:last-child { border-bottom: 0; }
+  .metric-strip .m-value { font-size: 20px; }
+
+  /* Relatório IA: o .report tinha padding: 32px e o .report-toolbar não wrappava — estourava em 390px */
+  .report { padding: 16px; max-width: 100%; }
+  .report-cover { padding: 32px 8px 40px; }
+  .report-section h2 { font-size: 16px; }
+  .report-toolbar { flex-wrap: wrap; gap: 10px; }
+  .report-toolbar .actions { flex-wrap: wrap; }
 }
 
 /* Very small phones */
@@ -2231,6 +2282,13 @@ table.t tr.total td {
   .hier-cols-header { grid-template-columns: repeat(2, 1fr); gap: 16px; }
 }
 
+/* CRM "METAS COMERCIAIS" no mobile: 1 coluna full-width pra valores
+   como R$14.593.457 não quebrarem em 2 linhas. Override do bloco 1200px acima. */
+@media (max-width: 600px) {
+  .crm-meta { flex-direction: column; flex-wrap: nowrap; }
+  .crm-meta-box { flex: 1 1 auto; min-height: auto; }
+}
+
 /* ============================================================
    FATURAMENTO POR PRODUTO + MARKETING ADS — namespaces .fat-* / .mkt-*
    Telas refeitas pra ficar fiéis aos prints PBI (laranja #ff6b18).
@@ -2577,6 +2635,16 @@ table.t tr.total td {
   .fat-metric-value { font-size: 22px; }
   .fat-barrow, .mkt-barrow { grid-template-columns: 90px 1fr; }
   .fat-barrow-label, .mkt-barrow-label { font-size: 10px; }
+  /* O valor era posicionado fora do track (transform translate +100%) — estourava o card em mobile.
+     No mobile passa a ficar sobreposto no canto direito do track, com cor clara + sombra pra ler em cima da barra laranja. */
+  .fat-barrow-track, .mkt-barrow-track { overflow: hidden; }
+  .fat-barrow-val, .mkt-barrow-val {
+    right: 6px;
+    transform: translate(0, -50%);
+    color: #fff;
+    font-size: 10.5px;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.65);
+  }
 }
 
 /* ===== BI Export modal + print multi-tela ===== */
@@ -2625,8 +2693,10 @@ table.t tr.total td {
   margin-left: 8px;
   white-space: nowrap;
 }
+/* Em telas estreitas, mantém só o ícone do botão Exportar BI pra caber no header */
 @media (max-width: 900px) {
-  .hd-export-bi span:not(:first-child) { display: none; }
+  .hd-export-bi span { display: none; }
+  .hd-export-bi { padding: 0; width: 38px; justify-content: center; gap: 0; margin-left: 0; }
 }
 
 /* BI Print mode: tema escuro preservado, cada tela vira uma página A4 */

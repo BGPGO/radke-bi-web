@@ -868,7 +868,7 @@ const PageCRM = ({ statusFilter, year, month, drilldown, setDrilldown }) => {
       </div>
 
       {/* KPIs topo (5: Leads, Conversão, Vendas no mês, Pipeline, Ganho) */}
-      <div className="kpi-row" style={{ gridTemplateColumns: "repeat(5, 1fr)" }}>
+      <div className="kpi-row">
         <_MiniKpi4 tone="cyan" label="Leads" value={_fmtInt4(T.totalLeads)} nonMonetary hint="oportunidades" />
         <_MiniKpi4 tone="green" label="Conversão" value={T.taxaConversao.toFixed(1).replace(".", ",") + "%"} nonMonetary hint={`${T.totalGanhos} de ${T.totalLeads}`} />
         <_MiniKpi4 tone="amber" label={`Vendas em ${MESES_NOMES[mesAtualIdx].slice(0,3)}`} value={_fmtInt4(ganhosMesQtd)} nonMonetary hint={`R$ ${_fmtBR4(ganhoMesAtual, 0)}`} />

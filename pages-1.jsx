@@ -1,5 +1,19 @@
 /* BIT/BGP Finance — Pages 1: Overview, Indicators, Receita, Despesa */
-const { useState } = React;
+const { useState, useEffect } = React;
+
+// Hook responsivo: detecta viewport mobile (<= 600px). Usado para ajustar SVGs com
+// preserveAspectRatio="none" cujas coords sao plotadas em px absolutos.
+const useIsMobile = (breakpoint = 600) => {
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth <= breakpoint : false
+  );
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth <= breakpoint);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [breakpoint]);
+  return isMobile;
+};
 
 const RangePills = ({ value, onChange }) => {
   const opts = ["7D", "30D", "90D", "YTD", "12M"];
@@ -72,8 +86,16 @@ const OverviewBars = ({ data, height = 220, year = "2026", onBarClick, activeIdx
 
 // Diverging line chart — line + zero baseline + value labels above/below points
 const IndicatorLine = ({ values, labels, height = 240, color = "var(--cyan)", format }) => {
-  const w = 1100, h = height;
-  const padX = 50, padTop = 36, padBottom = 36;
+  // No mobile reduzimos o viewBox horizontal (1100 -> 600) e a altura (240 -> 180).
+  // Como preserveAspectRatio="none" estica o conteudo pra preencher a largura do container,
+  // um viewBox mais estreito faz os pontos plotados em px absolutos ficarem espacados
+  // de forma proporcional ao espaco disponivel no mobile (~326px), evitando o achatamento.
+  const isMobile = useIsMobile();
+  const w = isMobile ? 600 : 1100;
+  const h = isMobile ? 180 : height;
+  const padX = isMobile ? 28 : 50;
+  const padTop = isMobile ? 28 : 36;
+  const padBottom = isMobile ? 28 : 36;
   const min = Math.min(0, ...values);
   const max = Math.max(0, ...values);
   const range = max - min || 1;
@@ -97,8 +119,20 @@ const IndicatorLine = ({ values, labels, height = 240, color = "var(--cyan)", fo
   const zeroY = yOf(0);
   const fmt = format || ((v) => window.BIT.fmt(v));
 
+  // Em mobile, mostramos label de valor Y apenas nos pontos extremos
+  // (primeiro, ultimo, max, min) pra evitar amassamento sobre a curva.
+  const labelIdxSet = (() => {
+    if (!isMobile || values.length <= 4) return null;
+    let maxI = 0, minI = 0;
+    for (let i = 1; i < values.length; i++) {
+      if (values[i] > values[maxI]) maxI = i;
+      if (values[i] < values[minI]) minI = i;
+    }
+    return new Set([0, values.length - 1, maxI, minI]);
+  })();
+
   return (
-    <svg className="ind-line" viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" style={{ width: "100%", height }}>
+    <svg className="ind-line" viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" style={{ width: "100%", height: h }}>
       <defs>
         <linearGradient id="ind-grad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor={color} stopOpacity="0.30"/>
@@ -111,12 +145,15 @@ const IndicatorLine = ({ values, labels, height = 240, color = "var(--cyan)", fo
       {pts.map((p, i) => {
         const v = values[i];
         const above = v >= 0;
+        const showLabel = labelIdxSet ? labelIdxSet.has(i) : true;
         return (
           <g key={i}>
-            <circle cx={p[0]} cy={p[1]} r="4.5" fill={color} stroke="#0a141a" strokeWidth="2.5"/>
-            <text x={p[0]} y={above ? p[1] - 12 : p[1] + 22} textAnchor="middle" fill={v >= 0 ? "#e8f6f9" : "#fca5a5"} fontFamily="var(--font-mono)" fontSize="11.5" fontWeight="600">
-              {fmt(v)}
-            </text>
+            <circle cx={p[0]} cy={p[1]} r={isMobile ? 3.5 : 4.5} fill={color} stroke="#0a141a" strokeWidth="2.5"/>
+            {showLabel && (
+              <text x={p[0]} y={above ? p[1] - 12 : p[1] + 22} textAnchor="middle" fill={v >= 0 ? "#e8f6f9" : "#fca5a5"} fontFamily="var(--font-mono)" fontSize={isMobile ? "10" : "11.5"} fontWeight="600">
+                {fmt(v)}
+              </text>
+            )}
           </g>
         );
       })}

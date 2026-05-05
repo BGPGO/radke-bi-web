@@ -214,7 +214,7 @@ const BiExportButton = () => {
   return (
     <>
       <button className="btn-ghost hd-export-bi" onClick={() => setOpen(true)} title="Exportar BI inteiro como PDF">
-        <Icon name="download" /> Exportar BI
+        <Icon name="download" /> <span>Exportar BI</span>
       </button>
       {open && (
         <div className="drawer-overlay no-print" onClick={() => setOpen(false)}>
