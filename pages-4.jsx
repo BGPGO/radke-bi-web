@@ -715,8 +715,8 @@ const _Funnel = ({ levels }) => {
 
 const PageCRM = ({ statusFilter, year, month, drilldown, setDrilldown }) => {
   const E = (typeof window !== "undefined" && window.BIT_RADKE_EXTRAS) || null;
-  const C = E && E.crm;
-  const hasData = C && Array.isArray(C.rows) && C.rows.length > 0;
+  const C0 = E && E.crm;
+  const hasData = C0 && Array.isArray(C0.rows) && C0.rows.length > 0;
 
   if (!hasData) {
     return (
@@ -730,16 +730,88 @@ const PageCRM = ({ statusFilter, year, month, drilldown, setDrilldown }) => {
     );
   }
 
+  const refYearCRM = (C0.totais && C0.totais.anoCRM) || (window.REF_YEAR || new Date().getFullYear());
+  const yearActive = year || refYearCRM;
+  const monthIdxFiltered = (month && month > 0) ? (month - 1) : null; // 0-based; null = ano completo
+
+  // Aplica filtro reativo (year + month) no escopo da PageCRM apenas — não toca no build,
+  // pra não estragar nada das outras telas. Recomputa totais, funil, aggregates client-side.
+  const C = useMemo(() => {
+    const FASES_ORDER = ['03 Proposta', '04 Negociação', '05 Aguardando Pedido', '06 Conclusão'];
+    const faseRank = (f) => FASES_ORDER.indexOf(f);
+    const rows = C0.rows.filter(r => {
+      if (r.ano !== yearActive) return false;
+      if (monthIdxFiltered != null && r.mes !== monthIdxFiltered) return false;
+      return true;
+    });
+    const totalLeads = rows.length;
+    const totalGanhos = rows.filter(r => r.ganho).length;
+    const totalPerdidos = rows.filter(r => r.perdido).length;
+    const totalAbertos = rows.filter(r => r.aberto).length;
+    const taxaConversao = totalLeads > 0 ? (totalGanhos / totalLeads) * 100 : 0;
+    const totalTicket = rows.reduce((s, r) => s + r.ticket, 0);
+    const totalGanhoTicket = rows.filter(r => r.ganho).reduce((s, r) => s + r.ticket, 0);
+    const totalAbertoTicket = rows.filter(r => r.aberto).reduce((s, r) => s + r.ticket, 0);
+    const totalPerdidoTicket = rows.filter(r => r.perdido).reduce((s, r) => s + r.ticket, 0);
+    const ticketMedio = totalLeads > 0 ? totalTicket / totalLeads : 0;
+    const funil = FASES_ORDER.map(f => ({
+      fase: f.replace(/^0\d /, ''), chave: f,
+      atual: rows.filter(r => r.fase === f).length,
+      cumulativo: rows.filter(r => faseRank(r.fase) >= faseRank(f)).length,
+    }));
+    const aggOpp = (keyFn) => {
+      const m = new Map();
+      for (const r of rows) {
+        const k = keyFn(r) || 'Sem categoria';
+        if (!m.has(k)) m.set(k, { name: k, qtd: 0, ganhos: 0, perdidos: 0, abertos: 0, ticket: 0, ticketGanho: 0 });
+        const o = m.get(k);
+        o.qtd++;
+        if (r.ganho) { o.ganhos++; o.ticketGanho += r.ticket; }
+        else if (r.perdido) o.perdidos++;
+        else o.abertos++;
+        o.ticket += r.ticket;
+      }
+      for (const o of m.values()) o.conversao = o.qtd > 0 ? (o.ganhos / o.qtd) * 100 : 0;
+      return [...m.values()].sort((a, b) => b.ticket - a.ticket);
+    };
+    const porVendedor = aggOpp(r => r.vendedor);
+    const porOrigem = aggOpp(r => r.origem);
+    const porMotivo = aggOpp(r => r.motivo).filter(x => x.name && x.name !== 'Sem categoria');
+    const porTipo = aggOpp(r => r.tipo).filter(x => x.name);
+    const porProduto = aggOpp(r => r.produto).filter(x => x.name).slice(0, 15);
+    const porMes = Array(12).fill(0).map((_, i) => ({
+      m: ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'][i],
+      leads: 0, ganhos: 0, perdidos: 0, ticket: 0, ticketGanho: 0,
+    }));
+    // Pra projeção mês a mês, sempre usa o ano inteiro (ignora o filtro de mês)
+    const rowsAno = C0.rows.filter(r => r.ano === yearActive);
+    for (const r of rowsAno) {
+      if (r.mes == null) continue;
+      const o = porMes[r.mes];
+      o.leads++;
+      if (r.ganho) { o.ganhos++; o.ticketGanho += r.ticket; }
+      else if (r.perdido) o.perdidos++;
+      o.ticket += r.ticket;
+    }
+    return {
+      rows, funil, porVendedor, porOrigem, porMotivo, porTipo, porProduto, porMes,
+      totais: {
+        totalLeads, totalGanhos, totalPerdidos, totalAbertos,
+        taxaConversao, totalTicket, totalGanhoTicket, totalAbertoTicket, totalPerdidoTicket,
+        ticketMedio, anoCRM: yearActive,
+      },
+    };
+  }, [C0, yearActive, monthIdxFiltered]);
+
   const T = C.totais;
 
-  // Funil cumulativo (passou pela fase = está nessa fase ou em fase superior)
+  // Funil cumulativo (filtrado: só fases com >0)
   const funil = (C.funil || []).filter(f => f.cumulativo > 0).map(f => ({
     label: f.fase, value: f.cumulativo, atual: f.atual,
   }));
-  // Adiciona "Conquistadas" como último nível
   funil.push({ label: "Conquistadas", value: T.totalGanhos });
 
-  // Top 4 boxes: ticket pipeline, ticket ganho, ticket perdido, ticket médio
+  // Top 4 boxes
   const meta = [
     { lbl: "TICKET GANHO", val: T.totalGanhoTicket, tone: "green", pct: Math.min(100, (T.totalGanhoTicket / Math.max(T.totalTicket, 1)) * 100) },
     { lbl: "TICKET PIPELINE (ABERTAS)", val: T.totalAbertoTicket, tone: "amber", pct: Math.min(100, (T.totalAbertoTicket / Math.max(T.totalTicket, 1)) * 100) },
@@ -747,19 +819,22 @@ const PageCRM = ({ statusFilter, year, month, drilldown, setDrilldown }) => {
     { lbl: "TICKET MÉDIO", val: T.ticketMedio, tone: "green", pct: 100 },
   ];
 
-  // Projeção: usa porMes do CRM (ano de referência) — leads (real) + leads ganhos
+  // Projeção (ano inteiro, ignora filtro de mês — sempre 12 colunas)
   const projData = (C.porMes || []).slice(0, 12);
 
-  // Metas comerciais (RADKE): R$ 1M/mês · R$ 12M acumulado ano
+  // Metas comerciais
   const META_MES = 1_000_000;
   const META_ANO = 12_000_000;
   const mesAtualIdx = (function() {
+    if (monthIdxFiltered != null) return monthIdxFiltered;
     const now = new Date();
-    if (now.getFullYear() !== T.anoCRM) return 11; // ano fechado: usa dezembro
+    if (now.getFullYear() !== yearActive) return 11;
     return now.getMonth();
   })();
   const ganhoMesAtual = (projData[mesAtualIdx] && projData[mesAtualIdx].ticketGanho) || 0;
-  const ganhoAcum = T.totalGanhoTicket || 0;
+  const ganhosMesQtd = (projData[mesAtualIdx] && projData[mesAtualIdx].ganhos) || 0;
+  const ganhoAcum = projData.reduce((s, m) => s + m.ticketGanho, 0);
+  const ganhosAcumQtd = projData.reduce((s, m) => s + m.ganhos, 0);
   const pctMes = Math.min(100, (ganhoMesAtual / META_MES) * 100);
   const pctAno = Math.min(100, (ganhoAcum / META_ANO) * 100);
   const MESES_NOMES = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
@@ -770,7 +845,7 @@ const PageCRM = ({ statusFilter, year, month, drilldown, setDrilldown }) => {
         <div>
           <h1>CRM — Pipeline de Oportunidades</h1>
           <div className="status-line">
-            {C.rows.length} leads · ganhos {T.totalGanhos} · perdidos {T.totalPerdidos} · abertos {T.totalAbertos} · ano {T.anoCRM}
+            {C.rows.length} leads · ganhos {T.totalGanhos} · perdidos {T.totalPerdidos} · abertos {T.totalAbertos} · {monthIdxFiltered != null ? `${MESES_NOMES[monthIdxFiltered]}/${T.anoCRM}` : `ano ${T.anoCRM}`}
           </div>
         </div>
         <div className="actions">
@@ -778,12 +853,13 @@ const PageCRM = ({ statusFilter, year, month, drilldown, setDrilldown }) => {
         </div>
       </div>
 
-      {/* KPIs topo (4) */}
-      <div className="kpi-row" style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
+      {/* KPIs topo (5: Leads, Conversão, Vendas no mês, Pipeline, Ganho) */}
+      <div className="kpi-row" style={{ gridTemplateColumns: "repeat(5, 1fr)" }}>
         <_MiniKpi4 tone="cyan" label="Leads" value={_fmtInt4(T.totalLeads)} nonMonetary hint="oportunidades" />
         <_MiniKpi4 tone="green" label="Conversão" value={T.taxaConversao.toFixed(1).replace(".", ",") + "%"} nonMonetary hint={`${T.totalGanhos} de ${T.totalLeads}`} />
+        <_MiniKpi4 tone="amber" label={`Vendas em ${MESES_NOMES[mesAtualIdx].slice(0,3)}`} value={_fmtInt4(ganhosMesQtd)} nonMonetary hint={`R$ ${_fmtBR4(ganhoMesAtual, 0)}`} />
         <_MiniKpi4 tone="amber" label="Pipeline" value={_fmtBR4(T.totalTicket, 0)} hint="ticket somado" />
-        <_MiniKpi4 tone="green" label="Ganho" value={_fmtBR4(T.totalGanhoTicket, 0)} hint="conquistadas" />
+        <_MiniKpi4 tone="green" label="Ganho" value={_fmtBR4(T.totalGanhoTicket, 0)} hint={`${ganhosAcumQtd} vendas no ano`} />
       </div>
 
       {/* Metas comerciais — barras horizontais (mês 1M · acumulado 12M) */}

@@ -231,14 +231,21 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
   };
   const fluxoFuturo = useMemo(() => {
     const all = window.applyDrilldown(B.EXTRATO || [], drilldown);
-    return all
+    const sorted = all
       .filter(e => {
         const status = (e[5] || '').toString().toUpperCase();
         if (!/A VENCER|ATRASADO|VENCE HOJE|PREVIST/i.test(status)) return false;
         return parseFluxoDate(e[0]) >= todayKey;
       })
       .sort((a, b) => parseFluxoDate(a[0]) - parseFluxoDate(b[0]))
-      .slice(0, 30);
+      .slice(0, 60);
+    // Saldo running: parte do saldo atual da planilha e atualiza a cada movimento
+    const saldoBase = (SALDOS_REAIS && SALDOS_REAIS.last && SALDOS_REAIS.last.total) || 0;
+    let saldoRunning = saldoBase;
+    return sorted.map((e, i) => {
+      saldoRunning += (e[4] || 0);
+      return [...e, saldoRunning];
+    });
   }, [B.EXTRATO, drilldown, todayKey]);
 
   return (
@@ -357,25 +364,33 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
         </div>
 
         <div className="card">
-          <h2 className="card-title">Fluxo a vencer (a partir de hoje)</h2>
-          <div className="status-line" style={{ marginBottom: 8 }}>{fluxoFuturo.length} lançamentos próximos</div>
-          <div className="t-scroll" style={{ maxHeight: 320 }}>
+          <h2 className="card-title">Fluxo a vencer (saldo projetado dia a dia)</h2>
+          <div className="status-line" style={{ marginBottom: 8 }}>
+            {fluxoFuturo.length} lançamentos a partir de hoje
+            {SALDOS_REAIS && SALDOS_REAIS.last && (
+              <> · saldo inicial <b style={{ color: "var(--cyan)" }}>{B.fmt(SALDOS_REAIS.last.total)}</b></>
+            )}
+          </div>
+          <div className="t-scroll" style={{ maxHeight: 360 }}>
             <table className="t">
               <thead>
-                <tr><th>Vence</th><th>Categoria</th><th>Cliente / Fornecedor</th><th className="num">Valor</th></tr>
+                <tr><th>Vence</th><th>Cliente / Fornecedor</th><th className="num">Movimento</th><th className="num">Saldo</th></tr>
               </thead>
               <tbody>
                 {fluxoFuturo.length === 0 && (
                   <tr><td colSpan="4" style={{ textAlign: "center", color: "var(--fg-3)", padding: 20 }}>Sem lançamentos a vencer</td></tr>
                 )}
-                {fluxoFuturo.map((e, i) => (
-                  <tr key={i}>
-                    <td style={{ fontFamily: "var(--font-mono)", fontSize: 10 }}>{e[0]}</td>
-                    <td style={{ fontSize: 11 }}>{(e[2] || "").slice(0, 22)}</td>
-                    <td style={{ fontSize: 11 }}>{(e[3] || "").slice(0, 28)}</td>
-                    <td className={`num ${e[4] < 0 ? "red" : "green"}`} style={{ fontSize: 11 }}>{B.fmt(e[4])}</td>
-                  </tr>
-                ))}
+                {fluxoFuturo.map((e, i) => {
+                  const saldoCol = e[6];
+                  return (
+                    <tr key={i}>
+                      <td style={{ fontFamily: "var(--font-mono)", fontSize: 10 }}>{e[0]}</td>
+                      <td style={{ fontSize: 11 }}>{(e[3] || e[2] || "").slice(0, 32)}</td>
+                      <td className={`num ${e[4] < 0 ? "red" : "green"}`} style={{ fontSize: 11 }}>{B.fmt(e[4])}</td>
+                      <td className="num" style={{ fontSize: 11, fontWeight: 600, color: saldoCol < 0 ? "var(--red)" : "var(--cyan)" }}>{B.fmt(saldoCol)}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

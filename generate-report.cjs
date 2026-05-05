@@ -327,6 +327,7 @@ async function callAnthropic(systemPrompt, userMessage, label) {
   const body = {
     model: 'claude-opus-4-7',
     max_tokens: 1024,
+    temperature: 0.2,
     system: systemPrompt,
     messages: [{ role: 'user', content: userMessage }],
   };

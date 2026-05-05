@@ -330,6 +330,7 @@ async function callAnthropic(
     const resp = await anthropic.messages.create({
       model: 'claude-opus-4-7',
       max_tokens: 1024,
+      temperature: 0.2,
       system: systemPrompt,
       messages: [{ role: 'user', content: userMessage }],
     });
