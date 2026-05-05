@@ -256,7 +256,7 @@ const out = {
       const cleanStr = (s) => (s == null ? '' : String(s).trim());
       const ND = (s) => (!s || s === 'N/D' ? '' : s);
 
-      const rows = raw.map(r => {
+      const rowsAll = raw.map(r => {
         const sit = cleanStr(r['Situação']);
         // Conquistado em DD/MM/YYYY = ganho. Motivo presente + Fase 06 = perdido. Senao em andamento.
         const ganho = /^Conquistado/i.test(sit);
@@ -297,9 +297,13 @@ const out = {
         };
       }).filter(x => x.descricao);
 
-      // Funil (ordem do PBI). Oportunidade está na fase ATUAL — mas se ganhou, conta em "Conquistadas".
-      // O funil cumulativo é: passou pela fase X = chegou em X ou maior.
-      const FASES_ORDER = ['01 Prospect', '02 Qualificação', '03 Proposta', '04 Negociação', '05 Aguardando Pedido', '06 Conclusão'];
+      // Filtro RADKE: excluir Prospect e Qualificação (fases muito iniciais
+      // que o PBI da empresa não considera no pipeline ativo).
+      const rows = rowsAll.filter(r => r.fase !== '01 Prospect' && r.fase !== '02 Qualificação');
+      console.log('  filtro Prospect/Qualif: removidas ' + (rowsAll.length - rows.length) + ' oportunidades de ' + rowsAll.length);
+
+      // Funil (a partir de 03 Proposta). O funil cumulativo: passou pela fase X = chegou em X ou maior.
+      const FASES_ORDER = ['03 Proposta', '04 Negociação', '05 Aguardando Pedido', '06 Conclusão'];
       const faseRank = (f) => FASES_ORDER.findIndex(x => x === f);
       const funil = FASES_ORDER.map(f => ({
         fase: f.replace(/^0\d /, ''),
