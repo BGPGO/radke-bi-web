@@ -1,0 +1,13 @@
+.env
+.env.local
+node_modules/
+data/_cache/
+
+# Dados Omie crus — sensiveis. NAO commitar.
+# data.js (built artifact) eh commitado e contem so agregados.
+data/*.json
+!data/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db

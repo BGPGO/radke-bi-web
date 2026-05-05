@@ -1,0 +1,17 @@
+{
+  "name": "radke-bi",
+  "version": "1.0.0",
+  "description": "BI financeiro standalone para **RADKE Soluções Intralogísticas**, alimentado pelo Omie. Baseado no template `molde-gobi`. Sem build, sem banco, sem dependências npm.",
+  "main": "data.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "esbuild": "^0.28.0",
+    "xlsx": "^0.18.5"
+  }
+}

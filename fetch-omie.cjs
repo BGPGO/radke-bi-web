@@ -1,0 +1,178 @@
+#!/usr/bin/env node
+/**
+ * Pull completo Omie pra RADKE.
+ * Saida: C:/Projects/radke-bi/data/*.json
+ *
+ * Estrategia:
+ *  - Paginado, 500 reg/pagina, 5 paginas em paralelo (rate limit ~30 req/s da Omie)
+ *  - Backoff exp em rate-limit (425 / "consumo excedido")
+ *  - Resolve cliente/fornecedor + categoria + depto IN MEMORY (mapas)
+ *  - Status preservado (PAGO / A VENCER / ATRASADO / VENCE HOJE / CANCELADO)
+ */
+'use strict';
+
+const fs = require('node:fs');
+const path_mod = require('node:path');
+const path = path_mod; // backward compat com chamadas existentes path.join
+
+const APP_KEY = '925971407361';
+const APP_SECRET = '5825074fc4731e98d49dbe826b1bf670';
+const BASE = 'https://app.omie.com.br/api/v1';
+const OUT = 'C:/Projects/radke-bi/data';
+const PAGE_SIZE = 500;
+// Omie restringe chamadas paralelas DO MESMO metodo (1 por vez).
+// Paginacao dentro de um metodo SEMPRE sequencial. Paralelismo eh entre
+// metodos diferentes (ex: ListarCategorias + ListarDepartamentos + ListarClientes
+// simultaneos, mas cada um internamente sequencial).
+const PAGE_DELAY_MS = 200; // pausa entre paginas do mesmo metodo
+
+fs.mkdirSync(OUT, { recursive: true });
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function call(p, method, params, retries = 8) {
+  const body = JSON.stringify({ call: method, app_key: APP_KEY, app_secret: APP_SECRET, param: [params] });
+  let res;
+  try {
+    res = await fetch(`${BASE}${p}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body });
+  } catch (netErr) {
+    if (retries > 0) {
+      const wait = Math.min(30000, 2000 * (9 - retries));
+      console.error(`  [network] ${method} → ${netErr.message} → wait ${wait}ms (retries left ${retries - 1})`);
+      await sleep(wait);
+      return call(p, method, params, retries - 1);
+    }
+    throw netErr;
+  }
+  let j;
+  try {
+    j = await res.json();
+  } catch (e) {
+    if (retries > 0) {
+      await sleep(2000);
+      return call(p, method, params, retries - 1);
+    }
+    throw new Error(`${method}: bad JSON (${res.status})`);
+  }
+  if (j.faultstring) {
+    // Erros transitorios: rate-limit, broken response, gateway timeout etc.
+    const transient = /Consumo|consumo|excedido|simultaneas|simult|Many|busy|Broken response|Application Server|BG|temporariamente|gateway|timeout|503|502|504|SOAP-ERROR/i.test(j.faultstring);
+    if (transient && retries > 0) {
+      const wait = Math.min(30000, 2000 * (9 - retries));
+      console.error(`  [retry] ${method} pag ${params.pagina || params.nPagina || '?'} → ${j.faultstring.slice(0,60)} → wait ${wait}ms (left ${retries - 1})`);
+      await sleep(wait);
+      return call(p, method, params, retries - 1);
+    }
+    throw new Error(`${method}: ${j.faultstring}`);
+  }
+  return j;
+}
+
+async function fetchAllPaginated(path, method, baseParam, dataKey, label) {
+  // Cache por pagina em disco — script eh REENTRANTE.
+  // Se cair na pagina 100/156, proxima execucao re-usa as 99 ja salvas.
+  const cacheDir = path_mod.join(OUT, '_cache', label);
+  fs.mkdirSync(cacheDir, { recursive: true });
+
+  const pageFile = (n) => path_mod.join(cacheDir, `page-${String(n).padStart(4, '0')}.json`);
+  const readCachedPage = (n) => {
+    try {
+      const buf = fs.readFileSync(pageFile(n), 'utf8');
+      const arr = JSON.parse(buf);
+      return Array.isArray(arr) ? arr : null;
+    } catch { return null; }
+  };
+  const writePage = (n, arr) => {
+    fs.writeFileSync(pageFile(n), JSON.stringify(arr));
+  };
+
+  // Pega total — se ja tem page-0001 cacheada, ainda precisamos saber total_de_paginas atualizado.
+  // Sempre re-chama pagina 1 pra pegar total atualizado (Omie pode ter ganhado novos registros desde ultimo run).
+  const first = await call(path, method, { ...baseParam, pagina: 1, registros_por_pagina: PAGE_SIZE });
+  const totalPages = first.total_de_paginas || 1;
+  const totalRegs = first.total_de_registros || (first[dataKey] || []).length;
+  writePage(1, first[dataKey] || []);
+  console.log(`  [${label}] ${totalRegs} registros em ${totalPages} paginas`);
+
+  for (let p = 2; p <= totalPages; p++) {
+    let arr = readCachedPage(p);
+    if (!arr) {
+      await sleep(PAGE_DELAY_MS);
+      const r = await call(path, method, { ...baseParam, pagina: p, registros_por_pagina: PAGE_SIZE });
+      arr = r[dataKey] || [];
+      writePage(p, arr);
+    }
+    process.stdout.write(`  [${label}] pag ${p}/${totalPages}\r`);
+  }
+
+  // Concatena tudo do cache em ordem
+  const all = [];
+  for (let p = 1; p <= totalPages; p++) {
+    const arr = readCachedPage(p) || [];
+    all.push(...arr);
+  }
+  console.log(`  [${label}] OK ${all.length} registros (de ${totalRegs} esperados)                          `);
+  return all;
+}
+
+(async () => {
+  console.log('=== Probe / empresa ===');
+  const empresas = await call('/geral/empresas/', 'ListarEmpresas', { pagina: 1, registros_por_pagina: 50, apenas_importado_api: 'N' });
+  console.log('  Empresa:', empresas.empresas_cadastro?.[0]?.nome_fantasia, '|', empresas.empresas_cadastro?.[0]?.codigo_cliente_omie);
+  fs.writeFileSync(path.join(OUT, 'empresa.json'), JSON.stringify(empresas.empresas_cadastro?.[0] || null, null, 2));
+
+  // === Lookup tables (categorias, depts, clientes/fornecedores) ===
+  console.log('\n=== Lookup tables (paralelo) ===');
+  const [categorias, departamentos] = await Promise.all([
+    fetchAllPaginated('/geral/categorias/', 'ListarCategorias', {}, 'categoria_cadastro', 'categorias'),
+    fetchAllPaginated('/geral/depart/', 'ListarDepartamentos', {}, 'departamentos', 'departamentos'),
+  ]);
+  fs.writeFileSync(path.join(OUT, 'categorias.json'), JSON.stringify(categorias, null, 2));
+  fs.writeFileSync(path.join(OUT, 'departamentos.json'), JSON.stringify(departamentos, null, 2));
+
+  console.log('\n=== Clientes/Fornecedores ===');
+  const clientes = await fetchAllPaginated('/geral/clientes/', 'ListarClientes', {}, 'clientes_cadastro', 'clientes');
+  fs.writeFileSync(path.join(OUT, 'clientes.json'), JSON.stringify(clientes, null, 2));
+
+  // === Movimentos: contas pagar e receber em paralelo (cada um paginado internamente) ===
+  console.log('\n=== Contas pagar + receber (em paralelo) ===');
+  const [contasPagar, contasReceber] = await Promise.all([
+    fetchAllPaginated('/financas/contapagar/', 'ListarContasPagar', { apenas_importado_api: 'N' }, 'conta_pagar_cadastro', 'contas_pagar'),
+    fetchAllPaginated('/financas/contareceber/', 'ListarContasReceber', { apenas_importado_api: 'N' }, 'conta_receber_cadastro', 'contas_receber'),
+  ]);
+  fs.writeFileSync(path.join(OUT, 'contas_pagar.json'), JSON.stringify(contasPagar, null, 2));
+  fs.writeFileSync(path.join(OUT, 'contas_receber.json'), JSON.stringify(contasReceber, null, 2));
+
+  // === Movimentos financeiros (data_pagamento real) — opcional ===
+  console.log('\n=== Movimentos financeiros (data pagamento) ===');
+  let movimentos = [];
+  try {
+    movimentos = await fetchAllPaginated('/financas/mf/', 'ListarMovimentos', {
+      nPagina: 1, nRegPorPagina: PAGE_SIZE,
+      cExibirObs: 'N',
+      cTipoData: 'EMISSAO',
+      dDtInicial: '01/01/2018',
+      dDtFinal: '31/12/2030',
+    }, 'movimentos', 'movimentos').catch((e) => { console.error('  movs erro:', e.message); return []; });
+    fs.writeFileSync(path.join(OUT, 'movimentos.json'), JSON.stringify(movimentos, null, 2));
+  } catch (e) {
+    console.error('  movs falhou:', e.message);
+  }
+
+  // === Resumo ===
+  const summary = {
+    fetched_at: new Date().toISOString(),
+    empresa: empresas.empresas_cadastro?.[0]?.nome_fantasia || null,
+    counts: {
+      contas_pagar: contasPagar.length,
+      contas_receber: contasReceber.length,
+      categorias: categorias.length,
+      departamentos: departamentos.length,
+      clientes_fornecedores: clientes.length,
+      movimentos: movimentos.length,
+    },
+  };
+  fs.writeFileSync(path.join(OUT, '_summary.json'), JSON.stringify(summary, null, 2));
+  console.log('\n=== DONE ===');
+  console.log(JSON.stringify(summary, null, 2));
+})().catch((e) => { console.error('FATAL:', e.message); process.exit(1); });
