@@ -640,7 +640,6 @@ const PageComparativo = ({ statusFilter, drilldown, setDrilldown, year, month })
 // Carrega report.json (gerado offline por generate-report.cjs) e renderiza
 // um relatorio executivo imprimivel (Ctrl+P -> Save as PDF).
 const PageRelatorio = ({ year, statusFilter }) => {
-  const B = window.BIT;
   const refYear = window.REF_YEAR || new Date().getFullYear();
   // Estado do periodo a renderizar (defaults: ano corrente YTD)
   const [periodYear, setPeriodYear] = useState(() => {
@@ -825,15 +824,22 @@ const PageRelatorio = ({ year, statusFilter }) => {
     return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
   };
 
+  // Cards reativos ao período (year + month) — antes usavam window.BIT global (YTD do ano)
+  const B = useMemo(
+    () => window.getBit('realizado', null, periodYear, periodMonth),
+    [periodYear, periodMonth]
+  );
+  const Bprev = useMemo(
+    () => window.getBit('a_pagar_receber', null, periodYear, periodMonth),
+    [periodYear, periodMonth]
+  );
   const k = B.KPIS || B;
   const recebido = k.TOTAL_RECEITA || 0;
   const pago = k.TOTAL_DESPESA || 0;
   const liquido = k.VALOR_LIQUIDO != null ? k.VALOR_LIQUIDO : (recebido - pago);
   const margem = k.MARGEM_LIQUIDA != null ? k.MARGEM_LIQUIDA : (recebido > 0 ? (liquido / recebido) * 100 : 0);
-
-  const SEG = window.BIT_SEGMENTS || {};
-  const aReceber = (SEG.a_pagar_receber && SEG.a_pagar_receber.KPIS && SEG.a_pagar_receber.KPIS.TOTAL_RECEITA) || 0;
-  const aPagar = (SEG.a_pagar_receber && SEG.a_pagar_receber.KPIS && SEG.a_pagar_receber.KPIS.TOTAL_DESPESA) || 0;
+  const aReceber = (Bprev.KPIS && Bprev.KPIS.TOTAL_RECEITA) || 0;
+  const aPagar = (Bprev.KPIS && Bprev.KPIS.TOTAL_DESPESA) || 0;
 
   const sec = (id) => (report.secoes && report.secoes[id]) || { title: id, analysis: '' };
 
