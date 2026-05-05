@@ -1824,3 +1824,21 @@ table.t tr.total td {
     margin-top: 8mm;
   }
 }
+
+/* Year select no header (esquerda do StatusFilter) */
+.header-year {
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 12px 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  margin-right: 10px;
+  font-family: inherit;
+}
+.header-year:hover { border-color: var(--cyan-dim); }
+.header-year:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(34,211,238,0.15); }
+.header-year option { background: var(--surface); color: var(--text); }

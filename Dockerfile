@@ -9,7 +9,12 @@ COPY styles.css /usr/share/nginx/html/
 COPY data.js /usr/share/nginx/html/
 COPY data-extras.js /usr/share/nginx/html/
 COPY app.bundle.js /usr/share/nginx/html/
+# Reports gerados por generate-report.cjs (default + por ano + por mes/ano)
 COPY report.json /usr/share/nginx/html/
+COPY report-2024.json /usr/share/nginx/html/
+COPY report-2025.json /usr/share/nginx/html/
+COPY report-2026-03.json /usr/share/nginx/html/
+COPY report-2026-04.json /usr/share/nginx/html/
 COPY assets /usr/share/nginx/html/assets
 
 # Config minima — SPA fallback + gzip + cache de assets

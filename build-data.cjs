@@ -596,12 +596,12 @@ window.REF_YEAR = REF_YEAR;
 window.AVAILABLE_YEARS = AVAILABLE_YEARS;
 window.aggregateTx = aggregateTx;
 window.filterTx = filterTx;
-// getBit: helper que retorna BIT cross-filtrado quando drilldown ativo,
-// senao BIT pre-computado padrao (rapido).
-window.getBit = function (statusFilter, drilldown) {
-  if (!drilldown) return window.BIT;
+// getBit: SEMPRE recomputa via recomputeBit (sem cache de window.BIT).
+// Evita lag no toggle Previsto/Realizado e suporta year arbitrario.
+window.getBit = function (statusFilter, drilldown, year) {
   const sf = statusFilter || window.BIT_FILTER || 'realizado';
-  return window.recomputeBit(sf, drilldown);
+  const y = year || window.REF_YEAR;
+  return window.recomputeBit(sf, drilldown, y);
 };
 // Cross-filter helper: combina statusFilter + drilldown e retorna BIT-like
 // com KPIs/charts/extrato recalculados em ~10ms (17k rows).

@@ -134,9 +134,22 @@ const StatusFilterSeg = ({ value, onChange }) => (
   </div>
 );
 
-// Header limpo: so o que funciona — breadcrumb + StatusFilter (Previsto/Realizado).
-// Removidos: DateRange, search-box, notifications (eram inertes/decorativos).
-const Header = ({ page, onToggleSidebar, statusFilter, setStatusFilter }) => {
+const YearSelect = ({ value, onChange, available }) => {
+  const years = available && available.length ? available : [value];
+  return (
+    <select
+      className="header-year"
+      value={value}
+      onChange={e => onChange(Number(e.target.value))}
+      title="Ano de referência"
+    >
+      {years.map(y => <option key={y} value={y}>{y}</option>)}
+    </select>
+  );
+};
+
+// Header: breadcrumb + YearSelect + StatusFilter
+const Header = ({ page, onToggleSidebar, statusFilter, setStatusFilter, year, setYear }) => {
   return (
     <header className="header">
       <button className="hd-icon-btn hd-menu-btn" title="Menu" onClick={onToggleSidebar}><Icon name="menu" /></button>
@@ -148,6 +161,7 @@ const Header = ({ page, onToggleSidebar, statusFilter, setStatusFilter }) => {
         <b>{PAGE_TITLES[page] || "Visão Geral"}</b>
       </div>
       <div style={{ flex: 1 }} />
+      {setYear && <YearSelect value={year} onChange={setYear} available={window.AVAILABLE_YEARS} />}
       {setStatusFilter && <StatusFilterSeg value={statusFilter} onChange={setStatusFilter} />}
     </header>
   );

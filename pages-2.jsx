@@ -1,8 +1,8 @@
 /* BIT/BGP Finance — Pages 2: Fluxo, Tesouraria, Comparativo */
 const { useState, useMemo } = React;
 
-const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown }) => {
-  const B = window.getBit(statusFilter, drilldown);
+const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year }) => {
+  const B = useMemo(() => window.getBit(statusFilter, drilldown, year), [statusFilter, drilldown, year]);
   const [view, setView] = useState("horizontal");
   const [range, setRange] = useState("12M");
   const months6 = B.MONTHS_FULL.slice(0, 6);
@@ -184,8 +184,8 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
   );
 };
 
-const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown }) => {
-  const B = window.getBit(statusFilter, drilldown);
+const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year }) => {
+  const B = useMemo(() => window.getBit(statusFilter, drilldown, year), [statusFilter, drilldown, year]);
   const SEG = window.BIT_SEGMENTS || {};
   const recebido = (SEG.realizado && SEG.realizado.KPIS && SEG.realizado.KPIS.TOTAL_RECEITA) || 0;
   const aReceber = (SEG.a_pagar_receber && SEG.a_pagar_receber.KPIS && SEG.a_pagar_receber.KPIS.TOTAL_RECEITA) || 0;
@@ -282,8 +282,8 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
   );
 };
 
-const PageComparativo = ({ statusFilter, drilldown, setDrilldown }) => {
-  const B = window.getBit(statusFilter, drilldown);
+const PageComparativo = ({ statusFilter, drilldown, setDrilldown, year }) => {
+  const B = useMemo(() => window.getBit(statusFilter, drilldown, year), [statusFilter, drilldown, year]);
   const refYear = (B.META && B.META.ref_year) || new Date().getFullYear();
   const lblTrim1 = `${refYear} · Trim 1 (jan-mar)`;
   const lblTrim2 = `${refYear} · Trim 2 (abr-jun)`;
@@ -426,18 +426,38 @@ const PageComparativo = ({ statusFilter, drilldown, setDrilldown }) => {
 // ===== PageRelatorio =====
 // Carrega report.json (gerado offline por generate-report.cjs) e renderiza
 // um relatorio executivo imprimivel (Ctrl+P -> Save as PDF).
-const PageRelatorio = () => {
+const PageRelatorio = ({ year, statusFilter }) => {
   const B = window.BIT;
+  const refYear = window.REF_YEAR || new Date().getFullYear();
+  // Estado do periodo a renderizar (defaults: ano corrente YTD)
+  const [periodYear, setPeriodYear] = useState(() => {
+    try { var p = JSON.parse(localStorage.getItem('radke.report.period') || 'null'); return (p && p.year) || (year || refYear); } catch (e) { return year || refYear; }
+  });
+  const [periodMonth, setPeriodMonth] = useState(() => {
+    try { var p = JSON.parse(localStorage.getItem('radke.report.period') || 'null'); return (p && p.month) || 0; } catch (e) { return 0; } // 0 = ano completo
+  });
   const [report, setReport] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showHelp, setShowHelp] = useState(false);
 
+  // resolve o nome do arquivo conforme periodo
+  const reportFileName = (y, m) => {
+    if (m && m > 0) return `report-${y}-${String(m).padStart(2,'0')}.json`;
+    if (y === refYear) return 'report.json'; // default mantem nome principal
+    return `report-${y}.json`;
+  };
+
   useEffect(() => {
     let cancelled = false;
-    fetch('report.json', { cache: 'no-store' })
+    setLoading(true);
+    setError(null);
+    setReport(null);
+    try { localStorage.setItem('radke.report.period', JSON.stringify({ year: periodYear, month: periodMonth })); } catch (e) {}
+    const file = reportFileName(periodYear, periodMonth);
+    fetch(file, { cache: 'no-store' })
       .then(r => {
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        if (!r.ok) throw new Error(`HTTP ${r.status} (arquivo ${file})`);
         return r.json();
       })
       .then(data => {
@@ -451,40 +471,66 @@ const PageRelatorio = () => {
         setLoading(false);
       });
     return () => { cancelled = true; };
-  }, []);
+  }, [periodYear, periodMonth]);
+
+  const MONTH_OPTIONS = [
+    { v: 0, label: "Ano completo" },
+    { v: 1, label: "Janeiro" }, { v: 2, label: "Fevereiro" }, { v: 3, label: "Março" },
+    { v: 4, label: "Abril" }, { v: 5, label: "Maio" }, { v: 6, label: "Junho" },
+    { v: 7, label: "Julho" }, { v: 8, label: "Agosto" }, { v: 9, label: "Setembro" },
+    { v: 10, label: "Outubro" }, { v: 11, label: "Novembro" }, { v: 12, label: "Dezembro" },
+  ];
+  const availableYears = window.AVAILABLE_YEARS || [refYear];
+
+  const PeriodToolbar = (
+    <div className="report-period-toolbar" style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
+      <span style={{ fontSize: 12, color: 'var(--mute)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Período:</span>
+      <select className="header-year" value={periodYear} onChange={e => setPeriodYear(Number(e.target.value))}>
+        {availableYears.map(y => <option key={y} value={y}>{y}</option>)}
+      </select>
+      <select className="header-year" value={periodMonth} onChange={e => setPeriodMonth(Number(e.target.value))}>
+        {MONTH_OPTIONS.map(o => <option key={o.v} value={o.v}>{o.label}</option>)}
+      </select>
+    </div>
+  );
 
   if (loading) {
     return (
       <div className="page">
         <div className="page-title">
           <div><h1>Relatório IA</h1><div className="status-line">Carregando…</div></div>
+          <div className="actions">{PeriodToolbar}</div>
         </div>
       </div>
     );
   }
 
   if (error || !report) {
+    const monthLabel = periodMonth > 0 ? MONTH_OPTIONS[periodMonth].label + ' de ' : '';
+    const cmd = periodMonth > 0
+      ? `node generate-report.cjs --force --year=${periodYear} --month=${periodMonth}`
+      : (periodYear === refYear ? `node generate-report.cjs --force` : `node generate-report.cjs --force --year=${periodYear}`);
     return (
       <div className="page">
         <div className="page-title">
           <div>
             <h1>Relatório IA</h1>
-            <div className="status-line">Relatório não encontrado</div>
+            <div className="status-line">Relatório de {monthLabel}{periodYear} ainda não foi gerado</div>
           </div>
+          <div className="actions">{PeriodToolbar}</div>
         </div>
         <div className="card">
-          <h2 className="card-title">Relatório ainda não gerado</h2>
+          <h2 className="card-title">Gerar agora</h2>
           <p style={{ color: "var(--fg-2)", lineHeight: 1.6, marginTop: 12 }}>
-            O arquivo <code style={{ background: "var(--surface-2)", padding: "2px 6px", borderRadius: 4 }}>report.json</code> não foi encontrado.
-            Para gerar o relatório, abra o terminal nesta pasta e rode:
+            Abra o terminal na pasta <code style={{ background: "var(--surface-2)", padding: "2px 6px", borderRadius: 4 }}>radke-bi</code> e rode:
           </p>
           <pre style={{ background: "var(--surface-2)", padding: 12, borderRadius: 8, marginTop: 12, fontSize: 13, color: "var(--cyan)" }}>
-            node generate-report.cjs
+            {cmd}
           </pre>
           <p style={{ color: "var(--fg-3)", fontSize: 12, marginTop: 12 }}>
-            O processo demora ~30s e usa a API da Anthropic. Depois de pronto, recarregue esta página.
+            ~30s + 1 chamada Anthropic. Depois de pronto, recarregue esta página (mantém o período selecionado).
           </p>
-          {error && <p style={{ color: "var(--red)", fontSize: 12, marginTop: 8 }}>Erro: {error}</p>}
+          {error && <p style={{ color: "var(--red)", fontSize: 12, marginTop: 8 }}>Detalhe: {error}</p>}
         </div>
       </div>
     );
@@ -525,7 +571,8 @@ const PageRelatorio = () => {
           <h1 style={{ margin: 0 }}>Relatório IA</h1>
           <div className="status-line">Gerado em {fmtDate(report.generated_at)} · {report.periodo}</div>
         </div>
-        <div className="actions">
+        <div className="actions" style={{ gap: 12, alignItems: 'center' }}>
+          {PeriodToolbar}
           <button className="btn-ghost" onClick={() => setShowHelp(true)}>Regenerar (script)</button>
           <button className="btn-primary" onClick={() => window.print()}>
             <Icon name="download" /> Exportar PDF

@@ -23,9 +23,16 @@ const vm = require('node:vm');
 const ROOT = __dirname;
 const ENV_FILE = path.join(ROOT, '.env');
 const DATA_FILE = path.join(ROOT, 'data.js');
-const OUT_FILE = path.join(ROOT, 'report.json');
 const FORCE = process.argv.includes('--force');
 const CACHE_TTL_MS = 60 * 60 * 1000; // 1h
+
+// CLI flags: --year=N e --month=N. Sem flags -> ano corrente YTD (report.json).
+function parseFlag(name) {
+  const a = process.argv.find(x => x.startsWith(`--${name}=`));
+  return a ? parseInt(a.split('=')[1], 10) : null;
+}
+const ARG_YEAR = parseFlag('year');
+const ARG_MONTH = parseFlag('month');
 
 // ---------- env loader simples (sem dotenv) ----------
 function loadEnv() {
@@ -55,17 +62,6 @@ if (!API_KEY) {
   process.exit(1);
 }
 
-// ---------- check cache ----------
-if (!FORCE && fs.existsSync(OUT_FILE)) {
-  const stat = fs.statSync(OUT_FILE);
-  const age = Date.now() - stat.mtimeMs;
-  if (age < CACHE_TTL_MS) {
-    const ageMin = Math.round(age / 60000);
-    console.log(`report.json ja existe (gerado ha ${ageMin}min, < 1h). Pulando. Use --force pra regenerar.`);
-    process.exit(0);
-  }
-}
-
 // ---------- carregar data.js num sandbox ----------
 if (!fs.existsSync(DATA_FILE)) {
   console.error('ERR: data.js nao encontrado. Rode `node build-data.cjs` antes.');
@@ -79,18 +75,61 @@ vm.runInContext(dataCode, sandbox);
 
 const SEG = sandbox.window.BIT_SEGMENTS;
 const META = sandbox.window.BIT_META;
+const ALL_TX = sandbox.window.ALL_TX || [];
+const REF_YEAR = sandbox.window.REF_YEAR || new Date().getFullYear();
 if (!SEG || !SEG.realizado) {
   console.error('ERR: window.BIT_SEGMENTS nao foi populado. data.js corrupto?');
   process.exit(1);
 }
 
-const realizado = SEG.realizado;
-const aPagarReceber = SEG.a_pagar_receber || { KPIS: {} };
-const tudo = SEG.tudo || { KPIS: {} };
+// Decide o periodo target
+const targetYear = ARG_YEAR || REF_YEAR;
+const targetMonth = ARG_MONTH; // pode ser null
+
+// Build segments filtrados por (year, month) a partir de ALL_TX
+function filterByPeriod(txList, statusFilter) {
+  let out = sandbox.window.filterTx(txList, statusFilter, null);
+  if (targetMonth) {
+    const ym = `${targetYear}-${String(targetMonth).padStart(2, '0')}`;
+    out = out.filter(r => r[1] === ym);
+  } else {
+    out = out.filter(r => r[1] && r[1].startsWith(`${targetYear}-`));
+  }
+  return sandbox.window.aggregateTx(out, targetYear);
+}
+
+const realizado = filterByPeriod(ALL_TX, 'realizado');
+const aPagarReceber = filterByPeriod(ALL_TX, 'a_pagar_receber');
+const tudo = filterByPeriod(ALL_TX, 'tudo');
 
 const empresaNome = (META && META.empresa && META.empresa.nome_fantasia) || 'RADKE Soluções Intralogísticas';
-const refYear = (META && META.ref_year) || new Date().getFullYear();
-const periodo = `Ano ${refYear} (YTD)`;
+const refYear = targetYear;
+
+// Periodo legivel + nome do arquivo de saida
+const MONTH_NAMES_PT = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+let periodo, OUT_FILE;
+if (targetMonth) {
+  periodo = `${MONTH_NAMES_PT[targetMonth - 1]}/${targetYear}`;
+  OUT_FILE = path.join(ROOT, `report-${targetYear}-${String(targetMonth).padStart(2,'0')}.json`);
+} else if (targetYear === REF_YEAR && !ARG_YEAR) {
+  // Sem flags -> YTD do ano corrente -> nome default report.json (compat)
+  periodo = `Ano ${targetYear} (YTD)`;
+  OUT_FILE = path.join(ROOT, 'report.json');
+} else {
+  periodo = `Ano ${targetYear}`;
+  OUT_FILE = path.join(ROOT, `report-${targetYear}.json`);
+}
+
+// ---------- check cache (so se nao for --force) ----------
+if (!FORCE && fs.existsSync(OUT_FILE)) {
+  const stat = fs.statSync(OUT_FILE);
+  const age = Date.now() - stat.mtimeMs;
+  if (age < CACHE_TTL_MS) {
+    const ageMin = Math.round(age / 60000);
+    console.log(`${path.basename(OUT_FILE)} ja existe (gerado ha ${ageMin}min, < 1h). Pulando. Use --force pra regenerar.`);
+    process.exit(0);
+  }
+}
 
 // ---------- helpers de formatacao pros prompts ----------
 function fmtBR(n) {
@@ -375,6 +414,8 @@ const SECOES = [
     generated_at: new Date().toISOString(),
     empresa: empresaNome,
     periodo,
+    year: targetYear,
+    month: targetMonth || null,
     filter: 'realizado',
     secoes,
     conclusao,

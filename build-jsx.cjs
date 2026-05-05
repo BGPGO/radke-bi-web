@@ -67,23 +67,31 @@ const SOURCES = [
     });
     var statusFilter = sf[0], setStatusFilter = sf[1];
     // Drilldown global: setado quando o usuario clica numa barra/linha de grafico.
-    // shape: null | { type: 'mes'|'categoria'|'cliente'|'fornecedor', value, label }
     var dd = useState(null);
     var drilldown = dd[0], setDrilldown = dd[1];
+    // Year selector: padrao = ano corrente (window.REF_YEAR)
+    var ys = useState(function () {
+      try { var y = parseInt(localStorage.getItem('radke.year'), 10); return y > 1900 ? y : (window.REF_YEAR || new Date().getFullYear()); } catch (e) { return window.REF_YEAR || new Date().getFullYear(); }
+    });
+    var year = ys[0], setYear = ys[1];
 
     useEffect(function () {
       try { localStorage.setItem('radke.statusFilter', statusFilter); } catch (e) {}
       if (typeof window._radkeMakeBit === 'function') {
         window.BIT = window._radkeMakeBit(statusFilter);
       }
-      // muda o status filter -> reseta drilldown (os dados de base mudaram)
       setDrilldown(null);
     }, [statusFilter]);
+
+    useEffect(function () {
+      try { localStorage.setItem('radke.year', String(year)); } catch (e) {}
+      setDrilldown(null);
+    }, [year]);
 
     var handleSetPage = function (newPage) {
       setPage(newPage);
       setSidebarOpen(false);
-      setDrilldown(null);  // troca de tela limpa o filtro
+      setDrilldown(null);
     };
 
     var PageComp = ({
@@ -111,12 +119,16 @@ const SOURCES = [
             onToggleSidebar={function () { setSidebarOpen(function (o) { return !o; }); }}
             statusFilter={statusFilter}
             setStatusFilter={setStatusFilter}
+            year={year}
+            setYear={setYear}
           />
           <PageComp
             filters={filters}
             setFilters={setFilters}
             onOpenFilters={function () { setFiltersOpen(true); }}
             statusFilter={statusFilter}
+            year={year}
+            setYear={setYear}
             drilldown={drilldown}
             setDrilldown={setDrilldown}
           />
