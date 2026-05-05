@@ -181,7 +181,6 @@ const PageOverview = ({ filters, setFilters, onOpenFilters, statusFilter, drilld
       </div>
 
       <DrilldownBadge drilldown={drilldown} onClear={() => setDrilldown(null)} />
-      <InlineFilterBar drilldown={drilldown} setDrilldown={setDrilldown} />
 
       <div className="row" style={{ gridTemplateColumns: "minmax(280px, 3fr) minmax(0, 9fr)" }}>
         {/* LEFT: Indicadores Principais + Resultado Geral */}
@@ -377,7 +376,6 @@ const PageReceita = ({ filters, setFilters, onOpenFilters, statusFilter, drilldo
       </div>
 
       <DrilldownBadge drilldown={drilldown} onClear={() => setDrilldown(null)} />
-      <InlineFilterBar kindHint="r" drilldown={drilldown} setDrilldown={setDrilldown} />
 
       <div className="row row-4">
         <KpiTile label="Receita total" value={(B.TOTAL_RECEITA / 1e6).toFixed(2).replace(".", ",")} unit="M" sparkValues={B.MONTH_DATA.map(m => m.receita)} sparkColor="var(--green)" tone="green" />
@@ -479,7 +477,6 @@ const PageDespesa = ({ filters, setFilters, onOpenFilters, statusFilter, drilldo
       </div>
 
       <DrilldownBadge drilldown={drilldown} onClear={() => setDrilldown(null)} />
-      <InlineFilterBar kindHint="d" drilldown={drilldown} setDrilldown={setDrilldown} />
 
       <div className="row row-4">
         <KpiTile label="Despesas totais" value={(totalDespesa / 1e6).toFixed(2).replace(".", ",")} unit="M" sparkValues={B.MONTH_DATA.map(m => m.despesa)} sparkColor="var(--red)" tone="red" />
