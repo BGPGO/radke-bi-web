@@ -26,7 +26,6 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
         <div className="actions">
           <RangePills value={range} onChange={setRange} />
           <Filters filters={filters} onOpen={onOpenFilters} page="fluxo" />
-          <ExportButton />
         </div>
       </div>
 
@@ -257,7 +256,6 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
         </div>
         <div className="actions">
           <Filters filters={filters} onOpen={onOpenFilters} page="tesouraria" />
-          <ExportButton />
         </div>
       </div>
 
@@ -513,7 +511,6 @@ const PageComparativo = ({ statusFilter, drilldown, setDrilldown, year, month })
           <div className="status-line">{periodLabel(p1)} vs {periodLabel(p2)}</div>
         </div>
         <div className="actions">
-          <ExportButton />
         </div>
       </div>
 

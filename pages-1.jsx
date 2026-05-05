@@ -178,7 +178,6 @@ const PageOverview = ({ filters, setFilters, onOpenFilters, statusFilter, drilld
         </div>
         <div className="actions">
           <Filters filters={filters} onOpen={onOpenFilters} page="overview" />
-          <ExportButton />
         </div>
       </div>
 
@@ -282,7 +281,6 @@ const PageIndicators = ({ statusFilter, drilldown, setDrilldown, year, month }) 
           <div className="status-line">Receita, despesa, valor líquido e margem · {statusFilter === "realizado" ? "realizado" : statusFilter === "tudo" ? "tudo" : "pendente"}</div>
         </div>
         <div className="actions">
-          <ExportButton />
         </div>
       </div>
 
@@ -376,7 +374,6 @@ const PageReceita = ({ filters, setFilters, onOpenFilters, statusFilter, drilldo
         <div className="actions">
           <RangePills value={range} onChange={setRange} />
           <Filters filters={filters} onOpen={onOpenFilters} page="receita" />
-          <ExportButton />
         </div>
       </div>
 
@@ -481,7 +478,6 @@ const PageDespesa = ({ filters, setFilters, onOpenFilters, statusFilter, drilldo
         <div className="actions">
           <RangePills value={range} onChange={setRange} />
           <Filters filters={filters} onOpen={onOpenFilters} page="despesa" />
-          <ExportButton />
         </div>
       </div>
 

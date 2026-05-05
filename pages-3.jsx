@@ -143,7 +143,6 @@ const PageFaturamentoProduto = ({ drilldown, setDrilldown }) => {
           <div className="status-line">{T.numNFs} NFs · {T.numProdutos} produtos · {T.numClientes} clientes · ano {T.anoRef}</div>
         </div>
         <div className="actions">
-          <ExportButton />
         </div>
       </div>
 
@@ -318,7 +317,6 @@ const PageCurvaABC = ({ drilldown, setDrilldown }) => {
             <button className={classFilter === "B" ? "active" : ""} onClick={() => setClassFilter("B")}>B</button>
             <button className={classFilter === "C" ? "active" : ""} onClick={() => setClassFilter("C")}>C</button>
           </div>
-          <ExportButton />
         </div>
       </div>
 
@@ -609,7 +607,6 @@ const PageMarketing = ({ drilldown, setDrilldown }) => {
           <div className="status-line">{T.numCampanhas} campanhas · gasto total R$ {formatBR(T.gastoTotal)}</div>
         </div>
         <div className="actions">
-          <ExportButton />
         </div>
       </div>
 

@@ -282,7 +282,6 @@ const PageHierarquia = ({ statusFilter, year, month, drilldown, setDrilldown }) 
           </div>
         </div>
         <div className="actions">
-          <ExportButton />
         </div>
       </div>
 
@@ -421,7 +420,6 @@ const PageDetalhado = ({ statusFilter, year, month, drilldown, setDrilldown }) =
           </div>
         </div>
         <div className="actions">
-          <ExportButton />
         </div>
       </div>
 
@@ -592,7 +590,6 @@ const PageProfundaCliente = ({ statusFilter, year, month, drilldown, setDrilldow
           </div>
         </div>
         <div className="actions">
-          <ExportButton />
         </div>
       </div>
 
@@ -849,7 +846,6 @@ const PageCRM = ({ statusFilter, year, month, drilldown, setDrilldown }) => {
           </div>
         </div>
         <div className="actions">
-          <ExportButton />
         </div>
       </div>
 

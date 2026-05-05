@@ -80,7 +80,11 @@ abc.forEach(p => abcCount[p.abc]++);
 console.log('  classes (regra 80/15/5):', abcCount);
 
 console.log('\n=== Faturamento por Produto ===');
-const fatRaw = readSheet('FaturamentoPorProduto.xlsx');
+const fatRawAll = readSheet('FaturamentoPorProduto.xlsx');
+// Filtro RADKE: só PEDIDO autorizado conta como faturamento (igual ao PBI).
+// Remessa de Produto e Devolucoes são etapas/contramovimentos da mesma venda.
+const fatRaw = fatRawAll.filter(r => r['Operação'] === 'PEDIDO' && r['Situação'] === 'Autorizado');
+console.log('  filtro PEDIDO + Autorizado: ' + fatRaw.length + ' de ' + fatRawAll.length + ' rows');
 // linhas de NF, cada linha = 1 item de NF
 const fatItems = fatRaw.map(r => {
   const dEm = excelToDate(num(r['Data de Emissão']));
