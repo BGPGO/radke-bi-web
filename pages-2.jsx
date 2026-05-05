@@ -284,32 +284,115 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
 
 const PageComparativo = ({ statusFilter, drilldown, setDrilldown, year, month }) => {
   const B = useMemo(() => window.getBit(statusFilter, drilldown, year, month), [statusFilter, drilldown, year, month]);
-  const refYear = (B.META && B.META.ref_year) || new Date().getFullYear();
-  const lblTrim1 = `${refYear} · Trim 1 (jan-mar)`;
-  const lblTrim2 = `${refYear} · Trim 2 (abr-jun)`;
-  const [d1, setD1] = useState(lblTrim1);
-  const [d2, setD2] = useState(lblTrim2);
+  const refYear = window.REF_YEAR || new Date().getFullYear();
+  const fmt = (B && B.fmt) || (n => `R$ ${n.toFixed(2)}`);
+  const fmtPct = (B && B.fmtPct) || (n => `${n.toFixed(1)}%`);
+
+  // Estado dos 2 periodos comparados — cada um eh { y, kind: 'mes'|'trim'|'ano', val }
+  const [p1, setP1] = useState({ y: refYear, kind: "trim", val: 1 });
+  const [p2, setP2] = useState({ y: refYear, kind: "trim", val: 2 });
   const [expanded, setExpanded] = useState({ Receita: true, Despesa: true });
 
-  const recHeader = B.COMP_DATA.find(r => r.tipo === "Receita") || { d1: 0, d2: 0 };
-  const despHeader = B.COMP_DATA.find(r => r.tipo === "Despesa") || { d1: 0, d2: 0 };
-  const totalReceita1 = recHeader.d1, totalReceita2 = recHeader.d2;
-  const totalDespesa1 = despHeader.d1, totalDespesa2 = despHeader.d2;
-  const liq1 = totalReceita1 + totalDespesa1, liq2 = totalReceita2 + totalDespesa2;
-  const safePct = (a, b) => b !== 0 ? (a / b) * 100 : 0;
-  const diffReceita = totalReceita2 - totalReceita1;
-  const diffReceitaPct = safePct(diffReceita, totalReceita1);
-  const diffDespesa = totalDespesa2 - totalDespesa1;
-  const diffDespesaPct = safePct(diffDespesa, totalDespesa1);
-  const diffLiq = liq2 - liq1;
-  const diffLiqPct = safePct(diffLiq, liq1);
+  // Calcula bounds de mes do periodo
+  const periodBounds = (p) => {
+    if (p.kind === "ano") return { y: p.y, mIni: 1, mFim: 12 };
+    if (p.kind === "trim") {
+      const tStart = (p.val - 1) * 3 + 1;
+      return { y: p.y, mIni: tStart, mFim: tStart + 2 };
+    }
+    return { y: p.y, mIni: p.val, mFim: p.val }; // mes
+  };
+  const periodLabel = (p) => {
+    if (p.kind === "ano") return `${p.y} · Ano completo`;
+    if (p.kind === "trim") {
+      const lbl = ["jan-mar", "abr-jun", "jul-set", "out-dez"][p.val - 1];
+      return `${p.y} · Trim ${p.val} (${lbl})`;
+    }
+    const mn = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"][p.val - 1];
+    return `${mn}/${p.y}`;
+  };
+
+  // Filtra ALL_TX por periodo + statusFilter; agrega receitas/despesas por categoria
+  const aggregate = (p) => {
+    const allTx = window.ALL_TX || [];
+    const filterTx = window.filterTx;
+    const sf = statusFilter || window.BIT_FILTER || "realizado";
+    const txFiltered = filterTx ? filterTx(allTx, sf, null) : allTx;
+    const { y, mIni, mFim } = periodBounds(p);
+    const mIniStr = `${y}-${String(mIni).padStart(2, "0")}`;
+    const mFimStr = `${y}-${String(mFim).padStart(2, "0")}`;
+    let totalRec = 0, totalDesp = 0;
+    const recCat = new Map(), despCat = new Map();
+    for (const row of txFiltered) {
+      const [kind, mes, , categoria, , valor] = row;
+      if (!mes || mes < mIniStr || mes > mFimStr) continue;
+      if (kind === "r") {
+        totalRec += valor;
+        recCat.set(categoria, (recCat.get(categoria) || 0) + valor);
+      } else {
+        totalDesp += valor;
+        despCat.set(categoria, (despCat.get(categoria) || 0) + valor);
+      }
+    }
+    return { totalRec, totalDesp, liq: totalRec - totalDesp, recCat, despCat };
+  };
+
+  const a1 = useMemo(() => aggregate(p1), [p1, statusFilter]);
+  const a2 = useMemo(() => aggregate(p2), [p2, statusFilter]);
+
+  const safePct = (a, b) => b !== 0 ? (a / b) * 100 : (a !== 0 ? 100 : 0);
+  const diffReceita = a2.totalRec - a1.totalRec;
+  const diffReceitaPct = safePct(diffReceita, a1.totalRec);
+  const diffDespesa = a2.totalDesp - a1.totalDesp;
+  const diffDespesaPct = safePct(diffDespesa, a1.totalDesp);
+  const diffLiq = a2.liq - a1.liq;
+  const diffLiqPct = safePct(diffLiq, Math.abs(a1.liq) || 1);
+
+  // Top categorias unidas (union de p1 + p2)
+  const allRecCats = new Set([...a1.recCat.keys(), ...a2.recCat.keys()]);
+  const allDespCats = new Set([...a1.despCat.keys(), ...a2.despCat.keys()]);
+
+  // Selector compacto: ano + tipo + valor
+  const PeriodPicker = ({ value, onChange, label }) => {
+    const yearsAvail = window.AVAILABLE_YEARS || [refYear];
+    const monthOpts = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+    return (
+      <div style={{ marginBottom: 12 }}>
+        <div className="filter-mini-label">{label}</div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 6 }}>
+          <select className="filter-select" value={value.y} onChange={e => onChange({ ...value, y: Number(e.target.value) })}>
+            {yearsAvail.map(y => <option key={y} value={y}>{y}</option>)}
+          </select>
+          <select className="filter-select" value={value.kind} onChange={e => onChange({ ...value, kind: e.target.value, val: e.target.value === "mes" ? 1 : (e.target.value === "trim" ? 1 : 1) })}>
+            <option value="mes">Mês</option>
+            <option value="trim">Trimestre</option>
+            <option value="ano">Ano completo</option>
+          </select>
+        </div>
+        {value.kind === "mes" && (
+          <select className="filter-select" style={{ width: "100%" }} value={value.val} onChange={e => onChange({ ...value, val: Number(e.target.value) })}>
+            {monthOpts.map((m, i) => <option key={i + 1} value={i + 1}>{m}</option>)}
+          </select>
+        )}
+        {value.kind === "trim" && (
+          <select className="filter-select" style={{ width: "100%" }} value={value.val} onChange={e => onChange({ ...value, val: Number(e.target.value) })}>
+            <option value={1}>Trim 1 (jan-mar)</option>
+            <option value={2}>Trim 2 (abr-jun)</option>
+            <option value={3}>Trim 3 (jul-set)</option>
+            <option value={4}>Trim 4 (out-dez)</option>
+          </select>
+        )}
+        <div style={{ marginTop: 4, color: "var(--mute)", fontSize: 11, letterSpacing: "0.04em" }}>{periodLabel(value)}</div>
+      </div>
+    );
+  };
 
   return (
     <div className="page">
       <div className="page-title">
         <div>
           <h1>Comparativo</h1>
-          <div className="status-line">Análise comparativa entre dois períodos</div>
+          <div className="status-line">{periodLabel(p1)} vs {periodLabel(p2)}</div>
         </div>
         <div className="actions">
           <ExportButton />
@@ -322,37 +405,27 @@ const PageComparativo = ({ statusFilter, drilldown, setDrilldown, year, month })
         <div style={{ display: "grid", gap: 16 }}>
           <div className="card">
             <h2 className="card-title">Filtragem de datas</h2>
-            <div style={{ marginBottom: 12 }}>
-              <div className="filter-mini-label">Data comparativa 1</div>
-              <select className="filter-select" style={{ width: "100%" }} value={d1} onChange={e => setD1(e.target.value)}>
-                <option>{lblTrim1}</option>
-              </select>
-            </div>
-            <div>
-              <div className="filter-mini-label">Data comparativa 2</div>
-              <select className="filter-select" style={{ width: "100%" }} value={d2} onChange={e => setD2(e.target.value)}>
-                <option>{lblTrim2}</option>
-              </select>
-            </div>
+            <PeriodPicker value={p1} onChange={setP1} label="Data comparativa 1" />
+            <PeriodPicker value={p2} onChange={setP2} label="Data comparativa 2" />
           </div>
 
           <div className="card">
             <h2 className="card-title">Indicadores principais</h2>
             <div style={{ display: "grid", gap: 12 }}>
-              <div className="indicator-card red">
+              <div className={`indicator-card ${diffReceita >= 0 ? "" : "red"}`}>
                 <div className="kpi-label">Diferença na receita</div>
-                <div style={{ fontSize: 22, fontWeight: 700, color: "var(--red)", letterSpacing: "-0.02em" }}>{B.fmt(diffReceita)}</div>
-                <div className={`kpi-delta down`}>{B.fmtPct(diffReceitaPct)}</div>
+                <div style={{ fontSize: 22, fontWeight: 700, color: diffReceita >= 0 ? "var(--green)" : "var(--red)", letterSpacing: "-0.02em" }}>{fmt(diffReceita)}</div>
+                <div className={`kpi-delta ${diffReceita >= 0 ? "up" : "down"}`}>{fmtPct(diffReceitaPct)}</div>
               </div>
-              <div className="indicator-card">
+              <div className={`indicator-card ${diffDespesa <= 0 ? "" : "red"}`}>
                 <div className="kpi-label">Diferença nas despesas</div>
-                <div style={{ fontSize: 22, fontWeight: 700, color: "var(--green)", letterSpacing: "-0.02em" }}>{B.fmt(diffDespesa)}</div>
-                <div className={`kpi-delta up`}>{B.fmtPct(diffDespesaPct)}</div>
+                <div style={{ fontSize: 22, fontWeight: 700, color: diffDespesa <= 0 ? "var(--green)" : "var(--red)", letterSpacing: "-0.02em" }}>{fmt(diffDespesa)}</div>
+                <div className={`kpi-delta ${diffDespesa <= 0 ? "up" : "down"}`}>{fmtPct(diffDespesaPct)}</div>
               </div>
-              <div className="indicator-card red">
+              <div className={`indicator-card ${diffLiq >= 0 ? "" : "red"}`}>
                 <div className="kpi-label">Diferença do valor líquido</div>
-                <div style={{ fontSize: 22, fontWeight: 700, color: "var(--red)", letterSpacing: "-0.02em" }}>{B.fmt(diffLiq)}</div>
-                <div className={`kpi-delta down`}>{B.fmtPct(diffLiqPct)}</div>
+                <div style={{ fontSize: 22, fontWeight: 700, color: diffLiq >= 0 ? "var(--green)" : "var(--red)", letterSpacing: "-0.02em" }}>{fmt(diffLiq)}</div>
+                <div className={`kpi-delta ${diffLiq >= 0 ? "up" : "down"}`}>{fmtPct(diffLiqPct)}</div>
               </div>
             </div>
           </div>
@@ -368,51 +441,73 @@ const PageComparativo = ({ statusFilter, drilldown, setDrilldown, year, month })
               <thead>
                 <tr>
                   <th>Receita / Despesa</th>
-                  <th className="num">{d1}</th>
-                  <th className="num">{d2}</th>
+                  <th className="num">{periodLabel(p1)}</th>
+                  <th className="num">{periodLabel(p2)}</th>
                   <th className="num">Δ Comparativo</th>
                   <th className="num">%</th>
                 </tr>
               </thead>
               <tbody>
-                {B.COMP_DATA.map((row, i) => {
-                  const diff = row.d2 - row.d1;
-                  const pct = row.d1 ? (diff / row.d1) * 100 : (row.d2 !== 0 ? 100 : 0);
-                  if (row.isHeader) {
-                    const open = expanded[row.tipo];
-                    return (
-                      <tr key={i} className="section">
-                        <td>
-                          <button onClick={() => setExpanded(s => ({ ...s, [row.tipo]: !s[row.tipo] }))}
-                            style={{ background: "transparent", border: 0, color: "inherit", padding: 0, fontWeight: 700, fontFamily: "inherit", fontSize: "inherit", display: "inline-flex", alignItems: "center", gap: 6 }}>
-                            <span className="chev">{open ? "−" : "+"}</span>{row.tipo}
-                          </button>
-                        </td>
-                        <td className={`num bold ${row.tipo === "Despesa" ? "red" : "green"}`}>{B.fmt(row.d1)}</td>
-                        <td className={`num bold ${row.tipo === "Despesa" ? "red" : "green"}`}>{B.fmt(row.d2)}</td>
-                        <td className={`num bold ${diff >= 0 ? "green" : "red"}`}>{B.fmt(diff)}</td>
-                        <td className={`num bold ${diff >= 0 ? "green" : "red"}`}>{B.fmtPct(pct)}</td>
-                      </tr>
-                    );
-                  }
-                  if (!expanded[row.parent]) return null;
-                  const isReceita = row.parent === "Receita";
+                {/* Header Receita */}
+                <tr className="section">
+                  <td>
+                    <button onClick={() => setExpanded(s => ({ ...s, Receita: !s.Receita }))} style={{ background: "transparent", border: 0, color: "inherit", padding: 0, fontWeight: 700, fontFamily: "inherit", fontSize: "inherit", display: "inline-flex", alignItems: "center", gap: 6 }}>
+                      <span className="chev">{expanded.Receita ? "−" : "+"}</span>Receita
+                    </button>
+                  </td>
+                  <td className="num bold green">{fmt(a1.totalRec)}</td>
+                  <td className="num bold green">{fmt(a2.totalRec)}</td>
+                  <td className={`num bold ${diffReceita >= 0 ? "green" : "red"}`}>{fmt(diffReceita)}</td>
+                  <td className={`num bold ${diffReceita >= 0 ? "green" : "red"}`}>{fmtPct(diffReceitaPct)}</td>
+                </tr>
+                {expanded.Receita && [...allRecCats].sort((x, y) => (a2.recCat.get(y) || 0) + (a1.recCat.get(y) || 0) - ((a2.recCat.get(x) || 0) + (a1.recCat.get(x) || 0))).map((cat, i) => {
+                  const v1 = a1.recCat.get(cat) || 0;
+                  const v2 = a2.recCat.get(cat) || 0;
+                  const diff = v2 - v1;
+                  const pct = safePct(diff, v1);
                   return (
-                    <tr key={i}>
-                      <td style={{ paddingLeft: 24 }}><span className="chev">+</span>{row.tipo}</td>
-                      <td className={`num ${isReceita ? "green" : "red"}`}>{row.d1 !== 0 ? B.fmt(row.d1) : "—"}</td>
-                      <td className={`num ${isReceita ? "green" : "red"}`}>{row.d2 !== 0 ? B.fmt(row.d2) : "—"}</td>
-                      <td className={`num ${diff >= 0 ? "green" : "red"}`}>{B.fmt(diff)}</td>
-                      <td className={`num ${diff >= 0 ? "green" : "red"}`}>{B.fmtPct(pct)}</td>
+                    <tr key={`r${i}`}>
+                      <td style={{ paddingLeft: 24 }}><span className="chev">+</span>{cat}</td>
+                      <td className="num green">{v1 !== 0 ? fmt(v1) : "—"}</td>
+                      <td className="num green">{v2 !== 0 ? fmt(v2) : "—"}</td>
+                      <td className={`num ${diff >= 0 ? "green" : "red"}`}>{fmt(diff)}</td>
+                      <td className={`num ${diff >= 0 ? "green" : "red"}`}>{fmtPct(pct)}</td>
+                    </tr>
+                  );
+                })}
+                {/* Header Despesa */}
+                <tr className="section">
+                  <td>
+                    <button onClick={() => setExpanded(s => ({ ...s, Despesa: !s.Despesa }))} style={{ background: "transparent", border: 0, color: "inherit", padding: 0, fontWeight: 700, fontFamily: "inherit", fontSize: "inherit", display: "inline-flex", alignItems: "center", gap: 6 }}>
+                      <span className="chev">{expanded.Despesa ? "−" : "+"}</span>Despesa
+                    </button>
+                  </td>
+                  <td className="num bold red">{fmt(a1.totalDesp)}</td>
+                  <td className="num bold red">{fmt(a2.totalDesp)}</td>
+                  <td className={`num bold ${diffDespesa <= 0 ? "green" : "red"}`}>{fmt(diffDespesa)}</td>
+                  <td className={`num bold ${diffDespesa <= 0 ? "green" : "red"}`}>{fmtPct(diffDespesaPct)}</td>
+                </tr>
+                {expanded.Despesa && [...allDespCats].sort((x, y) => (a2.despCat.get(y) || 0) + (a1.despCat.get(y) || 0) - ((a2.despCat.get(x) || 0) + (a1.despCat.get(x) || 0))).map((cat, i) => {
+                  const v1 = a1.despCat.get(cat) || 0;
+                  const v2 = a2.despCat.get(cat) || 0;
+                  const diff = v2 - v1;
+                  const pct = safePct(diff, v1);
+                  return (
+                    <tr key={`d${i}`}>
+                      <td style={{ paddingLeft: 24 }}><span className="chev">+</span>{cat}</td>
+                      <td className="num red">{v1 !== 0 ? fmt(v1) : "—"}</td>
+                      <td className="num red">{v2 !== 0 ? fmt(v2) : "—"}</td>
+                      <td className={`num ${diff <= 0 ? "green" : "red"}`}>{fmt(diff)}</td>
+                      <td className={`num ${diff <= 0 ? "green" : "red"}`}>{fmtPct(pct)}</td>
                     </tr>
                   );
                 })}
                 <tr className="total">
                   <td>Total líquido</td>
-                  <td className="num">{B.fmt(liq1)}</td>
-                  <td className="num">{B.fmt(liq2)}</td>
-                  <td className={`num ${diffLiq >= 0 ? "green" : "red"}`}>{B.fmt(diffLiq)}</td>
-                  <td className={`num ${diffLiq >= 0 ? "green" : "red"}`}>{B.fmtPct(diffLiqPct)}</td>
+                  <td className="num">{fmt(a1.liq)}</td>
+                  <td className="num">{fmt(a2.liq)}</td>
+                  <td className={`num ${diffLiq >= 0 ? "green" : "red"}`}>{fmt(diffLiq)}</td>
+                  <td className={`num ${diffLiq >= 0 ? "green" : "red"}`}>{fmtPct(diffLiqPct)}</td>
                 </tr>
               </tbody>
             </table>
