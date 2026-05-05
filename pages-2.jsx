@@ -295,26 +295,69 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
     if (!d || !m || !y) return 0;
     return y * 10000 + m * 100 + d;
   };
-  const fluxoFuturo = useMemo(() => {
+  const saldoBaseInicial = (SALDOS_REAIS && SALDOS_REAIS.last && SALDOS_REAIS.last.total) || 0;
+  const fluxoFuturoFull = useMemo(() => {
     // Usa SEG.a_pagar_receber.EXTRATO (todas as transacoes ainda nao pagas)
     const aprSeg = (SEG.a_pagar_receber) || {};
     const apReceitas = aprSeg.EXTRATO_RECEITAS || (aprSeg.EXTRATO || []).filter(e => e[4] > 0);
     const apDespesas = aprSeg.EXTRATO_DESPESAS || (aprSeg.EXTRATO || []).filter(e => e[4] < 0);
     const merged = [...apReceitas, ...apDespesas];
-    // Aplica drilldown atual (pra cruzar filtro de mês/categoria etc)
     const all = window.applyDrilldown ? window.applyDrilldown(merged, drilldown) : merged;
     const sorted = all
       .filter(e => parseFluxoDate(e[0]) >= todayKey)
-      .sort((a, b) => parseFluxoDate(a[0]) - parseFluxoDate(b[0]))
-      .slice(0, 60);
-    // Saldo running: parte do saldo atual da planilha e atualiza a cada movimento
-    const saldoBase = (SALDOS_REAIS && SALDOS_REAIS.last && SALDOS_REAIS.last.total) || 0;
-    let saldoRunning = saldoBase;
+      .sort((a, b) => parseFluxoDate(a[0]) - parseFluxoDate(b[0]));
+    // Saldo running com TODOS os lançamentos (não slice ainda — precisamos ver até o fim pra detectar quebra)
+    let saldoRunning = saldoBaseInicial;
     return sorted.map((e) => {
       saldoRunning += (e[4] || 0);
       return [...e, saldoRunning];
     });
-  }, [SEG, drilldown, todayKey]);
+  }, [SEG, drilldown, todayKey, saldoBaseInicial]);
+
+  // Tabela limita a 60 linhas, mas análise de risco usa o full
+  const fluxoFuturo = useMemo(() => fluxoFuturoFull.slice(0, 60), [fluxoFuturoFull]);
+
+  // Análise de risco de caixa: quando o saldo cai abaixo de zero pela 1ª vez?
+  // Mínimo projetado e em qual data?
+  const riscoAnalise = useMemo(() => {
+    if (fluxoFuturoFull.length === 0) return null;
+    let primeiroNegativo = null;
+    let minSaldo = saldoBaseInicial;
+    let minSaldoData = null;
+    let saldoFinal = saldoBaseInicial;
+    for (const row of fluxoFuturoFull) {
+      const saldo = row[6];
+      if (saldo < 0 && primeiroNegativo == null) {
+        primeiroNegativo = { data: row[0], saldo, valor: row[4], movimento: row[3] || row[2] };
+      }
+      if (saldo < minSaldo) {
+        minSaldo = saldo;
+        minSaldoData = row[0];
+      }
+      saldoFinal = saldo;
+    }
+    // Dias até primeiro negativo
+    let diasAteCrise = null;
+    if (primeiroNegativo) {
+      const [d, m, y] = primeiroNegativo.data.split('/').map(Number);
+      const t = new Date(); t.setHours(0,0,0,0);
+      const target = new Date(y, m - 1, d);
+      diasAteCrise = Math.round((target - t) / (1000 * 60 * 60 * 24));
+    }
+    return { primeiroNegativo, minSaldo, minSaldoData, saldoFinal, diasAteCrise, totalLancamentos: fluxoFuturoFull.length };
+  }, [fluxoFuturoFull, saldoBaseInicial]);
+
+  // Saldo dia-a-dia agregado (pra chart de projeção). Agrupa lançamentos do mesmo dia.
+  const saldoDiario = useMemo(() => {
+    if (fluxoFuturoFull.length === 0) return [];
+    const byDay = new Map();
+    for (const row of fluxoFuturoFull) {
+      const dataKey = row[0]; // DD/MM/YYYY
+      // Para o chart, queremos o saldo NO FIM do dia
+      byDay.set(dataKey, row[6]);
+    }
+    return [...byDay.entries()].map(([data, saldo]) => ({ data, saldo }));
+  }, [fluxoFuturoFull]);
 
   return (
     <div className="page">
@@ -432,12 +475,51 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
         <div className="card">
           <h2 className="card-title">Fluxo a vencer (saldo projetado dia a dia)</h2>
           <div className="status-line" style={{ marginBottom: 8 }}>
-            {fluxoFuturo.length} lançamentos a partir de hoje
+            {fluxoFuturoFull.length} lançamentos a partir de hoje
             {SALDOS_REAIS && SALDOS_REAIS.last && (
               <> · saldo inicial <b style={{ color: "var(--cyan)" }}>{B.fmt(SALDOS_REAIS.last.total)}</b></>
             )}
           </div>
-          <div className="t-scroll" style={{ maxHeight: 360 }}>
+          {/* Banner de risco de caixa */}
+          {riscoAnalise && (
+            <div className={`tesouraria-risco ${riscoAnalise.primeiroNegativo ? "risco-critico" : riscoAnalise.minSaldo < saldoBaseInicial * 0.3 ? "risco-atencao" : "risco-ok"}`}>
+              {riscoAnalise.primeiroNegativo ? (
+                <>
+                  <div className="risco-icon">⚠</div>
+                  <div className="risco-body">
+                    <div className="risco-titulo">SALDO ENTRA EM VERMELHO EM <b>{riscoAnalise.primeiroNegativo.data}</b> {riscoAnalise.diasAteCrise != null && <span className="risco-dias">(em {riscoAnalise.diasAteCrise} {riscoAnalise.diasAteCrise === 1 ? "dia" : "dias"})</span>}</div>
+                    <div className="risco-detalhe">
+                      Lançamento crítico: <b>{(riscoAnalise.primeiroNegativo.movimento || "").slice(0, 40)}</b> · {B.fmt(riscoAnalise.primeiroNegativo.valor)} · saldo cai pra <b style={{ color: "var(--red)" }}>{B.fmt(riscoAnalise.primeiroNegativo.saldo)}</b>
+                    </div>
+                    <div className="risco-min">
+                      Mínimo projetado: <b style={{ color: "var(--red)" }}>{B.fmt(riscoAnalise.minSaldo)}</b> em {riscoAnalise.minSaldoData} · Saldo final no horizonte: <b style={{ color: riscoAnalise.saldoFinal >= 0 ? "var(--green)" : "var(--red)" }}>{B.fmt(riscoAnalise.saldoFinal)}</b>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="risco-icon">{riscoAnalise.minSaldo < saldoBaseInicial * 0.3 ? "⚠" : "✓"}</div>
+                  <div className="risco-body">
+                    <div className="risco-titulo">
+                      {riscoAnalise.minSaldo < saldoBaseInicial * 0.3
+                        ? "SALDO MÍNIMO PROJETADO ABAIXO DE 30% DO ATUAL"
+                        : "CAIXA SAUDÁVEL NO HORIZONTE"}
+                    </div>
+                    <div className="risco-detalhe">
+                      Mínimo: <b style={{ color: riscoAnalise.minSaldo < saldoBaseInicial * 0.3 ? "var(--amber)" : "var(--green)" }}>{B.fmt(riscoAnalise.minSaldo)}</b> em {riscoAnalise.minSaldoData} · Final: <b style={{ color: "var(--green)" }}>{B.fmt(riscoAnalise.saldoFinal)}</b>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+          {/* Mini chart de saldo dia-a-dia projetado */}
+          {saldoDiario.length > 1 && (
+            <div className="tesouraria-mini-chart">
+              <SaldoProjetadoChart pontos={saldoDiario} saldoInicial={saldoBaseInicial} />
+            </div>
+          )}
+          <div className="t-scroll" style={{ maxHeight: 380 }}>
             <table className="t">
               <thead>
                 <tr><th>Vence</th><th>Cliente / Fornecedor</th><th className="num">Movimento</th><th className="num">Saldo</th></tr>
@@ -448,21 +530,97 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
                 )}
                 {fluxoFuturo.map((e, i) => {
                   const saldoCol = e[6];
+                  const dataAtual = e[0];
+                  const dataAnterior = i > 0 ? fluxoFuturo[i - 1][0] : null;
+                  const novoBloco = dataAnterior !== dataAtual; // primeira linha de cada dia
+                  // Linha "crítica" se este é o primeiro lançamento que torna o saldo negativo
+                  const saldoAnterior = i > 0 ? fluxoFuturo[i - 1][6] : saldoBaseInicial;
+                  const cruzouZero = saldoAnterior >= 0 && saldoCol < 0;
                   return (
-                    <tr key={i}>
-                      <td style={{ fontFamily: "var(--font-mono)", fontSize: 10 }}>{e[0]}</td>
+                    <tr key={i} className={cruzouZero ? "tesouraria-row-critica" : ""} style={novoBloco && i > 0 ? { borderTop: "1px solid var(--border-2)" } : {}}>
+                      <td style={{ fontFamily: "var(--font-mono)", fontSize: 10, fontWeight: novoBloco ? 700 : 400, color: novoBloco ? "var(--text)" : "var(--fg-3)" }}>{novoBloco ? dataAtual : ""}</td>
                       <td style={{ fontSize: 11 }}>{(e[3] || e[2] || "").slice(0, 32)}</td>
                       <td className={`num ${e[4] < 0 ? "red" : "green"}`} style={{ fontSize: 11 }}>{B.fmt(e[4])}</td>
-                      <td className="num" style={{ fontSize: 11, fontWeight: 600, color: saldoCol < 0 ? "var(--red)" : "var(--cyan)" }}>{B.fmt(saldoCol)}</td>
+                      <td className="num" style={{ fontSize: 11, fontWeight: 600, color: saldoCol < 0 ? "var(--red)" : saldoCol < saldoBaseInicial * 0.3 ? "var(--amber)" : "var(--cyan)" }}>{B.fmt(saldoCol)}</td>
                     </tr>
                   );
                 })}
               </tbody>
             </table>
           </div>
+          {fluxoFuturoFull.length > 60 && (
+            <div className="status-line" style={{ marginTop: 8, fontSize: 11, textAlign: "center" }}>
+              Mostrando primeiros 60 de {fluxoFuturoFull.length} lançamentos · análise de risco usa todos
+            </div>
+          )}
         </div>
       </div>
     </div>
+  );
+};
+
+// Mini chart SVG do saldo projetado dia-a-dia, com marcador da data crítica
+const SaldoProjetadoChart = ({ pontos, saldoInicial }) => {
+  const W = 800, H = 160, padX = 40, padTop = 16, padBottom = 32;
+  if (pontos.length < 2) return null;
+  const valores = [saldoInicial, ...pontos.map(p => p.saldo)];
+  const min = Math.min(0, ...valores);
+  const max = Math.max(...valores);
+  const range = (max - min) || 1;
+  const stepX = (W - padX * 2) / (pontos.length - 0);
+  const xOf = (i) => padX + i * stepX;
+  const yOf = (v) => padTop + (1 - (v - min) / range) * (H - padTop - padBottom);
+  const zeroY = yOf(0);
+  // Path da linha
+  const points = pontos.map((p, i) => `${xOf(i + 1)},${yOf(p.saldo)}`).join(" ");
+  const startPoint = `${xOf(0)},${yOf(saldoInicial)}`;
+  // Área pra preenchimento
+  const areaPath = `M ${startPoint} L ${points.replace(/ /g, " L ")} L ${xOf(pontos.length)},${yOf(min)} L ${xOf(0)},${yOf(min)} Z`;
+  // Detecta primeira data com saldo negativo
+  let critIdx = -1;
+  for (let i = 0; i < pontos.length; i++) {
+    if (pontos[i].saldo < 0) { critIdx = i; break; }
+  }
+  // Labels de data: a cada N pontos pra não amassar
+  const labelStep = Math.max(1, Math.ceil(pontos.length / 8));
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" style={{ width: "100%", height: H, marginBottom: 12 }}>
+      <defs>
+        <linearGradient id="ts-proj-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="var(--cyan)" stopOpacity="0.32" />
+          <stop offset="100%" stopColor="var(--cyan)" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      {/* zero line */}
+      {zeroY > padTop && zeroY < H - padBottom && (
+        <line x1={padX} y1={zeroY} x2={W - 10} y2={zeroY} stroke="rgba(239, 68, 68, 0.4)" strokeDasharray="4 4" strokeWidth="1" />
+      )}
+      {zeroY > padTop && zeroY < H - padBottom && (
+        <text x={W - 10} y={zeroY - 4} textAnchor="end" fontSize="10" fill="var(--red)" fontFamily="var(--font-mono)">R$ 0</text>
+      )}
+      {/* área */}
+      <path d={areaPath} fill="url(#ts-proj-grad)" />
+      {/* linha */}
+      <polyline points={`${startPoint} ${points}`} fill="none" stroke="var(--cyan)" strokeWidth="2" />
+      {/* marcador inicial */}
+      <circle cx={xOf(0)} cy={yOf(saldoInicial)} r="4" fill="var(--cyan)" stroke="#0a141a" strokeWidth="2" />
+      <text x={xOf(0)} y={yOf(saldoInicial) - 8} textAnchor="middle" fontSize="10" fill="var(--cyan)" fontFamily="var(--font-mono)">Hoje</text>
+      {/* marcador crítico */}
+      {critIdx >= 0 && (
+        <g>
+          <line x1={xOf(critIdx + 1)} y1={padTop} x2={xOf(critIdx + 1)} y2={H - padBottom} stroke="var(--red)" strokeDasharray="3 3" strokeWidth="1.2" />
+          <circle cx={xOf(critIdx + 1)} cy={yOf(pontos[critIdx].saldo)} r="5" fill="var(--red)" stroke="#0a141a" strokeWidth="2" />
+          <text x={xOf(critIdx + 1)} y={padTop - 2} textAnchor="middle" fontSize="10" fontWeight="700" fill="var(--red)">{pontos[critIdx].data}</text>
+        </g>
+      )}
+      {/* labels de data no eixo x */}
+      {pontos.map((p, i) => {
+        if (i % labelStep !== 0 && i !== pontos.length - 1) return null;
+        return (
+          <text key={i} x={xOf(i + 1)} y={H - 12} textAnchor="middle" fontSize="9" fill="var(--mute)">{p.data.slice(0, 5)}</text>
+        );
+      })}
+    </svg>
   );
 };
 

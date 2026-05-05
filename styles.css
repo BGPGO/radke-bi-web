@@ -2986,3 +2986,76 @@ table.t tr.total td {
 }
 .ifb-popover-item:hover { background: rgba(34, 211, 238, 0.08); color: var(--text); }
 .ifb-popover-item.active { background: rgba(34, 211, 238, 0.18); color: var(--cyan); font-weight: 600; }
+
+/* ===== Tesouraria — banner de risco de caixa ===== */
+.tesouraria-risco {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  border: 1px solid var(--border);
+}
+.tesouraria-risco.risco-critico {
+  background: linear-gradient(135deg, rgba(239,68,68,0.18), rgba(239,68,68,0.04));
+  border-color: rgba(239,68,68,0.45);
+  box-shadow: 0 0 18px rgba(239,68,68,0.20);
+}
+.tesouraria-risco.risco-atencao {
+  background: linear-gradient(135deg, rgba(251,191,36,0.14), rgba(251,191,36,0.03));
+  border-color: rgba(251,191,36,0.4);
+}
+.tesouraria-risco.risco-ok {
+  background: rgba(16, 185, 129, 0.06);
+  border-color: rgba(16, 185, 129, 0.22);
+}
+.risco-icon {
+  font-size: 32px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.tesouraria-risco.risco-critico .risco-icon { color: var(--red); }
+.tesouraria-risco.risco-atencao .risco-icon { color: #fbbf24; }
+.tesouraria-risco.risco-ok .risco-icon { color: var(--green); }
+.risco-body { flex: 1; min-width: 0; }
+.risco-titulo {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+.risco-dias {
+  display: inline-block;
+  padding: 2px 8px;
+  background: var(--red);
+  color: white;
+  border-radius: 4px;
+  font-size: 11px;
+  margin-left: 6px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.tesouraria-risco.risco-atencao .risco-dias { background: #fbbf24; color: #0a141a; }
+.risco-detalhe {
+  font-size: 12px;
+  color: var(--fg-2);
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+.risco-min {
+  font-size: 11px;
+  color: var(--fg-3);
+  line-height: 1.6;
+}
+.tesouraria-mini-chart { margin: 4px 0 12px; }
+.tesouraria-row-critica {
+  background: rgba(239, 68, 68, 0.08) !important;
+  border-left: 3px solid var(--red);
+}
+.tesouraria-row-critica td {
+  font-weight: 700 !important;
+}
