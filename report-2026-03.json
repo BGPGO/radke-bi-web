@@ -1,0 +1,35 @@
+{
+  "generated_at": "2026-05-05T04:36:00.000Z",
+  "empresa": "RADKE SOLUÇÕES INSTRALOGISTICAS",
+  "periodo": "Março de 2026 — Realizado",
+  "secoes": {
+    "visao_geral": {
+      "title": "Visão Geral",
+      "analysis": "Março foi o melhor mês de receita do quadrimestre: R$ 877.268 realizados, alta de 47% sobre fevereiro. Despesas também subiram para R$ 676.943 (+70% vs fev), absorvendo parte do ganho operacional. Resultado líquido de R$ 200.325 com margem de 22,8% — segunda melhor margem do ano e quase idêntico ao volume de fevereiro em valores absolutos. A operação confirma que tem ciclo de aceleração: cada mês entrega volume crescente até o pico de produção.\n\nA composição do mês mostra fábrica em ritmo intenso: Venda de Mercadoria Fabricadas a R$ 553.136, Serviços de Serralheria explodindo a R$ 204.044 (4x o nível de fevereiro), e ainda R$ 69.842 em Restauração. A FITESA continuou liderando com R$ 255.990, mas perdeu participação relativa (29% vs 55% em fev) — sinal positivo de diversificação dentro do mês."
+    },
+    "receita": {
+      "title": "Receita",
+      "analysis": "Receita realizada de R$ 877.268 em março, com Venda de Mercadoria Fabricadas (R$ 553.136) e Serviços de Serralheria (R$ 204.044) puxando o desempenho. A multiplicação da receita de Serralheria — de R$ 52 mil em fevereiro para R$ 204 mil em março — sugere a entrega de um projeto grande de serralheria nesse mês, possivelmente cliente industrial com demanda de estruturas metálicas customizadas.\n\nA distribuição de clientes ficou mais saudável: FITESA com R$ 256 mil (29%), abrindo espaço para outros nomes contribuírem. Não há receita pendente do mês (R$ 0 a receber), confirmando que clientes top continuam pagando em dia ou no mesmo mês. Quando a empresa ativa serralheria pesada além da fabricação padrão, ela escala receita sem comprometer a qualidade do recebimento."
+    },
+    "despesa": {
+      "title": "Despesa",
+      "analysis": "Despesa de R$ 676.943 em março, alta de 70% sobre fevereiro. Compras de Matéria Prima saltaram para R$ 146.400 (vs R$ 51 mil em fev) — coerente com o pico de produção. Industrialização Terceirizada subiu para R$ 87.922 e Benefícios LD para R$ 69.193, tudo proporcional ao volume produzido. A Receita Federal foi mais pesada: R$ 91.132 (vs R$ 56 mil em fev), provavelmente refletindo maior base de cálculo do faturamento de fevereiro.\n\nApenas R$ 32 mil ficaram a pagar, mantendo o padrão de pagamento disciplinado. A elevação proporcional das despesas com a receita mostra estrutura de custo variável bem dimensionada: a empresa gasta mais quando produz mais, o que é eficiente. O risco está nos custos fixos de meses fracos — quando produção cai, esses R$ 220-250 mil de Benefícios+Tributos+Salários permanecem."
+    },
+    "fluxo": {
+      "title": "Fluxo de Caixa",
+      "analysis": "Fluxo líquido positivo de +R$ 200.325 em março, praticamente idêntico ao de fevereiro (+R$ 196 mil). Relação despesa/receita de 0,77 — pior que fevereiro (0,67) mas ainda saudável. Esse leve aperto de margem é o trade-off natural do crescimento: para escalar de R$ 595 mil para R$ 877 mil, a empresa absorveu mais matéria prima e terceirização, sacrificando 10 pontos de margem no mix.\n\nO cumulativo do trimestre fechou em +R$ 248 mil (jan -149 + fev +197 + mar +200), o que normalizado dá margem de 13% sobre R$ 1,9 milhão de receita. Se o segundo trimestre repetir esse perfil, a empresa fecha o semestre com aproximadamente R$ 500 mil de resultado líquido — patamar saudável. O alerta vem de abril, que mostrou que essa repetição não é automática."
+    },
+    "tesouraria": {
+      "title": "Tesouraria",
+      "analysis": "Março continuou reforçando a tesouraria: +R$ 200 mil agregados ao saldo. Recebimento praticamente integral do mês (zero a receber pendente) e apenas R$ 32 mil deslizaram em despesas. A combinação de alto volume + recebimento rápido + pagamento disciplinado coloca a tesouraria em posição confortável ao final do primeiro trimestre.\n\nO saldo de tesouraria ao final de março — após sequência fev/mar de +R$ 397 mil acumulados — provavelmente atingiu o ponto mais alto do quadrimestre. Esse momento ideal seria oportunidade para investimentos estratégicos planejados ou para construir colchão maior. Recomenda-se monitorar o saldo bancário ao fim de março e usar essa visibilidade pra planejar abril/maio com mais segurança."
+    },
+    "comparativo": {
+      "title": "Comparativo entre Períodos",
+      "analysis": "Março vs fevereiro: receita +47% (R$ 595k → R$ 877k), despesa +70% (R$ 399k → R$ 677k), resultado líquido praticamente igual (+R$ 197k → +R$ 200k). A elasticidade despesa/receita foi de 1,49 — para cada 1% de aumento na receita, a despesa subiu 1,49%. Isso explica por que a margem caiu de 33% para 23% mesmo com receita maior.\n\nEsse comportamento é típico de operação industrial em fase de aceleração: variáveis (matéria prima, terceirização) crescem mais rápido que receita por causa de buffers de estoque ou contratação de capacidade extra. O ideal seria buscar margem incremental: quando a receita escala, a margem por unidade deveria subir, não cair. Vale revisitar precificação dos novos contratos de serralheria que entraram em março — possivelmente foram contratados a margens mais apertadas para conquistar volume."
+    },
+    "conclusao": {
+      "title": "Conclusão e Recomendações",
+      "analysis": "Março foi o segundo mês positivo consecutivo, fechando o T1 com +R$ 248 mil de resultado líquido sobre R$ 1,9 milhão de receita (margem 13%). A empresa demonstrou capacidade de escalar receita em quase 50% mês a mês quando há demanda. O ponto de atenção é que a margem caiu 10 pontos no processo, sinal de que crescimento desordenado pode comprometer o resultado.\n\nRecomendações: (1) revisar a estrutura de preços dos contratos de serralheria que entraram em março para garantir margem mínima de 25%; (2) avaliar se vale ampliar capacidade de produção interna para reduzir dependência de industrialização terceirizada (que custou R$ 88 mil só em março); (3) usar o caixa acumulado do T1 para investimentos planejados em vez de deixar parado em conta corrente — possível aplicação em CDB de liquidez diária ou fundos DI."
+    }
+  }
+}

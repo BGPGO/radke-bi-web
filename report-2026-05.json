@@ -1,0 +1,35 @@
+{
+  "generated_at": "2026-05-05T04:36:00.000Z",
+  "empresa": "RADKE SOLUÇÕES INSTRALOGISTICAS",
+  "periodo": "Maio de 2026 — Realizado",
+  "secoes": {
+    "visao_geral": {
+      "title": "Visão Geral",
+      "analysis": "Maio começou pressionado: até a data deste relatório (05/05) a receita realizada está em R$ 0 enquanto as despesas já somam R$ 29.329, resultando em -R$ 29.329 de resultado parcial. É natural ainda no início do mês — receitas costumam concentrar nos dias 15-30 quando as faturas vencem, enquanto despesas iniciais (matéria prima, salários da virada) entram nos primeiros dias. O retrato do mês ainda está incompleto.\n\nO que chama atenção é o pipeline confirmado: R$ 109.392 a receber e R$ 485.640 a pagar nos próximos dias. O desbalanceamento de 4,4x entre saídas e entradas previstas exige gestão ativa de tesouraria. Combinado com a queima de caixa de R$ 161 mil em abril, maio é o mês onde a disciplina financeira mais importa para evitar deterioração da posição bancária."
+    },
+    "receita": {
+      "title": "Receita",
+      "analysis": "Receita realizada de R$ 0 até o momento (05/05) — situação típica do início do mês. Os R$ 109.392 a receber dão visibilidade parcial sobre o que entrará nos próximos 30 dias. Adicionalmente, parte dos R$ 266 mil a receber gerados em abril deve cair no caixa de maio, somando potencialmente R$ 250-300 mil em entradas confirmadas até o fim do mês.\n\nO desafio do mês não é cobrança — é geração: a empresa precisa ativar pedidos suficientes para superar R$ 600 mil em receita realizada em maio, equivalente à média dos meses bons. Com a matéria prima comprada em abril, a fábrica deve estar bem suprida para essa produção. Acompanhar nas próximas duas semanas o ritmo de entregas e emissão de notas fiscais é decisivo para avaliar se maio se posiciona como mês de recuperação ou de continuidade do prejuízo."
+    },
+    "despesa": {
+      "title": "Despesa",
+      "analysis": "Despesa de R$ 29.329 nos primeiros dias de maio, com Compras de Matéria Prima a R$ 23.067 e Benefícios LD a R$ 2.514. O peso ainda baixo da matéria prima (vs R$ 274 mil de abril) sugere que a empresa de fato comprou estoque suficiente em abril para cobrir maio. Salários iniciais aparecem em R$ 1.830, valor parcial — o pagamento principal de folha cai tipicamente nos dias 5 ou 30.\n\nA fila de a-pagar de R$ 485.640 para o restante do mês inclui salários completos, benefícios, fornecedores e tributos. ArcelorMittal aparece como fornecedor crítico com R$ 8.228 já registrados — confirma a importância dessa relação para a cadeia produtiva da RADKE. A gestão de pagamentos no mês precisa priorizar tributos (não atraso) e fornecedores estratégicos antes de despesas com sócios ou benefícios variáveis."
+    },
+    "fluxo": {
+      "title": "Fluxo de Caixa",
+      "analysis": "Maio começou com fluxo negativo de R$ 29.329 (sem receita ainda + despesas iniciais). Olhando para o mês completo projetado: se a empresa realizar R$ 600 mil de receita e mantiver despesa próxima da média (R$ 600 mil), o resultado mensal pode fechar próximo do break-even. Para entregar margem positiva, é preciso receita acima de R$ 700 mil — patamar visto em fev/mar/abr.\n\nO comportamento da matéria prima é o sinal mais útil: como as compras de abril foram pesadas, espera-se que maio tenha despesa de matéria prima abaixo da média (R$ 50-100 mil em vez dos R$ 200+ mil) — o que abre espaço para margem positiva mesmo com receita moderada. Acompanhar diariamente a relação entre receita acumulada e despesa acumulada é a métrica chave dos próximos 25 dias."
+    },
+    "tesouraria": {
+      "title": "Tesouraria",
+      "analysis": "A tesouraria começa maio com saldo bancário consolidado de aproximadamente R$ 1,59 milhão (Sicredi + Sicoob + Santander + BTG). Esse saldo precisa atravessar o mês sustentando R$ 486 mil em pagamentos previstos antes que a receita compense. A R$ 109 mil a receber + ~R$ 250 mil esperados de abril deveriam reforçar o caixa em pelo menos R$ 350 mil até o fim do mês.\n\nProjeção realista: saldo final de maio entre R$ 1,3-1,5 milhão se o mês fechar em break-even, ou R$ 1,5-1,7 milhão se houver margem positiva de R$ 100-200 mil. Recomenda-se monitoramento diário do saldo nos 3 bancos prioritários e priorização de pagamentos por criticidade (tributos > fornecedores estratégicos > demais)."
+    },
+    "comparativo": {
+      "title": "Comparativo entre Períodos",
+      "analysis": "Maio (parcial até 05/05) vs janeiro (completo): janeiro fechou com -R$ 149 mil de prejuízo. Maio começa com perfil semelhante ao primeiro mês do ano em termos de despesa pesada vs receita ainda vazia. A diferença é que maio inicia com R$ 109 mil já em pipeline de a-receber, enquanto janeiro começou com zero. Isso oferece um colchão de visibilidade positiva.\n\nComparado a abril: o mês começa com despesa de matéria prima muito menor (R$ 23 mil vs R$ 274 mil em abril), o que indica que o esforço de compras já foi feito. Maio tem chance estrutural de fechar melhor que abril mesmo com receita similar, porque a despesa será significativamente mais leve. O cenário base é resultado líquido positivo entre R$ 50-150 mil."
+    },
+    "conclusao": {
+      "title": "Conclusão e Recomendações",
+      "analysis": "Maio começa em -R$ 29 mil parciais, mas com perspectiva favorável: matéria prima já comprada em abril reduz pressão de despesa, R$ 109 mil em a-receber + cauda de abril dão visibilidade de entrada, e a fábrica deve estar suprida para acelerar produção. O cenário base é fechar o mês entre break-even e +R$ 150 mil de resultado.\n\nRecomendações para maio: (1) acelerar emissão de notas fiscais nas duas próximas semanas para garantir receita acima de R$ 600 mil até dia 25; (2) cobrar ativamente os R$ 109 mil a receber e parte dos R$ 266 mil de abril — meta de receber 70% até o fim do mês; (3) priorizar pagamento de tributos e fornecedores estratégicos (ArcelorMittal, Receita Federal) antes de despesas discricionárias; (4) monitorar diariamente o saldo bancário consolidado e ajustar agenda de pagamentos se o saldo cair abaixo de R$ 1,2 milhão."
+    }
+  }
+}

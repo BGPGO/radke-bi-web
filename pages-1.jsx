@@ -177,7 +177,6 @@ const PageOverview = ({ filters, setFilters, onOpenFilters, statusFilter, drilld
           <div className="status-line">RADKE · ano {refYear} · status <b>{statusLabel}</b></div>
         </div>
         <div className="actions">
-          <Filters filters={filters} onOpen={onOpenFilters} page="overview" />
         </div>
       </div>
 
@@ -373,8 +372,6 @@ const PageReceita = ({ filters, setFilters, onOpenFilters, statusFilter, drilldo
           <div className="status-line">Composição por categoria, cliente e mês</div>
         </div>
         <div className="actions">
-          <RangePills value={range} onChange={setRange} />
-          <Filters filters={filters} onOpen={onOpenFilters} page="receita" />
         </div>
       </div>
 
@@ -476,8 +473,6 @@ const PageDespesa = ({ filters, setFilters, onOpenFilters, statusFilter, drilldo
           <div className="status-line">Composição por categoria, fornecedor e mês</div>
         </div>
         <div className="actions">
-          <RangePills value={range} onChange={setRange} />
-          <Filters filters={filters} onOpen={onOpenFilters} page="despesa" />
         </div>
       </div>
 

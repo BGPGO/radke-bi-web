@@ -1,0 +1,35 @@
+{
+  "generated_at": "2026-05-05T04:36:00.000Z",
+  "empresa": "RADKE SOLUÇÕES INSTRALOGISTICAS",
+  "periodo": "Ano 2026 (YTD) — Realizado",
+  "secoes": {
+    "visao_geral": {
+      "title": "Visão Geral",
+      "analysis": "O acumulado de 2026 até abril/maio fecha com receita realizada de R$ 2.589.892 e despesa de R$ 2.531.934, gerando resultado líquido positivo de apenas R$ 57.958, equivalente a margem líquida de 2,24%. O comportamento mensal é volátil: janeiro fechou no vermelho com -R$ 149 mil, fevereiro reagiu com +R$ 197 mil, março manteve a recuperação em +R$ 200 mil, mas abril voltou ao prejuízo com -R$ 161 mil. A operação está rodando no limite, com ciclos curtos de geração e consumo de caixa.\n\nO ponto mais sensível é a estrutura a vencer: há R$ 529 mil a receber contra R$ 2,26 milhões a pagar. Esse descasamento de 4,3x exige gestão ativa de cobrança, antecipação de recebíveis ou renegociação de prazos com fornecedores nas próximas semanas. Sem ação corretiva, a queima de caixa de abril pode se repetir e comprometer o capital de giro até o final do segundo trimestre."
+    },
+    "receita": {
+      "title": "Receita",
+      "analysis": "A receita realizada YTD soma R$ 2.589.892, dominada por \"Venda — Mercadoria Fabricadas\" (R$ 1.765.081, 68% do total) seguida pelos serviços de Restauração (R$ 380.097), Serralheria (R$ 365.175) e Instalação (R$ 54.032). O mix mostra que o negócio é primariamente industrial (fabricação) com camada complementar de serviços técnicos. A FITESA (Cosmópolis) responde por R$ 1.075.799 sozinha, ou 41,5% da receita total — concentração que amplifica o risco se essa conta sofrer atraso ou redução.\n\nNa fila de a-receber estão R$ 529.638 ainda não recebidos, sendo R$ 266 mil concentrados em abril (sinal positivo de receita recente que entrará em maio/junho). Recomenda-se priorizar a cobrança proativa dos R$ 529 mil pendentes e ampliar a base de clientes top com participação acima de R$ 100 mil para reduzir a dependência da FITESA, que hoje representa risco de concentração elevado."
+    },
+    "despesa": {
+      "title": "Despesa",
+      "analysis": "As despesas realizadas YTD totalizam R$ 2.531.934, com \"Compras de Matéria Prima\" liderando (R$ 582.682, 23%), seguida por Benefícios LD (R$ 233.219), Industrialização Terceirizada (R$ 228.244), Adiantamento de Lucros ao sócio Diogo (R$ 132.280) e IRPJ (R$ 105.900). A carga tributária com Receita Federal somando R$ 299.736 representa 11,8% das saídas — patamar elevado que merece revisão de regime tributário e análise de elegibilidade a benefícios fiscais setoriais.\n\nO mês de abril foi atípico: R$ 838 mil em despesas (maior do ano), puxado por R$ 274 mil em Matéria Prima — possivelmente reposição de estoque após a aceleração de março. Há R$ 2,26 milhões em despesas a pagar nos próximos meses, com maio já registrando R$ 486 mil de saídas previstas mesmo sem qualquer receita realizada ainda. A gestão de fluxo precisa equacionar essa pressão antes que se converta em atrasos com fornecedores ou tributos."
+    },
+    "fluxo": {
+      "title": "Fluxo de Caixa",
+      "analysis": "O fluxo mensal de 2026 mostra comportamento de \"serra\": janeiro fechou em -R$ 149 mil, fevereiro reagiu para +R$ 197 mil, março consolidou em +R$ 200 mil, abril mergulhou para -R$ 161 mil. O acumulado YTD é apenas +R$ 57.958, ou seja, todo o ganho de fev+mar foi quase totalmente apagado pelos prejuízos de jan+abr. Maio, com receita ainda zerada e despesas iniciais de R$ 29 mil, indica que o mês começa pressionado.\n\nA leitura estratégica é que a empresa precisa transformar pelo menos dois dos próximos quatro meses em superávit acima de R$ 200 mil para fechar o ano com margem operacional saudável (acima de 8%). O padrão histórico sugere que isso é viável, dado que março entregou +R$ 200 mil. O foco deve ser converter o pipeline de a-receber em caixa rápido e segurar despesas variáveis (matéria-prima, terceirização) durante meses de receita mais baixa."
+    },
+    "tesouraria": {
+      "title": "Tesouraria",
+      "analysis": "A posição de tesouraria atual é apertada porém manejável: saldo bancário consolidado de R$ 1.593.977 (Sicredi + Sicoob + Santander + BTG) cobre o caixa imediato. Recebido YTD R$ 2,59 milhões / Pago R$ 2,53 milhões — saldo operacional próximo do equilíbrio. Os R$ 529 mil a receber representam reforço de caixa para os próximos 30-60 dias, enquanto os R$ 2,26 milhões a pagar exigem distribuição cuidadosa nos meses seguintes para não pressionar o saldo bancário.\n\nA projeção saldo + a-receber − a-pagar indica trajetória de queda gradual se a empresa não acelerar a entrada de novas receitas. Recomenda-se criar política de antecipação de recebíveis para clientes top (FITESA, PRIMA SOLE, BERTOLINI), priorizar pagamentos por relevância estratégica e manter monitoramento semanal do saldo consolidado dos 3 bancos prioritários (Santander, Sicredi, Sicoob)."
+    },
+    "comparativo": {
+      "title": "Comparativo entre Períodos",
+      "analysis": "Comparando o primeiro trimestre (jan-mar) com o segundo trimestre parcial (abr) de 2026: o T1 fechou com receita de R$ 1.912.498 e resultado líquido de +R$ 247.998 (margem 13%). Abril sozinho — primeiro mês do T2 — entregou receita de R$ 677.394 mas com despesas de R$ 838.106, gerando -R$ 160.712 e puxando a margem YTD para baixo. O contraste evidencia que abril foi um mês de investimento operacional (pico em compras de matéria prima de R$ 274 mil) que ainda não converteu em receita.\n\nA expectativa é que esse investimento se materialize em receita nos meses seguintes (maio-junho). Se isso não ocorrer no prazo, o resultado consolidado do semestre pode fechar próximo do break-even. Métricas a monitorar: conversão da matéria prima de abril em produto faturado em maio/junho, e confirmação de que os R$ 266 mil a receber gerados em abril entrarão no caixa antes do fim de maio."
+    },
+    "conclusao": {
+      "title": "Conclusão e Recomendações",
+      "analysis": "A RADKE encerrou o quadrimestre com resultado próximo do break-even (margem 2,2%) em meio a alta volatilidade mensal — janeiro e abril foram negativos enquanto fevereiro e março compensaram. A operação demonstra capacidade de gerar margem em meses bons, mas o desafio é manter consistência. A concentração de 41,5% da receita na FITESA e o desbalanceamento entre R$ 529 mil a receber × R$ 2,26 milhões a pagar são os dois principais focos de atenção estratégica.\n\nRecomendações: (1) implementar gestão semanal de cobrança dos R$ 529 mil pendentes, com meta de reduzir o saldo a 50% até o fim de maio; (2) diversificar a carteira de clientes ampliando a participação de PRIMA SOLE, BERTOLINI e ZAFFARI para cada um superar R$ 50 mil/mês recorrente; (3) revisar a carga tributária junto a contador especializado dado os R$ 300 mil em Receita Federal — possíveis ganhos com mudança de regime ou créditos não aproveitados."
+    }
+  }
+}

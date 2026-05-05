@@ -1,0 +1,35 @@
+{
+  "generated_at": "2026-05-05T04:36:00.000Z",
+  "empresa": "RADKE SOLUÇÕES INSTRALOGISTICAS",
+  "periodo": "Abril de 2026 — Realizado",
+  "secoes": {
+    "visao_geral": {
+      "title": "Visão Geral",
+      "analysis": "Abril quebrou a sequência positiva: receita realizada de R$ 677.394 contra R$ 838.106 de despesas, gerando prejuízo de R$ 160.712 e margem de -23,7%. A receita caiu 23% vs março (R$ 877k → R$ 677k) enquanto a despesa subiu 24% (R$ 677k → R$ 838k) — combinação que apagou todo o ganho operacional. O mês foi o pior do quadrimestre em resultado líquido, anulando praticamente o ganho de fevereiro.\n\nO que chama atenção é o salto em Compras de Matéria Prima: R$ 273.972 só em abril (47% das despesas do mês), mais que o dobro de março. Esse perfil sugere reposição agressiva de estoque ou início de produção para entregas de maio/junho. Se essa interpretação estiver correta, abril foi um mês de \"investimento em pipeline futuro\" disfarçado de prejuízo operacional. A FITESA recuperou protagonismo com R$ 490.576 — 72% da receita do mês."
+    },
+    "receita": {
+      "title": "Receita",
+      "analysis": "Receita de R$ 677.394 em abril, queda de 23% sobre março. Venda de Mercadoria Fabricadas seguiu como principal categoria (R$ 539.039), mas Serviços de Serralheria desabaram para R$ 48.206 (-76% vs março). A Restauração subiu levemente para R$ 79.700. A leitura é que a empresa entregou os projetos pesados de Serralheria em março e abril voltou ao mix mais regular, dominado pela fabricação para clientes industriais.\n\nA FITESA explodiu para R$ 490.576 em abril — sua maior compra mensal do ano, representando 72% da receita do mês. Essa concentração é simultaneamente positiva (volume garantido) e arriscada (dependência crítica de uma conta). Vale registrar que dos R$ 530 mil de \"a receber\" do ano, R$ 266 mil foram gerados em abril — sinal de que parte dessa receita só será caixa em maio/junho."
+    },
+    "despesa": {
+      "title": "Despesa",
+      "analysis": "Despesa de R$ 838.106 em abril, alta de 24% sobre março. O grande responsável foi Compras de Matéria Prima a R$ 273.972 — quase o dobro de março e 5x o volume de fevereiro. Esse padrão é típico de operação que está repondo estoque para atender pedidos confirmados de meses seguintes. Benefícios LD subiram para R$ 75.909 (vs R$ 69 mil em mar), Industrialização caiu para R$ 51.370 (vs R$ 88 mil), e a Receita Federal seguiu pesada com R$ 93.860.\n\nA queda na Industrialização Terceirizada combinada com salto na Matéria Prima sugere que a empresa internalizou parte da produção que antes era terceirizada — possivelmente decisão estratégica para capturar margem adicional. Apenas R$ 28 mil ficaram a pagar do mês, mantendo o padrão de pagamento disciplinado mesmo em mês de prejuízo."
+    },
+    "fluxo": {
+      "title": "Fluxo de Caixa",
+      "analysis": "Fluxo líquido de -R$ 160.712 em abril — segundo pior do ano. Relação despesa/receita explodiu para 1,24, a pior do quadrimestre (jan foi 1,34). A combinação receita-em-queda + despesa-em-alta produz o cenário mais hostil para a tesouraria. O mês consumiu praticamente todo o ganho de fevereiro, deixando o cumulativo do quadrimestre em apenas +R$ 87 mil (jan-149 + fev+197 + mar+200 + abr-161 = +R$ 87 mil).\n\nSe o padrão \"compra agressiva de matéria prima → produção subsequente → faturamento elevado\" se confirmar, maio e junho devem entregar receitas significativamente acima de R$ 700 mil para \"pagar de volta\" o investimento de abril. Caso contrário, o quadrimestre pode fechar próximo do break-even apesar dos meses bons."
+    },
+    "tesouraria": {
+      "title": "Tesouraria",
+      "analysis": "Abril foi mês de consumo intenso de caixa: -R$ 161 mil queimados, alimentando estoque. Os R$ 266 mil a receber gerados no mês representam reforço de tesouraria para os 30-60 dias seguintes — entrarão entre maio e junho. Os R$ 28 mil a pagar adiados são valor pequeno, sem stress imediato.\n\nO ponto crítico é a posição combinada: o empilhamento de a-pagar do quadrimestre (próximo de R$ 2,3 milhões) é dominado por meses futuros, mas a empresa precisará vencer essa fila com receita real. O saldo bancário ao final de abril provavelmente caiu da posição máxima de março, mas continua confortável (acima de R$ 1,5 milhão). Maio começa pressionado: zero receita realizada na primeira semana e R$ 486 mil em despesas previstas até o fim do mês."
+    },
+    "comparativo": {
+      "title": "Comparativo entre Períodos",
+      "analysis": "Abril vs março: receita -23% (R$ 877k → R$ 677k), despesa +24% (R$ 677k → R$ 838k), resultado líquido inverteu de +R$ 200k para -R$ 161k — variação negativa de R$ 360 mil em um único mês. O efeito tesoura abriu drasticamente: enquanto a receita desinflou (volta ao patamar de fev), a despesa acelerou no maior compras de matéria prima do quadrimestre.\n\nComparando T1 fechado (jan-mar +R$ 248 mil) com T2 incipiente (abr -R$ 161 mil): o segundo trimestre começou no contrapé. Para o T2 manter o ritmo do T1, maio e junho precisam somar +R$ 409 mil entre os dois meses (~R$ 200 mil/mês). Isso é viável com base no histórico de fev/mar, mas exige que a matéria prima comprada em abril se converta em receita rápida."
+    },
+    "conclusao": {
+      "title": "Conclusão e Recomendações",
+      "analysis": "Abril rompeu a sequência positiva com prejuízo de R$ 161 mil, puxado por compras agressivas de matéria prima (R$ 274 mil) que parecem ser preparação para entregas futuras. A FITESA dominou a receita do mês com 72% — concentração elevada amplifica o risco. O quadrimestre acumulado caiu para apenas +R$ 87 mil de resultado líquido, com margem YTD de 2,2%.\n\nRecomendações: (1) confirmar com a equipe operacional se a compra de matéria prima de abril já tem pedidos correspondentes — se sim, projetar maio/junho com receita acima de R$ 800 mil; (2) acompanhar a entrada dos R$ 266 mil a receber gerados em abril com cobrança ativa em maio; (3) avaliar se a internalização de produção (queda em industrialização terceirizada) está gerando margem positiva ou apenas trocou um custo por outro maior. (4) Diversificar receita: a participação da FITESA acima de 70% no mês é zona de alerta — se eles atrasam um pagamento ou reduzem volume, o impacto é direto e imediato."
+    }
+  }
+}

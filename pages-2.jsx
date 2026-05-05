@@ -24,8 +24,6 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
           <div className="status-line">Análise horizontal/vertical e saldos por mês</div>
         </div>
         <div className="actions">
-          <RangePills value={range} onChange={setRange} />
-          <Filters filters={filters} onOpen={onOpenFilters} page="fluxo" />
         </div>
       </div>
 
@@ -74,8 +72,8 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
           </div>
           <div className="status-line" style={{ marginBottom: 8, fontSize: 11 }}>
             {view === "vertical"
-              ? "Vertical: cada categoria como % do total Receita/Despesa do mês"
-              : "Horizontal: variação % vs mês anterior (mostra evolução temporal)"}
+              ? "Vertical: todas as linhas (receita e despesa) como % da receita do mês"
+              : "Horizontal: cada mês como % do total anual da linha"}
           </div>
           <div className="t-scroll" style={{ maxHeight: 320 }}>
             <table className="t">
@@ -99,6 +97,8 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
                 </tr>
               </thead>
               <tbody>
+                {/* Pre-calcula totais usados nas duas análises */}
+                {(() => null)()}
                 <tr className="section">
                   <td>Receita</td>
                   {months6.map((_, i) => {
@@ -106,15 +106,12 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
                     let pctLabel = "100%";
                     let pctColor = "var(--fg-3)";
                     if (view === "horizontal") {
-                      if (i === 0) { pctLabel = "—"; }
-                      else {
-                        const prev = B.FLUXO_RECEITA.reduce((s, r) => s + (r.values[i - 1] || 0), 0);
-                        if (prev) {
-                          const delta = ((total - prev) / Math.abs(prev)) * 100;
-                          pctLabel = (delta >= 0 ? "+" : "") + delta.toFixed(1).replace(".", ",") + "%";
-                          pctColor = delta >= 0 ? "var(--green)" : "var(--red)";
-                        } else { pctLabel = "—"; }
-                      }
+                      // Total ANUAL da seção Receita (soma todos os meses)
+                      const totalAno = B.FLUXO_RECEITA.reduce((s, r) => s + r.values.reduce((a, b) => a + (b || 0), 0), 0);
+                      pctLabel = totalAno ? ((total / totalAno) * 100).toFixed(1).replace(".", ",") + "%" : "—";
+                    } else {
+                      // Vertical: receita do mês = 100% da base
+                      pctLabel = "100%";
                     }
                     return (
                       <React.Fragment key={i}>
@@ -132,22 +129,14 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
                       let pctLabel = "0,00%";
                       let pctColor = "var(--fg-3)";
                       if (view === "vertical") {
-                        const totalReceita = B.FLUXO_RECEITA.reduce((s, r) => s + (r.values[i] || 0), 0);
-                        const pct = totalReceita ? (v / totalReceita) * 100 : 0;
+                        // % da receita do mês (linha como fração da receita do mês)
+                        const totalReceitaMes = B.FLUXO_RECEITA.reduce((s, r) => s + (r.values[i] || 0), 0);
+                        const pct = totalReceitaMes ? (v / totalReceitaMes) * 100 : 0;
                         pctLabel = pct.toFixed(2).replace(".", ",") + "%";
                       } else {
-                        if (i === 0) { pctLabel = "—"; }
-                        else {
-                          const prev = row.values[i - 1] || 0;
-                          if (prev) {
-                            const delta = ((v - prev) / Math.abs(prev)) * 100;
-                            pctLabel = (delta >= 0 ? "+" : "") + delta.toFixed(1).replace(".", ",") + "%";
-                            pctColor = delta >= 0 ? "var(--green)" : "var(--red)";
-                          } else if (v) {
-                            pctLabel = "novo";
-                            pctColor = "var(--cyan)";
-                          } else { pctLabel = "—"; }
-                        }
+                        // Horizontal: % do total anual desta linha
+                        const totalAnoLinha = row.values.reduce((s, x) => s + (x || 0), 0);
+                        pctLabel = totalAnoLinha ? ((v / totalAnoLinha) * 100).toFixed(1).replace(".", ",") + "%" : "—";
                       }
                       return (
                         <React.Fragment key={i}>
@@ -161,24 +150,22 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
                 <tr className="section">
                   <td>Despesa</td>
                   {months6.map((_, i) => {
-                    const total = B.FLUXO_DESPESA.reduce((s, r) => s + (r.values[i] || 0), 0);
-                    let pctLabel = "100%";
+                    const totalDespesa = B.FLUXO_DESPESA.reduce((s, r) => s + (r.values[i] || 0), 0);
+                    let pctLabel = "—";
                     let pctColor = "var(--fg-3)";
-                    if (view === "horizontal") {
-                      if (i === 0) { pctLabel = "—"; }
-                      else {
-                        const prev = B.FLUXO_DESPESA.reduce((s, r) => s + (r.values[i - 1] || 0), 0);
-                        if (prev) {
-                          const delta = ((total - prev) / Math.abs(prev)) * 100;
-                          pctLabel = (delta >= 0 ? "+" : "") + delta.toFixed(1).replace(".", ",") + "%";
-                          // pra despesa: subir é ruim (vermelho), descer é bom (verde)
-                          pctColor = delta >= 0 ? "var(--red)" : "var(--green)";
-                        } else { pctLabel = "—"; }
-                      }
+                    if (view === "vertical") {
+                      // Despesa total do mês como % da receita do mês
+                      const totalReceitaMes = B.FLUXO_RECEITA.reduce((s, r) => s + (r.values[i] || 0), 0);
+                      pctLabel = totalReceitaMes ? ((totalDespesa / totalReceitaMes) * 100).toFixed(2).replace(".", ",") + "%" : "—";
+                      pctColor = totalDespesa > totalReceitaMes ? "var(--red)" : "var(--fg-3)";
+                    } else {
+                      // Horizontal: % do total anual da seção Despesa
+                      const totalAnoDesp = B.FLUXO_DESPESA.reduce((s, r) => s + r.values.reduce((a, b) => a + (b || 0), 0), 0);
+                      pctLabel = totalAnoDesp ? ((totalDespesa / totalAnoDesp) * 100).toFixed(1).replace(".", ",") + "%" : "—";
                     }
                     return (
                       <React.Fragment key={i}>
-                        <td className="num red">{B.fmt(total)}</td>
+                        <td className="num red">{B.fmt(totalDespesa)}</td>
                         <td className="num" style={{ color: pctColor, fontWeight: view === "horizontal" ? 600 : 400 }}>{pctLabel}</td>
                       </React.Fragment>
                     );
@@ -192,22 +179,14 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
                       let pctLabel = "0,00%";
                       let pctColor = "var(--fg-3)";
                       if (view === "vertical") {
-                        const totalDespesa = B.FLUXO_DESPESA.reduce((s, r) => s + (r.values[i] || 0), 0);
-                        const pct = totalDespesa ? (v / totalDespesa) * 100 : 0;
+                        // Despesa categoria como % da RECEITA do mês (não da despesa)
+                        const totalReceitaMes = B.FLUXO_RECEITA.reduce((s, r) => s + (r.values[i] || 0), 0);
+                        const pct = totalReceitaMes ? (v / totalReceitaMes) * 100 : 0;
                         pctLabel = pct.toFixed(2).replace(".", ",") + "%";
                       } else {
-                        if (i === 0) { pctLabel = "—"; }
-                        else {
-                          const prev = row.values[i - 1] || 0;
-                          if (prev) {
-                            const delta = ((v - prev) / Math.abs(prev)) * 100;
-                            pctLabel = (delta >= 0 ? "+" : "") + delta.toFixed(1).replace(".", ",") + "%";
-                            pctColor = delta >= 0 ? "var(--red)" : "var(--green)";
-                          } else if (v) {
-                            pctLabel = "novo";
-                            pctColor = "var(--cyan)";
-                          } else { pctLabel = "—"; }
-                        }
+                        // Horizontal: % do total anual desta linha de despesa
+                        const totalAnoLinha = row.values.reduce((s, x) => s + (x || 0), 0);
+                        pctLabel = totalAnoLinha ? ((v / totalAnoLinha) * 100).toFixed(1).replace(".", ",") + "%" : "—";
                       }
                       return (
                         <React.Fragment key={i}>
@@ -219,31 +198,25 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
                   </tr>
                 ))}
                 <tr className="total">
-                  <td>Total</td>
+                  <td>Total Líquido</td>
                   {months6.map((_, i) => {
                     const r = B.FLUXO_RECEITA.reduce((s, r) => s + (r.values[i] || 0), 0);
                     const d = B.FLUXO_DESPESA.reduce((s, r) => s + (r.values[i] || 0), 0);
-                    const liq = r + d;
+                    const liq = r - d;
                     let pctLabel = "—";
-                    let pctColor = "var(--fg-3)";
+                    let pctColor = liq >= 0 ? "var(--green)" : "var(--red)";
                     if (view === "vertical") {
+                      // Margem líquida: liq / receita do mês
                       pctLabel = r ? ((liq / r) * 100).toFixed(2).replace(".", ",") + "%" : "—";
                     } else {
-                      if (i === 0) { pctLabel = "—"; }
-                      else {
-                        const prevR = B.FLUXO_RECEITA.reduce((s, r2) => s + (r2.values[i - 1] || 0), 0);
-                        const prevD = B.FLUXO_DESPESA.reduce((s, r2) => s + (r2.values[i - 1] || 0), 0);
-                        const prevLiq = prevR + prevD;
-                        if (prevLiq) {
-                          const delta = ((liq - prevLiq) / Math.abs(prevLiq)) * 100;
-                          pctLabel = (delta >= 0 ? "+" : "") + delta.toFixed(1).replace(".", ",") + "%";
-                          pctColor = delta >= 0 ? "var(--green)" : "var(--red)";
-                        }
-                      }
+                      // Horizontal: cada mês como % do total liquido anual
+                      const liqAno = B.FLUXO_RECEITA.reduce((s, rr) => s + rr.values.reduce((a, b) => a + (b || 0), 0), 0)
+                                   - B.FLUXO_DESPESA.reduce((s, rr) => s + rr.values.reduce((a, b) => a + (b || 0), 0), 0);
+                      pctLabel = liqAno ? ((liq / liqAno) * 100).toFixed(1).replace(".", ",") + "%" : "—";
                     }
                     return (
                       <React.Fragment key={i}>
-                        <td className="num">{B.fmt(liq)}</td>
+                        <td className="num" style={{ color: liq >= 0 ? "var(--green)" : "var(--red)" }}>{B.fmt(liq)}</td>
                         <td className="num" style={{ color: pctColor, fontWeight: 600 }}>{pctLabel}</td>
                       </React.Fragment>
                     );
@@ -344,7 +317,6 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
           <div className="status-line"><span className="live-dot" /> Saldos e pulso · {(B.META && B.META.ref_year) || "—"}</div>
         </div>
         <div className="actions">
-          <Filters filters={filters} onOpen={onOpenFilters} page="tesouraria" />
         </div>
       </div>
 
@@ -830,7 +802,7 @@ const PageRelatorio = ({ year, statusFilter }) => {
     { v: 7, label: "Julho" }, { v: 8, label: "Agosto" }, { v: 9, label: "Setembro" },
     { v: 10, label: "Outubro" }, { v: 11, label: "Novembro" }, { v: 12, label: "Dezembro" },
   ];
-  const availableYears = window.AVAILABLE_YEARS || [refYear];
+  const availableYears = [2026];
 
   const PeriodToolbar = (
     <div className="report-period-toolbar" style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap' }}>
@@ -950,7 +922,6 @@ const PageRelatorio = ({ year, statusFilter }) => {
         </div>
         <div className="actions" style={{ gap: 12, alignItems: 'center' }}>
           {PeriodToolbar}
-          <button className="btn-ghost" onClick={() => setShowHelp(true)}>Regenerar (script)</button>
           <button className="btn-primary" onClick={() => window.print()}>
             <Icon name="download" /> Exportar PDF
           </button>

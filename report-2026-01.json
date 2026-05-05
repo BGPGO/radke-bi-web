@@ -1,0 +1,35 @@
+{
+  "generated_at": "2026-05-05T04:36:00.000Z",
+  "empresa": "RADKE SOLUÇÕES INSTRALOGISTICAS",
+  "periodo": "Janeiro de 2026 — Realizado",
+  "secoes": {
+    "visao_geral": {
+      "title": "Visão Geral",
+      "analysis": "Janeiro fechou no vermelho: R$ 439.775 de receita realizada contra R$ 588.948 de despesas, totalizando prejuízo de R$ 149.173 e margem líquida de -33,9%. É um início de ano pressionado, típico de empresas industriais com sazonalidade — janeiro tradicionalmente concentra férias coletivas, paradas técnicas e baixa demanda. O mix de receita do mês foi atípico: serviços (Restauração R$ 199 mil + Serralheria R$ 61 mil + Engenharia menor) representaram 60% da receita, enquanto a venda de mercadoria caiu para apenas R$ 170.586 — bem abaixo da média mensal anual de R$ 441 mil.\n\nA boa notícia é que praticamente não havia ainda contas a vencer relevantes (R$ 19 mil a pagar, sem nada a receber). Isso sugere que a empresa entrou no ano com posição de caixa relativamente limpa, sem arrastar dívidas operacionais do exercício anterior. Janeiro funcionou como um mês de recomposição, com despesas necessárias para sustentar a operação enquanto a receita ainda não acelera."
+    },
+    "receita": {
+      "title": "Receita",
+      "analysis": "Receita realizada de R$ 439.775 em janeiro, com destaque para Serviços de Restauração (R$ 199.084) liderando o mix — comportamento incomum frente ao padrão anual onde a fabricação domina. Esse pico em restauração indica que a empresa fechou um contrato relevante de manutenção/reforma no início do ano, possivelmente serviço pós-feriado que clientes priorizam quando reabrem operação. Cliente principal foi a CIA Zaffari (Loja 08 — Ipiranga) com R$ 136.689, sugerindo trabalho de adequação ou expansão na rede de supermercados.\n\nA categoria Venda de Mercadoria caiu para R$ 170.586, cerca de 1/3 da média mensal vista em fev-abr. Esse padrão indica que a fábrica operou em ritmo reduzido em janeiro — coerente com retomada gradual após férias coletivas. Não há receita a receber pendente do mês, sinal de boa pontualidade dos clientes neste período."
+    },
+    "despesa": {
+      "title": "Despesa",
+      "analysis": "Despesa de R$ 588.948 em janeiro, puxada por Compras de Matéria Prima (R$ 87.456), Industrialização por Terceiros (R$ 76.768) e Benefícios LD (R$ 54.200). O fornecedor que mais consumiu caixa foi a Receita Federal com R$ 57.963 — antecipações de tributos do início do exercício. O peso dos benefícios trabalhistas (LD) sugere encargos de férias e 13º proporcional ainda sendo quitados em janeiro, comum em empresas que adotam pagamento dividido.\n\nA combinação despesa-pesada-receita-leve gerou o pior resultado mensal de 2026 até agora. Apenas R$ 19 mil ficaram a pagar para o futuro — sinal de que a empresa pagou em dia, evitando juros e mantendo crédito limpo. Estrategicamente, manter essa disciplina é positivo, mas o impacto no caixa do mês foi severo."
+    },
+    "fluxo": {
+      "title": "Fluxo de Caixa",
+      "analysis": "Janeiro registrou fluxo líquido negativo de R$ 149.173, exigindo consumo do saldo bancário para cobrir o gap. Entrada total R$ 439.775, saída R$ 588.948 — relação saída/entrada de 1,34, ou seja, para cada R$ 1 de receita houve R$ 1,34 de despesa. É o tipo de mês em que a tesouraria sustenta a operação esperando a recuperação posterior.\n\nO fato de fevereiro e março terem revertido com +R$ 197 mil e +R$ 200 mil mostra que o consumo de caixa de janeiro foi reposto rapidamente. Para o futuro, vale considerar política de provisionamento: reservar mensalmente uma fatia da margem dos meses bons para cobrir pelo menos 1,5 mês de operação no caixa, garantindo travessia tranquila de janeiros futuros."
+    },
+    "tesouraria": {
+      "title": "Tesouraria",
+      "analysis": "A posição de tesouraria em janeiro foi pressionada pelo déficit de R$ 149 mil. Com R$ 439.775 recebidos e R$ 588.948 pagos, a empresa precisou consumir saldo bancário acumulado do exercício anterior. Não havia recebíveis pendentes do mês (R$ 0 a receber) e apenas R$ 19 mil a pagar deslizou para o mês seguinte — o que indica disciplina de pagamento mas também intensa pressão de caixa imediato.\n\nA recomendação para janeiros futuros é manter saldo mínimo de tesouraria equivalente a 1,5x a despesa média mensal (≈ R$ 950 mil) antes de entrar no mês, garantindo que a operação atravesse o início do ano sem stress. Acompanhar diariamente o saldo nos 3 bancos prioritários e evitar concentrar pagamentos grandes nas duas primeiras semanas do mês."
+    },
+    "comparativo": {
+      "title": "Comparativo entre Períodos",
+      "analysis": "Janeiro vs. média dos demais meses do quadrimestre (fev-abr): a receita de janeiro (R$ 440 mil) ficou 35% abaixo da média (R$ 717 mil/mês), enquanto a despesa (R$ 589 mil) ficou apenas 5% abaixo da média (R$ 638 mil). O descompasso é claro — receita caiu muito mais que despesa, o que torna o resultado mensal extremamente sensível à sazonalidade do faturamento.\n\nEsse padrão sugere que a estrutura de custos da RADKE é majoritariamente fixa: salários, benefícios, terceirização e tributos respondem mesmo quando a fábrica está operando em ritmo reduzido. A cada 10% de queda de receita, a margem cai de forma desproporcional. Para mitigar esse efeito, vale avaliar contratos sazonais com terceirizados ou políticas de banco de horas/escala flexível."
+    },
+    "conclusao": {
+      "title": "Conclusão e Recomendações",
+      "analysis": "Janeiro foi um mês de prejuízo esperado dentro da sazonalidade do setor industrial, com -R$ 149 mil de resultado líquido. A operação consumiu caixa para sustentar a estrutura fixa enquanto a receita não acelerava. A boa execução foi pagar em dia (apenas R$ 19 mil deslizou) e manter a base de clientes pontual (zero a-receber). A má notícia é o tamanho da estrutura de custos fixos — quase R$ 590 mil por mês.\n\nRecomendações para os próximos janeiros: (1) construir reserva técnica equivalente a 1,5x a despesa média mensal antes do encerramento do exercício anterior; (2) negociar com fornecedores estratégicos prazos mais flexíveis para janeiro/fevereiro; (3) avaliar viabilidade de receita complementar de menor margem mas alta liquidez (estoque pronto, serviços padronizados) que possa ser ativada nos primeiros 30 dias do ano."
+    }
+  }
+}
