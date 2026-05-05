@@ -55,6 +55,7 @@ const SOURCES = [
     faturamento_produto: '09 Faturamento por Produto',
     curva_abc: '10 Curva ABC',
     marketing: '11 Marketing ADS',
+    valuation: '12 Valuation',
   };
   function App() {
     var p = useState('overview'); var page = p[0], setPage = p[1];
@@ -97,6 +98,7 @@ const SOURCES = [
       faturamento_produto: PageFaturamentoProduto,
       curva_abc: PageCurvaABC,
       marketing: PageMarketing,
+      valuation: PageValuation,
     })[page];
 
     return (

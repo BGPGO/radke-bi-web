@@ -53,6 +53,7 @@ const Sidebar = ({ active, onSelect, open }) => {
     { id: "faturamento_produto", icon: "money", label: "Faturamento" },
     { id: "curva_abc", icon: "chart", label: "Curva ABC" },
     { id: "marketing", icon: "invest", label: "Marketing ADS" },
+    { id: "valuation", icon: "invest", label: "Valuation" },
     { id: "settings", icon: "settings", label: "Configurações", badge: "EM BREVE" },
   ];
   const renderItem = (it) => (
@@ -101,6 +102,7 @@ const PAGE_TITLES = {
   faturamento_produto: "Faturamento por Produto",
   curva_abc: "Curva ABC de Produtos",
   marketing: "Marketing ADS",
+  valuation: "Valuation",
 };
 
 const DATE_RANGES = [
