@@ -19,6 +19,9 @@
     // Le filtro persistido ANTES do data.js, pq data.js usa window.BIT_FILTER pra montar BIT inicial.
     try { window.BIT_FILTER = localStorage.getItem('radke.statusFilter') || 'realizado'; }
     catch (e) { window.BIT_FILTER = 'realizado'; }
+    // URL da API de geracao on-demand de relatorio IA. Usado pelo PageRelatorio
+    // como fallback quando o report-{year}-{month}.json estatico nao existe.
+    window.RADKE_REPORT_API = "https://radke-bi-api.187.77.238.125.sslip.io";
   </script>
   <script src="data.js"></script>
   <script src="data-extras.js"></script>

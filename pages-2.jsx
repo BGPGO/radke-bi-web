@@ -439,6 +439,7 @@ const PageRelatorio = ({ year, statusFilter }) => {
   const [report, setReport] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [generating, setGenerating] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
 
   // resolve o nome do arquivo conforme periodo
@@ -451,24 +452,62 @@ const PageRelatorio = ({ year, statusFilter }) => {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
+    setGenerating(false);
     setError(null);
     setReport(null);
     try { localStorage.setItem('radke.report.period', JSON.stringify({ year: periodYear, month: periodMonth })); } catch (e) {}
     const file = reportFileName(periodYear, periodMonth);
+
+    // 1) tenta o JSON pre-gerado (estatico). Se 404, cai no fallback de geracao on-demand.
     fetch(file, { cache: 'no-store' })
       .then(r => {
-        if (!r.ok) throw new Error(`HTTP ${r.status} (arquivo ${file})`);
-        return r.json();
+        if (r.ok) return r.json();
+        if (r.status === 404) return null; // sinaliza fallback
+        throw new Error(`HTTP ${r.status} (arquivo ${file})`);
       })
       .then(data => {
         if (cancelled) return;
-        setReport(data);
+        if (data) {
+          // tinha relatorio pre-gerado
+          setReport(data);
+          setLoading(false);
+          return null;
+        }
+        // 2) Fallback: chama a API publica de geracao on-demand
+        const apiUrl = window.RADKE_REPORT_API;
+        if (!apiUrl) {
+          throw new Error('API de geracao nao configurada');
+        }
         setLoading(false);
+        setGenerating(true);
+        return fetch(`${apiUrl}/generate-report`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            year: periodYear,
+            month: periodMonth > 0 ? periodMonth : null,
+          }),
+        }).then(async (resp) => {
+          if (cancelled) return;
+          if (resp.status === 429) {
+            const retry = resp.headers.get('Retry-After') || '3600';
+            throw new Error(`Limite de geracao atingido. Tente novamente em ~${Math.ceil(Number(retry) / 60)} minutos.`);
+          }
+          if (!resp.ok) {
+            const t = await resp.text().catch(() => '');
+            throw new Error(`Falha ao gerar (HTTP ${resp.status}). Verifique conexao com Anthropic. ${t.slice(0,200)}`);
+          }
+          const generated = await resp.json();
+          if (cancelled) return;
+          setReport(generated);
+          setGenerating(false);
+        });
       })
       .catch(e => {
         if (cancelled) return;
         setError(e.message);
         setLoading(false);
+        setGenerating(false);
       });
     return () => { cancelled = true; };
   }, [periodYear, periodMonth]);
@@ -500,6 +539,35 @@ const PageRelatorio = ({ year, statusFilter }) => {
         <div className="page-title">
           <div><h1>Relatório IA</h1><div className="status-line">Carregando…</div></div>
           <div className="actions">{PeriodToolbar}</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (generating) {
+    return (
+      <div className="page">
+        <div className="page-title">
+          <div>
+            <h1>Relatório IA</h1>
+            <div className="status-line">Gerando relatório com IA…</div>
+          </div>
+          <div className="actions">{PeriodToolbar}</div>
+        </div>
+        <div className="card" style={{ textAlign: 'center', padding: 40 }}>
+          <div style={{ fontSize: 48, marginBottom: 16 }}>⚙️</div>
+          <h2 className="card-title" style={{ textAlign: 'center' }}>Gerando análise…</h2>
+          <p style={{ color: 'var(--fg-2)', lineHeight: 1.6, marginTop: 12 }}>
+            Estamos disparando 7 chamadas à IA da Anthropic em paralelo para construir o relatório executivo deste período.
+          </p>
+          <p style={{ color: 'var(--fg-3)', fontSize: 13, marginTop: 8 }}>
+            Geralmente leva ~30 segundos. Não feche esta página.
+          </p>
+          <div style={{ marginTop: 24, display: 'flex', gap: 6, justifyContent: 'center', alignItems: 'center' }}>
+            <span style={{ width: 10, height: 10, borderRadius: '50%', background: 'var(--cyan)', animation: 'pulse 1.4s ease-in-out infinite' }} />
+            <span style={{ width: 10, height: 10, borderRadius: '50%', background: 'var(--cyan)', animation: 'pulse 1.4s ease-in-out 0.2s infinite' }} />
+            <span style={{ width: 10, height: 10, borderRadius: '50%', background: 'var(--cyan)', animation: 'pulse 1.4s ease-in-out 0.4s infinite' }} />
+          </div>
         </div>
       </div>
     );
