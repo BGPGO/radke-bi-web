@@ -84,6 +84,34 @@ const SOURCES = [
     });
     var month = ms[0], setMonth = ms[1];
 
+    // BI export multi-tela: array de page-ids ou null. Quando setado, renderiza
+    // todas as telas em sequencia + chama window.print() depois do layout pintar.
+    var pp = useState(null); var printPages = pp[0], setPrintPages = pp[1];
+    useEffect(function () {
+      window.startBiExport = function (pages) {
+        document.body.classList.add('bi-print-mode');
+        setPrintPages(pages);
+      };
+      return function () { window.startBiExport = null; };
+    }, []);
+    useEffect(function () {
+      if (!printPages) return;
+      // 2 frames pra garantir que as 16 paginas pintaram com seus dados
+      var rafA = requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          setTimeout(function () {
+            window.print();
+            // limpa apos print (com pequeno delay pra que o dialog feche primeiro)
+            setTimeout(function () {
+              document.body.classList.remove('bi-print-mode');
+              setPrintPages(null);
+            }, 500);
+          }, 200);
+        });
+      });
+      return function () { cancelAnimationFrame(rafA); };
+    }, [printPages]);
+
     useEffect(function () {
       try { localStorage.setItem('radke.statusFilter', statusFilter); } catch (e) {}
       if (typeof window._radkeMakeBit === 'function') {
@@ -108,7 +136,7 @@ const SOURCES = [
       setDrilldown(null);
     };
 
-    var PageComp = ({
+    var PAGE_COMPS = {
       overview: PageOverview,
       indicators: PageIndicators,
       receita: PageReceita,
@@ -125,7 +153,45 @@ const SOURCES = [
       detalhado: PageDetalhado,
       profunda_cliente: PageProfundaCliente,
       crm: PageCRM,
-    })[page];
+    };
+    var PageComp = PAGE_COMPS[page];
+
+    var commonProps = {
+      filters: filters,
+      setFilters: setFilters,
+      onOpenFilters: function () { setFiltersOpen(true); },
+      statusFilter: statusFilter,
+      year: year,
+      setYear: setYear,
+      month: month,
+      setMonth: setMonth,
+      drilldown: drilldown,
+      setDrilldown: setDrilldown,
+    };
+
+    // Modo print multi-tela: renderiza todas as paginas selecionadas em sequencia
+    if (printPages && printPages.length > 0) {
+      return (
+        <div className="app bi-print-root">
+          {printPages.map(function (id, i) {
+            var Comp = PAGE_COMPS[id];
+            if (!Comp) return null;
+            return (
+              <div key={id + '-' + i} className="bi-print-page">
+                <div className="bi-print-header">
+                  <img src="assets/bgp-logo-white.png" alt="BGP" className="bi-print-logo" />
+                  <div className="bi-print-title">
+                    <div className="bi-print-pagenum">{PAGE_LABELS[id] || id}</div>
+                    <div className="bi-print-brand">RADKE · BI Financeiro</div>
+                  </div>
+                </div>
+                <Comp {...commonProps} />
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
 
     return (
       <div className={'app ' + (sidebarOpen ? 'sidebar-open' : '')} data-screen-label={PAGE_LABELS[page]}>
@@ -142,18 +208,7 @@ const SOURCES = [
             month={month}
             setMonth={setMonth}
           />
-          <PageComp
-            filters={filters}
-            setFilters={setFilters}
-            onOpenFilters={function () { setFiltersOpen(true); }}
-            statusFilter={statusFilter}
-            year={year}
-            setYear={setYear}
-            month={month}
-            setMonth={setMonth}
-            drilldown={drilldown}
-            setDrilldown={setDrilldown}
-          />
+          <PageComp {...commonProps} />
         </div>
         <FiltersDrawer open={filtersOpen} onClose={function () { setFiltersOpen(false); }} filters={filters} setFilters={setFilters} />
       </div>

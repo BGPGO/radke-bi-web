@@ -97,20 +97,10 @@ const PageFaturamentoProduto = ({ drilldown, setDrilldown }) => {
   const [fVendedor, setFVendedor] = useState("Todos");
   const [fFamilia, setFFamilia] = useState("Todos");
 
-  // Faturamento "por anuncio" — sem coluna anuncio na NF, usamos as campanhas ADS top como proxy
-  // (plano-B: agregamos por familia e mostramos como anuncio)
+  // Faturamento "por anuncio" — XLSX nao tem coluna anuncio, mostramos vendas por familia (real)
   const vendasPorAnuncio = useMemo(() => {
-    if (A.length > 0) {
-      // Cruza: para cada campanha ADS, soma valorBRL como "vendas atribuidas" + leads (proxy de venda)
-      // Como o PBIX usa essa tela pra mostrar vendas por anuncio, aproximamos pegando as familias
-      // top com nome compactado. Mais fiel: usar leads * ticketMedio como atribuicao.
-      return A.slice(0, 8).map(c => ({
-        name: c.campanha.replace(/^(ENGAJAMENTO|TRÁFEGO|RECONHECIMENTO|ENGAJAMENTO-WHATSAPP)\s*[—-]?\s*/i, ""),
-        value: (c.leads || c.cliques || 0) * (T.ticketMedio || 0),
-      })).sort((a, b) => b.value - a.value);
-    }
     return F.porFamilia.slice(0, 8).map(x => ({ name: x.name, value: x.value }));
-  }, [A, F.porFamilia, T.ticketMedio]);
+  }, [F.porFamilia]);
 
   // Top produtos individuais (do detalhado, agregados por produto sem o prefixo familia)
   const topProdutos = useMemo(() => {
@@ -125,23 +115,21 @@ const PageFaturamentoProduto = ({ drilldown, setDrilldown }) => {
     return F.porVendedor.filter(v => v.name && v.name !== "N/D").slice(0, 6);
   }, [F.porVendedor]);
 
-  // Matriz "Analise de Produtos por Anuncio" — produto x mes (com valores mensais reais)
-  // Uso porMes como 4 colunas (jan/fev/mar/abr — onde tem dado) e top 8 produtos
-  const matrizMeses = useMemo(() => F.porMes.filter(m => m.valor > 0).map(m => m.m), [F.porMes]);
+  // Matriz "Analise de Produtos por Anuncio" — produto x mes com VALORES REAIS (do XLSX)
+  const MESES_ABBR = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
+  const matrizMesesIdx = useMemo(() => {
+    // Indexes dos meses que têm dados (qualquer produto)
+    const set = new Set();
+    (F.produtoMes || []).forEach(p => p.meses.forEach((v, i) => { if (v > 0) set.add(i); }));
+    return [...set].sort((a, b) => a - b);
+  }, [F.produtoMes]);
+  const matrizMeses = useMemo(() => matrizMesesIdx.map(i => MESES_ABBR[i]), [matrizMesesIdx]);
   const matrizProdutos = useMemo(() => {
-    const top = F.detalhado.slice(0, 8);
-    return top.map(p => {
-      const cleanName = p.name.includes("▸") ? p.name.split("▸").pop().trim() : p.name;
-      // Distribui o valor proporcionalmente entre os meses com dado (proxy — sem ts por produto)
-      const totalMesValor = F.porMes.reduce((s, m) => s + m.valor, 0) || 1;
-      const meses = matrizMeses.map(mname => {
-        const m = F.porMes.find(x => x.m === mname);
-        const peso = m.valor / totalMesValor;
-        return Math.round(p.value * peso);
-      });
-      return { nome: cleanName, total: p.value, meses };
+    return (F.produtoMes || []).slice(0, 10).map(p => {
+      const cleanName = p.nome.includes("▸") ? p.nome.split("▸").pop().trim() : p.nome;
+      return { nome: cleanName, total: p.total, meses: matrizMesesIdx.map(i => p.meses[i] || 0) };
     });
-  }, [F.detalhado, F.porMes, matrizMeses]);
+  }, [F.produtoMes, matrizMesesIdx]);
 
   const familiaOpts = useMemo(() => ["Todos", ...F.porFamilia.slice(0, 10).map(x => x.name)], [F.porFamilia]);
   const vendedorOpts = useMemo(() => ["Todos", ...F.porVendedor.filter(v => v.name !== "N/D").slice(0, 10).map(x => x.name)], [F.porVendedor]);
@@ -870,16 +858,18 @@ const PageValuation = () => {
 
   return (
     <div className="page">
-      <div className="page-title">
+      <div className="report-toolbar no-print">
         <div>
-          <h1>Valuation — Fluxo de Caixa Descontado</h1>
+          <h1 style={{ margin: 0 }}>Valuation — Fluxo de Caixa Descontado</h1>
           <div className="status-line">
             Projecao de 5 anos · YTD {monthCount} {monthCount === 1 ? "mes" : "meses"} de {REF_YEAR} · WACC {premissas.wacc}% · g {premissas.perpetuity_growth}%
           </div>
         </div>
-        <div className="actions">
+        <div className="actions" style={{ gap: 12, alignItems: 'center' }}>
           <button className="btn-ghost" onClick={resetPremissas} title="Voltar para premissas RADKE default">↺ Resetar premissas</button>
-          <ExportButton />
+          <button className="btn-primary" onClick={() => window.print()} title="Imprimir / salvar como PDF">
+            <Icon name="download" /> Exportar PDF
+          </button>
         </div>
       </div>
 
@@ -1012,6 +1002,66 @@ const PageValuation = () => {
 
       <div className="status-line" style={{ marginTop: 12, fontSize: 11, color: "var(--fg-3)" }}>
         Notas: (1) Receita Ano 1 = Receita YTD × 12/{monthCount} (anualizada). (2) FCF = Receita × Margem ({premissas.use_simulated_margin ? "simulada" : "efetiva"}). (3) Anos 2-3 crescem por premissa; anos 4-5 por IPCA. (4) Valor terminal = Modelo de Gordon. (5) Premissas salvas em localStorage.{VALUATION_LS_KEY}.
+      </div>
+
+      {/* ============ Análise textual (export-friendly) ============ */}
+      <div className="card" style={{ marginTop: 16 }}>
+        <h2 className="card-title">Memória de Cálculo e Premissas</h2>
+        <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)", gap: 24, marginTop: 12 }}>
+          <div>
+            <h3 style={{ fontSize: 12, color: "var(--fg-3)", textTransform: "uppercase", letterSpacing: 0.6, marginBottom: 10 }}>Inputs do período</h3>
+            <table className="t" style={{ width: "100%" }}>
+              <tbody>
+                <tr><td>Ano de referência</td><td className="num"><b>{REF_YEAR}</b></td></tr>
+                <tr><td>Meses com dados</td><td className="num"><b>{monthCount} {monthCount === 1 ? "mês" : "meses"}</b></td></tr>
+                <tr><td>Receita YTD</td><td className="num">R$ {formatBR(totalRecYTD, 0)}</td></tr>
+                <tr><td>Despesa YTD</td><td className="num">R$ {formatBR(totalDespYTD, 0)}</td></tr>
+                <tr><td>Resultado YTD</td><td className="num"><b>R$ {formatBR(resultadoYTD, 0)}</b></td></tr>
+                <tr><td>Margem efetiva (YTD)</td><td className="num">{margemEfetiva.toFixed(2).replace(".", ",")}%</td></tr>
+                <tr><td>Receita anualizada (Ano 1)</td><td className="num"><b>R$ {formatBR(dcf.ano1Receita, 0)}</b></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h3 style={{ fontSize: 12, color: "var(--fg-3)", textTransform: "uppercase", letterSpacing: 0.6, marginBottom: 10 }}>Premissas aplicadas</h3>
+            <table className="t" style={{ width: "100%" }}>
+              <tbody>
+                <tr><td>Crescimento Ano 2</td><td className="num">{premissas.growth_year2.toFixed(1).replace(".", ",")}%</td></tr>
+                <tr><td>Crescimento Ano 3</td><td className="num">{premissas.growth_year3.toFixed(1).replace(".", ",")}%</td></tr>
+                <tr><td>IPCA (anos 4-5)</td><td className="num">{premissas.ipca.toFixed(1).replace(".", ",")}%</td></tr>
+                <tr><td>WACC</td><td className="num"><b>{premissas.wacc.toFixed(1).replace(".", ",")}%</b></td></tr>
+                <tr><td>Crescimento perpétuo (g)</td><td className="num">{premissas.perpetuity_growth.toFixed(1).replace(".", ",")}%</td></tr>
+                <tr><td>Margem aplicada</td><td className="num"><b>{dcf.margemPct.toFixed(2).replace(".", ",")}%</b> ({premissas.use_simulated_margin ? "simulada" : "efetiva"})</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h3 style={{ fontSize: 12, color: "var(--fg-3)", textTransform: "uppercase", letterSpacing: 0.6, marginTop: 24, marginBottom: 10 }}>Interpretação</h3>
+        <div style={{ fontSize: 13, color: "var(--fg-2)", lineHeight: 1.7 }}>
+          <p>
+            Com base na receita YTD de <b>R$ {formatBR(totalRecYTD, 0)}</b> ({monthCount} {monthCount === 1 ? "mês" : "meses"} de {REF_YEAR}), a receita anualizada para o Ano 1 do DCF é estimada em <b>R$ {formatBR(dcf.ano1Receita, 0)}</b>. Aplicando uma margem {premissas.use_simulated_margin ? "simulada" : "efetiva"} de <b>{dcf.margemPct.toFixed(1).replace(".", ",")}%</b>, o fluxo de caixa livre do Ano 1 é projetado em R$ {formatBR(dcf.fcfs[0], 0)}.
+          </p>
+          <p>
+            A receita cresce <b>{premissas.growth_year2.toFixed(1).replace(".", ",")}%</b> no Ano 2, <b>{premissas.growth_year3.toFixed(1).replace(".", ",")}%</b> no Ano 3, e <b>{premissas.ipca.toFixed(1).replace(".", ",")}%</b> nos Anos 4-5 (IPCA). Os fluxos são descontados a uma taxa WACC de <b>{premissas.wacc.toFixed(1).replace(".", ",")}%</b>, gerando um Valor Presente dos Fluxos de <b>R$ {formatBR(dcf.pvFCF, 0)}</b>.
+          </p>
+          {dcf.waccValid ? (
+            <p>
+              O Valor Terminal pelo Modelo de Gordon, considerando crescimento perpétuo de <b>{premissas.perpetuity_growth.toFixed(1).replace(".", ",")}%</b>, totaliza <b>R$ {formatBR(dcf.terminalValue, 0)}</b>, descontado a R$ {formatBR(dcf.pvTerminal, 0)} a valor presente.
+            </p>
+          ) : (
+            <p style={{ color: "var(--red)" }}>
+              ⚠ O WACC ({premissas.wacc.toFixed(1).replace(".", ",")}%) precisa ser maior que o crescimento perpétuo ({premissas.perpetuity_growth.toFixed(1).replace(".", ",")}%) para o Modelo de Gordon ser aplicável.
+            </p>
+          )}
+          <p style={{ marginTop: 12, padding: 12, background: "rgba(34,211,238,0.05)", borderLeft: "3px solid var(--cyan)", borderRadius: 4 }}>
+            <b>Valuation total (Enterprise Value): R$ {formatBR(dcf.totalValuation, 0)}</b><br />
+            (VP Fluxos R$ {formatBR(dcf.pvFCF, 0)} + VP Terminal R$ {formatBR(dcf.pvTerminal, 0)})
+          </p>
+          <p style={{ fontSize: 12, color: "var(--fg-3)", marginTop: 12 }}>
+            <b>Sensibilidades a considerar:</b> uma variação de ±1pp no WACC desloca o valuation em ~{Math.abs(((dcf.totalValuation * 0.01) / Math.max(0.001, premissas.wacc / 100 - premissas.perpetuity_growth / 100))).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".")}; uma redução de ±5pp na margem altera o FCF anual em ±R$ {formatBR(Math.abs(dcf.ano1Receita * 0.05), 0)}. Recomenda-se rodar cenários otimista (margem +5pp, WACC −2pp) e conservador (margem −5pp, WACC +3pp) antes de decisões de M&A.
+          </p>
+        </div>
       </div>
     </div>
   );

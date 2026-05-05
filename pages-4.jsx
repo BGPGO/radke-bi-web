@@ -718,49 +718,45 @@ const PageCRM = ({ statusFilter, year, month, drilldown, setDrilldown }) => {
   const C = E && E.crm;
   const hasData = C && Array.isArray(C.rows) && C.rows.length > 0;
 
-  // Mock data (placeholder visual fiel ao print enquanto RD Station nao integra)
-  const mockKpis = {
-    leads: 36,
-    conversao: 32.6,
-    receita: 310013,
-    valorVendido: 138544,
-  };
-  const mockFunil = [
-    { label: "Leads", value: 12 },
-    { label: "Atendidos", value: 10 },
-    { label: "Esperando", value: 8 },
-    { label: "Aprovação", value: 6 },
-    { label: "Vendidos", value: 4 },
-  ];
-  const mockMeta = {
-    mediaApp: 51247.16,
-    vendaEficaz: 33.3,
-    recebido: 461107.29,
-    negar: 744430.97,
-  };
-  const mockProjecao = [
-    { mes: "jan", real: 45, proj: 52 },
-    { mes: "fev", real: 62, proj: 58 },
-    { mes: "mar", real: 71, proj: 65 },
-    { mes: "abr", real: 58, proj: 70 },
-    { mes: "mai", real: 0, proj: 75 },
-    { mes: "jun", real: 0, proj: 78 },
+  if (!hasData) {
+    return (
+      <div className="page">
+        <div className="page-title"><div><h1>CRM</h1></div></div>
+        <div className="card">
+          <h2 className="card-title">Sem dados de CRM</h2>
+          <p>Rode <code>node build-radke-extras.cjs</code> pra extrair <code>consolidado (33).xlsx</code>.</p>
+        </div>
+      </div>
+    );
+  }
+
+  const T = C.totais;
+
+  // Funil cumulativo (passou pela fase = está nessa fase ou em fase superior)
+  const funil = (C.funil || []).filter(f => f.cumulativo > 0).map(f => ({
+    label: f.fase, value: f.cumulativo, atual: f.atual,
+  }));
+  // Adiciona "Conquistadas" como último nível
+  funil.push({ label: "Conquistadas", value: T.totalGanhos });
+
+  // Top 4 boxes: ticket pipeline, ticket ganho, ticket perdido, ticket médio
+  const meta = [
+    { lbl: "TICKET GANHO", val: T.totalGanhoTicket, tone: "green", pct: Math.min(100, (T.totalGanhoTicket / Math.max(T.totalTicket, 1)) * 100) },
+    { lbl: "TICKET PIPELINE (ABERTAS)", val: T.totalAbertoTicket, tone: "amber", pct: Math.min(100, (T.totalAbertoTicket / Math.max(T.totalTicket, 1)) * 100) },
+    { lbl: "TICKET PERDIDO", val: T.totalPerdidoTicket, tone: "red", pct: Math.min(100, (T.totalPerdidoTicket / Math.max(T.totalTicket, 1)) * 100) },
+    { lbl: "TICKET MÉDIO", val: T.ticketMedio, tone: "green", pct: 100 },
   ];
 
-  const k = hasData ? {
-    leads: C.totalLeads || 0,
-    conversao: (C.totalLeads > 0 ? (C.totalConvertidos / C.totalLeads) * 100 : 0),
-    receita: C.totalReceita || 0,
-    valorVendido: C.totalVendido || 0,
-  } : mockKpis;
+  // Projeção: usa porMes do CRM (ano de referência) — leads (real) + leads ganhos
+  const projData = (C.porMes || []).slice(0, 12);
 
   return (
     <div className="page">
       <div className="page-title">
         <div>
-          <h1>CRM</h1>
+          <h1>CRM — Pipeline de Oportunidades</h1>
           <div className="status-line">
-            {hasData ? `${C.rows.length} leads` : "Visualização em mock — substituir por export RD Station"}
+            {C.rows.length} leads · ganhos {T.totalGanhos} · perdidos {T.totalPerdidos} · abertos {T.totalAbertos} · ano {T.anoCRM}
           </div>
         </div>
         <div className="actions">
@@ -770,112 +766,143 @@ const PageCRM = ({ statusFilter, year, month, drilldown, setDrilldown }) => {
 
       {/* KPIs topo (4) */}
       <div className="kpi-row" style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
-        <_MiniKpi4 tone="cyan" label="Leads" value={_fmtInt4(k.leads)} nonMonetary
-          hint="do periodo" />
-        <_MiniKpi4 tone="green" label="Conversão" value={k.conversao.toFixed(1).replace(".", ",") + "%"} nonMonetary
-          hint="taxa" />
-        <_MiniKpi4 tone="amber" label="Receita" value={_fmtBR4(k.receita)} hint="total" />
-        <_MiniKpi4 tone="amber" label="Valor Vendido" value={_fmtBR4(k.valorVendido)} hint="por produto" />
+        <_MiniKpi4 tone="cyan" label="Leads" value={_fmtInt4(T.totalLeads)} nonMonetary hint="oportunidades" />
+        <_MiniKpi4 tone="green" label="Conversão" value={T.taxaConversao.toFixed(1).replace(".", ",") + "%"} nonMonetary hint={`${T.totalGanhos} de ${T.totalLeads}`} />
+        <_MiniKpi4 tone="amber" label="Pipeline" value={_fmtBR4(T.totalTicket, 0)} hint="ticket somado" />
+        <_MiniKpi4 tone="green" label="Ganho" value={_fmtBR4(T.totalGanhoTicket, 0)} hint="conquistadas" />
       </div>
 
       {/* Layout: 4 boxes meta + Funil central + chart projeção */}
       <div className="crm-layout">
-        {/* Coluna esquerda: 4 indicadores */}
         <div className="crm-meta">
-          <div className="crm-meta-box green">
-            <div className="cmb-label">MÉDIA APP/M</div>
-            <div className="cmb-value">R$ {_fmtBR4(mockMeta.mediaApp)}</div>
-            <div className="cmb-bar"><div style={{ width: "62%" }} /></div>
-          </div>
-          <div className="crm-meta-box amber">
-            <div className="cmb-label">VENDA EFICAZ</div>
-            <div className="cmb-value">{mockMeta.vendaEficaz.toFixed(1).replace(".", ",")}%</div>
-            <div className="cmb-bar"><div style={{ width: "33%" }} /></div>
-          </div>
-          <div className="crm-meta-box green">
-            <div className="cmb-label">RECEBIDO</div>
-            <div className="cmb-value">R$ {_fmtBR4(mockMeta.recebido)}</div>
-            <div className="cmb-bar"><div style={{ width: "85%" }} /></div>
-          </div>
-          <div className="crm-meta-box red">
-            <div className="cmb-label">NEGADO/RECUSADO</div>
-            <div className="cmb-value">R$ {_fmtBR4(mockMeta.negar)}</div>
-            <div className="cmb-bar"><div style={{ width: "75%" }} /></div>
-          </div>
+          {meta.map((m, i) => (
+            <div key={i} className={`crm-meta-box ${m.tone}`}>
+              <div className="cmb-label">{m.lbl}</div>
+              <div className="cmb-value">R$ {_fmtBR4(m.val, 0)}</div>
+              <div className="cmb-bar"><div style={{ width: `${m.pct.toFixed(1)}%` }} /></div>
+            </div>
+          ))}
         </div>
 
-        {/* Coluna central: Funil de Vendas */}
         <div className="card crm-funnel-card">
           <h2 className="card-title">FUNIL DE VENDAS</h2>
-          <_Funnel levels={mockFunil} />
+          <_Funnel levels={funil} />
           <div className="crm-funnel-foot">
             <div className="cff-stat">
               <span className="cff-lbl">Conversão Funil</span>
-              <span className="cff-val">{((mockFunil[mockFunil.length - 1].value / mockFunil[0].value) * 100).toFixed(1).replace(".", ",")}%</span>
+              <span className="cff-val">{T.taxaConversao.toFixed(1).replace(".", ",")}%</span>
             </div>
             <div className="cff-stat">
-              <span className="cff-lbl">Total Final</span>
-              <span className="cff-val">{mockFunil[mockFunil.length - 1].value} vendas</span>
+              <span className="cff-lbl">Conquistadas</span>
+              <span className="cff-val">{T.totalGanhos}</span>
             </div>
           </div>
         </div>
 
-        {/* Coluna direita: Projeção */}
         <div className="card crm-proj-card">
-          <h2 className="card-title">VENDAS E PROJEÇÃO POR PRODUTO</h2>
-          <svg viewBox="0 0 380 240" width="100%" style={{ display: "block" }}>
-            {/* grid */}
-            {[0, 1, 2, 3, 4].map(i => (
-              <line key={i} x1="40" y1={20 + i * 40} x2="370" y2={20 + i * 40}
-                stroke="rgba(255,255,255,0.05)" strokeDasharray="3 3" />
-            ))}
-            {/* y axis labels */}
-            {[100, 75, 50, 25, 0].map((v, i) => (
-              <text key={i} x="34" y={24 + i * 40} textAnchor="end" fill="#6b7680" fontSize="9" fontFamily="JetBrains Mono">{v}</text>
-            ))}
-            {/* x axis labels */}
-            {mockProjecao.map((p, i) => {
-              const x = 40 + i * (330 / (mockProjecao.length - 1));
-              return <text key={i} x={x} y="232" textAnchor="middle" fill="#6b7680" fontSize="10">{p.mes}</text>;
-            })}
-            {/* Linha REAL (laranja) */}
-            <polyline
-              points={mockProjecao.map((p, i) => {
-                const x = 40 + i * (330 / (mockProjecao.length - 1));
-                const y = 180 - (p.real * 1.6);
-                return `${x},${y}`;
-              }).join(" ")}
-              fill="none" stroke="#f59e0b" strokeWidth="2.5" />
-            {/* Linha PROJEÇÃO (cyan tracejada) */}
-            <polyline
-              points={mockProjecao.map((p, i) => {
-                const x = 40 + i * (330 / (mockProjecao.length - 1));
-                const y = 180 - (p.proj * 1.6);
-                return `${x},${y}`;
-              }).join(" ")}
-              fill="none" stroke="#22d3ee" strokeWidth="2" strokeDasharray="5 4" />
-            {/* points */}
-            {mockProjecao.map((p, i) => {
-              const x = 40 + i * (330 / (mockProjecao.length - 1));
-              const yReal = 180 - (p.real * 1.6);
-              const yProj = 180 - (p.proj * 1.6);
-              return (
-                <g key={i}>
-                  {p.real > 0 && <circle cx={x} cy={yReal} r="3.5" fill="#f59e0b" />}
-                  <circle cx={x} cy={yProj} r="2.5" fill="#22d3ee" />
-                </g>
-              );
-            })}
-          </svg>
+          <h2 className="card-title">LEADS × GANHOS POR MÊS ({T.anoCRM})</h2>
+          {(() => {
+            const maxLeads = Math.max(...projData.map(p => p.leads), 1);
+            const W = 380, H = 240, pad = 32;
+            const stepX = (W - pad * 2) / Math.max(1, projData.length - 1);
+            const yScale = (v) => H - 30 - (v / maxLeads) * (H - pad - 50);
+            const linePoints = (vals) => vals.map((v, i) => `${pad + i * stepX},${yScale(v)}`).join(" ");
+            return (
+              <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ display: "block" }}>
+                {[0, 0.25, 0.5, 0.75, 1].map((t, i) => (
+                  <line key={i} x1={pad} y1={yScale(maxLeads * t)} x2={W - 10} y2={yScale(maxLeads * t)}
+                    stroke="rgba(255,255,255,0.05)" strokeDasharray="3 3" />
+                ))}
+                {[0, 0.25, 0.5, 0.75, 1].map((t, i) => (
+                  <text key={i} x={pad - 6} y={yScale(maxLeads * t) + 3} textAnchor="end" fill="#6b7680" fontSize="9">
+                    {Math.round(maxLeads * t)}
+                  </text>
+                ))}
+                {projData.map((p, i) => (
+                  <text key={i} x={pad + i * stepX} y={H - 8} textAnchor="middle" fill="#6b7680" fontSize="10">{p.m}</text>
+                ))}
+                <polyline points={linePoints(projData.map(p => p.leads))} fill="none" stroke="#22d3ee" strokeWidth="2.5" />
+                <polyline points={linePoints(projData.map(p => p.ganhos))} fill="none" stroke="#10b981" strokeWidth="2" strokeDasharray="5 4" />
+                {projData.map((p, i) => (
+                  <g key={i}>
+                    <circle cx={pad + i * stepX} cy={yScale(p.leads)} r="3" fill="#22d3ee" />
+                    {p.ganhos > 0 && <circle cx={pad + i * stepX} cy={yScale(p.ganhos)} r="2.5" fill="#10b981" />}
+                  </g>
+                ))}
+              </svg>
+            );
+          })()}
           <div className="crm-proj-legend">
-            <span><span className="lg-dot" style={{ background: "#f59e0b" }} /> Realizado</span>
-            <span><span className="lg-dot" style={{ background: "#22d3ee" }} /> Projeção</span>
+            <span><span className="lg-dot" style={{ background: "#22d3ee" }} /> Leads</span>
+            <span><span className="lg-dot" style={{ background: "#10b981" }} /> Ganhos</span>
           </div>
         </div>
       </div>
 
+      {/* Linha 2: Vendedor + Origem (lists) */}
+      <div className="row" style={{ gridTemplateColumns: "1fr 1fr", marginTop: 16 }}>
+        <div className="card">
+          <h2 className="card-title">POR VENDEDOR</h2>
+          <div className="bar-list with-bars">
+            {(C.porVendedor || []).slice(0, 8).map((v, i) => {
+              const max = (C.porVendedor[0] && C.porVendedor[0].ticket) || 1;
+              const w = (v.ticket / max) * 100;
+              return (
+                <div key={i} className="bar-row">
+                  <div className="row-meta">
+                    <span className="label">{v.name} · {v.qtd} opp · {v.conversao.toFixed(0)}% conv</span>
+                    <span className="val">R$ {_fmtBR4(v.ticket, 0)}</span>
+                  </div>
+                  <div className="track"><div className="fill amber" style={{ width: `${w}%` }} /></div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div className="card">
+          <h2 className="card-title">POR ORIGEM</h2>
+          <div className="bar-list with-bars">
+            {(C.porOrigem || []).slice(0, 8).map((o, i) => {
+              const max = (C.porOrigem[0] && C.porOrigem[0].ticket) || 1;
+              const w = (o.ticket / max) * 100;
+              return (
+                <div key={i} className="bar-row">
+                  <div className="row-meta">
+                    <span className="label">{o.name} · {o.qtd} opp</span>
+                    <span className="val">R$ {_fmtBR4(o.ticket, 0)}</span>
+                  </div>
+                  <div className="track"><div className="fill cyan" style={{ width: `${w}%` }} /></div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Linha 3: Motivo de perda */}
+      {C.porMotivo && C.porMotivo.length > 0 && (
+        <div className="card" style={{ marginTop: 16 }}>
+          <h2 className="card-title">MOTIVO DE CONCLUSÃO (perdas)</h2>
+          <div className="bar-list with-bars">
+            {C.porMotivo.slice(0, 8).map((m, i) => {
+              const max = (C.porMotivo[0] && C.porMotivo[0].qtd) || 1;
+              const w = (m.qtd / max) * 100;
+              return (
+                <div key={i} className="bar-row">
+                  <div className="row-meta">
+                    <span className="label">{m.name}</span>
+                    <span className="val">{m.qtd} opp · R$ {_fmtBR4(m.ticket, 0)}</span>
+                  </div>
+                  <div className="track"><div className="fill red" style={{ width: `${w}%` }} /></div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       <div className="status-line" style={{ marginTop: 12, fontSize: 11, color: "var(--fg-3)" }}>
-        Fonte: RD Station — visualização atual em <b>mock</b>. Para ativar: exporte pipeline como <code>crm.xlsx</code> em <code>data/</code> e rode <code>node build-radke-extras.cjs</code>.
+        Fonte: <code>consolidado (33).xlsx</code> · {C.rows.length} oportunidades extraídas. Atualize via <code>node build-radke-extras.cjs</code>.
       </div>
     </div>
   );

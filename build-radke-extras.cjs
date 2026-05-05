@@ -134,6 +134,19 @@ console.log('  total R$', fatTotais.totalValor.toFixed(2), '| NFs:', fatTotais.n
 // detalhamento familia x produto (top 50 produtos)
 const fatDetalhado = aggBy(fatItems, x => x.familia + ' ▸ ' + x.produto).slice(0, 100);
 
+// matriz REAL produto x mes (top 10 produtos do ano de referência)
+const fatProdutoMes = (function() {
+  const map = new Map(); // produto -> { name, total, meses: {0..11: valor} }
+  for (const it of fatItems) {
+    if (it.ano !== anoRef || it.mes == null) continue;
+    if (!map.has(it.produto)) map.set(it.produto, { nome: it.produto, total: 0, meses: Array(12).fill(0) });
+    const o = map.get(it.produto);
+    o.total += it.valor;
+    o.meses[it.mes] += it.valor;
+  }
+  return [...map.values()].sort((a, b) => b.total - a.total).slice(0, 12);
+})();
+
 console.log('\n=== Marketing ADS ===');
 const adsRaw = readSheet('RadkeADS.xlsx', 'Formatted Report');
 const ads = adsRaw.map(r => ({
@@ -205,6 +218,7 @@ const out = {
     porCliente: fatPorCliente,
     porMes: fatPorMes,
     detalhado: fatDetalhado,
+    produtoMes: fatProdutoMes,
     totais: fatTotais,
   },
   ads: {
@@ -212,6 +226,141 @@ const out = {
     campanhasAgg: adsCampanhasAgg,
     totais: adsTotais,
   },
+  crm: (function() {
+    try {
+      const wb = XLSX.readFile(path.join(DRIVE, 'consolidado (33).xlsx'));
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      const raw = XLSX.utils.sheet_to_json(ws, { defval: '' });
+
+      // Normaliza fase: "06 Conclusão" → "Conclusão" (mas mantemos a chave do funil)
+      const cleanStr = (s) => (s == null ? '' : String(s).trim());
+      const ND = (s) => (!s || s === 'N/D' ? '' : s);
+
+      const rows = raw.map(r => {
+        const sit = cleanStr(r['Situação']);
+        // Conquistado em DD/MM/YYYY = ganho. Motivo presente + Fase 06 = perdido. Senao em andamento.
+        const ganho = /^Conquistado/i.test(sit);
+        const motivo = ND(cleanStr(r['Motivo de Conclusão']));
+        const fase = cleanStr(r['Fase Atual']);
+        // Perdido: tem motivo (≠N/D) e nao é Conquistado
+        const perdido = !ganho && motivo && motivo !== 'Oportunidade nunca existiu';
+        const aberto = !ganho && !perdido;
+        const dataAtual = excelToDate(num(r['Data de atualização (completa)']));
+        const dataIncl = excelToDate(num(r['Data de inclusão (completa)']));
+        const dataConcl = excelToDate(num(r['Data de 06 Conclusão(completa)']));
+        const dataRef = ganho && dataConcl ? dataConcl : (dataAtual || dataIncl);
+        return {
+          descricao: cleanStr(r['Descrição da Oportunidade']),
+          fase,
+          situacao: sit,
+          ganho, perdido, aberto,
+          motivo,
+          vendedor: cleanStr(r['Vendedor']) || 'Sem Vendedor',
+          origem: cleanStr(r['Origem']) || 'Sem Origem',
+          tipo: cleanStr(r['Tipo']),
+          produto: cleanStr(r['Solução']) || cleanStr(r['Produto']) || '',
+          conta: cleanStr(r['Conta']),
+          ticket: num(r['Ticket']),
+          produtos: num(r['Produtos']),
+          servicos: num(r['Serviços']),
+          recorrencia: num(r['Recorrência']),
+          temperatura: num(r['Temperatura']),
+          anoPrev: num(r['Ano previsão']),
+          mesPrev: cleanStr(r['Mês previsão']),
+          dataIncl: dataIncl ? dataIncl.toISOString().slice(0,10) : null,
+          dataAtual: dataAtual ? dataAtual.toISOString().slice(0,10) : null,
+          dataConcl: dataConcl ? dataConcl.toISOString().slice(0,10) : null,
+          dataRef: dataRef ? dataRef.toISOString().slice(0,10) : null,
+          ano: dataRef ? dataRef.getFullYear() : null,
+          mes: dataRef ? dataRef.getMonth() : null,
+          tempoCiclo: num(r['Tempo de ciclo']),
+        };
+      }).filter(x => x.descricao);
+
+      // Funil (ordem do PBI). Oportunidade está na fase ATUAL — mas se ganhou, conta em "Conquistadas".
+      // O funil cumulativo é: passou pela fase X = chegou em X ou maior.
+      const FASES_ORDER = ['01 Prospect', '02 Qualificação', '03 Proposta', '04 Negociação', '05 Aguardando Pedido', '06 Conclusão'];
+      const faseRank = (f) => FASES_ORDER.findIndex(x => x === f);
+      const funil = FASES_ORDER.map(f => ({
+        fase: f.replace(/^0\d /, ''),
+        chave: f,
+        atual: rows.filter(r => r.fase === f).length,
+        cumulativo: rows.filter(r => faseRank(r.fase) >= faseRank(f)).length,
+      }));
+
+      const totalLeads = rows.length;
+      const totalGanhos = rows.filter(r => r.ganho).length;
+      const totalPerdidos = rows.filter(r => r.perdido).length;
+      const totalAbertos = rows.filter(r => r.aberto).length;
+      const taxaConversao = totalLeads > 0 ? (totalGanhos / totalLeads) * 100 : 0;
+
+      const totalTicket = rows.reduce((s, r) => s + r.ticket, 0);
+      const totalGanhoTicket = rows.filter(r => r.ganho).reduce((s, r) => s + r.ticket, 0);
+      const totalAbertoTicket = rows.filter(r => r.aberto).reduce((s, r) => s + r.ticket, 0);
+      const totalPerdidoTicket = rows.filter(r => r.perdido).reduce((s, r) => s + r.ticket, 0);
+      const ticketMedio = totalLeads > 0 ? totalTicket / totalLeads : 0;
+
+      // Aggregates
+      const aggOpp = (keyFn) => {
+        const m = new Map();
+        for (const r of rows) {
+          const k = keyFn(r) || 'Sem categoria';
+          if (!m.has(k)) m.set(k, { name: k, qtd: 0, ganhos: 0, perdidos: 0, abertos: 0, ticket: 0, ticketGanho: 0 });
+          const o = m.get(k);
+          o.qtd++;
+          if (r.ganho) { o.ganhos++; o.ticketGanho += r.ticket; }
+          else if (r.perdido) o.perdidos++;
+          else o.abertos++;
+          o.ticket += r.ticket;
+        }
+        for (const o of m.values()) {
+          o.conversao = o.qtd > 0 ? (o.ganhos / o.qtd) * 100 : 0;
+        }
+        return [...m.values()].sort((a, b) => b.ticket - a.ticket);
+      };
+      const porVendedor = aggOpp(r => r.vendedor);
+      const porOrigem = aggOpp(r => r.origem);
+      const porMotivo = aggOpp(r => r.motivo).filter(x => x.name && x.name !== 'Sem categoria');
+      const porTipo = aggOpp(r => r.tipo).filter(x => x.name);
+      const porProduto = aggOpp(r => r.produto).filter(x => x.name).slice(0, 15);
+      const porConta = aggOpp(r => r.conta).filter(x => x.name).slice(0, 20);
+
+      // Por mês (ano de referência = ano max de dataRef)
+      const anos = rows.map(r => r.ano).filter(Boolean);
+      const anoCRM = anos.length ? Math.max(...anos) : new Date().getFullYear();
+      const porMes = Array(12).fill(0).map((_, i) => ({
+        m: ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'][i],
+        leads: 0, ganhos: 0, perdidos: 0, ticket: 0, ticketGanho: 0,
+      }));
+      for (const r of rows) {
+        if (r.ano !== anoCRM || r.mes == null) continue;
+        const o = porMes[r.mes];
+        o.leads++;
+        if (r.ganho) { o.ganhos++; o.ticketGanho += r.ticket; }
+        else if (r.perdido) o.perdidos++;
+        o.ticket += r.ticket;
+      }
+
+      console.log(`\n=== CRM ===`);
+      console.log(`  ${totalLeads} oportunidades | ganhos: ${totalGanhos} (${taxaConversao.toFixed(1)}%) | perdidos: ${totalPerdidos} | abertos: ${totalAbertos}`);
+      console.log(`  Ticket total: R$ ${totalTicket.toFixed(2)} | Ticket ganho: R$ ${totalGanhoTicket.toFixed(2)} | Médio: R$ ${ticketMedio.toFixed(2)}`);
+      console.log(`  Funil: ${funil.map(f => f.chave + '=' + f.atual).join(' | ')}`);
+
+      return {
+        rows,
+        funil,
+        totais: {
+          totalLeads, totalGanhos, totalPerdidos, totalAbertos,
+          taxaConversao, totalTicket, totalGanhoTicket, totalAbertoTicket, totalPerdidoTicket,
+          ticketMedio, anoCRM,
+        },
+        porVendedor, porOrigem, porMotivo, porTipo, porProduto, porConta, porMes,
+      };
+    } catch (e) {
+      console.error('  CRM erro:', e.message);
+      return null;
+    }
+  })(),
   saldos: (function() {
     try {
       const wb = XLSX.readFile(path.join(DRIVE, 'Saldos - Radke Soluções.xlsx'));

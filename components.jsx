@@ -46,6 +46,7 @@ const Sidebar = ({ active, onSelect, open }) => {
     { id: "tesouraria", icon: "treasury", label: "Tesouraria" },
     { id: "comparativo", icon: "compare", label: "Comparativo" },
     { id: "relatorio", icon: "fileText", label: "Relatório IA" },
+    { id: "valuation", icon: "invest", label: "Valuation" },
     { id: "diary", icon: "diary", label: "Diário", badge: "EM BREVE" },
   ];
   const others = [
@@ -53,7 +54,6 @@ const Sidebar = ({ active, onSelect, open }) => {
     { id: "faturamento_produto", icon: "money", label: "Faturamento" },
     { id: "curva_abc", icon: "chart", label: "Curva ABC" },
     { id: "marketing", icon: "invest", label: "Marketing ADS" },
-    { id: "valuation", icon: "invest", label: "Valuation" },
     { id: "hierarquia", icon: "chart", label: "Hierarquia ADS" },
     { id: "detalhado", icon: "report", label: "Detalhado" },
     { id: "profunda_cliente", icon: "user", label: "Profunda Cliente" },
@@ -175,6 +175,85 @@ const MonthSelect = ({ value, onChange }) => (
   </select>
 );
 
+// BiExportButton: modal com checkboxes pra exportar telas selecionadas como PDF
+const BI_EXPORT_PAGES = [
+  { id: "overview", label: "01 Visão Geral" },
+  { id: "receita", label: "02 Receita" },
+  { id: "despesa", label: "03 Despesa" },
+  { id: "fluxo", label: "04 Fluxo de Caixa" },
+  { id: "tesouraria", label: "05 Tesouraria" },
+  { id: "comparativo", label: "06 Comparativo" },
+  { id: "relatorio", label: "07 Relatório IA" },
+  { id: "valuation", label: "08 Valuation" },
+  { id: "indicators", label: "09 Indicadores" },
+  { id: "faturamento_produto", label: "10 Faturamento por Produto" },
+  { id: "curva_abc", label: "11 Curva ABC" },
+  { id: "marketing", label: "12 Marketing ADS" },
+  { id: "hierarquia", label: "13 Hierarquia ADS" },
+  { id: "detalhado", label: "14 Detalhado" },
+  { id: "profunda_cliente", label: "15 Profunda Cliente" },
+  { id: "crm", label: "16 CRM" },
+];
+
+const BiExportButton = () => {
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState(() => new Set(BI_EXPORT_PAGES.map(p => p.id)));
+  const toggle = (id) => {
+    setSelected(s => {
+      const ns = new Set(s);
+      if (ns.has(id)) ns.delete(id); else ns.add(id);
+      return ns;
+    });
+  };
+  const submit = () => {
+    if (selected.size === 0) return;
+    const ordered = BI_EXPORT_PAGES.filter(p => selected.has(p.id)).map(p => p.id);
+    if (window.startBiExport) window.startBiExport(ordered);
+    setOpen(false);
+  };
+  return (
+    <>
+      <button className="btn-ghost hd-export-bi" onClick={() => setOpen(true)} title="Exportar BI inteiro como PDF">
+        <Icon name="download" /> Exportar BI
+      </button>
+      {open && (
+        <div className="drawer-overlay no-print" onClick={() => setOpen(false)}>
+          <div className="card bi-export-modal" onClick={e => e.stopPropagation()}>
+            <h2 className="card-title">Exportar BI como PDF</h2>
+            <p style={{ color: "var(--fg-2)", marginTop: 8, fontSize: 13 }}>
+              Selecione as telas para incluir no PDF. Cada tela vira uma página A4 com o tema escuro mantido.
+            </p>
+            <div className="bi-export-grid">
+              {BI_EXPORT_PAGES.map(p => (
+                <label key={p.id} className="bi-export-row">
+                  <input
+                    type="checkbox"
+                    checked={selected.has(p.id)}
+                    onChange={() => toggle(p.id)}
+                  />
+                  <span>{p.label}</span>
+                </label>
+              ))}
+            </div>
+            <div className="bi-export-actions">
+              <div style={{ display: "flex", gap: 8 }}>
+                <button className="btn-ghost" onClick={() => setSelected(new Set(BI_EXPORT_PAGES.map(p => p.id)))}>Todas</button>
+                <button className="btn-ghost" onClick={() => setSelected(new Set())}>Nenhuma</button>
+              </div>
+              <div style={{ display: "flex", gap: 8 }}>
+                <button className="btn-ghost" onClick={() => setOpen(false)}>Cancelar</button>
+                <button className="btn-primary" onClick={submit} disabled={selected.size === 0}>
+                  Exportar ({selected.size})
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
 // Header: breadcrumb + YearSelect + MonthSelect + StatusFilter
 const Header = ({ page, onToggleSidebar, statusFilter, setStatusFilter, year, setYear, month, setMonth }) => {
   return (
@@ -191,6 +270,7 @@ const Header = ({ page, onToggleSidebar, statusFilter, setStatusFilter, year, se
       {setYear && <YearSelect value={year} onChange={setYear} available={window.AVAILABLE_YEARS} />}
       {setMonth && <MonthSelect value={month} onChange={setMonth} />}
       {setStatusFilter && <StatusFilterSeg value={statusFilter} onChange={setStatusFilter} />}
+      <BiExportButton />
     </header>
   );
 };

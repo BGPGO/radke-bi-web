@@ -2576,3 +2576,127 @@ table.t tr.total td {
   .fat-barrow, .mkt-barrow { grid-template-columns: 90px 1fr; }
   .fat-barrow-label, .mkt-barrow-label { font-size: 10px; }
 }
+
+/* ===== BI Export modal + print multi-tela ===== */
+.bi-export-modal {
+  max-width: 560px;
+  margin: auto;
+  padding: 24px;
+}
+.bi-export-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 16px;
+  max-height: 380px;
+  overflow-y: auto;
+  padding: 8px 4px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.18);
+}
+.bi-export-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--fg-2);
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.bi-export-row:hover { background: rgba(34, 211, 238, 0.06); }
+.bi-export-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--cyan);
+  cursor: pointer;
+}
+.bi-export-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+  justify-content: space-between;
+}
+.hd-export-bi {
+  margin-left: 8px;
+  white-space: nowrap;
+}
+@media (max-width: 900px) {
+  .hd-export-bi span:not(:first-child) { display: none; }
+}
+
+/* BI Print mode: tema escuro preservado, cada tela vira uma página A4 */
+.bi-print-root {
+  display: block;
+  background: var(--bg);
+  min-height: 100vh;
+}
+.bi-print-page {
+  background: var(--bg);
+  padding: 20mm 14mm;
+  page-break-after: always;
+  break-after: page;
+}
+.bi-print-page:last-child { page-break-after: auto; }
+.bi-print-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.bi-print-logo { height: 28px; }
+.bi-print-pagenum {
+  font-size: 11px;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+}
+.bi-print-brand {
+  font-size: 16px;
+  color: var(--text);
+  font-weight: 700;
+}
+
+@media print {
+  body.bi-print-mode {
+    background: var(--bg) !important;
+    color: var(--text) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  body.bi-print-mode * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  body.bi-print-mode .page {
+    background: var(--bg) !important;
+    color: var(--text) !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  body.bi-print-mode .card, body.bi-print-mode .kpi-tile {
+    background: var(--surface) !important;
+    color: var(--text) !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+  body.bi-print-mode .card-title, body.bi-print-mode .kpi-label,
+  body.bi-print-mode .kpi-stack-label, body.bi-print-mode .ov-bars-tick span,
+  body.bi-print-mode .ov-bars-x span {
+    color: var(--fg-2) !important;
+  }
+  body.bi-print-mode .kpi-value, body.bi-print-mode .kpi-stack-value,
+  body.bi-print-mode .kpi-stack-pct {
+    color: var(--text) !important;
+  }
+  body.bi-print-mode .actions, body.bi-print-mode .no-print { display: none !important; }
+  body.bi-print-mode .bi-print-root { display: block !important; }
+  body.bi-print-mode .bi-print-page { background: var(--bg) !important; padding: 14mm 10mm !important; }
+  @page { size: A4; margin: 8mm; }
+}
