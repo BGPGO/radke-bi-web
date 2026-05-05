@@ -86,7 +86,18 @@ const clientes = readJson('clientes', []);
 const contasPagar = readJson('contas_pagar', []);
 const contasReceber = readJson('contas_receber', []);
 const movimentos = readJson('movimentos', []);
+const contasCorrentes = readJson('contas_correntes', []);
 const summary = readJson('_summary', null);
+
+// Bancos aceitos: 033 Santander, 748 Sicredi, 756 Sicoob.
+// Movimentos em outras contas (CAIXA interno, adiantamentos de viagem etc)
+// nao entram no BI - sao operacionais, nao representam fluxo de caixa real.
+const BANCOS_OK = new Set(['033', '748', '756']);
+const ccOk = new Set();
+for (const c of contasCorrentes) {
+  if (BANCOS_OK.has(String(c.codigo_banco))) ccOk.add(String(c.nCodCC));
+}
+console.log(`  contas correntes filtradas (Santander/Sicredi/Sicoob): ${ccOk.size}/${contasCorrentes.length}`);
 
 console.log(`  empresa: ${empresa ? empresa.nome_fantasia : '(faltando)'}`);
 console.log(`  categorias: ${categorias.length}`);
@@ -199,6 +210,10 @@ function normalizeMovimento(m) {
   // Filtro transferencias entre contas (nao sao receita/despesa real)
   const categoria = getCategoriaNome(d.cCodCateg);
   if (TRANSFERENCIA_RE.test(categoria)) return null;
+
+  // Filtro contas correntes: apenas bancos formais (Santander/Sicredi/Sicoob).
+  // Operacional interno (Caixa, adiantamentos de viagem, contas de socio) fica fora.
+  if (ccOk.size && !ccOk.has(String(d.nCodCC))) return null;
 
   const dataPago = parseBR(d.dDtPagamento);
   const dataVenc = parseBR(d.dDtVenc) || parseBR(d.dDtPrevisao) || parseBR(d.dDtEmissao);

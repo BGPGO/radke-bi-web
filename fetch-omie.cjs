@@ -150,6 +150,10 @@ async function fetchAllPaginated(path, method, baseParam, dataKey, label, opts) 
   const clientes = await fetchAllPaginated('/geral/clientes/', 'ListarClientes', {}, 'clientes_cadastro', 'clientes');
   fs.writeFileSync(path.join(OUT, 'clientes.json'), JSON.stringify(clientes, null, 2));
 
+  console.log('\n=== Contas Correntes (bancos) ===');
+  const contasCorrentes = await fetchAllPaginated('/geral/contacorrente/', 'ListarContasCorrentes', {}, 'ListarContasCorrentes', 'contas_correntes').catch((e) => { console.error('  cc erro:', e.message); return []; });
+  fs.writeFileSync(path.join(OUT, 'contas_correntes.json'), JSON.stringify(contasCorrentes, null, 2));
+
   // === Movimentos: contas pagar e receber em paralelo (cada um paginado internamente) ===
   console.log('\n=== Contas pagar + receber (em paralelo) ===');
   const [contasPagar, contasReceber] = await Promise.all([
