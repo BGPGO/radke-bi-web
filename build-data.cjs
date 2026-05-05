@@ -590,11 +590,11 @@ function aggregateTx(txList, year) {
       despCat.set(categoria, (despCat.get(categoria) || 0) + valor);
       if (fornecedor) despForn.set(fornecedor, (despForn.get(fornecedor) || 0) + valor);
     }
-    // Extrato compacto pra tabela
+    // Extrato compacto pra tabela (renomeado pra extRow porque outer for já usa 'row')
     const dataStr = String(dia).padStart(2,'0') + '/' + mes.slice(5,7) + '/' + mes.slice(0,4);
-    const row = [dataStr, cc || 'Operações', categoria, kind === 'r' ? cliente : fornecedor, kind === 'r' ? valor : -valor, realizado ? 'PAGO' : ''];
-    extratoArr.push(row);
-    if (kind === 'r') extratoRecArr.push(row); else extratoDespArr.push(row);
+    const extRow = [dataStr, cc || 'Operações', categoria, kind === 'r' ? cliente : fornecedor, kind === 'r' ? valor : -valor, realizado ? 'PAGO' : ''];
+    extratoArr.push(extRow);
+    if (kind === 'r') extratoRecArr.push(extRow); else extratoDespArr.push(extRow);
   }
 
   // sort por data desc (string DD/MM/YYYY → Date) — aplica nos 3 arrays

@@ -1,4 +1,4 @@
-/* RADKE BI — gerado por build-data.cjs em 2026-05-05T04:16:02.100Z */
+/* RADKE BI — gerado por build-data.cjs em 2026-05-05T04:10:01.771Z */
 /* Empresa: RADKE SOLUÇÕES INSTRALOGISTICAS | Ano ref: 2026 */
 const MONTHS = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
 const MONTHS_FULL = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
@@ -8066,11 +8066,11 @@ function aggregateTx(txList, year) {
       despCat.set(categoria, (despCat.get(categoria) || 0) + valor);
       if (fornecedor) despForn.set(fornecedor, (despForn.get(fornecedor) || 0) + valor);
     }
-    // Extrato compacto pra tabela (renomeado pra extRow porque outer for já usa 'row')
+    // Extrato compacto pra tabela
     const dataStr = String(dia).padStart(2,'0') + '/' + mes.slice(5,7) + '/' + mes.slice(0,4);
-    const extRow = [dataStr, cc || 'Operações', categoria, kind === 'r' ? cliente : fornecedor, kind === 'r' ? valor : -valor, realizado ? 'PAGO' : ''];
-    extratoArr.push(extRow);
-    if (kind === 'r') extratoRecArr.push(extRow); else extratoDespArr.push(extRow);
+    const row = [dataStr, cc || 'Operações', categoria, kind === 'r' ? cliente : fornecedor, kind === 'r' ? valor : -valor, realizado ? 'PAGO' : ''];
+    extratoArr.push(row);
+    if (kind === 'r') extratoRecArr.push(row); else extratoDespArr.push(row);
   }
 
   // sort por data desc (string DD/MM/YYYY → Date) — aplica nos 3 arrays
