@@ -718,6 +718,112 @@ const countActiveFilters = (f) => {
   return n;
 };
 
+// Toolbar de filtros inline (substitui o modal removido).
+// Lê categorias únicas de window.ALL_TX e seta drilldown global.
+const InlineFilterBar = ({ kindHint, drilldown, setDrilldown }) => {
+  const [searchOpen, setSearchOpen] = React.useState(false);
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const [grupo, setGrupo] = React.useState(() => {
+    if (kindHint === "r") return "Receita";
+    if (kindHint === "d") return "Despesa";
+    return drilldown && drilldown.type === "kind"
+      ? (drilldown.value === "r" ? "Receita" : "Despesa")
+      : "Todos";
+  });
+  React.useEffect(() => {
+    if (kindHint === "r") setGrupo("Receita");
+    else if (kindHint === "d") setGrupo("Despesa");
+  }, [kindHint]);
+
+  // Lê categorias únicas filtradas pelo grupo
+  const categorias = React.useMemo(() => {
+    const all = window.ALL_TX || [];
+    const set = new Set();
+    for (const row of all) {
+      const [kind, , , categoria] = row;
+      if (!categoria) continue;
+      if (grupo === "Receita" && kind !== "r") continue;
+      if (grupo === "Despesa" && kind !== "d") continue;
+      set.add(categoria);
+    }
+    return [...set].sort();
+  }, [grupo]);
+
+  const filtered = React.useMemo(() => {
+    if (!searchTerm) return categorias.slice(0, 50);
+    const q = searchTerm.toLowerCase();
+    return categorias.filter(c => c.toLowerCase().includes(q)).slice(0, 50);
+  }, [categorias, searchTerm]);
+
+  const activeCategoria = drilldown && drilldown.type === "categoria" ? drilldown.value : null;
+
+  const setGrupoAndClearCat = (v) => {
+    setGrupo(v);
+    if (drilldown && drilldown.type === "categoria") setDrilldown(null);
+  };
+  const handleCatSelect = (c) => {
+    setDrilldown({ type: "categoria", value: c, label: c });
+    setSearchOpen(false);
+    setSearchTerm("");
+  };
+
+  return (
+    <div className="inline-filterbar">
+      {!kindHint && (
+        <label className="ifb-item">
+          <span>Grupo</span>
+          <select className="filter-select" value={grupo} onChange={e => setGrupoAndClearCat(e.target.value)}>
+            <option>Todos</option>
+            <option>Receita</option>
+            <option>Despesa</option>
+          </select>
+        </label>
+      )}
+      <label className="ifb-item ifb-search-wrap">
+        <span>Categoria</span>
+        <div className="ifb-search-trigger" onClick={() => setSearchOpen(o => !o)}>
+          <span style={{ flex: 1 }}>
+            {activeCategoria
+              ? <span style={{ color: "var(--cyan)", fontWeight: 600 }}>{activeCategoria.length > 28 ? activeCategoria.slice(0, 28) + "…" : activeCategoria}</span>
+              : <span style={{ color: "var(--mute)" }}>Todas categorias</span>}
+          </span>
+          <Icon name="chevronRight" />
+        </div>
+        {searchOpen && (
+          <div className="ifb-popover">
+            <input
+              autoFocus
+              type="text"
+              placeholder={`Pesquisar (${categorias.length} categorias)`}
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
+              className="ifb-search-input"
+            />
+            <div className="ifb-popover-list">
+              <div className="ifb-popover-item" onClick={() => { setDrilldown(null); setSearchOpen(false); setSearchTerm(""); }}>
+                <i>Todas categorias</i>
+              </div>
+              {filtered.map(c => (
+                <div key={c}
+                  className={`ifb-popover-item ${activeCategoria === c ? "active" : ""}`}
+                  onClick={() => handleCatSelect(c)}>
+                  {c}
+                </div>
+              ))}
+              {filtered.length === 0 && <div className="ifb-popover-item" style={{ color: "var(--mute)" }}>Nada encontrado</div>}
+            </div>
+          </div>
+        )}
+      </label>
+      {(activeCategoria || (drilldown && drilldown.type !== "categoria")) && (
+        <button className="btn-ghost" onClick={() => setDrilldown(null)} title="Limpar filtros">
+          Limpar
+        </button>
+      )}
+    </div>
+  );
+};
+
 // Compact button that opens the side drawer
 const Filters = ({ filters, onOpen, page }) => {
   if (page === "comparativo") return null;
@@ -836,7 +942,7 @@ function applyDrilldown(extrato, dd) {
 }
 
 Object.assign(window, {
-  Icon, Sidebar, Header, Filters, FiltersDrawer, ExportButton, DEFAULT_FILTERS,
+  Icon, Sidebar, Header, Filters, FiltersDrawer, InlineFilterBar, ExportButton, DEFAULT_FILTERS,
   MonthlyBars, SingleBars, DailyBars, StackedArea, TrendChart, MultiLine,
   BarList, BarListLine, BarListLegend, DivergingBars, Donut, Spark, KpiTile,
   PAGE_TITLES, StatusFilterSeg, STATUS_FILTERS,

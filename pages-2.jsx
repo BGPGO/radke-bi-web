@@ -28,6 +28,7 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
       </div>
 
       <DrilldownBadge drilldown={drilldown} onClear={() => setDrilldown(null)} />
+      <InlineFilterBar drilldown={drilldown} setDrilldown={setDrilldown} />
 
       <div className="metric-strip">
         <div className="metric">
@@ -321,6 +322,7 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
       </div>
 
       <DrilldownBadge drilldown={drilldown} onClear={() => setDrilldown(null)} />
+      <InlineFilterBar drilldown={drilldown} setDrilldown={setDrilldown} />
 
       <div className="row row-4">
         <KpiTile label="Recebido (PAGO)" value={(recebido / 1e6).toFixed(2).replace(".", ",")} unit="M" sparkValues={recDiaSeg} sparkColor="var(--green)" tone="green" />
