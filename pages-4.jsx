@@ -285,18 +285,8 @@ const PageHierarquia = ({ statusFilter, year, month, drilldown, setDrilldown }) 
         </div>
       </div>
 
-      {/* Filtros decorativos no topo (estilo print) */}
+      {/* Filtros funcionais (Campanha + Anúncio aplicam de fato no rowsFiltered) */}
       <div className="hier-filters">
-        <div className="hf-item">
-          <label>Data inicio</label>
-          <input type="date" className="filter-select" value={dataInicio} onChange={(e) => setDataInicio(e.target.value)} />
-        </div>
-        <div className="hf-item">
-          <label>Tipo de Resultado</label>
-          <select className="filter-select" value={tipoResultado} onChange={(e) => setTipoResultado(e.target.value)}>
-            <option value="todos">Todos</option><option value="leads">Leads</option><option value="cliques">Cliques</option>
-          </select>
-        </div>
         <div className="hf-item">
           <label>Campanhas</label>
           <select className="filter-select" value={campanhaFiltro} onChange={(e) => setCampanhaFiltro(e.target.value)}>
@@ -311,6 +301,9 @@ const PageHierarquia = ({ statusFilter, year, month, drilldown, setDrilldown }) 
             {anunciosUniq.map(a => <option key={a} value={a}>{a.length > 30 ? a.slice(0, 30) + "…" : a}</option>)}
           </select>
         </div>
+        {(campanhaFiltro !== "todas" || anuncioFiltro !== "todos") && (
+          <button className="btn-ghost" onClick={() => { setCampanhaFiltro("todas"); setAnuncioFiltro("todos"); }}>Limpar</button>
+        )}
       </div>
 
       {/* KPIs no topo (compactos) */}

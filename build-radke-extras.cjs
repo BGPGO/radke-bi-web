@@ -244,6 +244,7 @@ const out = {
     detalhado: fatDetalhado,
     produtoMes: fatProdutoMes,
     totais: fatTotais,
+    items: fatItemsAno, // raw items do ano (pra filtros reativos no client)
   },
   ads: {
     rows: ads,

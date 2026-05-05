@@ -549,7 +549,6 @@ const PageComparativo = ({ statusFilter, drilldown, setDrilldown, year, month })
         <div className="card">
           <div className="card-title-row">
             <h2 className="card-title">Análise comparativa entre períodos</h2>
-            <button className="btn-ghost"><Icon name="download" /> Exportar</button>
           </div>
           <div className="t-scroll" style={{ maxHeight: 540 }}>
             <table className="t">

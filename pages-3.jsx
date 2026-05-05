@@ -78,7 +78,7 @@ const FatVerticalBars = ({ items, height = 240, formatter = (v) => "R$ " + forma
 
 const PageFaturamentoProduto = ({ drilldown, setDrilldown }) => {
   const E = (typeof window !== "undefined" && window.BIT_RADKE_EXTRAS) || null;
-  if (!E || !E.faturamento) {
+  if (!E || !E.faturamento || !E.faturamento.items) {
     return (
       <div className="page">
         <div className="page-title"><div><h1>Faturamento por Produto</h1></div></div>
@@ -86,87 +86,121 @@ const PageFaturamentoProduto = ({ drilldown, setDrilldown }) => {
       </div>
     );
   }
-  const F = E.faturamento;
-  const T = F.totais;
-  const A = (E.ads && E.ads.campanhasAgg) || []; // pra "Vendas por Anuncio" usamos campanhas ADS como proxy
 
-  // Filtros locais (visuais — replicam o print PBI)
+  // Filtros reativos
   const [fMes, setFMes] = useState("Todos");
-  const [fAnuncio, setFAnuncio] = useState("Todos");
-  const [fTipo, setFTipo] = useState("Todos");
   const [fVendedor, setFVendedor] = useState("Todos");
   const [fFamilia, setFFamilia] = useState("Todos");
 
-  // Faturamento "por anuncio" — XLSX nao tem coluna anuncio, mostramos vendas por familia (real)
-  const vendasPorAnuncio = useMemo(() => {
-    return F.porFamilia.slice(0, 8).map(x => ({ name: x.name, value: x.value }));
-  }, [F.porFamilia]);
-
-  // Top produtos individuais (do detalhado, agregados por produto sem o prefixo familia)
-  const topProdutos = useMemo(() => {
-    return F.detalhado.slice(0, 6).map(d => ({
-      name: d.name.includes("▸") ? d.name.split("▸").pop().trim() : d.name,
-      value: d.value,
-    }));
-  }, [F.detalhado]);
-
-  // Top vendedores (filtra "N/D")
-  const topVendedores = useMemo(() => {
-    return F.porVendedor.filter(v => v.name && v.name !== "N/D").slice(0, 6);
-  }, [F.porVendedor]);
-
-  // Matriz "Analise de Produtos por Anuncio" — produto x mes com VALORES REAIS (do XLSX)
   const MESES_ABBR = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
+  const items = E.faturamento.items;
+
+  // Aplica todos os filtros nos items raw e recomputa todos os agregados
+  const filtered = useMemo(() => {
+    return items.filter(it => {
+      if (fMes !== "Todos" && MESES_ABBR[it.mes] !== fMes) return false;
+      if (fVendedor !== "Todos" && it.vendedor !== fVendedor) return false;
+      if (fFamilia !== "Todos" && it.familia !== fFamilia) return false;
+      return true;
+    });
+  }, [items, fMes, fVendedor, fFamilia]);
+
+  // Recomputa agregados a partir de filtered
+  const aggBy = (arr, keyFn) => {
+    const m = new Map();
+    for (const it of arr) {
+      const k = keyFn(it) || 'Sem categoria';
+      if (!m.has(k)) m.set(k, { name: k, value: 0, qtd: 0 });
+      const o = m.get(k);
+      o.value += it.valor;
+      o.qtd += it.qtd || 0;
+    }
+    return [...m.values()].sort((a, b) => b.value - a.value);
+  };
+
+  const T = useMemo(() => {
+    const totalValor = filtered.reduce((s, it) => s + it.valor, 0);
+    const totalQtd = filtered.reduce((s, it) => s + it.qtd, 0);
+    const numNFs = new Set(filtered.map(it => it.nf).filter(Boolean)).size;
+    const numClientes = new Set(filtered.map(it => it.cliente).filter(Boolean)).size;
+    const numProdutos = new Set(filtered.map(it => it.produto).filter(Boolean)).size;
+    const ticketMedio = numNFs > 0 ? totalValor / numNFs : 0;
+    return { totalValor, totalQtd, numNFs, numClientes, numProdutos, ticketMedio, anoRef: E.faturamento.totais.anoRef };
+  }, [filtered, E.faturamento.totais.anoRef]);
+
+  const porFamilia = useMemo(() => aggBy(filtered, x => x.familia).slice(0, 20), [filtered]);
+  const porVendedor = useMemo(() => aggBy(filtered, x => x.vendedor).slice(0, 20), [filtered]);
+
+  // Vendas por Anúncio = vendas por família (real, do XLSX)
+  const vendasPorAnuncio = useMemo(() => porFamilia.slice(0, 8), [porFamilia]);
+
+  // Top produtos individuais
+  const topProdutos = useMemo(() => {
+    return aggBy(filtered, x => x.produto).slice(0, 6).map(d => ({
+      name: d.name.length > 40 ? d.name.slice(0, 40) + '…' : d.name, value: d.value,
+    }));
+  }, [filtered]);
+
+  // Top vendedores (filtra "Sem Vendedor"/"N/D")
+  const topVendedores = useMemo(() => {
+    return porVendedor.filter(v => v.name && v.name !== "N/D" && v.name !== "Sem Vendedor").slice(0, 6);
+  }, [porVendedor]);
+
+  // Matriz produto × mês (de filtered)
+  const matrizProdutosFull = useMemo(() => {
+    const map = new Map();
+    for (const it of filtered) {
+      if (it.mes == null) continue;
+      if (!map.has(it.produto)) map.set(it.produto, { nome: it.produto, total: 0, meses: Array(12).fill(0) });
+      const o = map.get(it.produto);
+      o.total += it.valor;
+      o.meses[it.mes] += it.valor;
+    }
+    return [...map.values()].sort((a, b) => b.total - a.total);
+  }, [filtered]);
+
   const matrizMesesIdx = useMemo(() => {
-    // Indexes dos meses que têm dados (qualquer produto)
     const set = new Set();
-    (F.produtoMes || []).forEach(p => p.meses.forEach((v, i) => { if (v > 0) set.add(i); }));
+    matrizProdutosFull.forEach(p => p.meses.forEach((v, i) => { if (v > 0) set.add(i); }));
     return [...set].sort((a, b) => a - b);
-  }, [F.produtoMes]);
+  }, [matrizProdutosFull]);
   const matrizMeses = useMemo(() => matrizMesesIdx.map(i => MESES_ABBR[i]), [matrizMesesIdx]);
   const matrizProdutos = useMemo(() => {
-    return (F.produtoMes || []).slice(0, 10).map(p => {
+    return matrizProdutosFull.slice(0, 10).map(p => {
       const cleanName = p.nome.includes("▸") ? p.nome.split("▸").pop().trim() : p.nome;
       return { nome: cleanName, total: p.total, meses: matrizMesesIdx.map(i => p.meses[i] || 0) };
     });
-  }, [F.produtoMes, matrizMesesIdx]);
+  }, [matrizProdutosFull, matrizMesesIdx]);
 
-  const familiaOpts = useMemo(() => ["Todos", ...F.porFamilia.slice(0, 10).map(x => x.name)], [F.porFamilia]);
-  const vendedorOpts = useMemo(() => ["Todos", ...F.porVendedor.filter(v => v.name !== "N/D").slice(0, 10).map(x => x.name)], [F.porVendedor]);
-  const anuncioOpts = useMemo(() => ["Todos", ...vendasPorAnuncio.map(x => x.name)], [vendasPorAnuncio]);
+  // Opções dos dropdowns (sempre todas, calculadas dos items raw)
+  const mesOpts = useMemo(() => ["Todos", ...[...new Set(items.map(it => MESES_ABBR[it.mes]).filter(Boolean))]], [items]);
+  const familiaOpts = useMemo(() => ["Todos", ...[...new Set(items.map(it => it.familia).filter(f => f && f !== 'Sem Família'))].sort()], [items]);
+  const vendedorOpts = useMemo(() => ["Todos", ...[...new Set(items.map(it => it.vendedor).filter(v => v && v !== 'N/D' && v !== 'Sem Vendedor'))].sort()], [items]);
+
+  const filtroAtivo = fMes !== "Todos" || fVendedor !== "Todos" || fFamilia !== "Todos";
+  const limparFiltros = () => { setFMes("Todos"); setFVendedor("Todos"); setFFamilia("Todos"); };
 
   return (
     <div className="page">
       <div className="page-title">
         <div>
           <h1>Faturamento por Produto</h1>
-          <div className="status-line">{T.numNFs} NFs · {T.numProdutos} produtos · {T.numClientes} clientes · ano {T.anoRef}</div>
+          <div className="status-line">
+            {T.numNFs} NFs · {T.numProdutos} produtos · {T.numClientes} clientes · ano {T.anoRef}
+            {filtroAtivo && <> · <b style={{ color: "var(--cyan)" }}>filtrado</b></>}
+          </div>
         </div>
         <div className="actions">
+          {filtroAtivo && <button className="btn-ghost" onClick={limparFiltros}>Limpar filtros</button>}
         </div>
       </div>
 
-      {/* ===== Header de filtros (5 dropdowns, igual print PBI) ===== */}
+      {/* ===== Header de filtros funcionais ===== */}
       <div className="fat-filters">
         <label className="fat-filter">
-          <span>Mês de Início</span>
+          <span>Mês</span>
           <select className="filter-select" value={fMes} onChange={e => setFMes(e.target.value)}>
-            <option>Todos</option>
-            {F.porMes.filter(m => m.valor > 0).map(m => <option key={m.m}>{m.m}</option>)}
-          </select>
-        </label>
-        <label className="fat-filter">
-          <span>Anúncio</span>
-          <select className="filter-select" value={fAnuncio} onChange={e => setFAnuncio(e.target.value)}>
-            {anuncioOpts.map(o => <option key={o}>{o}</option>)}
-          </select>
-        </label>
-        <label className="fat-filter">
-          <span>Tipo de Resultado</span>
-          <select className="filter-select" value={fTipo} onChange={e => setFTipo(e.target.value)}>
-            <option>Todos</option>
-            <option>Venda</option>
-            <option>Devolução</option>
+            {mesOpts.map(o => <option key={o}>{o}</option>)}
           </select>
         </label>
         <label className="fat-filter">
@@ -548,90 +582,106 @@ const PageMarketing = ({ drilldown, setDrilldown }) => {
     );
   }
   const M = E.ads;
-  const T = M.totais;
 
-  // Filtros locais (visuais)
-  const [fData, setFData] = useState("Todos");
-  const [fTipo, setFTipo] = useState("Todos");
+  // Filtros reativos
   const [fCamp, setFCamp] = useState("Todos");
   const [fAnuncio, setFAnuncio] = useState("Todos");
 
-  const campanhasOpts = useMemo(() => ["Todos", ...M.campanhasAgg.map(c => c.campanha)], [M.campanhasAgg]);
+  const campanhasOpts = useMemo(() => ["Todos", ...[...new Set(M.rows.map(r => r.campanha).filter(Boolean))].sort()], [M.rows]);
   const anuncioOpts = useMemo(() => {
     const set = new Set(M.rows.map(r => r.anuncio).filter(a => a && a !== "All"));
-    return ["Todos", ...Array.from(set)];
+    return ["Todos", ...[...set].sort()];
   }, [M.rows]);
 
-  // Métricas globais derivadas (igual ao print)
+  // Filtra rows raw e recomputa tudo
+  const rowsFiltered = useMemo(() => {
+    return M.rows.filter(r => {
+      if (fCamp !== "Todos" && r.campanha !== fCamp) return false;
+      if (fAnuncio !== "Todos" && r.anuncio !== fAnuncio) return false;
+      return true;
+    });
+  }, [M.rows, fCamp, fAnuncio]);
+
+  const T = useMemo(() => {
+    const gastoTotal = rowsFiltered.reduce((s, r) => s + r.valorBRL, 0);
+    const alcanceTotal = rowsFiltered.reduce((s, r) => s + r.alcance, 0);
+    const impressoesTotal = rowsFiltered.reduce((s, r) => s + r.impressoes, 0);
+    const cliquesTotal = rowsFiltered.reduce((s, r) => s + r.cliques, 0);
+    const resultadosTotal = rowsFiltered.reduce((s, r) => s + r.resultados, 0);
+    const numCampanhas = new Set(rowsFiltered.map(r => r.campanha).filter(Boolean)).size;
+    return {
+      gastoTotal, alcanceTotal, impressoesTotal, cliquesTotal, resultadosTotal, numCampanhas,
+      cpmMedio: impressoesTotal > 0 ? (gastoTotal / impressoesTotal) * 1000 : 0,
+      cpcMedio: cliquesTotal > 0 ? gastoTotal / cliquesTotal : 0,
+    };
+  }, [rowsFiltered]);
+
+  // CampanhasAgg (filtered) — usado no chart CPM × Valor
+  const campanhasAgg = useMemo(() => {
+    const map = new Map();
+    for (const it of rowsFiltered) {
+      if (!it.campanha) continue;
+      if (!map.has(it.campanha)) map.set(it.campanha, { campanha: it.campanha, valorBRL: 0, alcance: 0, impressoes: 0, cliques: 0, resultados: 0, leads: 0 });
+      const o = map.get(it.campanha);
+      o.valorBRL += it.valorBRL;
+      o.alcance = Math.max(o.alcance, it.alcance);
+      o.impressoes += it.impressoes;
+      o.cliques += it.cliques;
+      o.resultados += it.resultados;
+      o.leads += it.leads;
+    }
+    for (const o of map.values()) {
+      o.cpm = o.impressoes > 0 ? (o.valorBRL / o.impressoes) * 1000 : 0;
+      o.cpc = o.cliques > 0 ? o.valorBRL / o.cliques : 0;
+    }
+    return [...map.values()].sort((a, b) => b.valorBRL - a.valorBRL);
+  }, [rowsFiltered]);
+
   const cpmGlobal = T.cpmMedio || 0;
   const cpcGlobal = T.cpcMedio || 0;
   const freqGlobal = T.alcanceTotal > 0 ? T.impressoesTotal / T.alcanceTotal : 0;
-  // "Impacto" no print parece ser "Resultados" — valor 27.985,61 (sugere R$ × algo).
-  // Aproximamos com gastoTotal / leads ou similar. Vamos exibir resultadosTotal.
   const impactoVal = T.resultadosTotal || 0;
 
-  // Top 6 campanhas por cliques
   const topCampCliques = useMemo(() => {
-    return M.campanhasAgg
-      .slice()
-      .sort((a, b) => b.cliques - a.cliques)
-      .slice(0, 6)
-      .map(c => ({ name: c.campanha, value: c.cliques }));
-  }, [M.campanhasAgg]);
+    return campanhasAgg.slice().sort((a, b) => b.cliques - a.cliques).slice(0, 6).map(c => ({ name: c.campanha, value: c.cliques }));
+  }, [campanhasAgg]);
 
-  // Leads por anúncio — top 8 anuncios por leads (ou cliques se leads zerado)
   const leadsPorAnuncio = useMemo(() => {
-    // agrega por anuncio
     const byAd = new Map();
-    for (const r of M.rows) {
+    for (const r of rowsFiltered) {
       if (!r.anuncio || r.anuncio === "All") continue;
-      const k = r.anuncio;
-      if (!byAd.has(k)) byAd.set(k, { name: k, leads: 0, cliques: 0 });
-      const o = byAd.get(k);
+      if (!byAd.has(r.anuncio)) byAd.set(r.anuncio, { name: r.anuncio, leads: 0, cliques: 0 });
+      const o = byAd.get(r.anuncio);
       o.leads += r.leads || 0;
       o.cliques += r.cliques || 0;
     }
-    const arr = Array.from(byAd.values());
+    const arr = [...byAd.values()];
     const useLeads = arr.some(x => x.leads > 0);
-    return arr
-      .map(x => ({ name: x.name, value: useLeads ? x.leads : x.cliques }))
-      .sort((a, b) => b.value - a.value)
-      .slice(0, 8);
-  }, [M.rows]);
+    return arr.map(x => ({ name: x.name, value: useLeads ? x.leads : x.cliques })).sort((a, b) => b.value - a.value).slice(0, 8);
+  }, [rowsFiltered]);
+
+  const filtroAtivo = fCamp !== "Todos" || fAnuncio !== "Todos";
+  const limparFiltros = () => { setFCamp("Todos"); setFAnuncio("Todos"); };
 
   return (
     <div className="page">
       <div className="page-title">
         <div>
           <h1>Análise Profunda — Marketing ADS</h1>
-          <div className="status-line">{T.numCampanhas} campanhas · gasto total R$ {formatBR(T.gastoTotal)}</div>
+          <div className="status-line">
+            {T.numCampanhas} campanhas · gasto total R$ {formatBR(T.gastoTotal)}
+            {filtroAtivo && <> · <b style={{ color: "var(--cyan)" }}>filtrado</b></>}
+          </div>
         </div>
         <div className="actions">
+          {filtroAtivo && <button className="btn-ghost" onClick={limparFiltros}>Limpar filtros</button>}
         </div>
       </div>
 
-      {/* ===== Header de filtros (4 dropdowns) ===== */}
+      {/* ===== Header de filtros funcionais ===== */}
       <div className="mkt-filters">
         <label className="mkt-filter">
-          <span>Data início</span>
-          <select className="filter-select" value={fData} onChange={e => setFData(e.target.value)}>
-            <option>Todos</option>
-            <option>Últ 7 dias</option>
-            <option>Últ 30 dias</option>
-            <option>Últ 90 dias</option>
-          </select>
-        </label>
-        <label className="mkt-filter">
-          <span>Tipo de Resultado</span>
-          <select className="filter-select" value={fTipo} onChange={e => setFTipo(e.target.value)}>
-            <option>Todos</option>
-            <option>Leads</option>
-            <option>Cliques</option>
-            <option>Engajamento</option>
-          </select>
-        </label>
-        <label className="mkt-filter">
-          <span>Campanhas</span>
+          <span>Campanha</span>
           <select className="filter-select" value={fCamp} onChange={e => setFCamp(e.target.value)}>
             {campanhasOpts.map(o => <option key={o}>{o}</option>)}
           </select>
@@ -672,7 +722,7 @@ const PageMarketing = ({ drilldown, setDrilldown }) => {
       <div className="row mkt-row-1">
         <div className="card mkt-cpm-card">
           <h2 className="card-title">CPM × VALOR INVESTIDO</h2>
-          <MktCpmChart campanhas={M.campanhasAgg} height={260} />
+          <MktCpmChart campanhas={campanhasAgg} height={260} />
         </div>
         <div className="card mkt-cliques-card">
           <h2 className="card-title">CLIQUES POR CAMPANHA</h2>

@@ -401,7 +401,6 @@ const PageReceita = ({ filters, setFilters, onOpenFilters, statusFilter, drilldo
         <div className="card">
           <div className="card-title-row">
             <h2 className="card-title">Extrato de receitas {drilldown ? `· ${drilldown.label}` : ""}</h2>
-            <button className="btn-ghost"><Icon name="download" /> Exportar</button>
           </div>
           <div className="t-scroll">
             <table className="t">
@@ -505,7 +504,6 @@ const PageDespesa = ({ filters, setFilters, onOpenFilters, statusFilter, drilldo
         <div className="card">
           <div className="card-title-row">
             <h2 className="card-title">Extrato de despesas {drilldown ? `· ${drilldown.label}` : ""}</h2>
-            <button className="btn-ghost"><Icon name="download" /> Exportar</button>
           </div>
           <div className="t-scroll">
             <table className="t">
