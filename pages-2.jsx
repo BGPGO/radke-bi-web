@@ -72,6 +72,11 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
               <button className={view === "vertical" ? "active" : ""} onClick={() => setView("vertical")}>Análise vertical</button>
             </div>
           </div>
+          <div className="status-line" style={{ marginBottom: 8, fontSize: 11 }}>
+            {view === "vertical"
+              ? "Vertical: cada categoria como % do total Receita/Despesa do mês"
+              : "Horizontal: variação % vs mês anterior (mostra evolução temporal)"}
+          </div>
           <div className="t-scroll" style={{ maxHeight: 320 }}>
             <table className="t">
               <thead>
@@ -87,7 +92,7 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
                             title="Clique para filtrar este mês">
                           {m}
                         </th>
-                        <th className="num">%</th>
+                        <th className="num">{view === "horizontal" ? "Δ%" : "%"}</th>
                       </React.Fragment>
                     );
                   })}
@@ -98,10 +103,23 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
                   <td>Receita</td>
                   {months6.map((_, i) => {
                     const total = B.FLUXO_RECEITA.reduce((s, r) => s + (r.values[i] || 0), 0);
+                    let pctLabel = "100%";
+                    let pctColor = "var(--fg-3)";
+                    if (view === "horizontal") {
+                      if (i === 0) { pctLabel = "—"; }
+                      else {
+                        const prev = B.FLUXO_RECEITA.reduce((s, r) => s + (r.values[i - 1] || 0), 0);
+                        if (prev) {
+                          const delta = ((total - prev) / Math.abs(prev)) * 100;
+                          pctLabel = (delta >= 0 ? "+" : "") + delta.toFixed(1).replace(".", ",") + "%";
+                          pctColor = delta >= 0 ? "var(--green)" : "var(--red)";
+                        } else { pctLabel = "—"; }
+                      }
+                    }
                     return (
                       <React.Fragment key={i}>
                         <td className="num green">{B.fmt(total)}</td>
-                        <td className="num">100%</td>
+                        <td className="num" style={{ color: pctColor, fontWeight: view === "horizontal" ? 600 : 400 }}>{pctLabel}</td>
                       </React.Fragment>
                     );
                   })}
@@ -110,13 +128,31 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
                   <tr key={row.cat}>
                     <td><span className="chev">+</span>{row.cat}</td>
                     {months6.map((_, i) => {
-                      const v = row.values[i];
-                      const totalReceita = B.FLUXO_RECEITA.reduce((s, r) => s + (r.values[i] || 0), 0);
-                      const pct = totalReceita ? (v / totalReceita) * 100 : 0;
+                      const v = row.values[i] || 0;
+                      let pctLabel = "0,00%";
+                      let pctColor = "var(--fg-3)";
+                      if (view === "vertical") {
+                        const totalReceita = B.FLUXO_RECEITA.reduce((s, r) => s + (r.values[i] || 0), 0);
+                        const pct = totalReceita ? (v / totalReceita) * 100 : 0;
+                        pctLabel = pct.toFixed(2).replace(".", ",") + "%";
+                      } else {
+                        if (i === 0) { pctLabel = "—"; }
+                        else {
+                          const prev = row.values[i - 1] || 0;
+                          if (prev) {
+                            const delta = ((v - prev) / Math.abs(prev)) * 100;
+                            pctLabel = (delta >= 0 ? "+" : "") + delta.toFixed(1).replace(".", ",") + "%";
+                            pctColor = delta >= 0 ? "var(--green)" : "var(--red)";
+                          } else if (v) {
+                            pctLabel = "novo";
+                            pctColor = "var(--cyan)";
+                          } else { pctLabel = "—"; }
+                        }
+                      }
                       return (
                         <React.Fragment key={i}>
                           <td className="num green">{B.fmt(v)}</td>
-                          <td className="num" style={{ color: "var(--fg-3)" }}>{pct.toFixed(2).replace(".",",")}%</td>
+                          <td className="num" style={{ color: pctColor }}>{pctLabel}</td>
                         </React.Fragment>
                       );
                     })}
@@ -126,10 +162,24 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
                   <td>Despesa</td>
                   {months6.map((_, i) => {
                     const total = B.FLUXO_DESPESA.reduce((s, r) => s + (r.values[i] || 0), 0);
+                    let pctLabel = "100%";
+                    let pctColor = "var(--fg-3)";
+                    if (view === "horizontal") {
+                      if (i === 0) { pctLabel = "—"; }
+                      else {
+                        const prev = B.FLUXO_DESPESA.reduce((s, r) => s + (r.values[i - 1] || 0), 0);
+                        if (prev) {
+                          const delta = ((total - prev) / Math.abs(prev)) * 100;
+                          pctLabel = (delta >= 0 ? "+" : "") + delta.toFixed(1).replace(".", ",") + "%";
+                          // pra despesa: subir é ruim (vermelho), descer é bom (verde)
+                          pctColor = delta >= 0 ? "var(--red)" : "var(--green)";
+                        } else { pctLabel = "—"; }
+                      }
+                    }
                     return (
                       <React.Fragment key={i}>
                         <td className="num red">{B.fmt(total)}</td>
-                        <td className="num">100%</td>
+                        <td className="num" style={{ color: pctColor, fontWeight: view === "horizontal" ? 600 : 400 }}>{pctLabel}</td>
                       </React.Fragment>
                     );
                   })}
@@ -138,13 +188,31 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
                   <tr key={row.cat}>
                     <td><span className="chev">+</span>{row.cat}</td>
                     {months6.map((_, i) => {
-                      const v = row.values[i];
-                      const totalDespesa = B.FLUXO_DESPESA.reduce((s, r) => s + (r.values[i] || 0), 0);
-                      const pct = totalDespesa ? (v / totalDespesa) * 100 : 0;
+                      const v = row.values[i] || 0;
+                      let pctLabel = "0,00%";
+                      let pctColor = "var(--fg-3)";
+                      if (view === "vertical") {
+                        const totalDespesa = B.FLUXO_DESPESA.reduce((s, r) => s + (r.values[i] || 0), 0);
+                        const pct = totalDespesa ? (v / totalDespesa) * 100 : 0;
+                        pctLabel = pct.toFixed(2).replace(".", ",") + "%";
+                      } else {
+                        if (i === 0) { pctLabel = "—"; }
+                        else {
+                          const prev = row.values[i - 1] || 0;
+                          if (prev) {
+                            const delta = ((v - prev) / Math.abs(prev)) * 100;
+                            pctLabel = (delta >= 0 ? "+" : "") + delta.toFixed(1).replace(".", ",") + "%";
+                            pctColor = delta >= 0 ? "var(--red)" : "var(--green)";
+                          } else if (v) {
+                            pctLabel = "novo";
+                            pctColor = "var(--cyan)";
+                          } else { pctLabel = "—"; }
+                        }
+                      }
                       return (
                         <React.Fragment key={i}>
                           <td className="num red">{B.fmt(v)}</td>
-                          <td className="num" style={{ color: "var(--fg-3)" }}>{pct.toFixed(2).replace(".",",")}%</td>
+                          <td className="num" style={{ color: pctColor }}>{pctLabel}</td>
                         </React.Fragment>
                       );
                     })}
@@ -155,10 +223,28 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
                   {months6.map((_, i) => {
                     const r = B.FLUXO_RECEITA.reduce((s, r) => s + (r.values[i] || 0), 0);
                     const d = B.FLUXO_DESPESA.reduce((s, r) => s + (r.values[i] || 0), 0);
+                    const liq = r + d;
+                    let pctLabel = "—";
+                    let pctColor = "var(--fg-3)";
+                    if (view === "vertical") {
+                      pctLabel = r ? ((liq / r) * 100).toFixed(2).replace(".", ",") + "%" : "—";
+                    } else {
+                      if (i === 0) { pctLabel = "—"; }
+                      else {
+                        const prevR = B.FLUXO_RECEITA.reduce((s, r2) => s + (r2.values[i - 1] || 0), 0);
+                        const prevD = B.FLUXO_DESPESA.reduce((s, r2) => s + (r2.values[i - 1] || 0), 0);
+                        const prevLiq = prevR + prevD;
+                        if (prevLiq) {
+                          const delta = ((liq - prevLiq) / Math.abs(prevLiq)) * 100;
+                          pctLabel = (delta >= 0 ? "+" : "") + delta.toFixed(1).replace(".", ",") + "%";
+                          pctColor = delta >= 0 ? "var(--green)" : "var(--red)";
+                        }
+                      }
+                    }
                     return (
                       <React.Fragment key={i}>
-                        <td className="num">{B.fmt(r + d)}</td>
-                        <td className="num">{(((r + d) / r) * 100).toFixed(2).replace(".",",")}%</td>
+                        <td className="num">{B.fmt(liq)}</td>
+                        <td className="num" style={{ color: pctColor, fontWeight: 600 }}>{pctLabel}</td>
                       </React.Fragment>
                     );
                   })}
