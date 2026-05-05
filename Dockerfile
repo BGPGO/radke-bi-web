@@ -1,20 +1,18 @@
-# Coolify deploy — serve o BI RADKE estaticamente via Caddy.
-# Os artefatos (data.js, app.bundle.js, report.json) sao pre-buildados
-# localmente e commitados no repo. Container so serve files.
+# Coolify deploy — serve estatica RADKE BI via nginx (mais previsivel que Caddy
+# no setup do Coolify; veja issue de "exited:unhealthy" com caddy:2-alpine).
 
-FROM caddy:2-alpine
+FROM nginx:alpine
 
-# Static files (todos pre-buildados localmente: data.js, data-extras.js,
-# app.bundle.js, report.json sao gerados via START.bat antes do git push).
-COPY index.html /srv/
-COPY styles.css /srv/
-COPY data.js /srv/
-COPY data-extras.js /srv/
-COPY app.bundle.js /srv/
-COPY report.json /srv/
-COPY assets /srv/assets
+# Static files (todos pre-buildados localmente)
+COPY index.html /usr/share/nginx/html/
+COPY styles.css /usr/share/nginx/html/
+COPY data.js /usr/share/nginx/html/
+COPY data-extras.js /usr/share/nginx/html/
+COPY app.bundle.js /usr/share/nginx/html/
+COPY report.json /usr/share/nginx/html/
+COPY assets /usr/share/nginx/html/assets
 
-# Caddyfile com basic_auth controlado por env vars
-COPY Caddyfile /etc/caddy/Caddyfile
+# Config minima — SPA fallback + gzip + cache de assets
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80

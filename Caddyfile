@@ -1,8 +1,0 @@
-# Caddy serve estatica RADKE BI. Coolify+Traefik fazem TLS na frente.
-:80 {
-	root * /srv
-	encode gzip zstd
-	header X-Robots-Tag "noindex,nofollow,noarchive"
-	try_files {path} /index.html
-	file_server
-}
