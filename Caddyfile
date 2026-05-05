@@ -5,14 +5,6 @@
 	root * /srv
 	encode gzip zstd
 
-	# Basic auth opcional — usuario/senha vem de env vars do Coolify.
-	# Se BGP_AUTH_USER e BGP_AUTH_HASH estao setados, exige login.
-	# Senha hashed via `caddy hash-password`.
-	@protected not path /robots.txt /favicon.ico
-	basic_auth @protected {
-		{$BGP_AUTH_USER:bgp} {$BGP_AUTH_HASH:JDJhJDE0JEdUR3MybTFSQzhhcEFUMm9YQ09zZHV1OEdjLnpvT0xYbGc2dlBaNk1mUGc5Y0NFc05EMS5L}
-	}
-
 	# Cache forte pros assets versionados
 	@assets path /assets/*
 	header @assets Cache-Control "public, max-age=31536000, immutable"
