@@ -640,8 +640,10 @@ table.t th {
   padding: 12px 14px;
   border-bottom: 1px solid var(--border);
   white-space: nowrap;
-  background: linear-gradient(180deg, rgba(34,211,238,0.025), transparent);
-  position: sticky; top: 0; z-index: 1;
+  background: var(--surface);
+  background-image: linear-gradient(180deg, rgba(34,211,238,0.05), rgba(34,211,238,0));
+  position: sticky; top: 0; z-index: 2;
+  box-shadow: 0 1px 0 var(--border);
 }
 table.t td {
   padding: 10px 14px;
