@@ -42,8 +42,10 @@ function excelToDate(serial) {
 
 console.log('=== Curva ABC ===');
 const abcRaw = readSheet('CurvaABCPRodutos.xlsx');
-const abc = abcRaw.map(r => ({
-  abc: r['ABC'] || 'X',
+// XLSX traz a coluna ABC mas a classificação está embaralhada (A único, ordem inconsistente).
+// Recalculamos do zero: sort por valor faturado desc, classifica pela regra 80/15/5
+// (A = primeiros 80% da receita acumulada, B = 80-95%, C = 95-100%).
+const abcSrc = abcRaw.map(r => ({
   codigo: r['Código do Produto'] || '',
   descricao: (r['Descrição do Produto'] || '').toString().trim(),
   marca: r['Marca'] || '',
@@ -51,18 +53,31 @@ const abc = abcRaw.map(r => ({
   unidade: r['Unidade'] || '',
   valorFaturado: num(r['Valor Faturado']),
   qtdFaturada: num(r['Quantidade Faturada']),
-  pctValor: num(r['% Participação (Valor)']),
-  valorAcumulado: num(r['Valor Acumulado']),
-  pctAcumulado: num(r['% Acumulado (Valor)']),
-  ordem: num(r['Ordem']),
-})).filter(x => x.descricao).sort((a, b) => a.ordem - b.ordem);
-console.log('  ', abc.length, 'produtos');
-const abcCount = { A: 0, B: 0, C: 0 };
-abc.forEach(p => {
-  const k = (p.abc || '').charAt(0).toUpperCase();
-  if (abcCount[k] != null) abcCount[k]++;
+})).filter(x => x.descricao && x.valorFaturado > 0)
+  .sort((a, b) => b.valorFaturado - a.valorFaturado);
+const abcTotal = abcSrc.reduce((s, x) => s + x.valorFaturado, 0);
+let abcAcum = 0;
+const abc = abcSrc.map((p, i) => {
+  abcAcum += p.valorFaturado;
+  const pctAcumulado = abcTotal > 0 ? (abcAcum / abcTotal) * 100 : 0;
+  const pctValor = abcTotal > 0 ? (p.valorFaturado / abcTotal) * 100 : 0;
+  let abcClass;
+  if (pctAcumulado <= 80) abcClass = 'A';
+  else if (pctAcumulado <= 95) abcClass = 'B';
+  else abcClass = 'C';
+  return {
+    ...p,
+    abc: abcClass,
+    pctValor,
+    valorAcumulado: abcAcum,
+    pctAcumulado,
+    ordem: i + 1,
+  };
 });
-console.log('  classes:', abcCount);
+console.log('  ', abc.length, 'produtos · total R$', abcTotal.toFixed(2));
+const abcCount = { A: 0, B: 0, C: 0 };
+abc.forEach(p => abcCount[p.abc]++);
+console.log('  classes (regra 80/15/5):', abcCount);
 
 console.log('\n=== Faturamento por Produto ===');
 const fatRaw = readSheet('FaturamentoPorProduto.xlsx');
@@ -99,46 +114,51 @@ function aggBy(items, keyFn, valueFn = (x) => x.valor) {
   return Array.from(map.values()).sort((a, b) => b.value - a.value);
 }
 
-const fatPorFamilia = aggBy(fatItems, x => x.familia).slice(0, 20);
-const fatPorVendedor = aggBy(fatItems, x => x.vendedor).slice(0, 20);
-const fatPorCliente = aggBy(fatItems, x => x.cliente).slice(0, 15);
-
-// por mes (todos os anos juntos no acumulado, usar ano max)
+// Ano de referência = ano max nos dados (último ano com faturamento)
 const anoRef = (() => {
   const ys = fatItems.map(x => x.ano).filter(Boolean);
   return ys.length ? Math.max(...ys) : new Date().getFullYear();
 })();
+// CORREÇÃO: PBI mostra só o ano de referência. Antes, totais/agg somavam TODOS
+// os anos do XLSX (2025+2026 = R$ 9M). Agora restringimos ao ano corrente (R$ 3.5M).
+const fatItemsAno = fatItems.filter(x => x.ano === anoRef);
+console.log('  itens 2025+2026: ' + fatItems.length + ' | apenas ' + anoRef + ': ' + fatItemsAno.length);
+
+const fatPorFamilia = aggBy(fatItemsAno, x => x.familia).slice(0, 20);
+const fatPorVendedor = aggBy(fatItemsAno, x => x.vendedor).slice(0, 20);
+const fatPorCliente = aggBy(fatItemsAno, x => x.cliente).slice(0, 15);
+
 const fatPorMes = Array(12).fill(0).map((_, i) => ({
   m: ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'][i],
   valor: 0,
   qtd: 0,
 }));
-for (const it of fatItems) {
-  if (it.ano !== anoRef || it.mes == null) continue;
+for (const it of fatItemsAno) {
+  if (it.mes == null) continue;
   fatPorMes[it.mes].valor += it.valor;
   fatPorMes[it.mes].qtd += it.qtd;
 }
 
 const fatTotais = {
-  totalValor: fatItems.reduce((s, x) => s + x.valor, 0),
-  totalQtd: fatItems.reduce((s, x) => s + x.qtd, 0),
-  numItens: fatItems.length,
-  numNFs: new Set(fatItems.map(x => x.nf).filter(Boolean)).size,
-  numClientes: new Set(fatItems.map(x => x.cliente).filter(Boolean)).size,
-  numProdutos: new Set(fatItems.map(x => x.produto).filter(Boolean)).size,
+  totalValor: fatItemsAno.reduce((s, x) => s + x.valor, 0),
+  totalQtd: fatItemsAno.reduce((s, x) => s + x.qtd, 0),
+  numItens: fatItemsAno.length,
+  numNFs: new Set(fatItemsAno.map(x => x.nf).filter(Boolean)).size,
+  numClientes: new Set(fatItemsAno.map(x => x.cliente).filter(Boolean)).size,
+  numProdutos: new Set(fatItemsAno.map(x => x.produto).filter(Boolean)).size,
   anoRef,
 };
 fatTotais.ticketMedio = fatTotais.numNFs > 0 ? fatTotais.totalValor / fatTotais.numNFs : 0;
-console.log('  total R$', fatTotais.totalValor.toFixed(2), '| NFs:', fatTotais.numNFs, '| ticketMedio:', fatTotais.ticketMedio.toFixed(2));
+console.log('  ' + anoRef + ': R$ ' + fatTotais.totalValor.toFixed(2) + ' | NFs: ' + fatTotais.numNFs + ' | ticketMedio: ' + fatTotais.ticketMedio.toFixed(2));
 
-// detalhamento familia x produto (top 50 produtos)
-const fatDetalhado = aggBy(fatItems, x => x.familia + ' ▸ ' + x.produto).slice(0, 100);
+// detalhamento familia x produto (top 100 do ano)
+const fatDetalhado = aggBy(fatItemsAno, x => x.familia + ' ▸ ' + x.produto).slice(0, 100);
 
-// matriz REAL produto x mes (top 10 produtos do ano de referência)
+// matriz REAL produto x mes (top 12 produtos do ano de referência)
 const fatProdutoMes = (function() {
-  const map = new Map(); // produto -> { name, total, meses: {0..11: valor} }
-  for (const it of fatItems) {
-    if (it.ano !== anoRef || it.mes == null) continue;
+  const map = new Map();
+  for (const it of fatItemsAno) {
+    if (it.mes == null) continue;
     if (!map.has(it.produto)) map.set(it.produto, { nome: it.produto, total: 0, meses: Array(12).fill(0) });
     const o = map.get(it.produto);
     o.total += it.valor;
