@@ -1039,7 +1039,7 @@ node generate-report.cjs --force
 
         <section className="report-section report-conclusion">
           <h2>Conclusão e Recomendações</h2>
-          {renderAnalysis(report.conclusao)}
+          {renderAnalysis(sec('conclusao').analysis)}
         </section>
 
         <footer className="report-footer">
