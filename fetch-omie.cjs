@@ -68,13 +68,12 @@ async function call(p, method, params, retries = 8) {
   return j;
 }
 
-async function fetchAllPaginated(path, method, baseParam, dataKey, label) {
+async function fetchAllPaginated(path, method, baseParam, dataKey, label, opts) {
   // Cache por pagina em disco — script eh REENTRANTE.
-  // Se cair na pagina 100/156, proxima execucao re-usa as 99 ja salvas.
   const cacheDir = path_mod.join(OUT, '_cache', label);
   fs.mkdirSync(cacheDir, { recursive: true });
 
-  const pageFile = (n) => path_mod.join(cacheDir, `page-${String(n).padStart(4, '0')}.json`);
+  const pageFile = (n) => path_mod.join(cacheDir, `page-${String(n).padStart(5, '0')}.json`);
   const readCachedPage = (n) => {
     try {
       const buf = fs.readFileSync(pageFile(n), 'utf8');
@@ -82,15 +81,22 @@ async function fetchAllPaginated(path, method, baseParam, dataKey, label) {
       return Array.isArray(arr) ? arr : null;
     } catch { return null; }
   };
-  const writePage = (n, arr) => {
-    fs.writeFileSync(pageFile(n), JSON.stringify(arr));
-  };
+  const writePage = (n, arr) => fs.writeFileSync(pageFile(n), JSON.stringify(arr));
 
-  // Pega total — se ja tem page-0001 cacheada, ainda precisamos saber total_de_paginas atualizado.
-  // Sempre re-chama pagina 1 pra pegar total atualizado (Omie pode ter ganhado novos registros desde ultimo run).
-  const first = await call(path, method, { ...baseParam, pagina: 1, registros_por_pagina: PAGE_SIZE });
-  const totalPages = first.total_de_paginas || 1;
-  const totalRegs = first.total_de_registros || (first[dataKey] || []).length;
+  // Estilo de pagination — alguns endpoints usam pagina/total_de_paginas (snake),
+  // outros usam nPagina/nTotPaginas (camelCase numerico). Detecta via opts.style.
+  const style = (opts && opts.style) || 'snake';
+  const buildParams = (page, size) => style === 'camel'
+    ? { ...baseParam, nPagina: page, nRegPorPagina: size }
+    : { ...baseParam, pagina: page, registros_por_pagina: size };
+  const readMeta = (resp) => style === 'camel'
+    ? { total: resp.nTotRegistros, pages: resp.nTotPaginas }
+    : { total: resp.total_de_registros, pages: resp.total_de_paginas };
+
+  const first = await call(path, method, buildParams(1, PAGE_SIZE));
+  const meta = readMeta(first);
+  const totalPages = meta.pages || 1;
+  const totalRegs = meta.total || (first[dataKey] || []).length;
   writePage(1, first[dataKey] || []);
   console.log(`  [${label}] ${totalRegs} registros em ${totalPages} paginas`);
 
@@ -98,20 +104,19 @@ async function fetchAllPaginated(path, method, baseParam, dataKey, label) {
     let arr = readCachedPage(p);
     if (!arr) {
       await sleep(PAGE_DELAY_MS);
-      const r = await call(path, method, { ...baseParam, pagina: p, registros_por_pagina: PAGE_SIZE });
+      const r = await call(path, method, buildParams(p, PAGE_SIZE));
       arr = r[dataKey] || [];
       writePage(p, arr);
     }
-    process.stdout.write(`  [${label}] pag ${p}/${totalPages}\r`);
+    if (p % 10 === 0 || p === totalPages) process.stdout.write(`  [${label}] pag ${p}/${totalPages}\r`);
   }
 
-  // Concatena tudo do cache em ordem
   const all = [];
   for (let p = 1; p <= totalPages; p++) {
     const arr = readCachedPage(p) || [];
     all.push(...arr);
   }
-  console.log(`  [${label}] OK ${all.length} registros (de ${totalRegs} esperados)                          `);
+  console.log(`  [${label}] OK ${all.length} registros                                          `);
   return all;
 }
 
@@ -143,17 +148,15 @@ async function fetchAllPaginated(path, method, baseParam, dataKey, label) {
   fs.writeFileSync(path.join(OUT, 'contas_pagar.json'), JSON.stringify(contasPagar, null, 2));
   fs.writeFileSync(path.join(OUT, 'contas_receber.json'), JSON.stringify(contasReceber, null, 2));
 
-  // === Movimentos financeiros (data_pagamento real) — opcional ===
-  console.log('\n=== Movimentos financeiros (data pagamento) ===');
+  // === Movimentos financeiros (ListarMovimentos — fonte canonica do PBI) ===
+  // Schema oficial usado pelo Power BI: { detalhes: {dDtPagamento, cNatureza, cStatus, cGrupo, ...}, resumo: {nValPago, nValLiquido, ...}, departamentos: [...] }
+  // Param exato copiado do M code do PBI da RADKE.
+  console.log('\n=== Movimentos financeiros (ListarMovimentos) ===');
   let movimentos = [];
   try {
     movimentos = await fetchAllPaginated('/financas/mf/', 'ListarMovimentos', {
-      nPagina: 1, nRegPorPagina: PAGE_SIZE,
-      cExibirObs: 'N',
-      cTipoData: 'EMISSAO',
-      dDtInicial: '01/01/2018',
-      dDtFinal: '31/12/2030',
-    }, 'movimentos', 'movimentos').catch((e) => { console.error('  movs erro:', e.message); return []; });
+      cExibirDepartamentos: 'S',
+    }, 'movimentos', 'movimentos', { style: 'camel' }).catch((e) => { console.error('  movs erro:', e.message); return []; });
     fs.writeFileSync(path.join(OUT, 'movimentos.json'), JSON.stringify(movimentos, null, 2));
   } catch (e) {
     console.error('  movs falhou:', e.message);

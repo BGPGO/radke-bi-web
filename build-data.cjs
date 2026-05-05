@@ -597,11 +597,18 @@ window.AVAILABLE_YEARS = AVAILABLE_YEARS;
 window.aggregateTx = aggregateTx;
 window.filterTx = filterTx;
 // getBit: SEMPRE recomputa via recomputeBit (sem cache de window.BIT).
-// Evita lag no toggle Previsto/Realizado e suporta year arbitrario.
-window.getBit = function (statusFilter, drilldown, year) {
+// Evita lag no toggle Previsto/Realizado e suporta year/month arbitrario.
+// month: 0 = ano completo, 1-12 = mes especifico.
+window.getBit = function (statusFilter, drilldown, year, month) {
   const sf = statusFilter || window.BIT_FILTER || 'realizado';
   const y = year || window.REF_YEAR;
-  return window.recomputeBit(sf, drilldown, y);
+  let dd = drilldown;
+  if (!dd && month && month >= 1 && month <= 12) {
+    const mm = String(month).padStart(2, '0');
+    const ym = y + '-' + mm;
+    dd = { type: 'mes', value: ym, label: ym };
+  }
+  return window.recomputeBit(sf, dd, y);
 };
 // Cross-filter helper: combina statusFilter + drilldown e retorna BIT-like
 // com KPIs/charts/extrato recalculados em ~10ms (17k rows).

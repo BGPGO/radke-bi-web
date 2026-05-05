@@ -1,8 +1,8 @@
 /* BIT/BGP Finance — Pages 2: Fluxo, Tesouraria, Comparativo */
 const { useState, useMemo } = React;
 
-const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year }) => {
-  const B = useMemo(() => window.getBit(statusFilter, drilldown, year), [statusFilter, drilldown, year]);
+const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, month }) => {
+  const B = useMemo(() => window.getBit(statusFilter, drilldown, year, month), [statusFilter, drilldown, year, month]);
   const [view, setView] = useState("horizontal");
   const [range, setRange] = useState("12M");
   const months6 = B.MONTHS_FULL.slice(0, 6);
@@ -184,8 +184,8 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
   );
 };
 
-const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year }) => {
-  const B = useMemo(() => window.getBit(statusFilter, drilldown, year), [statusFilter, drilldown, year]);
+const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, month }) => {
+  const B = useMemo(() => window.getBit(statusFilter, drilldown, year, month), [statusFilter, drilldown, year, month]);
   const SEG = window.BIT_SEGMENTS || {};
   const recebido = (SEG.realizado && SEG.realizado.KPIS && SEG.realizado.KPIS.TOTAL_RECEITA) || 0;
   const aReceber = (SEG.a_pagar_receber && SEG.a_pagar_receber.KPIS && SEG.a_pagar_receber.KPIS.TOTAL_RECEITA) || 0;
@@ -282,8 +282,8 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
   );
 };
 
-const PageComparativo = ({ statusFilter, drilldown, setDrilldown, year }) => {
-  const B = useMemo(() => window.getBit(statusFilter, drilldown, year), [statusFilter, drilldown, year]);
+const PageComparativo = ({ statusFilter, drilldown, setDrilldown, year, month }) => {
+  const B = useMemo(() => window.getBit(statusFilter, drilldown, year, month), [statusFilter, drilldown, year, month]);
   const refYear = (B.META && B.META.ref_year) || new Date().getFullYear();
   const lblTrim1 = `${refYear} · Trim 1 (jan-mar)`;
   const lblTrim2 = `${refYear} · Trim 2 (abr-jun)`;

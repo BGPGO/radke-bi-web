@@ -129,8 +129,8 @@ const IndicatorLine = ({ values, labels, height = 240, color = "var(--cyan)", fo
   );
 };
 
-const PageOverview = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year }) => {
-  const B = useMemo(() => window.getBit(statusFilter, drilldown, year), [statusFilter, drilldown, year]);
+const PageOverview = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, month }) => {
+  const B = useMemo(() => window.getBit(statusFilter, drilldown, year, month), [statusFilter, drilldown, year, month]);
   const [indicator, setIndicator] = useState("Valor líquido");
   const refYear = (B.META && B.META.ref_year) || new Date().getFullYear();
   // descobre o indice ativo se o drilldown for de mes (pra destacar a barra)
@@ -255,8 +255,8 @@ const PageOverview = ({ filters, setFilters, onOpenFilters, statusFilter, drilld
   );
 };
 
-const PageIndicators = ({ statusFilter, drilldown, setDrilldown, year }) => {
-  const B = useMemo(() => window.getBit(statusFilter, drilldown, year), [statusFilter, drilldown, year]);
+const PageIndicators = ({ statusFilter, drilldown, setDrilldown, year, month }) => {
+  const B = useMemo(() => window.getBit(statusFilter, drilldown, year, month), [statusFilter, drilldown, year, month]);
   const totalReceita = B.TOTAL_RECEITA;
   const totalDespesa = B.TOTAL_DESPESA;
   const valorLiq = B.VALOR_LIQUIDO;
@@ -335,8 +335,8 @@ const PageIndicators = ({ statusFilter, drilldown, setDrilldown, year }) => {
   );
 };
 
-const PageReceita = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year }) => {
-  const B = useMemo(() => window.getBit(statusFilter, drilldown, year), [statusFilter, drilldown, year]);
+const PageReceita = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, month }) => {
+  const B = useMemo(() => window.getBit(statusFilter, drilldown, year, month), [statusFilter, drilldown, year, month]);
   const mediaMes = B.TOTAL_RECEITA / 12;
   const numClientes = B.RECEITA_CLIENTES.length;
   const ticket = numClientes > 0 ? B.TOTAL_RECEITA / numClientes : 0;
@@ -441,8 +441,8 @@ const PageReceita = ({ filters, setFilters, onOpenFilters, statusFilter, drilldo
   );
 };
 
-const PageDespesa = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year }) => {
-  const B = useMemo(() => window.getBit(statusFilter, drilldown, year), [statusFilter, drilldown, year]);
+const PageDespesa = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, month }) => {
+  const B = useMemo(() => window.getBit(statusFilter, drilldown, year, month), [statusFilter, drilldown, year, month]);
   const totalDespesa = B.TOTAL_DESPESA;
   const mediaMes = totalDespesa / 12;
   const numFornec = B.DESPESA_FORNECEDORES.length;

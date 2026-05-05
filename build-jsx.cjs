@@ -74,6 +74,10 @@ const SOURCES = [
       try { var y = parseInt(localStorage.getItem('radke.year'), 10); return y > 1900 ? y : (window.REF_YEAR || new Date().getFullYear()); } catch (e) { return window.REF_YEAR || new Date().getFullYear(); }
     });
     var year = ys[0], setYear = ys[1];
+    var ms = useState(function () {
+      try { var m = parseInt(localStorage.getItem('radke.month'), 10); return (m >= 0 && m <= 12) ? m : 0; } catch (e) { return 0; }
+    });
+    var month = ms[0], setMonth = ms[1];
 
     useEffect(function () {
       try { localStorage.setItem('radke.statusFilter', statusFilter); } catch (e) {}
@@ -87,6 +91,11 @@ const SOURCES = [
       try { localStorage.setItem('radke.year', String(year)); } catch (e) {}
       setDrilldown(null);
     }, [year]);
+
+    useEffect(function () {
+      try { localStorage.setItem('radke.month', String(month)); } catch (e) {}
+      setDrilldown(null);
+    }, [month]);
 
     var handleSetPage = function (newPage) {
       setPage(newPage);
@@ -121,6 +130,8 @@ const SOURCES = [
             setStatusFilter={setStatusFilter}
             year={year}
             setYear={setYear}
+            month={month}
+            setMonth={setMonth}
           />
           <PageComp
             filters={filters}
@@ -129,6 +140,8 @@ const SOURCES = [
             statusFilter={statusFilter}
             year={year}
             setYear={setYear}
+            month={month}
+            setMonth={setMonth}
             drilldown={drilldown}
             setDrilldown={setDrilldown}
           />

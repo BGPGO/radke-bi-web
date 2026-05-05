@@ -148,8 +148,27 @@ const YearSelect = ({ value, onChange, available }) => {
   );
 };
 
-// Header: breadcrumb + YearSelect + StatusFilter
-const Header = ({ page, onToggleSidebar, statusFilter, setStatusFilter, year, setYear }) => {
+const MONTH_OPTS = [
+  { v: 0, label: "Ano completo" },
+  { v: 1, label: "Janeiro" }, { v: 2, label: "Fevereiro" }, { v: 3, label: "Março" },
+  { v: 4, label: "Abril" }, { v: 5, label: "Maio" }, { v: 6, label: "Junho" },
+  { v: 7, label: "Julho" }, { v: 8, label: "Agosto" }, { v: 9, label: "Setembro" },
+  { v: 10, label: "Outubro" }, { v: 11, label: "Novembro" }, { v: 12, label: "Dezembro" },
+];
+
+const MonthSelect = ({ value, onChange }) => (
+  <select
+    className="header-year"
+    value={value || 0}
+    onChange={e => onChange(Number(e.target.value))}
+    title="Mês de referência (Ano completo = todos)"
+  >
+    {MONTH_OPTS.map(o => <option key={o.v} value={o.v}>{o.label}</option>)}
+  </select>
+);
+
+// Header: breadcrumb + YearSelect + MonthSelect + StatusFilter
+const Header = ({ page, onToggleSidebar, statusFilter, setStatusFilter, year, setYear, month, setMonth }) => {
   return (
     <header className="header">
       <button className="hd-icon-btn hd-menu-btn" title="Menu" onClick={onToggleSidebar}><Icon name="menu" /></button>
@@ -162,6 +181,7 @@ const Header = ({ page, onToggleSidebar, statusFilter, setStatusFilter, year, se
       </div>
       <div style={{ flex: 1 }} />
       {setYear && <YearSelect value={year} onChange={setYear} available={window.AVAILABLE_YEARS} />}
+      {setMonth && <MonthSelect value={month} onChange={setMonth} />}
       {setStatusFilter && <StatusFilterSeg value={statusFilter} onChange={setStatusFilter} />}
     </header>
   );
