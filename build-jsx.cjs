@@ -96,20 +96,59 @@ const SOURCES = [
     }, []);
     useEffect(function () {
       if (!printPages) return;
-      // 2 frames pra garantir que as 16 paginas pintaram com seus dados
-      var rafA = requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          setTimeout(function () {
-            window.print();
-            // limpa apos print (com pequeno delay pra que o dialog feche primeiro)
-            setTimeout(function () {
-              document.body.classList.remove('bi-print-mode');
-              setPrintPages(null);
-            }, 500);
-          }, 200);
+      var cancelled = false;
+      var waitReady = function () {
+        // 1) fonts
+        var fontsP = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+        // 2) imagens (todas as <img> do bi-print-root tem que ter terminado)
+        var imgsP = new Promise(function (resolve) {
+          var imgs = Array.prototype.slice.call(document.querySelectorAll('.bi-print-root img'));
+          var pending = imgs.filter(function (i) { return !i.complete; });
+          if (pending.length === 0) return resolve();
+          var done = 0;
+          pending.forEach(function (i) {
+            var fin = function () { done++; if (done >= pending.length) resolve(); };
+            i.addEventListener('load', fin, { once: true });
+            i.addEventListener('error', fin, { once: true });
+          });
+          // safety net
+          setTimeout(resolve, 5000);
         });
-      });
-      return function () { cancelAnimationFrame(rafA); };
+        // 3) PageRelatorio: se foi incluído no export, esperar até ele renderizar conteudo
+        //    (carrega async via fetch). Damos até 30s, polling a cada 200ms.
+        var hasRelatorio = printPages.indexOf('relatorio') !== -1;
+        var relatorioP = !hasRelatorio ? Promise.resolve() : new Promise(function (resolve) {
+          var deadline = Date.now() + 30000;
+          var poll = function () {
+            if (cancelled) return resolve();
+            // Sinal: PageRelatorio renderizou .report-cover OU mensagem de erro/help
+            var rendered = document.querySelector('.bi-print-root .report-cover')
+              || document.querySelector('.bi-print-root .report');
+            if (rendered) return resolve();
+            if (Date.now() > deadline) return resolve();
+            setTimeout(poll, 200);
+          };
+          poll();
+        });
+        Promise.all([fontsP, imgsP, relatorioP]).then(function () {
+          if (cancelled) return;
+          // 2 frames pra garantir reflow final + 400ms pra layout estabilizar
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              setTimeout(function () {
+                if (cancelled) return;
+                window.print();
+                setTimeout(function () {
+                  document.body.classList.remove('bi-print-mode');
+                  setPrintPages(null);
+                }, 800);
+              }, 400);
+            });
+          });
+        });
+      };
+      waitReady();
+      return function () { cancelled = true; };
     }, [printPages]);
 
     useEffect(function () {

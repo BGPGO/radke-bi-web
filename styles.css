@@ -2699,8 +2699,59 @@ table.t tr.total td {
   }
   body.bi-print-mode .actions, body.bi-print-mode .no-print { display: none !important; }
   body.bi-print-mode .bi-print-root { display: block !important; }
-  body.bi-print-mode .bi-print-page { background: var(--bg) !important; padding: 14mm 10mm !important; }
+  body.bi-print-mode .bi-print-page {
+    background: var(--bg) !important;
+    padding: 14mm 10mm !important;
+    page-break-after: always;
+    page-break-inside: auto;
+  }
+  body.bi-print-mode .bi-print-page:last-child { page-break-after: auto; }
+  body.bi-print-mode .bi-print-header {
+    page-break-inside: avoid;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  /* Reset sticky thead — em multi-page export sticky vaza pra próxima página */
+  body.bi-print-mode table.t th {
+    position: static !important;
+    box-shadow: none !important;
+  }
+  /* Permite quebra de tabela mas evita quebra DENTRO de uma linha + repete thead */
+  body.bi-print-mode table.t {
+    page-break-inside: auto;
+    break-inside: auto;
+  }
+  body.bi-print-mode table.t thead {
+    display: table-header-group;
+  }
+  body.bi-print-mode table.t tr {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  /* Libera scroll containers — print precisa ver tudo, não só o viewport visível */
+  body.bi-print-mode .t-scroll {
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  /* Cards não quebram no meio (mas se forem grandes demais, deixa) */
+  body.bi-print-mode .card { break-inside: auto; page-break-inside: auto; }
+  body.bi-print-mode .kpi-row, body.bi-print-mode .row {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
   @page { size: A4; margin: 8mm; }
+}
+
+/* Escopa o @media print legado (Relatório IA standalone) pra não interferir
+   no multi-page BI export — só aplica quando NÃO está em bi-print-mode */
+@media print {
+  body:not(.bi-print-mode) .sidebar,
+  body:not(.bi-print-mode) .sidebar-backdrop,
+  body:not(.bi-print-mode) .header,
+  body:not(.bi-print-mode) .report-toolbar,
+  body:not(.bi-print-mode) .no-print,
+  body:not(.bi-print-mode) .drawer-overlay,
+  body:not(.bi-print-mode) .drawer { display: none !important; }
 }
 
 /* ===== CRM metas (barras horizontais) ===== */

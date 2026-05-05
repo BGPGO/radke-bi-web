@@ -569,6 +569,7 @@ function aggregateTx(txList, year) {
   const recCat = new Map(), despCat = new Map();
   const recCli = new Map(), despForn = new Map();
   const extratoArr = [];
+  const extratoRecArr = [], extratoDespArr = [];
   let totalReceita = 0, totalDespesa = 0;
 
   for (const row of txList) {
@@ -591,15 +592,20 @@ function aggregateTx(txList, year) {
     }
     // Extrato compacto pra tabela
     const dataStr = String(dia).padStart(2,'0') + '/' + mes.slice(5,7) + '/' + mes.slice(0,4);
-    extratoArr.push([dataStr, cc || 'Operações', categoria, kind === 'r' ? cliente : fornecedor, kind === 'r' ? valor : -valor, realizado ? 'PAGO' : '']);
+    const row = [dataStr, cc || 'Operações', categoria, kind === 'r' ? cliente : fornecedor, kind === 'r' ? valor : -valor, realizado ? 'PAGO' : ''];
+    extratoArr.push(row);
+    if (kind === 'r') extratoRecArr.push(row); else extratoDespArr.push(row);
   }
 
-  // sort extrato por data desc (string DD/MM/YYYY → Date)
-  extratoArr.sort((a, b) => {
+  // sort por data desc (string DD/MM/YYYY → Date) — aplica nos 3 arrays
+  const sortByDateDesc = (a, b) => {
     const [da,ma,ya] = a[0].split('/').map(Number);
     const [db,mb,yb] = b[0].split('/').map(Number);
     return new Date(yb,mb-1,db) - new Date(ya,ma-1,da);
-  });
+  };
+  extratoArr.sort(sortByDateDesc);
+  extratoRecArr.sort(sortByDateDesc);
+  extratoDespArr.sort(sortByDateDesc);
 
   const topN = (mp, n) => Array.from(mp.entries()).map(([name,value]) => ({name,value})).sort((a,b)=>b.value-a.value).slice(0,n);
   const VALOR_LIQUIDO = totalReceita - totalDespesa;
@@ -612,6 +618,8 @@ function aggregateTx(txList, year) {
     RECEITA_CLIENTES: topN(recCli, 12),
     DESPESA_FORNECEDORES: topN(despForn, 12),
     EXTRATO: extratoArr.slice(0, 200),
+    EXTRATO_RECEITAS: extratoRecArr.slice(0, 200),
+    EXTRATO_DESPESAS: extratoDespArr.slice(0, 200),
     KPIS: {
       TOTAL_RECEITA: totalReceita,
       TOTAL_DESPESA: totalDespesa,

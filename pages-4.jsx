@@ -364,42 +364,66 @@ const PageDetalhado = ({ statusFilter, year, month, drilldown, setDrilldown }) =
   }
   const F = E.faturamento;
   const A = E.abc;
+  const items = F.items || [];
 
-  const familias = useMemo(() => F.porFamilia.slice(0, 10), [F.porFamilia]);
+  // Filtro reativo por mês do header (year fixo no anoRef do faturamento)
+  const monthIdxFiltered = (month && month > 0) ? (month - 1) : null;
+  const monthsAbbr = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
+
+  const itemsFiltered = useMemo(() => {
+    return items.filter(it => {
+      if (monthIdxFiltered != null && it.mes !== monthIdxFiltered) return false;
+      return true;
+    });
+  }, [items, monthIdxFiltered]);
+
+  // Recomputa familia x valor e cliente x valor a partir dos items filtrados
+  const aggBy = (arr, keyFn) => {
+    const m = new Map();
+    for (const it of arr) {
+      const k = keyFn(it) || 'Sem categoria';
+      m.set(k, (m.get(k) || 0) + it.valor);
+    }
+    return [...m.entries()].map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value);
+  };
+
+  const familias = useMemo(() => aggBy(itemsFiltered, x => x.familia).slice(0, 10), [itemsFiltered]);
   const totalFamilias = familias.reduce((s, x) => s + x.value, 0);
-
-  const clientes = useMemo(() => F.porCliente.slice(0, 14), [F.porCliente]);
+  const clientes = useMemo(() => aggBy(itemsFiltered, x => x.cliente).slice(0, 14), [itemsFiltered]);
   const totalClientes = clientes.reduce((s, x) => s + x.value, 0);
 
-  const monthsAbbr = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
-  const refMonth = (typeof window !== "undefined" && window.REF_MONTH) || (new Date().getMonth() + 1);
-  const monthsToShow = monthsAbbr.slice(0, Math.min(refMonth, 12));
+  // Meses pra mostrar = só os com dados nos items filtrados
+  const monthsToShowIdx = useMemo(() => {
+    const set = new Set();
+    itemsFiltered.forEach(it => { if (it.mes != null) set.add(it.mes); });
+    return [...set].sort((a, b) => a - b);
+  }, [itemsFiltered]);
+  const monthsToShow = monthsToShowIdx.map(i => monthsAbbr[i]);
 
+  // Top 30 produtos por valor (com ABC class do extras + qtd e meses REAIS)
   const produtos = useMemo(() => {
-    return A.rows.slice(0, 30).map(p => {
-      const totalQtd = p.qtdFaturada || 0;
-      const totalValor = p.valorFaturado || 0;
-      const valorUnit = totalQtd > 0 ? totalValor / totalQtd : 0;
-      const totalMesAcum = F.porMes.reduce((s, m) => s + (m.valor || 0), 0) || 1;
-      const meses = monthsAbbr.slice(0, monthsToShow.length).map((_, i) => {
-        const fm = F.porMes[i];
-        const ratio = ((fm && fm.valor) || 0) / totalMesAcum;
-        return Math.round(totalQtd * ratio);
-      });
-      return {
-        descricao: p.descricao,
-        codigo: p.codigo,
-        familia: p.familia,
-        abc: (p.abc || "").charAt(0).toUpperCase(),
-        qtd: totalQtd,
-        valorUnit,
-        faturamento: totalValor,
-        meses,
-      };
-    });
-  }, [A.rows, F.porMes, monthsToShow.length]);
+    const byProduct = new Map();
+    for (const it of itemsFiltered) {
+      const k = it.produto;
+      if (!k) continue;
+      if (!byProduct.has(k)) byProduct.set(k, { descricao: k, familia: it.familia, qtd: 0, faturamento: 0, meses: Array(12).fill(0) });
+      const o = byProduct.get(k);
+      o.qtd += it.qtd || 0;
+      o.faturamento += it.valor;
+      if (it.mes != null) o.meses[it.mes] += it.qtd || 0;
+    }
+    // Mapeia ABC class de A.rows pelo nome do produto
+    const abcByName = new Map(A.rows.map(p => [p.descricao, p.abc]));
+    return [...byProduct.values()]
+      .map(p => ({
+        ...p,
+        valorUnit: p.qtd > 0 ? p.faturamento / p.qtd : 0,
+        abc: (abcByName.get(p.descricao) || "").charAt(0).toUpperCase(),
+      }))
+      .sort((a, b) => b.faturamento - a.faturamento)
+      .slice(0, 30);
+  }, [itemsFiltered, A.rows]);
 
-  // Max para escala dos bar lists
   const maxFamilia = Math.max(...familias.map(x => x.value), 1);
   const maxCliente = Math.max(...clientes.map(x => x.value), 1);
 
@@ -492,7 +516,8 @@ const PageDetalhado = ({ statusFilter, year, month, drilldown, setDrilldown }) =
             </thead>
             <tbody>
               {produtos.map((p, i) => {
-                const totalMeses = p.meses.reduce((s, x) => s + x, 0);
+                const qtdMonths = monthsToShowIdx.map(idx => p.meses[idx] || 0);
+                const totalMeses = qtdMonths.reduce((s, x) => s + x, 0);
                 return (
                   <tr key={i}>
                     <td>
@@ -505,7 +530,7 @@ const PageDetalhado = ({ statusFilter, year, month, drilldown, setDrilldown }) =
                     <td className="num">{_fmtInt4(p.qtd)}</td>
                     <td className="num">R$ {_fmtBR4(p.valorUnit)}</td>
                     <td className="num rd-fat-col">R$ {_fmtBR4(p.faturamento)}</td>
-                    {p.meses.map((q, mi) => (
+                    {qtdMonths.map((q, mi) => (
                       <td key={mi} className="num">{_fmtInt4(q)}</td>
                     ))}
                     <td className="num">{_fmtInt4(totalMeses)}</td>
@@ -517,10 +542,10 @@ const PageDetalhado = ({ statusFilter, year, month, drilldown, setDrilldown }) =
                 <td className="num">{_fmtInt4(produtos.reduce((s, p) => s + p.qtd, 0))}</td>
                 <td className="num">—</td>
                 <td className="num rd-fat-col">R$ {_fmtBR4(produtos.reduce((s, p) => s + p.faturamento, 0))}</td>
-                {monthsToShow.map((_, mi) => (
-                  <td key={mi} className="num">{_fmtInt4(produtos.reduce((s, p) => s + (p.meses[mi] || 0), 0))}</td>
+                {monthsToShowIdx.map((idx, mi) => (
+                  <td key={mi} className="num">{_fmtInt4(produtos.reduce((s, p) => s + (p.meses[idx] || 0), 0))}</td>
                 ))}
-                <td className="num">{_fmtInt4(produtos.reduce((s, p) => s + p.meses.reduce((a, b) => a + b, 0), 0))}</td>
+                <td className="num">{_fmtInt4(produtos.reduce((s, p) => s + monthsToShowIdx.reduce((a, idx) => a + (p.meses[idx] || 0), 0), 0))}</td>
               </tr>
             </tbody>
           </table>

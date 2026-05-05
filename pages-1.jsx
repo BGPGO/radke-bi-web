@@ -357,8 +357,9 @@ const PageReceita = ({ filters, setFilters, onOpenFilters, statusFilter, drilldo
   const activeCategoria = (drilldown && drilldown.type === "categoria") ? drilldown.value : null;
   const activeCliente = (drilldown && drilldown.type === "cliente") ? drilldown.value : null;
 
-  // Extrato filtrado de receitas (so positivos)
-  const extratoReceitas = B.EXTRATO.filter(e => e[4] > 0);
+  // Extrato filtrado de receitas (usa EXTRATO_RECEITAS pre-separado pelo build,
+  // fallback pro filtro inline pra compat com BIT base)
+  const extratoReceitas = B.EXTRATO_RECEITAS || B.EXTRATO.filter(e => e[4] > 0);
   const extratoFiltrado = window.applyDrilldown(extratoReceitas, drilldown);
   const totalFiltrado = drilldown
     ? extratoFiltrado.reduce((s, e) => s + e[4], 0)
@@ -460,8 +461,8 @@ const PageDespesa = ({ filters, setFilters, onOpenFilters, statusFilter, drilldo
   const activeCategoria = (drilldown && drilldown.type === "categoria") ? drilldown.value : null;
   const activeFornecedor = (drilldown && drilldown.type === "fornecedor") ? drilldown.value : null;
 
-  // Extrato filtrado de despesas (so negativos)
-  const extratoDespesas = B.EXTRATO.filter(e => e[4] < 0);
+  // Extrato filtrado de despesas (usa EXTRATO_DESPESAS pre-separado, fallback inline)
+  const extratoDespesas = B.EXTRATO_DESPESAS || B.EXTRATO.filter(e => e[4] < 0);
   const extratoFiltrado = window.applyDrilldown(extratoDespesas, drilldown);
   const totalFiltrado = drilldown
     ? Math.abs(extratoFiltrado.reduce((s, e) => s + e[4], 0))
