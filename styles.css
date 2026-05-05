@@ -2228,3 +2228,351 @@ table.t tr.total td {
   .crm-meta-box { flex: 1 1 calc(50% - 6px); min-height: auto; }
   .hier-cols-header { grid-template-columns: repeat(2, 1fr); gap: 16px; }
 }
+
+/* ============================================================
+   FATURAMENTO POR PRODUTO + MARKETING ADS — namespaces .fat-* / .mkt-*
+   Telas refeitas pra ficar fiéis aos prints PBI (laranja #ff6b18).
+   ============================================================ */
+
+/* ----- Filtros header (compartilhado fat / mkt) ----- */
+.fat-filters,
+.mkt-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin-bottom: 18px;
+  padding: 14px 18px;
+  background: rgba(8, 14, 18, 0.6);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+.fat-filter,
+.mkt-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.fat-filter span,
+.mkt-filter span {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--mute);
+  font-weight: 600;
+}
+.fat-filter .filter-select,
+.mkt-filter .filter-select { width: 100%; }
+
+/* ============================================================
+   FATURAMENTO POR PRODUTO
+   ============================================================ */
+
+.fat-row-1 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.fat-row-2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 14px;
+}
+.fat-col-rankings {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 14px;
+}
+
+/* Métricas Gerais (KPI bloco esquerda) */
+.fat-metricas { padding: 22px 24px; }
+.fat-metricas-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--mute);
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+.fat-metricas-grid {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  gap: 18px;
+}
+.fat-metric { display: flex; flex-direction: column; gap: 4px; }
+.fat-metric-label {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--mute);
+  font-weight: 600;
+}
+.fat-metric-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.025em;
+  font-feature-settings: "tnum" 1;
+  line-height: 1.05;
+}
+
+/* Vertical bars laranja — usado em "VENDAS POR ANÚNCIO" */
+.fat-vbars {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 30px 8px 0;
+  position: relative;
+}
+.fat-vbar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  height: 100%;
+  justify-content: flex-end;
+  gap: 6px;
+}
+.fat-vbar-stack {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+  position: relative;
+}
+.fat-vbar-bar {
+  width: 70%;
+  max-width: 38px;
+  min-height: 3px;
+  border-radius: 3px 3px 0 0;
+  transition: filter 150ms;
+  box-shadow: 0 0 14px -6px rgba(255, 107, 24, 0.6);
+}
+.fat-vbar-col:hover .fat-vbar-bar { filter: brightness(1.15); }
+.fat-vbar-val {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--text-2);
+  white-space: nowrap;
+}
+.fat-vbar-x {
+  font-size: 9.5px;
+  color: var(--mute);
+  text-align: center;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Bar list horizontal laranja (RANKING POR PRODUTO / VENDEDOR) */
+.fat-barlist { display: flex; flex-direction: column; gap: 12px; }
+.fat-barrow { display: grid; grid-template-columns: 130px 1fr; gap: 12px; align-items: center; }
+.fat-barrow-label {
+  font-size: 11.5px;
+  color: var(--text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right;
+  font-weight: 500;
+}
+.fat-barrow-track {
+  position: relative;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
+  overflow: visible;
+}
+.fat-barrow-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 250ms ease-out;
+  box-shadow: 0 0 14px -6px rgba(255, 107, 24, 0.5);
+}
+.fat-barrow-val {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(calc(100% + 8px), -50%);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Matriz produtos × mês */
+.fat-matriz { padding: 18px; }
+.fat-matriz-tbl th,
+.fat-matriz-tbl td { font-size: 11.5px; padding: 8px 10px; }
+.fat-matriz-tbl th { font-size: 9.5px; }
+
+/* ============================================================
+   MARKETING ADS
+   ============================================================ */
+
+/* 4 KPI tiles em linha (CUSTOS / CLIQUES / IMPRESSÕES / IMPACTO) */
+.mkt-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.mkt-kpi {
+  background: rgba(8, 14, 18, 0.78);
+  border: 1px solid rgba(255, 107, 24, 0.18);
+  border-radius: 16px;
+  padding: 18px 22px;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 12px 28px -16px rgba(0, 0, 0, 0.7);
+}
+.mkt-kpi::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(420px 220px at 100% 0%, rgba(255, 107, 24, 0.16), transparent 62%);
+  pointer-events: none;
+}
+.mkt-kpi > * { position: relative; }
+.mkt-kpi-label {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--mute);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.mkt-kpi-value {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--text);
+  font-feature-settings: "tnum" 1;
+}
+.mkt-kpi-orange { color: #ff6b18; }
+.mkt-kpi-sub {
+  font-size: 11px;
+  color: var(--mute);
+  margin-top: 8px;
+  letter-spacing: 0.02em;
+}
+.mkt-kpi-sub b { color: var(--text-2); font-weight: 600; }
+
+/* Linha CPM × Valor Investido + Cliques por Campanha */
+.mkt-row-1 {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.mkt-cpm-card { padding: 18px 20px 12px; }
+.mkt-cliques-card { padding: 18px 20px; }
+.mkt-leads-card { padding: 18px 20px; }
+
+/* Bar list horizontal laranja (CLIQUES POR CAMPANHA) */
+.mkt-barlist { display: flex; flex-direction: column; gap: 12px; }
+.mkt-barrow { display: grid; grid-template-columns: 130px 1fr; gap: 12px; align-items: center; }
+.mkt-barrow-label {
+  font-size: 11px;
+  color: var(--text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right;
+  font-weight: 500;
+}
+.mkt-barrow-track {
+  position: relative;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
+}
+.mkt-barrow-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 250ms ease-out;
+  box-shadow: 0 0 14px -6px rgba(255, 107, 24, 0.5);
+}
+.mkt-barrow-val {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(calc(100% + 8px), -50%);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Vertical bars (LEADS POR ANÚNCIO) */
+.mkt-vbars {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  padding: 30px 14px 0;
+}
+.mkt-vbar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+  gap: 6px;
+  position: relative;
+  min-width: 0;
+}
+.mkt-vbar-bar {
+  width: 60%;
+  max-width: 44px;
+  min-height: 4px;
+  border-radius: 3px 3px 0 0;
+  background: #ff6b18;
+  box-shadow: 0 0 16px -6px rgba(255, 107, 24, 0.7);
+  transition: filter 150ms;
+}
+.mkt-vbar-col:hover .mkt-vbar-bar { filter: brightness(1.15); }
+.mkt-vbar-val {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text);
+  white-space: nowrap;
+  font-weight: 600;
+}
+.mkt-vbar-x {
+  font-size: 9.5px;
+  color: var(--mute);
+  text-align: center;
+  line-height: 1.1;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ----- Responsivo ----- */
+@media (max-width: 1100px) {
+  .fat-row-1, .fat-row-2, .mkt-row-1 { grid-template-columns: 1fr; }
+  .mkt-kpis { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .mkt-kpis { grid-template-columns: 1fr; }
+  .mkt-kpi-value { font-size: 24px; }
+  .fat-metric-value { font-size: 22px; }
+  .fat-barrow, .mkt-barrow { grid-template-columns: 90px 1fr; }
+  .fat-barrow-label, .mkt-barrow-label { font-size: 10px; }
+}

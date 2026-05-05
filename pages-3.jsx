@@ -427,8 +427,130 @@ const PageCurvaABC = ({ drilldown, setDrilldown }) => {
 };
 
 // ============================================================
-// PageMarketing — replica "Análise Profunda" (Facebook ADS) do PBIX
+// PageMarketing — replica "Analise Profunda" (Facebook ADS) do PBIX
+// (laranja primario #ff6b18, layout fiel ao print)
 // ============================================================
+
+// Bar list horizontal laranja para campanhas (cliques)
+const MktBarList = ({ items, color = ORANGE, formatter = (v) => formatInt(v) }) => {
+  if (!items.length) return <div className="status-line">Sem dados.</div>;
+  const max = Math.max(...items.map(it => it.value)) || 1;
+  return (
+    <div className="mkt-barlist">
+      {items.map((it, i) => {
+        const w = (it.value / max) * 100;
+        return (
+          <div key={i} className="mkt-barrow">
+            <div className="mkt-barrow-label" title={it.name}>{it.name}</div>
+            <div className="mkt-barrow-track">
+              <div className="mkt-barrow-fill" style={{ width: `${w}%`, background: color }} />
+              <div className="mkt-barrow-val">{formatter(it.value)}</div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+// Vertical bars (leads por anuncio) — coluna laranja, label vertical embaixo, valor acima
+const MktVerticalBars = ({ items, height = 240, formatter = (v) => formatInt(v) }) => {
+  if (!items.length) return <div className="status-line">Sem dados.</div>;
+  const max = Math.max(...items.map(it => it.value)) || 1;
+  return (
+    <div className="mkt-vbars" style={{ height }}>
+      {items.map((it, i) => {
+        const h = Math.max((it.value / max) * 100, 1);
+        return (
+          <div key={i} className="mkt-vbar-col" title={`${it.name}: ${formatter(it.value)}`}>
+            <span className="mkt-vbar-val">{formatter(it.value)}</span>
+            <div className="mkt-vbar-bar" style={{ height: `${h}%` }} />
+            <span className="mkt-vbar-x" title={it.name}>{it.name.length > 12 ? it.name.slice(0, 12) + "…" : it.name}</span>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+// CPM × Valor Investido — line + dashed area chart (sem date column real, plota por campanha)
+const MktCpmChart = ({ campanhas, height = 260 }) => {
+  if (!campanhas.length) return <div className="status-line">Sem dados.</div>;
+  const w = 1000, h = height;
+  const padX = 50, padTop = 26, padBottom = 50;
+  const cpmVals = campanhas.map(c => c.cpm || 0);
+  const valVals = campanhas.map(c => c.valorBRL || 0);
+  const cpmMax = Math.max(...cpmVals) * 1.1 || 1;
+  const valMax = Math.max(...valVals) * 1.1 || 1;
+  const stepX = (w - padX * 2) / Math.max(1, campanhas.length - 1);
+
+  const cpmPts = cpmVals.map((v, i) => [
+    padX + i * stepX,
+    padTop + (1 - v / cpmMax) * (h - padTop - padBottom),
+  ]);
+  const valPts = valVals.map((v, i) => [
+    padX + i * stepX,
+    padTop + (1 - v / valMax) * (h - padTop - padBottom),
+  ]);
+
+  const lineCpm = cpmPts.map((p, i) => `${i === 0 ? "M" : "L"} ${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(" ");
+  const lineVal = valPts.map((p, i) => `${i === 0 ? "M" : "L"} ${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(" ");
+  const baseY = h - padBottom;
+  const areaCpm = lineCpm + ` L ${cpmPts[cpmPts.length - 1][0]} ${baseY} L ${cpmPts[0][0]} ${baseY} Z`;
+
+  // y axis ticks (lado esquerdo = CPM)
+  const ticks = 5;
+  const tickVals = Array.from({ length: ticks }, (_, i) => (cpmMax / (ticks - 1)) * i);
+
+  return (
+    <svg className="mkt-cpm-svg" viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" style={{ height, width: "100%" }}>
+      <defs>
+        <linearGradient id="mkt-cpm-area" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={ORANGE} stopOpacity="0.30" />
+          <stop offset="100%" stopColor={ORANGE} stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      {tickVals.map((tv, i) => {
+        const y = padTop + (1 - tv / cpmMax) * (h - padTop - padBottom);
+        return (
+          <g key={i}>
+            <line x1={padX} y1={y} x2={w - 10} y2={y} stroke="rgba(255,255,255,0.04)" strokeDasharray="3 4" />
+            <text x={padX - 8} y={y + 3} textAnchor="end" fontSize="10" fill="var(--mute)">
+              {tv.toFixed(1).replace(".", ",")}
+            </text>
+          </g>
+        );
+      })}
+      {/* área de CPM (cyan-ish base translúcida) */}
+      <path d={areaCpm} fill="url(#mkt-cpm-area)" />
+      <path d={lineCpm} fill="none" stroke={ORANGE} strokeWidth="2.2" strokeLinejoin="round" strokeLinecap="round" />
+      {/* linha tracejada VALOR INVESTIDO */}
+      <path d={lineVal} fill="none" stroke="var(--cyan)" strokeWidth="2" strokeDasharray="6 4" strokeLinejoin="round" strokeLinecap="round" />
+      {/* pontos CPM */}
+      {cpmPts.map((p, i) => (
+        <circle key={"c" + i} cx={p[0]} cy={p[1]} r="3.5" fill={ORANGE} stroke="#0b0f14" strokeWidth="1.5" />
+      ))}
+      {/* labels eixo X (campanhas) */}
+      {campanhas.map((c, i) => {
+        const x = padX + i * stepX;
+        const label = c.campanha.length > 14 ? c.campanha.slice(0, 14) + "…" : c.campanha;
+        return (
+          <text key={"x" + i} x={x} y={h - 16} textAnchor="middle" fontSize="9" fill="var(--mute)">
+            {label}
+          </text>
+        );
+      })}
+      {/* legenda */}
+      <g transform={`translate(${padX}, 12)`}>
+        <line x1="0" y1="0" x2="18" y2="0" stroke={ORANGE} strokeWidth="2.2" />
+        <text x="24" y="3" fontSize="10" fill="var(--text-2)">CPM</text>
+        <line x1="80" y1="0" x2="98" y2="0" stroke="var(--cyan)" strokeWidth="2" strokeDasharray="6 4" />
+        <text x="104" y="3" fontSize="10" fill="var(--text-2)">Valor Investido</text>
+      </g>
+    </svg>
+  );
+};
+
 const PageMarketing = ({ drilldown, setDrilldown }) => {
   const E = (typeof window !== "undefined" && window.BIT_RADKE_EXTRAS) || null;
   if (!E || !E.ads) {
@@ -442,27 +564,60 @@ const PageMarketing = ({ drilldown, setDrilldown }) => {
   const M = E.ads;
   const T = M.totais;
 
-  const [activeCamp, setActiveCamp] = useState(null);
+  // Filtros locais (visuais)
+  const [fData, setFData] = useState("Todos");
+  const [fTipo, setFTipo] = useState("Todos");
+  const [fCamp, setFCamp] = useState("Todos");
+  const [fAnuncio, setFAnuncio] = useState("Todos");
 
-  // detalhe da campanha selecionada (ou null = todas)
-  const detalhe = useMemo(() => {
-    if (!activeCamp) return M.rows;
-    return M.rows.filter(r => r.campanha === activeCamp);
-  }, [activeCamp, M.rows]);
+  const campanhasOpts = useMemo(() => ["Todos", ...M.campanhasAgg.map(c => c.campanha)], [M.campanhasAgg]);
+  const anuncioOpts = useMemo(() => {
+    const set = new Set(M.rows.map(r => r.anuncio).filter(a => a && a !== "All"));
+    return ["Todos", ...Array.from(set)];
+  }, [M.rows]);
 
-  const handleCampClick = (it) => {
-    const newName = it.campanha;
-    setActiveCamp(activeCamp === newName ? null : newName);
-  };
+  // Métricas globais derivadas (igual ao print)
+  const cpmGlobal = T.cpmMedio || 0;
+  const cpcGlobal = T.cpcMedio || 0;
+  const freqGlobal = T.alcanceTotal > 0 ? T.impressoesTotal / T.alcanceTotal : 0;
+  // "Impacto" no print parece ser "Resultados" — valor 27.985,61 (sugere R$ × algo).
+  // Aproximamos com gastoTotal / leads ou similar. Vamos exibir resultadosTotal.
+  const impactoVal = T.resultadosTotal || 0;
 
-  // bar list de campanhas (top por gasto)
-  const barCampanhas = M.campanhasAgg.map(c => ({ name: c.campanha, value: c.valorBRL }));
+  // Top 6 campanhas por cliques
+  const topCampCliques = useMemo(() => {
+    return M.campanhasAgg
+      .slice()
+      .sort((a, b) => b.cliques - a.cliques)
+      .slice(0, 6)
+      .map(c => ({ name: c.campanha, value: c.cliques }));
+  }, [M.campanhasAgg]);
+
+  // Leads por anúncio — top 8 anuncios por leads (ou cliques se leads zerado)
+  const leadsPorAnuncio = useMemo(() => {
+    // agrega por anuncio
+    const byAd = new Map();
+    for (const r of M.rows) {
+      if (!r.anuncio || r.anuncio === "All") continue;
+      const k = r.anuncio;
+      if (!byAd.has(k)) byAd.set(k, { name: k, leads: 0, cliques: 0 });
+      const o = byAd.get(k);
+      o.leads += r.leads || 0;
+      o.cliques += r.cliques || 0;
+    }
+    const arr = Array.from(byAd.values());
+    const useLeads = arr.some(x => x.leads > 0);
+    return arr
+      .map(x => ({ name: x.name, value: useLeads ? x.leads : x.cliques }))
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 8);
+  }, [M.rows]);
 
   return (
     <div className="page">
       <div className="page-title">
         <div>
-          <h1>Marketing — Facebook ADS</h1>
+          <h1>Análise Profunda — Marketing ADS</h1>
           <div className="status-line">{T.numCampanhas} campanhas · gasto total R$ {formatBR(T.gastoTotal)}</div>
         </div>
         <div className="actions">
@@ -470,101 +625,80 @@ const PageMarketing = ({ drilldown, setDrilldown }) => {
         </div>
       </div>
 
-      {activeCamp && (
-        <div className="drilldown-badge">
-          <span className="dd-label">Campanha: <b>{activeCamp}</b></span>
-          <button className="dd-clear" onClick={() => setActiveCamp(null)}>× Limpar</button>
-        </div>
-      )}
-
-      <div className="kpi-row">
-        <MiniKpi tone="amber" label="Gasto Total" value={formatBR(T.gastoTotal)} hint={`${T.numCampanhas} campanhas`} />
-        <MiniKpi tone="cyan"  label="Alcance" value={formatInt(T.alcanceTotal)} nonMonetary hint="pessoas atingidas" />
-        <MiniKpi tone="cyan"  label="Impressoes" value={formatInt(T.impressoesTotal)} nonMonetary hint={`freq ${T.alcanceTotal > 0 ? (T.impressoesTotal / T.alcanceTotal).toFixed(2).replace(".", ",") : "0"}`} />
-        <MiniKpi tone="green" label="Cliques no link" value={formatInt(T.cliquesTotal)} nonMonetary hint={`CTR ${T.ctrMedio.toFixed(2).replace(".", ",")}%`} />
-        <MiniKpi tone="green" label="Resultados" value={formatInt(T.resultadosTotal)} nonMonetary hint={`CPM ${formatBR(T.cpmMedio)}`} />
+      {/* ===== Header de filtros (4 dropdowns) ===== */}
+      <div className="mkt-filters">
+        <label className="mkt-filter">
+          <span>Data início</span>
+          <select className="filter-select" value={fData} onChange={e => setFData(e.target.value)}>
+            <option>Todos</option>
+            <option>Últ 7 dias</option>
+            <option>Últ 30 dias</option>
+            <option>Últ 90 dias</option>
+          </select>
+        </label>
+        <label className="mkt-filter">
+          <span>Tipo de Resultado</span>
+          <select className="filter-select" value={fTipo} onChange={e => setFTipo(e.target.value)}>
+            <option>Todos</option>
+            <option>Leads</option>
+            <option>Cliques</option>
+            <option>Engajamento</option>
+          </select>
+        </label>
+        <label className="mkt-filter">
+          <span>Campanhas</span>
+          <select className="filter-select" value={fCamp} onChange={e => setFCamp(e.target.value)}>
+            {campanhasOpts.map(o => <option key={o}>{o}</option>)}
+          </select>
+        </label>
+        <label className="mkt-filter">
+          <span>Anúncio</span>
+          <select className="filter-select" value={fAnuncio} onChange={e => setFAnuncio(e.target.value)}>
+            {anuncioOpts.map(o => <option key={o}>{o}</option>)}
+          </select>
+        </label>
       </div>
 
-      <div className="row" style={{ gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)" }}>
-        <div className="card">
-          <h2 className="card-title">Gasto por campanha</h2>
-          <BarList
-            items={barCampanhas}
-            color="amber"
-            valueKey="value"
-            labelKey="name"
-            onItemClick={(it) => handleCampClick({ campanha: it.name })}
-            activeName={activeCamp}
-          />
+      {/* ===== 4 KPI tiles (igual print: CUSTOS/IMPRESSOES, CLIQUES, IMPRESSOES, IMPACTO) ===== */}
+      <div className="mkt-kpis">
+        <div className="mkt-kpi">
+          <div className="mkt-kpi-label">CUSTOS / IMPRESSÕES</div>
+          <div className="mkt-kpi-value mkt-kpi-orange">R$ {formatBR(T.gastoTotal)}</div>
+          <div className="mkt-kpi-sub">CPM <b>R$ {formatBR(cpmGlobal)}</b></div>
         </div>
-        <div className="card">
-          <h2 className="card-title">Performance por campanha</h2>
-          <div className="t-scroll" style={{ maxHeight: 320 }}>
-            <table className="t">
-              <thead>
-                <tr>
-                  <th>Campanha</th>
-                  <th className="num">Impr.</th>
-                  <th className="num">Cliques</th>
-                  <th className="num">CTR</th>
-                  <th className="num">CPC</th>
-                </tr>
-              </thead>
-              <tbody>
-                {M.campanhasAgg.map((c, i) => (
-                  <tr key={i} className={activeCamp === c.campanha ? "active" : ""}
-                      onClick={() => handleCampClick({ campanha: c.campanha })}
-                      style={{ cursor: "pointer" }}>
-                    <td>{c.campanha.length > 30 ? c.campanha.slice(0, 30) + "…" : c.campanha}</td>
-                    <td className="num">{formatInt(c.impressoes)}</td>
-                    <td className="num">{formatInt(c.cliques)}</td>
-                    <td className="num cyan">{c.ctr.toFixed(2).replace(".", ",")}%</td>
-                    <td className="num">R$ {formatBR(c.cpc)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+        <div className="mkt-kpi">
+          <div className="mkt-kpi-label">CLIQUES ADS</div>
+          <div className="mkt-kpi-value mkt-kpi-orange">{formatInt(T.cliquesTotal)}</div>
+          <div className="mkt-kpi-sub">Cliques ADS · CPC <b>R$ {formatBR(cpcGlobal)}</b></div>
+        </div>
+        <div className="mkt-kpi">
+          <div className="mkt-kpi-label">IMPRESSÕES ADS</div>
+          <div className="mkt-kpi-value mkt-kpi-orange">{formatInt(T.impressoesTotal)}</div>
+          <div className="mkt-kpi-sub">Impacto <b>{formatBR(impactoVal)}</b> · Frequência <b>{freqGlobal.toFixed(2).replace(".", ",")}</b></div>
+        </div>
+        <div className="mkt-kpi">
+          <div className="mkt-kpi-label">IMPACTO ADS</div>
+          <div className="mkt-kpi-value mkt-kpi-orange">{formatInt(T.alcanceTotal)}</div>
+          <div className="mkt-kpi-sub">Alcance · {T.numCampanhas} campanhas</div>
         </div>
       </div>
 
-      <div className="card">
-        <div className="card-title-row">
-          <h2 className="card-title">Detalhamento por anuncio {activeCamp ? `· ${activeCamp}` : ""}</h2>
-          <span className="status-line">{detalhe.length} linhas</span>
+      {/* ===== Linha 2: CPM × Valor Investido (esquerda) | Cliques por Campanha (direita) ===== */}
+      <div className="row mkt-row-1">
+        <div className="card mkt-cpm-card">
+          <h2 className="card-title">CPM × VALOR INVESTIDO</h2>
+          <MktCpmChart campanhas={M.campanhasAgg} height={260} />
         </div>
-        <div className="t-scroll" style={{ maxHeight: 380 }}>
-          <table className="t">
-            <thead>
-              <tr>
-                <th>Campanha</th>
-                <th>Conjunto</th>
-                <th>Anuncio</th>
-                <th>Status</th>
-                <th className="num">Alcance</th>
-                <th className="num">Impressoes</th>
-                <th className="num">Gasto</th>
-                <th className="num">Resultados</th>
-                <th className="num">Custo/Result.</th>
-              </tr>
-            </thead>
-            <tbody>
-              {detalhe.map((r, i) => (
-                <tr key={i}>
-                  <td title={r.campanha}>{(r.campanha || "").slice(0, 25)}</td>
-                  <td>{r.conjunto}</td>
-                  <td>{r.anuncio}</td>
-                  <td><span style={{ color: r.status === "active" ? "var(--green)" : "var(--fg-3)" }}>{r.status || "—"}</span></td>
-                  <td className="num">{formatInt(r.alcance)}</td>
-                  <td className="num">{formatInt(r.impressoes)}</td>
-                  <td className="num amber">R$ {formatBR(r.valorBRL)}</td>
-                  <td className="num">{formatInt(r.resultados)}</td>
-                  <td className="num">R$ {formatBR(r.custoPorResultado)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="card mkt-cliques-card">
+          <h2 className="card-title">CLIQUES POR CAMPANHA</h2>
+          <MktBarList items={topCampCliques} />
         </div>
+      </div>
+
+      {/* ===== Linha 3: Leads por Anúncio (full width) ===== */}
+      <div className="card mkt-leads-card">
+        <h2 className="card-title">LEADS POR ANÚNCIO</h2>
+        <MktVerticalBars items={leadsPorAnuncio} height={260} />
       </div>
     </div>
   );
