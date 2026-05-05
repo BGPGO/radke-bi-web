@@ -297,22 +297,33 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
   };
   const saldoBaseInicial = (SALDOS_REAIS && SALDOS_REAIS.last && SALDOS_REAIS.last.total) || 0;
   const fluxoFuturoFull = useMemo(() => {
-    // Usa SEG.a_pagar_receber.EXTRATO (todas as transacoes ainda nao pagas)
-    const aprSeg = (SEG.a_pagar_receber) || {};
-    const apReceitas = aprSeg.EXTRATO_RECEITAS || (aprSeg.EXTRATO || []).filter(e => e[4] > 0);
-    const apDespesas = aprSeg.EXTRATO_DESPESAS || (aprSeg.EXTRATO || []).filter(e => e[4] < 0);
-    const merged = [...apReceitas, ...apDespesas];
-    const all = window.applyDrilldown ? window.applyDrilldown(merged, drilldown) : merged;
-    const sorted = all
+    // Lê direto de ALL_TX (não usa SEG.EXTRATO porque buildExtrato faz slice(0,200)
+    // sortado DESC, perdendo lançamentos de 2026 quando há parcelas até 2033).
+    const allTx = window.ALL_TX || [];
+    // Filtra: não realizado (a-vencer) E data >= hoje
+    // ALL_TX schema: [kind, mes (yyyy-mm), dia, categoria, cliente, valor, realizado, fornecedor, cc]
+    const apr = allTx.filter(r => r[6] === 0);
+    // Constrói tupla compatível com EXTRATO: [data DD/MM/YYYY, cc, categoria, cliente/fornec, valorAssinado, status]
+    const rows = apr.map(r => {
+      const [kind, mes, dia, categoria, cliente, valor, _realizado, fornecedor, cc] = r;
+      if (!mes || !dia) return null;
+      const dataStr = String(dia).padStart(2, '0') + '/' + mes.slice(5, 7) + '/' + mes.slice(0, 4);
+      const valorAssinado = kind === 'r' ? valor : -valor;
+      return [dataStr, cc || 'Operações', categoria, kind === 'r' ? cliente : fornecedor, valorAssinado, ''];
+    }).filter(Boolean);
+    // Aplica drilldown se houver
+    const filtered = window.applyDrilldown ? window.applyDrilldown(rows, drilldown) : rows;
+    // Filtra futuro + sort ASC (mais próximas primeiro)
+    const sorted = filtered
       .filter(e => parseFluxoDate(e[0]) >= todayKey)
       .sort((a, b) => parseFluxoDate(a[0]) - parseFluxoDate(b[0]));
-    // Saldo running com TODOS os lançamentos (não slice ainda — precisamos ver até o fim pra detectar quebra)
+    // Saldo running
     let saldoRunning = saldoBaseInicial;
     return sorted.map((e) => {
       saldoRunning += (e[4] || 0);
       return [...e, saldoRunning];
     });
-  }, [SEG, drilldown, todayKey, saldoBaseInicial]);
+  }, [drilldown, todayKey, saldoBaseInicial]);
 
   // Tabela limita a 60 linhas, mas análise de risco usa o full
   const fluxoFuturo = useMemo(() => fluxoFuturoFull.slice(0, 60), [fluxoFuturoFull]);
