@@ -218,7 +218,8 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
   const sMin = Math.min(...saldosCum, 0);
   const sMed = saldosCum.length ? saldosCum.reduce((s, v) => s + v, 0) / saldosCum.length : 0;
 
-  // Fluxo a vencer: a partir de hoje, ordem ascendente, apenas a vencer/atrasado/vence hoje
+  // Fluxo a vencer: pega o segmento a_pagar_receber (que tem só items NÃO realizados)
+  // e filtra por data >= hoje. Ordem ascendente (próximo vencimento primeiro).
   const todayKey = (function() {
     const t = new Date();
     return t.getFullYear() * 10000 + (t.getMonth() + 1) * 100 + t.getDate();
@@ -229,23 +230,25 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
     return y * 10000 + m * 100 + d;
   };
   const fluxoFuturo = useMemo(() => {
-    const all = window.applyDrilldown(B.EXTRATO || [], drilldown);
+    // Usa SEG.a_pagar_receber.EXTRATO (todas as transacoes ainda nao pagas)
+    const aprSeg = (SEG.a_pagar_receber) || {};
+    const apReceitas = aprSeg.EXTRATO_RECEITAS || (aprSeg.EXTRATO || []).filter(e => e[4] > 0);
+    const apDespesas = aprSeg.EXTRATO_DESPESAS || (aprSeg.EXTRATO || []).filter(e => e[4] < 0);
+    const merged = [...apReceitas, ...apDespesas];
+    // Aplica drilldown atual (pra cruzar filtro de mês/categoria etc)
+    const all = window.applyDrilldown ? window.applyDrilldown(merged, drilldown) : merged;
     const sorted = all
-      .filter(e => {
-        const status = (e[5] || '').toString().toUpperCase();
-        if (!/A VENCER|ATRASADO|VENCE HOJE|PREVIST/i.test(status)) return false;
-        return parseFluxoDate(e[0]) >= todayKey;
-      })
+      .filter(e => parseFluxoDate(e[0]) >= todayKey)
       .sort((a, b) => parseFluxoDate(a[0]) - parseFluxoDate(b[0]))
       .slice(0, 60);
     // Saldo running: parte do saldo atual da planilha e atualiza a cada movimento
     const saldoBase = (SALDOS_REAIS && SALDOS_REAIS.last && SALDOS_REAIS.last.total) || 0;
     let saldoRunning = saldoBase;
-    return sorted.map((e, i) => {
+    return sorted.map((e) => {
       saldoRunning += (e[4] || 0);
       return [...e, saldoRunning];
     });
-  }, [B.EXTRATO, drilldown, todayKey]);
+  }, [SEG, drilldown, todayKey]);
 
   return (
     <div className="page">
@@ -637,6 +640,9 @@ const PageComparativo = ({ statusFilter, drilldown, setDrilldown, year, month })
 // um relatorio executivo imprimivel (Ctrl+P -> Save as PDF).
 const PageRelatorio = ({ year, statusFilter }) => {
   const refYear = window.REF_YEAR || new Date().getFullYear();
+  // Hooks de dados — DEVEM ficar antes de qualquer early return pra não violar
+  // a ordem dos hooks. Os useMemo dependem de periodYear/periodMonth declarados abaixo
+  // mas useMemo aceita refs do escopo via closure.
   // Estado do periodo a renderizar (defaults: ano corrente YTD)
   const [periodYear, setPeriodYear] = useState(() => {
     try { var p = JSON.parse(localStorage.getItem('radke.report.period') || 'null'); return (p && p.year) || (year || refYear); } catch (e) { return year || refYear; }
@@ -649,6 +655,17 @@ const PageRelatorio = ({ year, statusFilter }) => {
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
+
+  // Cards reativos ao período (year + month) — antes usavam window.BIT global YTD
+  // Mantidos no topo (regra dos hooks) — não chamar dentro de early returns
+  const B = useMemo(
+    () => window.getBit('realizado', null, periodYear, periodMonth),
+    [periodYear, periodMonth]
+  );
+  const Bprev = useMemo(
+    () => window.getBit('a_pagar_receber', null, periodYear, periodMonth),
+    [periodYear, periodMonth]
+  );
 
   // resolve o nome do arquivo conforme periodo
   const reportFileName = (y, m) => {
@@ -820,15 +837,6 @@ const PageRelatorio = ({ year, statusFilter }) => {
     return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
   };
 
-  // Cards reativos ao período (year + month) — antes usavam window.BIT global (YTD do ano)
-  const B = useMemo(
-    () => window.getBit('realizado', null, periodYear, periodMonth),
-    [periodYear, periodMonth]
-  );
-  const Bprev = useMemo(
-    () => window.getBit('a_pagar_receber', null, periodYear, periodMonth),
-    [periodYear, periodMonth]
-  );
   const k = B.KPIS || B;
   const recebido = k.TOTAL_RECEITA || 0;
   const pago = k.TOTAL_DESPESA || 0;

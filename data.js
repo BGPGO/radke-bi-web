@@ -1,4 +1,4 @@
-/* RADKE BI — gerado por build-data.cjs em 2026-05-05T04:16:02.100Z */
+/* RADKE BI — gerado por build-data.cjs em 2026-05-05T04:24:34.827Z */
 /* Empresa: RADKE SOLUÇÕES INSTRALOGISTICAS | Ano ref: 2026 */
 const MONTHS = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
 const MONTHS_FULL = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
@@ -1949,6 +1949,3210 @@ const SEGMENTS = {
         "Adiantamento Salarial",
         "ROBERTO ALVES DA CUNHA",
         -1102,
+        "PAGO"
+      ]
+    ],
+    "EXTRATO_RECEITAS": [
+      [
+        "30/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        23612.23,
+        "RECEBIDO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        81343.14,
+        "RECEBIDO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "CD SUL LOGISTICA LTDA",
+        17000,
+        "RECEBIDO"
+      ],
+      [
+        "29/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 20 - BB ASSIS BRASIL",
+        6354.81,
+        "RECEBIDO"
+      ],
+      [
+        "28/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 20 - BB ASSIS BRASIL",
+        10699.07,
+        "RECEBIDO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 201 - CESTTO PROTÁSIO",
+        2673.87,
+        "RECEBIDO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 18 - LIMA E SILVA",
+        1958.1,
+        "RECEBIDO"
+      ],
+      [
+        "24/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 44 - ZAFF CARLOS GOMES",
+        2111.07,
+        "RECEBIDO"
+      ],
+      [
+        "22/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "Dep. 05 - Manutenção",
+        4033.91,
+        "RECEBIDO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        21900.25,
+        "RECEBIDO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CESTTO GRAVATAÍ - LJ 203",
+        2361.74,
+        "RECEBIDO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 08 - IPIRANGA",
+        19274.8,
+        "RECEBIDO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        23612.23,
+        "RECEBIDO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        81343.14,
+        "RECEBIDO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "UNITS BRASIL COMERCIO INDUSTRIA E REPRESENTACOES LTDA",
+        34989.84,
+        "RECEBIDO"
+      ],
+      [
+        "13/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BERTOLINI S/A - ES",
+        4213.94,
+        "RECEBIDO"
+      ],
+      [
+        "10/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        40637.93,
+        "RECEBIDO"
+      ],
+      [
+        "10/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        23240.9,
+        "RECEBIDO"
+      ],
+      [
+        "10/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        62242.71,
+        "RECEBIDO"
+      ],
+      [
+        "10/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        20318.97,
+        "RECEBIDO"
+      ],
+      [
+        "10/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        134225.01,
+        "RECEBIDO"
+      ],
+      [
+        "09/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CESTTO GRAVATAÍ - LJ 203",
+        6780.71,
+        "RECEBIDO"
+      ],
+      [
+        "06/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "DRT LOGISTICA",
+        5348.35,
+        "RECEBIDO"
+      ],
+      [
+        "06/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "BB SHOP - NOVO HAMBURGO",
+        11984.99,
+        "RECEBIDO"
+      ],
+      [
+        "01/04/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "VETLOG DISTRIBUIDORA DE PRODUTOS PARA ANIMAIS LTDA",
+        10680,
+        "RECEBIDO"
+      ],
+      [
+        "01/04/2026",
+        "Operações",
+        "Serviços - Engenharia",
+        "ADIENT - GRAVATAÍ/RS",
+        10449.26,
+        "RECEBIDO"
+      ],
+      [
+        "01/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CESTTO GRAVATAÍ - LJ 203",
+        903.16,
+        "RECEBIDO"
+      ],
+      [
+        "01/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CESTTO GRAVATAÍ - LJ 203",
+        872.85,
+        "RECEBIDO"
+      ],
+      [
+        "01/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CESTTO GRAVATAÍ - LJ 203",
+        3507.14,
+        "RECEBIDO"
+      ],
+      [
+        "01/04/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "ATACADAO - PELOTAS",
+        2536.5,
+        "RECEBIDO"
+      ],
+      [
+        "01/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CESTTO GRAVATAÍ - LJ 203",
+        6183.84,
+        "RECEBIDO"
+      ],
+      [
+        "31/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BERTOLINI S/A - ES",
+        42798.77,
+        "RECEBIDO"
+      ],
+      [
+        "31/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 17 - ZAFFARI CAVALHADA",
+        4830.23,
+        "RECEBIDO"
+      ],
+      [
+        "31/03/2026",
+        "Operações",
+        "Juros de Aplicações",
+        "Sem cliente",
+        0.02,
+        "RECEBIDO"
+      ],
+      [
+        "30/03/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "UNITS BRASIL COMERCIO INDUSTRIA E REPRESENTACOES LTDA",
+        34989.83,
+        "RECEBIDO"
+      ],
+      [
+        "27/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BERTOLINI S/A - ES",
+        4213.94,
+        "RECEBIDO"
+      ],
+      [
+        "27/03/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "FITESA - COSMÓPOLIS",
+        52937.2,
+        "RECEBIDO"
+      ],
+      [
+        "25/03/2026",
+        "Operações",
+        "Serviços - Instalação",
+        "ADIENT - SÃO BERNARDO DO CAMPO/SP",
+        2323.92,
+        "RECEBIDO"
+      ],
+      [
+        "23/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BERTOLINI S/A - ES",
+        42798.78,
+        "RECEBIDO"
+      ],
+      [
+        "23/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BERTOLINI S/A - ES",
+        55801.46,
+        "RECEBIDO"
+      ],
+      [
+        "23/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BERTOLINI S/A - ES",
+        8974.49,
+        "RECEBIDO"
+      ],
+      [
+        "20/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "DRT LOGISTICA",
+        5348.35,
+        "RECEBIDO"
+      ],
+      [
+        "18/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI - PARK SHOPP CANOAS - LJ 42",
+        6465.44,
+        "RECEBIDO"
+      ],
+      [
+        "18/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 17 - ZAFFARI CAVALHADA",
+        1105.39,
+        "RECEBIDO"
+      ],
+      [
+        "18/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        62242.72,
+        "RECEBIDO"
+      ],
+      [
+        "18/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        46481.79,
+        "RECEBIDO"
+      ],
+      [
+        "18/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        40637.93,
+        "RECEBIDO"
+      ],
+      [
+        "18/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "ATACADAO - PELOTAS",
+        1428.98,
+        "RECEBIDO"
+      ],
+      [
+        "18/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 36 - ZAFF BOULEVARD",
+        20657.55,
+        "RECEBIDO"
+      ],
+      [
+        "17/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 200 - CESTTO WENCESLAU",
+        889.35,
+        "RECEBIDO"
+      ],
+      [
+        "17/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 200 - CESTTO WENCESLAU",
+        1876.76,
+        "RECEBIDO"
+      ],
+      [
+        "17/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 200 - CESTTO WENCESLAU",
+        1822.93,
+        "RECEBIDO"
+      ],
+      [
+        "17/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 200 - CESTTO WENCESLAU",
+        1781.29,
+        "RECEBIDO"
+      ],
+      [
+        "17/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 200 - CESTTO WENCESLAU",
+        2947.35,
+        "RECEBIDO"
+      ],
+      [
+        "16/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI - LOJA 27 - OTTO",
+        16475.22,
+        "RECEBIDO"
+      ],
+      [
+        "16/03/2026",
+        "Operações",
+        "Aporte de sócios",
+        "Sem cliente",
+        41.91,
+        "RECEBIDO"
+      ],
+      [
+        "13/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI ANITA - LJ 09",
+        6654.61,
+        "RECEBIDO"
+      ],
+      [
+        "12/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFF. CRISTÓVÃO COLOMBO - LJ 16",
+        557.86,
+        "RECEBIDO"
+      ],
+      [
+        "12/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFF. CRISTÓVÃO COLOMBO - LJ 16",
+        3778.35,
+        "RECEBIDO"
+      ],
+      [
+        "06/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BERTOLINI S/A - ES",
+        55801.47,
+        "RECEBIDO"
+      ],
+      [
+        "06/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BERTOLINI S/A - ES",
+        8974.49,
+        "RECEBIDO"
+      ],
+      [
+        "04/03/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "MEGE ADMINISTRADORA DE BENS LTDA",
+        38900,
+        "RECEBIDO"
+      ],
+      [
+        "04/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "UNITS BRASIL COMERCIO INDUSTRIA E REPRESENTACOES LTDA",
+        5066.48,
+        "RECEBIDO"
+      ],
+      [
+        "04/03/2026",
+        "Operações",
+        "Serviços - Engenharia",
+        "ADIENT - SÃO JOSÉ PINHAIS/PR",
+        5724.85,
+        "RECEBIDO"
+      ],
+      [
+        "04/03/2026",
+        "Operações",
+        "Serviços - Instalação",
+        "ADIENT - SÃO BERNARDO DO CAMPO/SP",
+        42155.39,
+        "RECEBIDO"
+      ],
+      [
+        "04/03/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        36741.6,
+        "RECEBIDO"
+      ],
+      [
+        "04/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        35662.98,
+        "RECEBIDO"
+      ],
+      [
+        "04/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        59438.29,
+        "RECEBIDO"
+      ],
+      [
+        "04/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        23775.24,
+        "RECEBIDO"
+      ],
+      [
+        "03/03/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "VETLOG DISTRIBUIDORA DE PRODUTOS PARA ANIMAIS LTDA",
+        17031.7,
+        "RECEBIDO"
+      ],
+      [
+        "03/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        53690,
+        "RECEBIDO"
+      ],
+      [
+        "02/03/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "UNITS BRASIL COMERCIO INDUSTRIA E REPRESENTACOES LTDA",
+        23443.18,
+        "RECEBIDO"
+      ],
+      [
+        "27/02/2026",
+        "Operações",
+        "Juros de Aplicações",
+        "Sem cliente",
+        0.25,
+        "RECEBIDO"
+      ],
+      [
+        "26/02/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CONDOMÍNIO BB WALLIG",
+        4299.09,
+        "RECEBIDO"
+      ],
+      [
+        "26/02/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        14014.29,
+        "RECEBIDO"
+      ],
+      [
+        "26/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        15284.13,
+        "RECEBIDO"
+      ],
+      [
+        "26/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        25473.55,
+        "RECEBIDO"
+      ],
+      [
+        "26/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        10189.44,
+        "RECEBIDO"
+      ],
+      [
+        "25/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        31482.97,
+        "RECEBIDO"
+      ],
+      [
+        "20/02/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI IPANEMA - LOJA 29",
+        972.21,
+        "RECEBIDO"
+      ],
+      [
+        "20/02/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 201 - CESTTO PROTÁSIO",
+        3067.43,
+        "RECEBIDO"
+      ],
+      [
+        "20/02/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "COND. BB SHOPP - SAO LEOPOLDO",
+        2291.04,
+        "RECEBIDO"
+      ],
+      [
+        "19/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "UNITS BRASIL COMERCIO INDUSTRIA E REPRESENTACOES LTDA",
+        5066.48,
+        "RECEBIDO"
+      ],
+      [
+        "18/02/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 17 - ZAFFARI CAVALHADA",
+        4447.08,
+        "RECEBIDO"
+      ],
+      [
+        "18/02/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 200 - CESTTO WENCESLAU",
+        3312.65,
+        "RECEBIDO"
+      ],
+      [
+        "18/02/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CESTTO GRAVATAÍ - LJ 203",
+        1577.72,
+        "RECEBIDO"
+      ],
+      [
+        "18/02/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 12 - BB CANOAS",
+        6370.75,
+        "RECEBIDO"
+      ],
+      [
+        "11/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "ADIENT - SÃO BERNARDO DO CAMPO/SP",
+        97965.97,
+        "RECEBIDO"
+      ],
+      [
+        "10/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        214760,
+        "RECEBIDO"
+      ],
+      [
+        "05/02/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "MEGE ADMINISTRADORA DE BENS LTDA",
+        30342,
+        "RECEBIDO"
+      ],
+      [
+        "05/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "SUPERFRIO LOG - MGG",
+        19107.2,
+        "RECEBIDO"
+      ],
+      [
+        "03/02/2026",
+        "Operações",
+        "Serviços - Instalação",
+        "YARA BRASIL FERTILIZANTES S/A",
+        9552.81,
+        "RECEBIDO"
+      ],
+      [
+        "03/02/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "SAMS&apos;S CLUB - RADIAL_SP",
+        7754.57,
+        "RECEBIDO"
+      ],
+      [
+        "03/02/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "BB. WALLIG - LOJA 25",
+        2660.86,
+        "RECEBIDO"
+      ],
+      [
+        "03/02/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "BOURBON COUNTRY - LOJA 24",
+        2471.77,
+        "RECEBIDO"
+      ],
+      [
+        "03/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        20747.57,
+        "RECEBIDO"
+      ],
+      [
+        "03/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        62242.71,
+        "RECEBIDO"
+      ],
+      [
+        "30/01/2026",
+        "Operações",
+        "Juros de Aplicações",
+        "Sem cliente",
+        0.19,
+        "RECEBIDO"
+      ],
+      [
+        "29/01/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "BOURBON COUNTRY - LOJA 24",
+        29395.12,
+        "RECEBIDO"
+      ],
+      [
+        "29/01/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 08 - IPIRANGA",
+        136689.38,
+        "RECEBIDO"
+      ],
+      [
+        "29/01/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "BOURBON COUNTRY - LOJA 24",
+        4302.09,
+        "RECEBIDO"
+      ],
+      [
+        "21/01/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "MAGAZINE LUIZA S/A",
+        5243.04,
+        "RECEBIDO"
+      ],
+      [
+        "19/01/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "STAHL BRASIL SA",
+        15421.03,
+        "RECEBIDO"
+      ],
+      [
+        "16/01/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI BORDINI - LOJA 06",
+        21576.56,
+        "RECEBIDO"
+      ],
+      [
+        "16/01/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFF. CRISTÓVÃO COLOMBO - LJ 16",
+        7120.65,
+        "RECEBIDO"
+      ],
+      [
+        "12/01/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "DELLY&apos;S FOOD SERVICE",
+        65010,
+        "RECEBIDO"
+      ],
+      [
+        "12/01/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "DELLY&apos;S FOOD SERVICE",
+        14989.89,
+        "RECEBIDO"
+      ],
+      [
+        "12/01/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "CEVA LOGISTICS LTDA.",
+        19580,
+        "RECEBIDO"
+      ],
+      [
+        "02/01/2026",
+        "Operações",
+        "Serviços - Engenharia",
+        "CD CARREFOUR - PORTO ALEGRE",
+        9291.15,
+        "RECEBIDO"
+      ],
+      [
+        "02/01/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        26244,
+        "RECEBIDO"
+      ],
+      [
+        "02/01/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        25473.55,
+        "RECEBIDO"
+      ],
+      [
+        "02/01/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        42455.92,
+        "RECEBIDO"
+      ],
+      [
+        "02/01/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        16982.32,
+        "RECEBIDO"
+      ],
+      [
+        "31/12/2025",
+        "Operações",
+        "Juros de Aplicações",
+        "Sem cliente",
+        0.11,
+        "RECEBIDO"
+      ],
+      [
+        "29/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI - SÃO LEOPOLDO - LOJA 31",
+        5650.89,
+        "RECEBIDO"
+      ],
+      [
+        "29/12/2025",
+        "Operações",
+        "Serviços - Instalação",
+        "MAGAZINE LUIZA S/A",
+        1308.3,
+        "RECEBIDO"
+      ],
+      [
+        "26/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 36 - ZAFF BOULEVARD",
+        1595.47,
+        "RECEBIDO"
+      ],
+      [
+        "26/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 17 - ZAFFARI CAVALHADA",
+        3568.47,
+        "RECEBIDO"
+      ],
+      [
+        "26/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 17 - ZAFFARI CAVALHADA",
+        31744.97,
+        "RECEBIDO"
+      ],
+      [
+        "26/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI - LOJA 27 - OTTO",
+        11751.04,
+        "RECEBIDO"
+      ],
+      [
+        "26/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 12 - BB CANOAS",
+        72236.87,
+        "RECEBIDO"
+      ],
+      [
+        "26/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI - LOJA 27 - OTTO",
+        1882.24,
+        "RECEBIDO"
+      ],
+      [
+        "26/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI - LOJA 27 - OTTO",
+        3036.15,
+        "RECEBIDO"
+      ],
+      [
+        "26/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI - LOJA 27 - OTTO",
+        1031.43,
+        "RECEBIDO"
+      ],
+      [
+        "26/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 17 - ZAFFARI CAVALHADA",
+        25387.22,
+        "RECEBIDO"
+      ],
+      [
+        "22/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CD ZAFFARI - SERTÓRIO",
+        8143.73,
+        "RECEBIDO"
+      ],
+      [
+        "22/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CD ZAFFARI - SERTÓRIO",
+        862.83,
+        "RECEBIDO"
+      ],
+      [
+        "22/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CD ZAFFARI - SERTÓRIO",
+        965.02,
+        "RECEBIDO"
+      ],
+      [
+        "22/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CD ZAFFARI - SERTÓRIO",
+        4404.75,
+        "RECEBIDO"
+      ],
+      [
+        "19/12/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "STAHL BRASIL SA",
+        35982.39,
+        "RECEBIDO"
+      ],
+      [
+        "18/12/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "TMD FRICTION - Salto/SP",
+        25943.21,
+        "RECEBIDO"
+      ],
+      [
+        "18/12/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "TMD FRICTION - Salto/SP",
+        5563.7,
+        "RECEBIDO"
+      ],
+      [
+        "18/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI HÍPICA - LOJA 39",
+        5634.64,
+        "RECEBIDO"
+      ],
+      [
+        "17/12/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "CD LOJAS POMPEIA - CAMAQUA_RS",
+        1602,
+        "RECEBIDO"
+      ],
+      [
+        "17/12/2025",
+        "Operações",
+        "Serviços - Engenharia",
+        "ADIENT - SÃO BERNARDO DO CAMPO/SP",
+        5724.85,
+        "RECEBIDO"
+      ],
+      [
+        "16/12/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "CD LOJAS POMPEIA - CAMAQUA_RS",
+        1695.37,
+        "RECEBIDO"
+      ],
+      [
+        "16/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "BB NOVO HAMBURGO - LOJA 30",
+        2924,
+        "RECEBIDO"
+      ],
+      [
+        "16/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 20 - BB ASSIS BRASIL",
+        24875.87,
+        "RECEBIDO"
+      ],
+      [
+        "15/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 17 - ZAFFARI CAVALHADA",
+        1167.75,
+        "RECEBIDO"
+      ],
+      [
+        "15/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 17 - ZAFFARI CAVALHADA",
+        812.75,
+        "RECEBIDO"
+      ],
+      [
+        "15/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 17 - ZAFFARI CAVALHADA",
+        1245.6,
+        "RECEBIDO"
+      ],
+      [
+        "15/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 17 - ZAFFARI CAVALHADA",
+        951.5,
+        "RECEBIDO"
+      ],
+      [
+        "12/12/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "INDUSTRIA DE PLASTICOS HERC LTDA",
+        4897.27,
+        "RECEBIDO"
+      ],
+      [
+        "11/12/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "DELLY&apos;S FOOD SERVICE",
+        65010,
+        "RECEBIDO"
+      ],
+      [
+        "11/12/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "DELLY&apos;S FOOD SERVICE",
+        14989.88,
+        "RECEBIDO"
+      ],
+      [
+        "11/12/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "TMD FRICTION - Salto/SP",
+        39401.98,
+        "RECEBIDO"
+      ],
+      [
+        "11/12/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "TMD FRICTION - Salto/SP",
+        124256.41,
+        "RECEBIDO"
+      ],
+      [
+        "11/12/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "TMD FRICTION - Salto/SP",
+        114090.42,
+        "RECEBIDO"
+      ],
+      [
+        "10/12/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "DANA INDUSTRIAS LTDA",
+        3500.37,
+        "RECEBIDO"
+      ],
+      [
+        "09/12/2025",
+        "Operações",
+        "Serviços - Engenharia",
+        "BLEISTAHL BRASIL METALURGIA LTDA",
+        22582.84,
+        "RECEBIDO"
+      ],
+      [
+        "03/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 15 - HIGIENOPOLIS",
+        2052.31,
+        "RECEBIDO"
+      ],
+      [
+        "01/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CESTTO GRAVATAÍ - LJ 203",
+        3805.58,
+        "RECEBIDO"
+      ],
+      [
+        "01/12/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "CEVA LOGISTICS LTDA",
+        3891.97,
+        "RECEBIDO"
+      ],
+      [
+        "30/11/2025",
+        "Operações",
+        "Juros de Aplicações",
+        "Sem cliente",
+        0.22,
+        "RECEBIDO"
+      ],
+      [
+        "27/11/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 20 - BB ASSIS BRASIL",
+        23176.56,
+        "RECEBIDO"
+      ],
+      [
+        "25/11/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 22 - BB IPIRANGA",
+        1607.96,
+        "RECEBIDO"
+      ],
+      [
+        "24/11/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "INDUSTRIA DE PLASTICOS HERC LTDA",
+        1317.09,
+        "RECEBIDO"
+      ],
+      [
+        "24/11/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "GIALLO CONSTRUCOES - POA",
+        10299.89,
+        "RECEBIDO"
+      ],
+      [
+        "21/11/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 36 - ZAFF BOULEVARD",
+        3192.68,
+        "RECEBIDO"
+      ],
+      [
+        "19/11/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CD ZAFFARI - SERTÓRIO",
+        48734.66,
+        "RECEBIDO"
+      ],
+      [
+        "19/11/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CONDOMÍNIO BB WALLIG",
+        4678.48,
+        "RECEBIDO"
+      ],
+      [
+        "19/11/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "SUPERFRIO LOG - GYN",
+        6238.01,
+        "RECEBIDO"
+      ],
+      [
+        "18/11/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PROMA BRASIL - Contagem/MG",
+        13598.03,
+        "RECEBIDO"
+      ],
+      [
+        "18/11/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "SUPERFRIO LOG - MGG",
+        5655.5,
+        "RECEBIDO"
+      ],
+      [
+        "18/11/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "SUPERFRIO LOG - BSB",
+        32917.75,
+        "RECEBIDO"
+      ],
+      [
+        "17/11/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 36 - ZAFF BOULEVARD",
+        2906.13,
+        "RECEBIDO"
+      ],
+      [
+        "17/11/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 12 - BB CANOAS",
+        18911.05,
+        "RECEBIDO"
+      ],
+      [
+        "11/11/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "DELLY&apos;S FOOD SERVICE",
+        10043.22,
+        "RECEBIDO"
+      ],
+      [
+        "11/11/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "TERMINAL LOGISTICO MERLIN LTDA",
+        22782.68,
+        "RECEBIDO"
+      ],
+      [
+        "11/11/2025",
+        "Operações",
+        "Vendas Estornadas",
+        "SUPERFRIO LOG - UBE/UDI",
+        48474.12,
+        "RECEBIDO"
+      ],
+      [
+        "07/11/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BLEISTAHL BRASIL METALURGIA LTDA",
+        2443,
+        "RECEBIDO"
+      ],
+      [
+        "07/11/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BLEISTAHL BRASIL METALURGIA LTDA",
+        5432.39,
+        "RECEBIDO"
+      ],
+      [
+        "07/11/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BLEISTAHL BRASIL METALURGIA LTDA",
+        37054.62,
+        "RECEBIDO"
+      ],
+      [
+        "06/11/2025",
+        "Operações",
+        "Vendas Estornadas",
+        "SUPERFRIO LOG - GYN",
+        23941,
+        "RECEBIDO"
+      ],
+      [
+        "06/11/2025",
+        "Operações",
+        "Vendas Estornadas",
+        "SUPERFRIO LOG - BSB",
+        68553.67,
+        "RECEBIDO"
+      ],
+      [
+        "06/11/2025",
+        "Operações",
+        "Vendas Estornadas",
+        "SUPERFRIO LOG - MGG",
+        7695.02,
+        "RECEBIDO"
+      ],
+      [
+        "06/11/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "SUPERFRIO LOG - UBE/UDI",
+        25168.84,
+        "RECEBIDO"
+      ],
+      [
+        "04/11/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BERTOLINI S/A - ES",
+        118011.25,
+        "RECEBIDO"
+      ],
+      [
+        "04/11/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "SUPERFRIO - CGD",
+        23393.96,
+        "RECEBIDO"
+      ],
+      [
+        "03/11/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 18 - LIMA E SILVA",
+        2906.13,
+        "RECEBIDO"
+      ],
+      [
+        "31/10/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "TONDO CIA LTDA",
+        8852.33,
+        "RECEBIDO"
+      ],
+      [
+        "31/10/2025",
+        "Operações",
+        "Serviços - Engenharia",
+        "MACROMIX TAQUARA - FILIAL 84",
+        2627.8,
+        "RECEBIDO"
+      ],
+      [
+        "31/10/2025",
+        "Operações",
+        "Serviços - Engenharia",
+        "MACROMIX TORRES - FILIAL 55",
+        3190.9,
+        "RECEBIDO"
+      ],
+      [
+        "31/10/2025",
+        "Operações",
+        "Serviços - Manutenção",
+        "TERMINAL LOGISTICO MERLIN LTDA",
+        19927.94,
+        "RECEBIDO"
+      ],
+      [
+        "31/10/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 15 - HIGIENOPOLIS",
+        4051.21,
+        "RECEBIDO"
+      ],
+      [
+        "30/10/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "YARA BRASIL FERTILIZANTES S/A",
+        26692.21,
+        "RECEBIDO"
+      ],
+      [
+        "30/10/2025",
+        "Operações",
+        "Juros de Aplicações",
+        "Sem cliente",
+        0.33,
+        "RECEBIDO"
+      ],
+      [
+        "28/10/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "BR SUPPLY",
+        6223.77,
+        "RECEBIDO"
+      ],
+      [
+        "28/10/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "YARA BRASIL FERTILIZANTES S/A",
+        8916.67,
+        "RECEBIDO"
+      ],
+      [
+        "28/10/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "TERMINAL LOGISTICO MERLIN LTDA",
+        9764.01,
+        "RECEBIDO"
+      ],
+      [
+        "27/10/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "INDUSTRIA DE PLASTICOS HERC LTDA",
+        4996.01,
+        "RECEBIDO"
+      ],
+      [
+        "27/10/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "INDUSTRIA DE PLASTICOS HERC LTDA",
+        4897.27,
+        "RECEBIDO"
+      ],
+      [
+        "27/10/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 22 - BB IPIRANGA",
+        12110,
+        "RECEBIDO"
+      ],
+      [
+        "24/10/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI - LOJA 27 - OTTO",
+        60520.96,
+        "RECEBIDO"
+      ],
+      [
+        "24/10/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI - LOJA 27 - OTTO",
+        4238.5,
+        "RECEBIDO"
+      ],
+      [
+        "23/10/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 36 - ZAFF BOULEVARD",
+        4498,
+        "RECEBIDO"
+      ],
+      [
+        "23/10/2025",
+        "Operações",
+        "Serviços - Manutenção",
+        "CEVA LOGISTICS LTDA",
+        5632,
+        "RECEBIDO"
+      ],
+      [
+        "22/10/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 12 - BB CANOAS",
+        4053.82,
+        "RECEBIDO"
+      ],
+      [
+        "21/10/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "SUPERFRIO - MARILIA_SP",
+        15021.84,
+        "RECEBIDO"
+      ],
+      [
+        "20/10/2025",
+        "Operações",
+        "Serviços - Instalação",
+        "ALPHA QUIMICA LTDA",
+        656.37,
+        "RECEBIDO"
+      ]
+    ],
+    "EXTRATO_DESPESAS": [
+      [
+        "04/05/2026",
+        "Operações",
+        "Material de Escritório",
+        "BRS",
+        -351.21,
+        "PAGO"
+      ],
+      [
+        "04/05/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "FUSOPAR PARAFUSOS LTDA",
+        -395.9,
+        "PAGO"
+      ],
+      [
+        "04/05/2026",
+        "Operações",
+        "Compra de Mercadorias para Prestação de Serviços",
+        "FUSOPAR PARAFUSOS LTDA",
+        -5.18,
+        "PAGO"
+      ],
+      [
+        "04/05/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "ROLABRAS ROLAMENTOS",
+        -777.6,
+        "PAGO"
+      ],
+      [
+        "04/05/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "ACOS FAVORIT",
+        -2441.32,
+        "PAGO"
+      ],
+      [
+        "04/05/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "SIDERSUL PRODUTOS SIDERURGICOS LTDA.",
+        -6857.5,
+        "PAGO"
+      ],
+      [
+        "04/05/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "ARCELORMITTAL BRASIL S/A",
+        -537.03,
+        "PAGO"
+      ],
+      [
+        "04/05/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "ARCELORMITTAL BRASIL S/A",
+        -7691.11,
+        "PAGO"
+      ],
+      [
+        "04/05/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "FUSOPAR PARAFUSOS LTDA",
+        -284.43,
+        "PAGO"
+      ],
+      [
+        "04/05/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "ACOS FAVORIT",
+        -1719.15,
+        "PAGO"
+      ],
+      [
+        "04/05/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "CCD",
+        -2362.5,
+        "PAGO"
+      ],
+      [
+        "04/05/2026",
+        "Operações",
+        "Industrialização efetuada por terceiros",
+        "METALURGICA ROLIM LTDA",
+        -539,
+        "PAGO"
+      ],
+      [
+        "04/05/2026",
+        "Operações",
+        "Frete",
+        "EXPRESSO SAO MIGUEL LTDA",
+        -1022.72,
+        "PAGO"
+      ],
+      [
+        "04/05/2026",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "PAGO"
+      ],
+      [
+        "04/05/2026",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "PAGO"
+      ],
+      [
+        "01/05/2026",
+        "Operações",
+        "Salários",
+        "ANDRE LUIS CYGAINSKI",
+        -1830,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Industrialização efetuada por terceiros",
+        "SJP PINTURAS",
+        -11189.49,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Ambiente Comercial - Intituto Caldeira",
+        "INSTITUTO CALDEIRA",
+        -2500,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "FUSOPAR PARAFUSOS LTDA",
+        -122.47,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "ARCELORMITTAL BRASIL S/A",
+        -675.47,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "ARCELORMITTAL BRASIL S/A",
+        -542.62,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Frete",
+        "VERGALHAO - ALVORADA",
+        -250,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "Agropneu&apos;s",
+        -2520,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Material de Uso e Consumo",
+        "GASMAN COMERCIO DE GASES INDUSTRIAIS LTDA",
+        -1203.6,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Frete",
+        "HB TRANSPORTE E LOGISTICA EIRELI -TRANSITO BRASIL",
+        -108.48,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Cursos e Treinamentos",
+        "CURSOS - VANESSA",
+        -700,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Parcelamento IRRF",
+        "RECEITA FEDERAL",
+        -573.55,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "IRPJ",
+        "RECEITA FEDERAL",
+        -27816.29,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Contribuição Social",
+        "RECEITA FEDERAL",
+        -11481.1,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Mútuo - Radke Soluções",
+        "RECEITA FEDERAL",
+        -398.4,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Mútuo - Radke Soluções",
+        "RECEITA FEDERAL",
+        -239.04,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "IPVA",
+        "DETRAN/RS",
+        -108.9,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "IPVA",
+        "DETRAN/RS",
+        -270.26,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "IPVA",
+        "DETRAN/RS",
+        -216.7,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "IPVA",
+        "DETRAN/RS",
+        -216.7,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "IPVA",
+        "DETRAN/RS",
+        -203.12,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "IPVA",
+        "DETRAN/RS",
+        -203.12,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Multas de Trânsito",
+        "DETRAN/RS",
+        -131.46,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Multas de Trânsito",
+        "DETRAN/RS",
+        -131.46,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Multas de Trânsito",
+        "DETRAN/RS",
+        -559.32,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Salários",
+        "ALEXSANDRO LIVINO LEAL",
+        -2131,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Salários",
+        "ANDRE GONCALVES DA SILVA",
+        -3386,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Salários",
+        "ROBERTO ALVES DA CUNHA",
+        -3112,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Salários",
+        "TIAGO DAMIAN",
+        -1528,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Pensão Alimentícia",
+        "LIDIANE WOLYNEZUK BENITES",
+        -1908.34,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Salários",
+        "CIRO CARLOS BITENCOURT PACHECO",
+        -2074,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "58.117.626 FELIPE CORREA PIMENTEL",
+        -5158.48,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -800,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Multas de Trânsito",
+        "DETRAN/RS",
+        -262.92,
+        "PAGO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -2500,
+        "PAGO"
+      ],
+      [
+        "29/04/2026",
+        "Operações",
+        "Conselhos de Classe",
+        "CREA-RS",
+        -285.59,
+        "PAGO"
+      ],
+      [
+        "29/04/2026",
+        "Operações",
+        "Tarifas Bancárias",
+        "Sem cliente",
+        -5.36,
+        "PAGO"
+      ],
+      [
+        "29/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "ARCELORMITTAL BRASIL S/A",
+        -710.57,
+        "PAGO"
+      ],
+      [
+        "29/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "ARCELORMITTAL BRASIL S/A",
+        -6036.52,
+        "PAGO"
+      ],
+      [
+        "29/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "Qualiaco e Metais Ltda",
+        -4072.82,
+        "PAGO"
+      ],
+      [
+        "29/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "SIDERSUL PRODUTOS SIDERURGICOS LTDA.",
+        -10016.6,
+        "PAGO"
+      ],
+      [
+        "29/04/2026",
+        "Operações",
+        "Advogados",
+        "VILLELA INSTITUICAO DE PAGAMENTO S/A.",
+        -1136.33,
+        "PAGO"
+      ],
+      [
+        "29/04/2026",
+        "Operações",
+        "Advogados",
+        "VILLELA INSTITUICAO DE PAGAMENTO S/A.",
+        -1116,
+        "PAGO"
+      ],
+      [
+        "28/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "COFERCAN FILIAL",
+        -1720.84,
+        "PAGO"
+      ],
+      [
+        "28/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "RR COMERCIAL ACOS LTDA - ASSIS",
+        -647.46,
+        "PAGO"
+      ],
+      [
+        "28/04/2026",
+        "Operações",
+        "Tarifas Bancárias",
+        "Sem cliente",
+        -5.36,
+        "PAGO"
+      ],
+      [
+        "28/04/2026",
+        "Operações",
+        "Alimentação",
+        "Sem cliente",
+        -42.9,
+        "PAGO"
+      ],
+      [
+        "28/04/2026",
+        "Operações",
+        "Estacionamento",
+        "Sem cliente",
+        -22,
+        "PAGO"
+      ],
+      [
+        "28/04/2026",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -10000,
+        "PAGO"
+      ],
+      [
+        "28/04/2026",
+        "Operações",
+        "Tarifas Bancárias",
+        "Sem cliente",
+        -20,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Mútuo - Radke Soluções",
+        "SEM PARAR",
+        -520.78,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Alimentação",
+        "Sem cliente",
+        -21.3,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Tarifas Bancárias",
+        "Sem cliente",
+        -2.68,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Material de Uso e Consumo",
+        "ACARTOCENTER CONSTRUCAO A SECO LTDA",
+        -3500,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "MAXTINTAS DISTRIBUIDORA LTDA",
+        -915.28,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Impostos e Taxas",
+        "ICMS",
+        -68.15,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "SIDERSUL PRODUTOS SIDERURGICOS LTDA.",
+        -6200.65,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Industrialização efetuada por terceiros",
+        "CCD",
+        -6251.21,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "CCD",
+        -1178.25,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "ARCELORMITTAL BRASIL S/A",
+        -765.41,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Industrialização efetuada por terceiros",
+        "CCD",
+        -2632.08,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "CCD",
+        -2417,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "FUSOPAR PARAFUSOS LTDA",
+        -3659.76,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "FUSOPAR PARAFUSOS LTDA",
+        -2378.35,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "ACOS FAVORIT",
+        -1719.16,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Frete",
+        "EXPRESSO SAO MIGUEL LTDA - FONE 3349-5555",
+        -107,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Frete",
+        "CHAPECO - EXPRESSO SAO MIGUEL S/A",
+        -199,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "SIDERSUL PRODUTOS SIDERURGICOS LTDA.",
+        -744.3,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "ARCELORMITTAL BRASIL S/A",
+        -329.97,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Compra de Serviços",
+        "TOFFANELO EMPILHADEIRAS",
+        -1375,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Compra de Serviços",
+        "TATIANE MOTTA - FAXINA",
+        -220,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2080.35,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Parcelamento ICMS 5193741-7",
+        "ICMS",
+        -352.72,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Parcelamento ICMS 5200354-0",
+        "ICMS",
+        -8489.99,
+        "PAGO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Diogo - Adiantamento de Lucros",
+        "DIOGO ALMEIDA",
+        -500,
+        "PAGO"
+      ],
+      [
+        "24/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "ARCELORMITTAL BRASIL S/A",
+        -311.55,
+        "PAGO"
+      ],
+      [
+        "24/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "MAXTINTAS DISTRIBUIDORA LTDA",
+        -983,
+        "PAGO"
+      ],
+      [
+        "24/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "INOX RS/RARS",
+        -13817.38,
+        "PAGO"
+      ],
+      [
+        "24/04/2026",
+        "Operações",
+        "ASO, PCMSO, PPRA e Exames Médicos",
+        "CMPA MEDICINA DO TRABALHO",
+        -2299.78,
+        "PAGO"
+      ],
+      [
+        "24/04/2026",
+        "Operações",
+        "COFINS",
+        "RECEITA FEDERAL",
+        -20813.12,
+        "PAGO"
+      ],
+      [
+        "24/04/2026",
+        "Operações",
+        "IPI",
+        "RECEITA FEDERAL",
+        -15017.05,
+        "PAGO"
+      ],
+      [
+        "24/04/2026",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -5400,
+        "PAGO"
+      ],
+      [
+        "24/04/2026",
+        "Operações",
+        "Pró-labore",
+        "LEONARDO ALEFF ALVES DOS",
+        -1780,
+        "PAGO"
+      ],
+      [
+        "24/04/2026",
+        "Operações",
+        "Conselhos de Classe",
+        "CREA-PE",
+        -285.59,
+        "PAGO"
+      ],
+      [
+        "24/04/2026",
+        "Operações",
+        "Tarifas Bancárias",
+        "Sem cliente",
+        -5.36,
+        "PAGO"
+      ],
+      [
+        "23/04/2026",
+        "Operações",
+        "Conselhos de Classe",
+        "CREA-RS",
+        -108.39,
+        "PAGO"
+      ],
+      [
+        "23/04/2026",
+        "Operações",
+        "Despesas com Software",
+        "TIQUE TAQUE",
+        -198.4,
+        "PAGO"
+      ],
+      [
+        "23/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "FUSOPAR PARAFUSOS LTDA",
+        -698.26,
+        "PAGO"
+      ],
+      [
+        "23/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "FUSOPAR PARAFUSOS LTDA",
+        -460.2,
+        "PAGO"
+      ],
+      [
+        "23/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "FUSOPAR PARAFUSOS LTDA",
+        -522.59,
+        "PAGO"
+      ],
+      [
+        "23/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "COFERCAN",
+        -4915.99,
+        "PAGO"
+      ],
+      [
+        "23/04/2026",
+        "Operações",
+        "Industrialização efetuada por terceiros",
+        "GALVANOSUL",
+        -300,
+        "PAGO"
+      ],
+      [
+        "23/04/2026",
+        "Operações",
+        "Uniformes e EPI&apos;s",
+        "Profermaq Comércio de Ferramentas Ltda",
+        -49.99,
+        "PAGO"
+      ],
+      [
+        "23/04/2026",
+        "Operações",
+        "Uniformes e EPI&apos;s",
+        "Profermaq Comércio de Ferramentas Ltda",
+        -54.73,
+        "PAGO"
+      ],
+      [
+        "23/04/2026",
+        "Operações",
+        "Compra de Mercadorias para Prestação de Serviços",
+        "Profermaq Comércio de Ferramentas Ltda",
+        -160.8,
+        "PAGO"
+      ],
+      [
+        "23/04/2026",
+        "Operações",
+        "Uniformes e EPI&apos;s",
+        "Profermaq Comércio de Ferramentas Ltda",
+        -75.21,
+        "PAGO"
+      ],
+      [
+        "23/04/2026",
+        "Operações",
+        "Compra de Mercadorias para Prestação de Serviços",
+        "Profermaq Comércio de Ferramentas Ltda",
+        -317.17,
+        "PAGO"
+      ],
+      [
+        "23/04/2026",
+        "Operações",
+        "Material de Uso e Consumo",
+        "Profermaq Comércio de Ferramentas Ltda",
+        -334.52,
+        "PAGO"
+      ],
+      [
+        "23/04/2026",
+        "Operações",
+        "Uniformes e EPI&apos;s",
+        "Profermaq Comércio de Ferramentas Ltda",
+        -145.7,
+        "PAGO"
+      ],
+      [
+        "23/04/2026",
+        "Operações",
+        "GRRF",
+        "RECEITA FEDERAL",
+        -203.42,
+        "PAGO"
+      ],
+      [
+        "23/04/2026",
+        "Operações",
+        "Diogo - Adiantamento de Lucros",
+        "DIOGO ALMEIDA",
+        -18000,
+        "PAGO"
+      ],
+      [
+        "23/04/2026",
+        "Operações",
+        "Material de Higiene e Limpeza",
+        "Profermaq Comércio de Ferramentas Ltda",
+        -181.94,
+        "PAGO"
+      ],
+      [
+        "23/04/2026",
+        "Operações",
+        "Compra de Mercadorias para Prestação de Serviços",
+        "MADELEI PRODUTOS PARA MOVEIS E DECORACAO LTDA",
+        -116.78,
+        "PAGO"
+      ],
+      [
+        "23/04/2026",
+        "Operações",
+        "Marketing",
+        "AZUL",
+        -516.41,
+        "PAGO"
+      ],
+      [
+        "23/04/2026",
+        "Operações",
+        "Alimentação",
+        "Sem cliente",
+        -39.3,
+        "PAGO"
+      ],
+      [
+        "22/04/2026",
+        "Operações",
+        "Conselhos de Classe",
+        "CREA - GO",
+        -285.59,
+        "PAGO"
+      ],
+      [
+        "22/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "ECO PALLETS LTDA-ME",
+        -676,
+        "PAGO"
+      ],
+      [
+        "22/04/2026",
+        "Operações",
+        "Compra de Serviços",
+        "OMIEXPERIENCE S.A.",
+        -1250,
+        "PAGO"
+      ],
+      [
+        "22/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "RR COMERCIAL ACOS LTDA - ASSIS",
+        -1349.51,
+        "PAGO"
+      ],
+      [
+        "22/04/2026",
+        "Operações",
+        "Rescisões",
+        "EDERSON NOVAKOSKI",
+        -1340.53,
+        "PAGO"
+      ],
+      [
+        "22/04/2026",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -200,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "ACOS FAVORIT",
+        -2441.32,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Material de Uso e Consumo",
+        "GASMAN COMERCIO DE GASES INDUSTRIAIS LTDA",
+        -802.4,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "FUSOPAR PARAFUSOS LTDA",
+        -129.13,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "FUSOPAR PARAFUSOS LTDA",
+        -9.83,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "FUSOPAR PARAFUSOS LTDA",
+        -1175.47,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "FUSOPAR PARAFUSOS LTDA",
+        -661.86,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "ARCELORMITTAL BRASIL S/A",
+        -12913.4,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Remessa",
+        "CCD",
+        -2403,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Compra de Mercadorias para Prestação de Serviços",
+        "PROTEFIX PROTECAO E FIXACAO",
+        -124.8,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Material de Uso e Consumo",
+        "GASMAN COMERCIO DE GASES INDUSTRIAIS LTDA",
+        -401.2,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Seguro de Vida",
+        "ICATU SEGUROS",
+        -501.08,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "ARCELORMITTAL BRASIL S/A",
+        -7690.88,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "CCD",
+        -2008.5,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "EMPRESA RIOGRANDENSE DO CORTE LTDA.",
+        -2512,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Marketing",
+        "MAXIMOS",
+        -2940,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Frete",
+        "CHAPECO - EXPRESSO SAO MIGUEL S/A",
+        -232,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "INSS",
+        "RECEITA FEDERAL",
+        -544.29,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Empréstimo Pronampe",
+        "BANCO SANTANDER (BRASIL) S.A.",
+        -3997.98,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "FGTS",
+        "RECEITA FEDERAL",
+        -2473.62,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Conselhos de Classe",
+        "CREA-PE",
+        -285.59,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "ARCELORMITTAL BRASIL S/A",
+        -4155.41,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Juros e Despesas Financeiras",
+        "Sem cliente",
+        -4711.67,
+        "PAGO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Material de Escritório",
+        "BRS",
+        -276.2,
+        "PAGO"
+      ],
+      [
+        "17/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "ROLABRAS ROLAMENTOS",
+        -777.6,
+        "PAGO"
+      ],
+      [
+        "17/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "FUSOPAR PARAFUSOS LTDA",
+        -639,
+        "PAGO"
+      ],
+      [
+        "17/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "EMPRESA RIOGRANDENSE DO CORTE LTDA.",
+        -2377.98,
+        "PAGO"
+      ],
+      [
+        "17/04/2026",
+        "Operações",
+        "Industrialização efetuada por terceiros",
+        "GALVANOSUL",
+        -440,
+        "PAGO"
+      ],
+      [
+        "17/04/2026",
+        "Operações",
+        "Conselhos de Classe",
+        "CREA-RS",
+        -108.39,
+        "PAGO"
+      ],
+      [
+        "17/04/2026",
+        "Operações",
+        "Manutenção e Conserv. Bens e Equip.",
+        "DRYTEC",
+        -347.28,
+        "PAGO"
+      ],
+      [
+        "17/04/2026",
+        "Operações",
+        "Manutenção e Conserv. Bens e Equip.",
+        "DRYTEC",
+        -180,
+        "PAGO"
+      ],
+      [
+        "17/04/2026",
+        "Operações",
+        "Despesas c/ Cobranças",
+        "Sem cliente",
+        -2.05,
+        "PAGO"
+      ],
+      [
+        "17/04/2026",
+        "Operações",
+        "Alimentação",
+        "Sem cliente",
+        -21.3,
+        "PAGO"
+      ],
+      [
+        "17/04/2026",
+        "Operações",
+        "Tarifas Bancárias",
+        "Sem cliente",
+        -8.04,
+        "PAGO"
+      ],
+      [
+        "17/04/2026",
+        "Operações",
+        "Tarifas Bancárias",
+        "Sem cliente",
+        -2.68,
+        "PAGO"
+      ],
+      [
+        "17/04/2026",
+        "Operações",
+        "Material de Expediente",
+        "Sem cliente",
+        -1404,
+        "PAGO"
+      ],
+      [
+        "16/04/2026",
+        "Operações",
+        "Conselhos de Classe",
+        "CREA-RS",
+        -142.06,
+        "PAGO"
+      ],
+      [
+        "16/04/2026",
+        "Operações",
+        "Conselhos de Classe",
+        "CREA-RS",
+        -117.42,
+        "PAGO"
+      ],
+      [
+        "16/04/2026",
+        "Operações",
+        "Conselhos de Classe",
+        "CREA-RS",
+        -117.42,
+        "PAGO"
+      ],
+      [
+        "16/04/2026",
+        "Operações",
+        "Conselhos de Classe",
+        "CREA-RS",
+        -117.42,
+        "PAGO"
+      ],
+      [
+        "16/04/2026",
+        "Operações",
+        "Conselhos de Classe",
+        "CREA-RS",
+        -117.42,
+        "PAGO"
+      ],
+      [
+        "16/04/2026",
+        "Operações",
+        "Conselhos de Classe",
+        "CREA-RS",
+        -117.42,
+        "PAGO"
+      ],
+      [
+        "16/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "FUSOPAR PARAFUSOS LTDA",
+        -790.24,
+        "PAGO"
+      ],
+      [
+        "16/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "FUSOPAR PARAFUSOS LTDA",
+        -805.51,
+        "PAGO"
+      ],
+      [
+        "16/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "CCD",
+        -1307,
+        "PAGO"
+      ],
+      [
+        "16/04/2026",
+        "Operações",
+        "Frete",
+        "RICARDO MACIEL RIBEIRO",
+        -9256,
+        "PAGO"
+      ],
+      [
+        "16/04/2026",
+        "Operações",
+        "Alimentação",
+        "Sem cliente",
+        -51.9,
+        "PAGO"
+      ],
+      [
+        "15/04/2026",
+        "Operações",
+        "Adiantamento Salarial",
+        "SAMUEL VIEIRA MARQUES",
+        -920,
+        "PAGO"
+      ],
+      [
+        "15/04/2026",
+        "Operações",
+        "Vale Refeição",
+        "SAMUEL VIEIRA MARQUES",
+        -595,
+        "PAGO"
+      ],
+      [
+        "15/04/2026",
+        "Operações",
+        "Vale Transporte",
+        "SAMUEL VIEIRA MARQUES",
+        -222.4,
+        "PAGO"
+      ],
+      [
+        "15/04/2026",
+        "Operações",
+        "Tarifas Bancárias",
+        "Sem cliente",
+        -5.36,
+        "PAGO"
+      ],
+      [
+        "15/04/2026",
+        "Operações",
+        "Alimentação",
+        "Sem cliente",
+        -42.6,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "ARCELORMITTAL BRASIL S/A",
+        -6036.35,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Compra de Mercadorias para Prestação de Serviços",
+        "MAXTINTAS DISTRIBUIDORA LTDA",
+        -337.7,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Compra de Mercadorias para Prestação de Serviços",
+        "MAXTINTAS DISTRIBUIDORA LTDA",
+        -84.1,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Despesas com Veículos",
+        "CAMBER AUTO CENTER",
+        -2238.6,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Adiantamento Salarial",
+        "ALEXSANDRO LIVINO LEAL",
+        -968,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Adiantamento Salarial",
+        "ANDRE GONCALVES DA SILVA",
+        -968,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Adiantamento Salarial",
+        "ROBERTO ALVES DA CUNHA",
+        -1102,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Adiantamento Salarial",
+        "ANDRE LUIS CYGAINSKI",
+        -968,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Adiantamento Salarial",
+        "TIAGO DAMIAN",
+        -1200,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Adiantamento Salarial",
+        "CIRO CARLOS BITENCOURT PACHECO",
+        -920,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Contabilidade",
+        "DAHMER CONTABILIDADE LTDA",
+        -4040,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Compra de Mercadorias para Prestação de Serviços",
+        "MAXTINTAS DISTRIBUIDORA LTDA",
+        -101.06,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Assistência Médica",
+        "CENTRO CLINICO GAUCHO LTDA",
+        -124.12,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Compras de Materia Prima",
+        "ARCELORMITTAL BRASIL S/A",
+        -537,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -6780,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -3220,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Assistência Médica",
+        "CENTRO CLINICO GAUCHO LTDA",
+        -1469.48,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Contabilidade",
+        "DAHMER CONTABILIDADE LTDA",
+        -1960,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Frete",
+        "HB TRANSPORTES E LOGISTICA EIRELI",
+        -1493.16,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Parcelamento PGFN 014874671",
+        "RECEITA FEDERAL",
+        -4135.02,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Parcelamento PGFN 014874749",
+        "RECEITA FEDERAL",
+        -1092.21,
+        "PAGO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Parcelamento PGFN 014874711",
+        "RECEITA FEDERAL",
+        -3878.73,
         "PAGO"
       ]
     ],
@@ -4664,6 +7868,1834 @@ const SEGMENTS = {
         "A VENCER"
       ]
     ],
+    "EXTRATO_RECEITAS": [
+      [
+        "11/08/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "CD SUL LOGISTICA LTDA",
+        24999.99,
+        "A VENCER"
+      ],
+      [
+        "27/07/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "CD SUL LOGISTICA LTDA",
+        25000,
+        "A VENCER"
+      ],
+      [
+        "12/07/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "CD SUL LOGISTICA LTDA",
+        25000,
+        "A VENCER"
+      ],
+      [
+        "27/06/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "CD SUL LOGISTICA LTDA",
+        25000,
+        "A VENCER"
+      ],
+      [
+        "12/06/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "CD SUL LOGISTICA LTDA",
+        25000,
+        "A VENCER"
+      ],
+      [
+        "01/06/2026",
+        "Operações",
+        "Serviços - Engenharia",
+        "BUSCHLE &amp; LEPPER - CANOAS/RS",
+        2956.27,
+        "A VENCER"
+      ],
+      [
+        "28/05/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "CD SUL LOGISTICA LTDA",
+        25000,
+        "A VENCER"
+      ],
+      [
+        "27/05/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "ADIENT - GRAVATAÍ/RS",
+        6728.4,
+        "A VENCER"
+      ],
+      [
+        "24/05/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "ADIENT - GRAVATAÍ/RS",
+        3483.66,
+        "A VENCER"
+      ],
+      [
+        "19/05/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "SUPERFRIO LOG - BSB",
+        15530.5,
+        "A VENCER"
+      ],
+      [
+        "19/05/2026",
+        "Operações",
+        "Venda - Revenda de Mercadoria",
+        "FITESA - COSMÓPOLIS",
+        13130.89,
+        "A VENCER"
+      ],
+      [
+        "19/05/2026",
+        "Operações",
+        "Venda - Revenda de Mercadoria",
+        "FITESA - COSMÓPOLIS",
+        7619.85,
+        "A VENCER"
+      ],
+      [
+        "18/05/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI - LOJA 27 - OTTO",
+        3425.78,
+        "A VENCER"
+      ],
+      [
+        "18/05/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 12 - BB CANOAS",
+        3965.91,
+        "A VENCER"
+      ],
+      [
+        "18/05/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "COND. BB SHOPP - SAO LEOPOLDO",
+        2281.94,
+        "A VENCER"
+      ],
+      [
+        "13/05/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "CD SUL LOGISTICA LTDA",
+        20000,
+        "A VENCER"
+      ],
+      [
+        "12/05/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BERTOLINI S/A - ES",
+        4960.13,
+        "A VENCER"
+      ],
+      [
+        "10/05/2026",
+        "Operações",
+        "Serviços - Instalação",
+        "ADIENT - SÃO JOSÉ PINHAIS/PR",
+        3264.52,
+        "A VENCER"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        20318.96,
+        "A VENCER"
+      ],
+      [
+        "29/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "ADIENT - SÃO JOSÉ PINHAIS/PR",
+        2530,
+        "ATRASADO"
+      ],
+      [
+        "25/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        6879.55,
+        "A VENCER"
+      ],
+      [
+        "25/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        8260,
+        "A VENCER"
+      ],
+      [
+        "17/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        40637.93,
+        "A VENCER"
+      ],
+      [
+        "10/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        134225,
+        "A VENCER"
+      ],
+      [
+        "10/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        40637.93,
+        "A VENCER"
+      ],
+      [
+        "08/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "COMFRIO SOLUCOES LOGISTICAS S/A",
+        12589.79,
+        "VENCE HOJE"
+      ],
+      [
+        "10/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "NISS ENGENHARIA E EXECUCOES LTDA",
+        26210.95,
+        "ATRASADO"
+      ],
+      [
+        "24/12/2021",
+        "Operações",
+        "Serviços - Instalação",
+        "KOPRON DO BRASIL COMERCIO E INDUSTRIA DE EQUIPAMENTOS DE LOGISTICA LTDA.",
+        80750,
+        "A VENCER"
+      ]
+    ],
+    "EXTRATO_DESPESAS": [
+      [
+        "25/07/2033",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/06/2033",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/05/2033",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/04/2033",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/03/2033",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/02/2033",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/01/2033",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/12/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/11/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/10/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/09/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/08/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/07/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/06/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/05/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/04/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/03/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/02/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/01/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/12/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/11/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/10/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/09/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/08/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/07/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/06/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/05/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/04/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/03/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/02/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/01/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/12/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/12/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/12/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "25/11/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/11/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/11/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "25/10/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/10/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/10/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "25/09/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/09/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/09/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "25/08/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/08/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/08/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "25/07/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/07/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/07/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "30/06/2030",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/06/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/06/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/06/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/05/2030",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/05/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/05/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/05/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "30/04/2030",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/04/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/04/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/04/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/03/2030",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/03/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/03/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/03/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "28/02/2030",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/02/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/02/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/02/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/01/2030",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/01/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/01/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/01/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/12/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/12/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/12/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/12/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "30/11/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/11/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/11/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/11/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/10/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/10/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/10/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/10/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "30/09/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/09/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/09/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/09/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/08/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/08/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/08/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/08/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/07/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/07/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/07/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/07/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "30/06/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/06/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/06/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/06/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/05/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/05/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/05/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/05/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "30/04/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/04/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/04/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/04/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/03/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/03/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/03/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/03/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "28/02/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/02/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/02/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/02/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/01/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/01/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/01/2029",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/01/2029",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/01/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/01/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/12/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/12/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/12/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/12/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/12/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/12/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "30/11/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/11/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/11/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/11/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/11/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/11/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/10/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/10/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/10/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/10/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/10/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/10/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "30/09/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/09/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/09/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/09/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/09/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/09/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/08/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/08/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/08/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/08/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/08/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/08/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/07/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/07/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/07/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/07/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/07/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/07/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "30/06/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/06/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/06/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/06/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/06/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/06/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/05/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/05/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/05/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/05/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/05/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/05/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "30/04/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/04/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/04/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/04/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/04/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/04/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/03/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/03/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/03/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/03/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/03/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/03/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "29/02/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/02/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/02/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/02/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/02/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/02/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/01/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/01/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/01/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/01/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/01/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/01/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/12/2027",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/12/2027",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/12/2027",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/12/2027",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/12/2027",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ]
+    ],
     "KPIS": {
       "TOTAL_RECEITA": 529637.9500000001,
       "TOTAL_DESPESA": 2263992.7899999996,
@@ -5551,6 +10583,3210 @@ const SEGMENTS = {
       }
     ],
     "EXTRATO": [
+      [
+        "25/07/2033",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/06/2033",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/05/2033",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/04/2033",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/03/2033",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/02/2033",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/01/2033",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/12/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/11/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/10/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/09/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/08/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/07/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/06/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/05/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/04/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/03/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/02/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/01/2032",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/12/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/11/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/10/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/09/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/08/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/07/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/06/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/05/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/04/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/03/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/02/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/01/2031",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "25/12/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/12/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/12/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "25/11/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/11/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/11/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "25/10/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/10/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/10/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "25/09/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/09/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/09/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "25/08/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/08/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/08/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "25/07/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/07/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/07/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "30/06/2030",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/06/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/06/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/06/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/05/2030",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/05/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/05/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/05/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "30/04/2030",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/04/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/04/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/04/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/03/2030",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/03/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/03/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/03/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "28/02/2030",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/02/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/02/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/02/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/01/2030",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/01/2030",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/01/2030",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/01/2030",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/12/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/12/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/12/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/12/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "30/11/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/11/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/11/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/11/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/10/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/10/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/10/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/10/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "30/09/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/09/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/09/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/09/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/08/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/08/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/08/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/08/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/07/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/07/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/07/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/07/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "30/06/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/06/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/06/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/06/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/05/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/05/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/05/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/05/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "30/04/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/04/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/04/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/04/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/03/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/03/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/03/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/03/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "28/02/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/02/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "01/02/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/02/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/01/2029",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/01/2029",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/01/2029",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/01/2029",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/01/2029",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/01/2029",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/12/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/12/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/12/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/12/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/12/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/12/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "30/11/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/11/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/11/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/11/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/11/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/11/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/10/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/10/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/10/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/10/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/10/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/10/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "30/09/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/09/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/09/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/09/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/09/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/09/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/08/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/08/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/08/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/08/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/08/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/08/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/07/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/07/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/07/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/07/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/07/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/07/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "30/06/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/06/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/06/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/06/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/06/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/06/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/05/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/05/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/05/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/05/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/05/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/05/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "30/04/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/04/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/04/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/04/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/04/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/04/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/03/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/03/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/03/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/03/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/03/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/03/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "29/02/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/02/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/02/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/02/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/02/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/02/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/01/2028",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/01/2028",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/01/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/01/2028",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/01/2028",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "01/01/2028",
+        "Operações",
+        "Benefícios LD",
+        "LEONARDO ALEFF ALVES DOS",
+        -1257.05,
+        "A VENCER"
+      ],
+      [
+        "31/12/2027",
+        "Operações",
+        "Parcelamento ISS",
+        "PMPA",
+        -1298.74,
+        "A VENCER"
+      ],
+      [
+        "25/12/2027",
+        "Operações",
+        "Parcelamento ICMS 5184546-6",
+        "ICMS",
+        -2060.43,
+        "A VENCER"
+      ],
+      [
+        "02/12/2027",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "MV SERVICOS DE MANUTENCAO E SOLDAS",
+        -12601,
+        "A VENCER"
+      ],
+      [
+        "02/12/2027",
+        "Operações",
+        "Serviços Tomados PJ - Custo",
+        "DM SERVICOS DE MANUTENCAO E SOLDAS LTDA",
+        -9583,
+        "A VENCER"
+      ],
+      [
+        "01/12/2027",
+        "Operações",
+        "Benefícios LD",
+        "RODRIGO DE BEM ALMEIDA",
+        -1257.05,
+        "A VENCER"
+      ]
+    ],
+    "EXTRATO_RECEITAS": [
+      [
+        "11/08/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "CD SUL LOGISTICA LTDA",
+        24999.99,
+        "A VENCER"
+      ],
+      [
+        "27/07/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "CD SUL LOGISTICA LTDA",
+        25000,
+        "A VENCER"
+      ],
+      [
+        "12/07/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "CD SUL LOGISTICA LTDA",
+        25000,
+        "A VENCER"
+      ],
+      [
+        "27/06/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "CD SUL LOGISTICA LTDA",
+        25000,
+        "A VENCER"
+      ],
+      [
+        "12/06/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "CD SUL LOGISTICA LTDA",
+        25000,
+        "A VENCER"
+      ],
+      [
+        "01/06/2026",
+        "Operações",
+        "Serviços - Engenharia",
+        "BUSCHLE &amp; LEPPER - CANOAS/RS",
+        2956.27,
+        "A VENCER"
+      ],
+      [
+        "28/05/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "CD SUL LOGISTICA LTDA",
+        25000,
+        "A VENCER"
+      ],
+      [
+        "27/05/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "ADIENT - GRAVATAÍ/RS",
+        6728.4,
+        "A VENCER"
+      ],
+      [
+        "24/05/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "ADIENT - GRAVATAÍ/RS",
+        3483.66,
+        "A VENCER"
+      ],
+      [
+        "19/05/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "SUPERFRIO LOG - BSB",
+        15530.5,
+        "A VENCER"
+      ],
+      [
+        "19/05/2026",
+        "Operações",
+        "Venda - Revenda de Mercadoria",
+        "FITESA - COSMÓPOLIS",
+        13130.89,
+        "A VENCER"
+      ],
+      [
+        "19/05/2026",
+        "Operações",
+        "Venda - Revenda de Mercadoria",
+        "FITESA - COSMÓPOLIS",
+        7619.85,
+        "A VENCER"
+      ],
+      [
+        "18/05/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI - LOJA 27 - OTTO",
+        3425.78,
+        "A VENCER"
+      ],
+      [
+        "18/05/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 12 - BB CANOAS",
+        3965.91,
+        "A VENCER"
+      ],
+      [
+        "18/05/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "COND. BB SHOPP - SAO LEOPOLDO",
+        2281.94,
+        "A VENCER"
+      ],
+      [
+        "13/05/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "CD SUL LOGISTICA LTDA",
+        20000,
+        "A VENCER"
+      ],
+      [
+        "12/05/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BERTOLINI S/A - ES",
+        4960.13,
+        "A VENCER"
+      ],
+      [
+        "10/05/2026",
+        "Operações",
+        "Serviços - Instalação",
+        "ADIENT - SÃO JOSÉ PINHAIS/PR",
+        3264.52,
+        "A VENCER"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        20318.96,
+        "A VENCER"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        23612.23,
+        "RECEBIDO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        81343.14,
+        "RECEBIDO"
+      ],
+      [
+        "30/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "CD SUL LOGISTICA LTDA",
+        17000,
+        "RECEBIDO"
+      ],
+      [
+        "29/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "ADIENT - SÃO JOSÉ PINHAIS/PR",
+        2530,
+        "ATRASADO"
+      ],
+      [
+        "29/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 20 - BB ASSIS BRASIL",
+        6354.81,
+        "RECEBIDO"
+      ],
+      [
+        "28/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 20 - BB ASSIS BRASIL",
+        10699.07,
+        "RECEBIDO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 201 - CESTTO PROTÁSIO",
+        2673.87,
+        "RECEBIDO"
+      ],
+      [
+        "27/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 18 - LIMA E SILVA",
+        1958.1,
+        "RECEBIDO"
+      ],
+      [
+        "25/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        6879.55,
+        "A VENCER"
+      ],
+      [
+        "25/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        8260,
+        "A VENCER"
+      ],
+      [
+        "24/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 44 - ZAFF CARLOS GOMES",
+        2111.07,
+        "RECEBIDO"
+      ],
+      [
+        "22/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "Dep. 05 - Manutenção",
+        4033.91,
+        "RECEBIDO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        21900.25,
+        "RECEBIDO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CESTTO GRAVATAÍ - LJ 203",
+        2361.74,
+        "RECEBIDO"
+      ],
+      [
+        "20/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 08 - IPIRANGA",
+        19274.8,
+        "RECEBIDO"
+      ],
+      [
+        "17/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        40637.93,
+        "A VENCER"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        23612.23,
+        "RECEBIDO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        81343.14,
+        "RECEBIDO"
+      ],
+      [
+        "14/04/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "UNITS BRASIL COMERCIO INDUSTRIA E REPRESENTACOES LTDA",
+        34989.84,
+        "RECEBIDO"
+      ],
+      [
+        "13/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BERTOLINI S/A - ES",
+        4213.94,
+        "RECEBIDO"
+      ],
+      [
+        "10/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        134225,
+        "A VENCER"
+      ],
+      [
+        "10/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        40637.93,
+        "A VENCER"
+      ],
+      [
+        "10/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        40637.93,
+        "RECEBIDO"
+      ],
+      [
+        "10/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        23240.9,
+        "RECEBIDO"
+      ],
+      [
+        "10/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        62242.71,
+        "RECEBIDO"
+      ],
+      [
+        "10/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        20318.97,
+        "RECEBIDO"
+      ],
+      [
+        "10/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        134225.01,
+        "RECEBIDO"
+      ],
+      [
+        "09/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CESTTO GRAVATAÍ - LJ 203",
+        6780.71,
+        "RECEBIDO"
+      ],
+      [
+        "08/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "COMFRIO SOLUCOES LOGISTICAS S/A",
+        12589.79,
+        "VENCE HOJE"
+      ],
+      [
+        "06/04/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "DRT LOGISTICA",
+        5348.35,
+        "RECEBIDO"
+      ],
+      [
+        "06/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "BB SHOP - NOVO HAMBURGO",
+        11984.99,
+        "RECEBIDO"
+      ],
+      [
+        "01/04/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "VETLOG DISTRIBUIDORA DE PRODUTOS PARA ANIMAIS LTDA",
+        10680,
+        "RECEBIDO"
+      ],
+      [
+        "01/04/2026",
+        "Operações",
+        "Serviços - Engenharia",
+        "ADIENT - GRAVATAÍ/RS",
+        10449.26,
+        "RECEBIDO"
+      ],
+      [
+        "01/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CESTTO GRAVATAÍ - LJ 203",
+        903.16,
+        "RECEBIDO"
+      ],
+      [
+        "01/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CESTTO GRAVATAÍ - LJ 203",
+        872.85,
+        "RECEBIDO"
+      ],
+      [
+        "01/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CESTTO GRAVATAÍ - LJ 203",
+        3507.14,
+        "RECEBIDO"
+      ],
+      [
+        "01/04/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "ATACADAO - PELOTAS",
+        2536.5,
+        "RECEBIDO"
+      ],
+      [
+        "01/04/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CESTTO GRAVATAÍ - LJ 203",
+        6183.84,
+        "RECEBIDO"
+      ],
+      [
+        "31/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BERTOLINI S/A - ES",
+        42798.77,
+        "RECEBIDO"
+      ],
+      [
+        "31/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 17 - ZAFFARI CAVALHADA",
+        4830.23,
+        "RECEBIDO"
+      ],
+      [
+        "31/03/2026",
+        "Operações",
+        "Juros de Aplicações",
+        "Sem cliente",
+        0.02,
+        "RECEBIDO"
+      ],
+      [
+        "30/03/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "UNITS BRASIL COMERCIO INDUSTRIA E REPRESENTACOES LTDA",
+        34989.83,
+        "RECEBIDO"
+      ],
+      [
+        "27/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BERTOLINI S/A - ES",
+        4213.94,
+        "RECEBIDO"
+      ],
+      [
+        "27/03/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "FITESA - COSMÓPOLIS",
+        52937.2,
+        "RECEBIDO"
+      ],
+      [
+        "25/03/2026",
+        "Operações",
+        "Serviços - Instalação",
+        "ADIENT - SÃO BERNARDO DO CAMPO/SP",
+        2323.92,
+        "RECEBIDO"
+      ],
+      [
+        "23/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BERTOLINI S/A - ES",
+        42798.78,
+        "RECEBIDO"
+      ],
+      [
+        "23/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BERTOLINI S/A - ES",
+        55801.46,
+        "RECEBIDO"
+      ],
+      [
+        "23/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BERTOLINI S/A - ES",
+        8974.49,
+        "RECEBIDO"
+      ],
+      [
+        "20/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "DRT LOGISTICA",
+        5348.35,
+        "RECEBIDO"
+      ],
+      [
+        "18/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI - PARK SHOPP CANOAS - LJ 42",
+        6465.44,
+        "RECEBIDO"
+      ],
+      [
+        "18/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 17 - ZAFFARI CAVALHADA",
+        1105.39,
+        "RECEBIDO"
+      ],
+      [
+        "18/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        62242.72,
+        "RECEBIDO"
+      ],
+      [
+        "18/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        46481.79,
+        "RECEBIDO"
+      ],
+      [
+        "18/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        40637.93,
+        "RECEBIDO"
+      ],
+      [
+        "18/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "ATACADAO - PELOTAS",
+        1428.98,
+        "RECEBIDO"
+      ],
+      [
+        "18/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 36 - ZAFF BOULEVARD",
+        20657.55,
+        "RECEBIDO"
+      ],
+      [
+        "17/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 200 - CESTTO WENCESLAU",
+        889.35,
+        "RECEBIDO"
+      ],
+      [
+        "17/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 200 - CESTTO WENCESLAU",
+        1876.76,
+        "RECEBIDO"
+      ],
+      [
+        "17/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 200 - CESTTO WENCESLAU",
+        1822.93,
+        "RECEBIDO"
+      ],
+      [
+        "17/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 200 - CESTTO WENCESLAU",
+        1781.29,
+        "RECEBIDO"
+      ],
+      [
+        "17/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 200 - CESTTO WENCESLAU",
+        2947.35,
+        "RECEBIDO"
+      ],
+      [
+        "16/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI - LOJA 27 - OTTO",
+        16475.22,
+        "RECEBIDO"
+      ],
+      [
+        "16/03/2026",
+        "Operações",
+        "Aporte de sócios",
+        "Sem cliente",
+        41.91,
+        "RECEBIDO"
+      ],
+      [
+        "13/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI ANITA - LJ 09",
+        6654.61,
+        "RECEBIDO"
+      ],
+      [
+        "12/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFF. CRISTÓVÃO COLOMBO - LJ 16",
+        557.86,
+        "RECEBIDO"
+      ],
+      [
+        "12/03/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFF. CRISTÓVÃO COLOMBO - LJ 16",
+        3778.35,
+        "RECEBIDO"
+      ],
+      [
+        "06/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BERTOLINI S/A - ES",
+        55801.47,
+        "RECEBIDO"
+      ],
+      [
+        "06/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BERTOLINI S/A - ES",
+        8974.49,
+        "RECEBIDO"
+      ],
+      [
+        "04/03/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "MEGE ADMINISTRADORA DE BENS LTDA",
+        38900,
+        "RECEBIDO"
+      ],
+      [
+        "04/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "UNITS BRASIL COMERCIO INDUSTRIA E REPRESENTACOES LTDA",
+        5066.48,
+        "RECEBIDO"
+      ],
+      [
+        "04/03/2026",
+        "Operações",
+        "Serviços - Engenharia",
+        "ADIENT - SÃO JOSÉ PINHAIS/PR",
+        5724.85,
+        "RECEBIDO"
+      ],
+      [
+        "04/03/2026",
+        "Operações",
+        "Serviços - Instalação",
+        "ADIENT - SÃO BERNARDO DO CAMPO/SP",
+        42155.39,
+        "RECEBIDO"
+      ],
+      [
+        "04/03/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        36741.6,
+        "RECEBIDO"
+      ],
+      [
+        "04/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        35662.98,
+        "RECEBIDO"
+      ],
+      [
+        "04/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        59438.29,
+        "RECEBIDO"
+      ],
+      [
+        "04/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        23775.24,
+        "RECEBIDO"
+      ],
+      [
+        "03/03/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "VETLOG DISTRIBUIDORA DE PRODUTOS PARA ANIMAIS LTDA",
+        17031.7,
+        "RECEBIDO"
+      ],
+      [
+        "03/03/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        53690,
+        "RECEBIDO"
+      ],
+      [
+        "02/03/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "UNITS BRASIL COMERCIO INDUSTRIA E REPRESENTACOES LTDA",
+        23443.18,
+        "RECEBIDO"
+      ],
+      [
+        "27/02/2026",
+        "Operações",
+        "Juros de Aplicações",
+        "Sem cliente",
+        0.25,
+        "RECEBIDO"
+      ],
+      [
+        "26/02/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CONDOMÍNIO BB WALLIG",
+        4299.09,
+        "RECEBIDO"
+      ],
+      [
+        "26/02/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        14014.29,
+        "RECEBIDO"
+      ],
+      [
+        "26/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        15284.13,
+        "RECEBIDO"
+      ],
+      [
+        "26/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        25473.55,
+        "RECEBIDO"
+      ],
+      [
+        "26/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        10189.44,
+        "RECEBIDO"
+      ],
+      [
+        "25/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        31482.97,
+        "RECEBIDO"
+      ],
+      [
+        "20/02/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI IPANEMA - LOJA 29",
+        972.21,
+        "RECEBIDO"
+      ],
+      [
+        "20/02/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 201 - CESTTO PROTÁSIO",
+        3067.43,
+        "RECEBIDO"
+      ],
+      [
+        "20/02/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "COND. BB SHOPP - SAO LEOPOLDO",
+        2291.04,
+        "RECEBIDO"
+      ],
+      [
+        "19/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "UNITS BRASIL COMERCIO INDUSTRIA E REPRESENTACOES LTDA",
+        5066.48,
+        "RECEBIDO"
+      ],
+      [
+        "18/02/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 17 - ZAFFARI CAVALHADA",
+        4447.08,
+        "RECEBIDO"
+      ],
+      [
+        "18/02/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 200 - CESTTO WENCESLAU",
+        3312.65,
+        "RECEBIDO"
+      ],
+      [
+        "18/02/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CESTTO GRAVATAÍ - LJ 203",
+        1577.72,
+        "RECEBIDO"
+      ],
+      [
+        "18/02/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 12 - BB CANOAS",
+        6370.75,
+        "RECEBIDO"
+      ],
+      [
+        "11/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "ADIENT - SÃO BERNARDO DO CAMPO/SP",
+        97965.97,
+        "RECEBIDO"
+      ],
+      [
+        "10/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "NISS ENGENHARIA E EXECUCOES LTDA",
+        26210.95,
+        "ATRASADO"
+      ],
+      [
+        "10/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        214760,
+        "RECEBIDO"
+      ],
+      [
+        "05/02/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "MEGE ADMINISTRADORA DE BENS LTDA",
+        30342,
+        "RECEBIDO"
+      ],
+      [
+        "05/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "SUPERFRIO LOG - MGG",
+        19107.2,
+        "RECEBIDO"
+      ],
+      [
+        "03/02/2026",
+        "Operações",
+        "Serviços - Instalação",
+        "YARA BRASIL FERTILIZANTES S/A",
+        9552.81,
+        "RECEBIDO"
+      ],
+      [
+        "03/02/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "SAMS&apos;S CLUB - RADIAL_SP",
+        7754.57,
+        "RECEBIDO"
+      ],
+      [
+        "03/02/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "BB. WALLIG - LOJA 25",
+        2660.86,
+        "RECEBIDO"
+      ],
+      [
+        "03/02/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "BOURBON COUNTRY - LOJA 24",
+        2471.77,
+        "RECEBIDO"
+      ],
+      [
+        "03/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        20747.57,
+        "RECEBIDO"
+      ],
+      [
+        "03/02/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "FITESA - COSMÓPOLIS",
+        62242.71,
+        "RECEBIDO"
+      ],
+      [
+        "30/01/2026",
+        "Operações",
+        "Juros de Aplicações",
+        "Sem cliente",
+        0.19,
+        "RECEBIDO"
+      ],
+      [
+        "29/01/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "BOURBON COUNTRY - LOJA 24",
+        29395.12,
+        "RECEBIDO"
+      ],
+      [
+        "29/01/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 08 - IPIRANGA",
+        136689.38,
+        "RECEBIDO"
+      ],
+      [
+        "29/01/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "BOURBON COUNTRY - LOJA 24",
+        4302.09,
+        "RECEBIDO"
+      ],
+      [
+        "21/01/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "MAGAZINE LUIZA S/A",
+        5243.04,
+        "RECEBIDO"
+      ],
+      [
+        "19/01/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "STAHL BRASIL SA",
+        15421.03,
+        "RECEBIDO"
+      ],
+      [
+        "16/01/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI BORDINI - LOJA 06",
+        21576.56,
+        "RECEBIDO"
+      ],
+      [
+        "16/01/2026",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFF. CRISTÓVÃO COLOMBO - LJ 16",
+        7120.65,
+        "RECEBIDO"
+      ],
+      [
+        "12/01/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "DELLY&apos;S FOOD SERVICE",
+        65010,
+        "RECEBIDO"
+      ],
+      [
+        "12/01/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "DELLY&apos;S FOOD SERVICE",
+        14989.89,
+        "RECEBIDO"
+      ],
+      [
+        "12/01/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "CEVA LOGISTICS LTDA.",
+        19580,
+        "RECEBIDO"
+      ],
+      [
+        "02/01/2026",
+        "Operações",
+        "Serviços - Engenharia",
+        "CD CARREFOUR - PORTO ALEGRE",
+        9291.15,
+        "RECEBIDO"
+      ],
+      [
+        "02/01/2026",
+        "Operações",
+        "Serviços - Serralheria",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        26244,
+        "RECEBIDO"
+      ],
+      [
+        "02/01/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        25473.55,
+        "RECEBIDO"
+      ],
+      [
+        "02/01/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        42455.92,
+        "RECEBIDO"
+      ],
+      [
+        "02/01/2026",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        16982.32,
+        "RECEBIDO"
+      ],
+      [
+        "31/12/2025",
+        "Operações",
+        "Juros de Aplicações",
+        "Sem cliente",
+        0.11,
+        "RECEBIDO"
+      ],
+      [
+        "29/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI - SÃO LEOPOLDO - LOJA 31",
+        5650.89,
+        "RECEBIDO"
+      ],
+      [
+        "29/12/2025",
+        "Operações",
+        "Serviços - Instalação",
+        "MAGAZINE LUIZA S/A",
+        1308.3,
+        "RECEBIDO"
+      ],
+      [
+        "26/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 36 - ZAFF BOULEVARD",
+        1595.47,
+        "RECEBIDO"
+      ],
+      [
+        "26/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 17 - ZAFFARI CAVALHADA",
+        3568.47,
+        "RECEBIDO"
+      ],
+      [
+        "26/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 17 - ZAFFARI CAVALHADA",
+        31744.97,
+        "RECEBIDO"
+      ],
+      [
+        "26/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI - LOJA 27 - OTTO",
+        11751.04,
+        "RECEBIDO"
+      ],
+      [
+        "26/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 12 - BB CANOAS",
+        72236.87,
+        "RECEBIDO"
+      ],
+      [
+        "26/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI - LOJA 27 - OTTO",
+        1882.24,
+        "RECEBIDO"
+      ],
+      [
+        "26/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI - LOJA 27 - OTTO",
+        3036.15,
+        "RECEBIDO"
+      ],
+      [
+        "26/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI - LOJA 27 - OTTO",
+        1031.43,
+        "RECEBIDO"
+      ],
+      [
+        "26/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 17 - ZAFFARI CAVALHADA",
+        25387.22,
+        "RECEBIDO"
+      ],
+      [
+        "22/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CD ZAFFARI - SERTÓRIO",
+        8143.73,
+        "RECEBIDO"
+      ],
+      [
+        "22/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CD ZAFFARI - SERTÓRIO",
+        862.83,
+        "RECEBIDO"
+      ],
+      [
+        "22/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CD ZAFFARI - SERTÓRIO",
+        965.02,
+        "RECEBIDO"
+      ],
+      [
+        "22/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CD ZAFFARI - SERTÓRIO",
+        4404.75,
+        "RECEBIDO"
+      ],
+      [
+        "19/12/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "STAHL BRASIL SA",
+        35982.39,
+        "RECEBIDO"
+      ],
+      [
+        "18/12/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "TMD FRICTION - Salto/SP",
+        25943.21,
+        "RECEBIDO"
+      ],
+      [
+        "18/12/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "TMD FRICTION - Salto/SP",
+        5563.7,
+        "RECEBIDO"
+      ],
+      [
+        "18/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "ZAFFARI HÍPICA - LOJA 39",
+        5634.64,
+        "RECEBIDO"
+      ],
+      [
+        "17/12/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "CD LOJAS POMPEIA - CAMAQUA_RS",
+        1602,
+        "RECEBIDO"
+      ],
+      [
+        "17/12/2025",
+        "Operações",
+        "Serviços - Engenharia",
+        "ADIENT - SÃO BERNARDO DO CAMPO/SP",
+        5724.85,
+        "RECEBIDO"
+      ],
+      [
+        "16/12/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "CD LOJAS POMPEIA - CAMAQUA_RS",
+        1695.37,
+        "RECEBIDO"
+      ],
+      [
+        "16/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "BB NOVO HAMBURGO - LOJA 30",
+        2924,
+        "RECEBIDO"
+      ],
+      [
+        "16/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 20 - BB ASSIS BRASIL",
+        24875.87,
+        "RECEBIDO"
+      ],
+      [
+        "15/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 17 - ZAFFARI CAVALHADA",
+        1167.75,
+        "RECEBIDO"
+      ],
+      [
+        "15/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 17 - ZAFFARI CAVALHADA",
+        812.75,
+        "RECEBIDO"
+      ],
+      [
+        "15/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 17 - ZAFFARI CAVALHADA",
+        1245.6,
+        "RECEBIDO"
+      ],
+      [
+        "15/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "LOJA 17 - ZAFFARI CAVALHADA",
+        951.5,
+        "RECEBIDO"
+      ],
+      [
+        "12/12/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "INDUSTRIA DE PLASTICOS HERC LTDA",
+        4897.27,
+        "RECEBIDO"
+      ],
+      [
+        "11/12/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "DELLY&apos;S FOOD SERVICE",
+        65010,
+        "RECEBIDO"
+      ],
+      [
+        "11/12/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "DELLY&apos;S FOOD SERVICE",
+        14989.88,
+        "RECEBIDO"
+      ],
+      [
+        "11/12/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "TMD FRICTION - Salto/SP",
+        39401.98,
+        "RECEBIDO"
+      ],
+      [
+        "11/12/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "TMD FRICTION - Salto/SP",
+        124256.41,
+        "RECEBIDO"
+      ],
+      [
+        "11/12/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "TMD FRICTION - Salto/SP",
+        114090.42,
+        "RECEBIDO"
+      ],
+      [
+        "10/12/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "DANA INDUSTRIAS LTDA",
+        3500.37,
+        "RECEBIDO"
+      ],
+      [
+        "09/12/2025",
+        "Operações",
+        "Serviços - Engenharia",
+        "BLEISTAHL BRASIL METALURGIA LTDA",
+        22582.84,
+        "RECEBIDO"
+      ],
+      [
+        "03/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 15 - HIGIENOPOLIS",
+        2052.31,
+        "RECEBIDO"
+      ],
+      [
+        "01/12/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CESTTO GRAVATAÍ - LJ 203",
+        3805.58,
+        "RECEBIDO"
+      ],
+      [
+        "01/12/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "CEVA LOGISTICS LTDA",
+        3891.97,
+        "RECEBIDO"
+      ],
+      [
+        "30/11/2025",
+        "Operações",
+        "Juros de Aplicações",
+        "Sem cliente",
+        0.22,
+        "RECEBIDO"
+      ],
+      [
+        "27/11/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 20 - BB ASSIS BRASIL",
+        23176.56,
+        "RECEBIDO"
+      ],
+      [
+        "25/11/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 22 - BB IPIRANGA",
+        1607.96,
+        "RECEBIDO"
+      ],
+      [
+        "24/11/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "INDUSTRIA DE PLASTICOS HERC LTDA",
+        1317.09,
+        "RECEBIDO"
+      ],
+      [
+        "24/11/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "GIALLO CONSTRUCOES - POA",
+        10299.89,
+        "RECEBIDO"
+      ],
+      [
+        "21/11/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 36 - ZAFF BOULEVARD",
+        3192.68,
+        "RECEBIDO"
+      ],
+      [
+        "19/11/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CD ZAFFARI - SERTÓRIO",
+        48734.66,
+        "RECEBIDO"
+      ],
+      [
+        "19/11/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CONDOMÍNIO BB WALLIG",
+        4678.48,
+        "RECEBIDO"
+      ],
+      [
+        "19/11/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "SUPERFRIO LOG - GYN",
+        6238.01,
+        "RECEBIDO"
+      ],
+      [
+        "18/11/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "PROMA BRASIL - Contagem/MG",
+        13598.03,
+        "RECEBIDO"
+      ],
+      [
+        "18/11/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "SUPERFRIO LOG - MGG",
+        5655.5,
+        "RECEBIDO"
+      ],
+      [
+        "18/11/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "SUPERFRIO LOG - BSB",
+        32917.75,
+        "RECEBIDO"
+      ],
+      [
+        "17/11/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "LJ 36 - ZAFF BOULEVARD",
+        2906.13,
+        "RECEBIDO"
+      ],
+      [
+        "17/11/2025",
+        "Operações",
+        "Serviços - Restauração",
+        "CIA ZAFFARI - LOJA 12 - BB CANOAS",
+        18911.05,
+        "RECEBIDO"
+      ],
+      [
+        "11/11/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "DELLY&apos;S FOOD SERVICE",
+        10043.22,
+        "RECEBIDO"
+      ],
+      [
+        "11/11/2025",
+        "Operações",
+        "Serviços - Serralheria",
+        "TERMINAL LOGISTICO MERLIN LTDA",
+        22782.68,
+        "RECEBIDO"
+      ],
+      [
+        "11/11/2025",
+        "Operações",
+        "Vendas Estornadas",
+        "SUPERFRIO LOG - UBE/UDI",
+        48474.12,
+        "RECEBIDO"
+      ],
+      [
+        "07/11/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BLEISTAHL BRASIL METALURGIA LTDA",
+        2443,
+        "RECEBIDO"
+      ],
+      [
+        "07/11/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BLEISTAHL BRASIL METALURGIA LTDA",
+        5432.39,
+        "RECEBIDO"
+      ],
+      [
+        "07/11/2025",
+        "Operações",
+        "Venda - Mercadoria Fabricadas",
+        "BLEISTAHL BRASIL METALURGIA LTDA",
+        37054.62,
+        "RECEBIDO"
+      ]
+    ],
+    "EXTRATO_DESPESAS": [
       [
         "25/07/2033",
         "Operações",

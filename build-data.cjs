@@ -335,17 +335,28 @@ function buildClienteAgg(items, year) {
 }
 
 function buildExtrato(rec, desp, limit = 200) {
-  // tupla compativel com mock: [data, cc, categoria, cliente, valor]
-  const all = [];
-  for (const t of rec) all.push([fmtBR(t.data_efetiva), t.centroCusto || 'Operações', t.categoria, t.cliente, t.valor, t.status]);
-  for (const t of desp) all.push([fmtBR(t.data_efetiva), t.centroCusto || 'Operações', t.categoria, t.cliente, -t.valor, t.status]);
+  // tupla compativel com mock: [data, cc, categoria, cliente, valor, status]
+  const all = [], recArr = [], despArr = [];
+  for (const t of rec) {
+    const r = [fmtBR(t.data_efetiva), t.centroCusto || 'Operações', t.categoria, t.cliente, t.valor, t.status];
+    all.push(r); recArr.push(r);
+  }
+  for (const t of desp) {
+    const r = [fmtBR(t.data_efetiva), t.centroCusto || 'Operações', t.categoria, t.cliente, -t.valor, t.status];
+    all.push(r); despArr.push(r);
+  }
   // sort por data desc
-  all.sort((a, b) => {
+  const sortDesc = (a, b) => {
     const [da, ma, ya] = (a[0] || '01/01/1970').split('/').map(Number);
     const [db, mb, yb] = (b[0] || '01/01/1970').split('/').map(Number);
     return new Date(yb, mb - 1, db) - new Date(ya, ma - 1, da);
-  });
-  return all.slice(0, limit);
+  };
+  all.sort(sortDesc); recArr.sort(sortDesc); despArr.sort(sortDesc);
+  return {
+    EXTRATO: all.slice(0, limit),
+    EXTRATO_RECEITAS: recArr.slice(0, limit),
+    EXTRATO_DESPESAS: despArr.slice(0, limit),
+  };
 }
 
 function buildKpis(monthData) {
@@ -366,7 +377,10 @@ function buildSegment(rec, desp, year, label) {
   const DESPESA_CATEGORIAS = buildCategoriaAgg(d, year, 'despesa');
   const RECEITA_CLIENTES = buildClienteAgg(r, year);
   const DESPESA_FORNECEDORES = buildClienteAgg(d, year);
-  const EXTRATO = buildExtrato(r, d, 200);
+  const extOut = buildExtrato(r, d, 200);
+  const EXTRATO = extOut.EXTRATO;
+  const EXTRATO_RECEITAS = extOut.EXTRATO_RECEITAS;
+  const EXTRATO_DESPESAS = extOut.EXTRATO_DESPESAS;
   const KPIS = buildKpis(MONTH_DATA);
   // count de lancamentos por mes (pra DailyBars/RECEITA_DIA usar como proxy)
   const RECEITA_DIA = Array(31).fill(0);
@@ -448,6 +462,7 @@ function buildSegment(rec, desp, year, label) {
   return {
     MONTH_DATA, RECEITA_CATEGORIAS, DESPESA_CATEGORIAS,
     RECEITA_CLIENTES, DESPESA_FORNECEDORES, EXTRATO,
+    EXTRATO_RECEITAS, EXTRATO_DESPESAS,
     KPIS, RECEITA_DIA, DESPESA_DIA, SALDOS_MES,
     FLUXO_RECEITA, FLUXO_DESPESA, COMP_DATA,
   };
