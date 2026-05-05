@@ -197,9 +197,49 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
   const aPagarDiaSeg = (SEG.a_pagar_receber && SEG.a_pagar_receber.DESPESA_DIA) || B.DESPESA_DIA;
 
   const saldosMes = (SEG.tudo && SEG.tudo.SALDOS_MES) || B.SALDOS_MES;
-  const sMax = Math.max(...saldosMes, 0);
-  const sMin = Math.min(...saldosMes, 0);
-  const sMed = saldosMes.length ? saldosMes.reduce((s, v) => s + v, 0) / saldosMes.length : 0;
+  // Cumulativo (running balance): cada mês = saldo atual após acumular movimentos
+  const SALDOS_REAIS = (window.BIT_RADKE_EXTRAS && window.BIT_RADKE_EXTRAS.saldos) || null;
+  // Saldo inicial do ano: usa o saldo real mais antigo da planilha (se disponível) menos os movimentos até o mês desse saldo.
+  // Sem isso, parte de 0 e mostra apenas o efeito dos movimentos.
+  const saldoInicial = (function() {
+    if (!SALDOS_REAIS || !SALDOS_REAIS.last) return 0;
+    const lastDate = new Date(SALDOS_REAIS.last.data);
+    const lastMonthIdx = lastDate.getMonth();
+    // Saldo no mês N = saldoInicial + sum(saldosMes[0..N]). Sabemos saldo atual e queremos saldo inicial.
+    // saldoInicial = saldoAtual - sum(saldosMes[0..lastMonthIdx])
+    let acumAteAgora = 0;
+    for (let i = 0; i <= lastMonthIdx; i++) acumAteAgora += saldosMes[i] || 0;
+    return SALDOS_REAIS.last.total - acumAteAgora;
+  })();
+  const saldosCum = saldosMes.reduce((acc, v, i) => {
+    acc.push((acc[i - 1] != null ? acc[i - 1] : saldoInicial) + (v || 0));
+    return acc;
+  }, []);
+  const sMax = Math.max(...saldosCum, 0);
+  const sMin = Math.min(...saldosCum, 0);
+  const sMed = saldosCum.length ? saldosCum.reduce((s, v) => s + v, 0) / saldosCum.length : 0;
+
+  // Fluxo a vencer: a partir de hoje, ordem ascendente, apenas a vencer/atrasado/vence hoje
+  const todayKey = (function() {
+    const t = new Date();
+    return t.getFullYear() * 10000 + (t.getMonth() + 1) * 100 + t.getDate();
+  })();
+  const parseFluxoDate = (s) => {
+    const [d, m, y] = (s || '').split('/').map(Number);
+    if (!d || !m || !y) return 0;
+    return y * 10000 + m * 100 + d;
+  };
+  const fluxoFuturo = useMemo(() => {
+    const all = window.applyDrilldown(B.EXTRATO || [], drilldown);
+    return all
+      .filter(e => {
+        const status = (e[5] || '').toString().toUpperCase();
+        if (!/A VENCER|ATRASADO|VENCE HOJE|PREVIST/i.test(status)) return false;
+        return parseFluxoDate(e[0]) >= todayKey;
+      })
+      .sort((a, b) => parseFluxoDate(a[0]) - parseFluxoDate(b[0]))
+      .slice(0, 30);
+  }, [B.EXTRATO, drilldown, todayKey]);
 
   return (
     <div className="page">
@@ -301,24 +341,34 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
 
       <div className="row" style={{ gridTemplateColumns: "minmax(0, 7fr) minmax(0, 5fr)" }}>
         <div className="card">
-          <h2 className="card-title">Saldo realizado por mês (movimento)</h2>
+          <h2 className="card-title">Saldo acumulado por mês</h2>
           <div style={{ display: "flex", gap: 24, marginBottom: 14, flexWrap: "wrap" }}>
             <div><div className="kpi-label">Saldo Máximo</div><div style={{ fontFamily: "var(--font-mono)", fontWeight: 600, color: "var(--green)" }}>{B.fmt(sMax)}</div></div>
             <div><div className="kpi-label">Saldo Mínimo</div><div style={{ fontFamily: "var(--font-mono)", fontWeight: 600, color: "var(--red)" }}>{B.fmt(sMin)}</div></div>
             <div><div className="kpi-label">Saldo Médio</div><div style={{ fontFamily: "var(--font-mono)", fontWeight: 600, color: "var(--cyan)" }}>{B.fmt(sMed)}</div></div>
+            {SALDOS_REAIS && SALDOS_REAIS.last && (
+              <div><div className="kpi-label">Saldo atual (planilha)</div><div style={{ fontFamily: "var(--font-mono)", fontWeight: 600, color: "var(--cyan)" }}>{B.fmt(SALDOS_REAIS.last.total)}</div></div>
+            )}
           </div>
-          <TrendChart values={saldosMes} labels={B.MONTHS} color="var(--cyan)" height={200} showPoints={true} showLabels={false} gradientId="ts-saldo" />
+          <TrendChart values={saldosCum} labels={B.MONTHS} color="var(--cyan)" height={200} showPoints={true} showLabels={true} gradientId="ts-saldo" />
+          <div className="status-line" style={{ marginTop: 6 }}>
+            Saldo cumulativo: parte de R$ {(B.fmt(saldoInicial) || "0").replace("R$ ", "")} no início do ano e acumula receitas − despesas mês a mês.
+          </div>
         </div>
 
         <div className="card">
-          <h2 className="card-title">Últimos lançamentos</h2>
+          <h2 className="card-title">Fluxo a vencer (a partir de hoje)</h2>
+          <div className="status-line" style={{ marginBottom: 8 }}>{fluxoFuturo.length} lançamentos próximos</div>
           <div className="t-scroll" style={{ maxHeight: 320 }}>
             <table className="t">
               <thead>
-                <tr><th>Data</th><th>Categoria</th><th>Cliente / Fornecedor</th><th className="num">Valor</th></tr>
+                <tr><th>Vence</th><th>Categoria</th><th>Cliente / Fornecedor</th><th className="num">Valor</th></tr>
               </thead>
               <tbody>
-                {window.applyDrilldown(B.EXTRATO, drilldown).slice(0, 20).map((e, i) => (
+                {fluxoFuturo.length === 0 && (
+                  <tr><td colSpan="4" style={{ textAlign: "center", color: "var(--fg-3)", padding: 20 }}>Sem lançamentos a vencer</td></tr>
+                )}
+                {fluxoFuturo.map((e, i) => (
                   <tr key={i}>
                     <td style={{ fontFamily: "var(--font-mono)", fontSize: 10 }}>{e[0]}</td>
                     <td style={{ fontSize: 11 }}>{(e[2] || "").slice(0, 22)}</td>
