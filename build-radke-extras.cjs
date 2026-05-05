@@ -96,7 +96,7 @@ const fatItems = fatRaw.map(r => {
     familia: r['Família de Produto'] || 'Sem Família',
     vendedor: r['Vendedor'] || 'Sem Vendedor',
     qtd: num(r['Quantidade']),
-    valor: num(r['Total de Mercadoria'] || r['Valor Total'] || r['Valor Mercadoria']),
+    valor: num(r['Total de Mercadoria']),
   };
 }).filter(x => x.valor > 0); // ignora linhas zero
 console.log('  itens com valor > 0:', fatItems.length);

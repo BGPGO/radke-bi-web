@@ -750,6 +750,20 @@ const PageCRM = ({ statusFilter, year, month, drilldown, setDrilldown }) => {
   // Projeção: usa porMes do CRM (ano de referência) — leads (real) + leads ganhos
   const projData = (C.porMes || []).slice(0, 12);
 
+  // Metas comerciais (RADKE): R$ 1M/mês · R$ 12M acumulado ano
+  const META_MES = 1_000_000;
+  const META_ANO = 12_000_000;
+  const mesAtualIdx = (function() {
+    const now = new Date();
+    if (now.getFullYear() !== T.anoCRM) return 11; // ano fechado: usa dezembro
+    return now.getMonth();
+  })();
+  const ganhoMesAtual = (projData[mesAtualIdx] && projData[mesAtualIdx].ticketGanho) || 0;
+  const ganhoAcum = T.totalGanhoTicket || 0;
+  const pctMes = Math.min(100, (ganhoMesAtual / META_MES) * 100);
+  const pctAno = Math.min(100, (ganhoAcum / META_ANO) * 100);
+  const MESES_NOMES = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+
   return (
     <div className="page">
       <div className="page-title">
@@ -770,6 +784,43 @@ const PageCRM = ({ statusFilter, year, month, drilldown, setDrilldown }) => {
         <_MiniKpi4 tone="green" label="Conversão" value={T.taxaConversao.toFixed(1).replace(".", ",") + "%"} nonMonetary hint={`${T.totalGanhos} de ${T.totalLeads}`} />
         <_MiniKpi4 tone="amber" label="Pipeline" value={_fmtBR4(T.totalTicket, 0)} hint="ticket somado" />
         <_MiniKpi4 tone="green" label="Ganho" value={_fmtBR4(T.totalGanhoTicket, 0)} hint="conquistadas" />
+      </div>
+
+      {/* Metas comerciais — barras horizontais (mês 1M · acumulado 12M) */}
+      <div className="card crm-metas-card" style={{ marginTop: 14 }}>
+        <h2 className="card-title">METAS COMERCIAIS · {T.anoCRM}</h2>
+        <div className="crm-metas-grid">
+          <div className="crm-meta-row">
+            <div className="crm-meta-row-head">
+              <div>
+                <div className="crm-meta-row-label">Meta do mês ({MESES_NOMES[mesAtualIdx]})</div>
+                <div className="crm-meta-row-sub">R$ {_fmtBR4(ganhoMesAtual, 0)} de R$ {_fmtBR4(META_MES, 0)}</div>
+              </div>
+              <div className={`crm-meta-pct ${pctMes >= 100 ? 'green' : pctMes >= 70 ? 'cyan' : pctMes >= 40 ? 'amber' : 'red'}`}>
+                {pctMes.toFixed(1).replace(".", ",")}%
+              </div>
+            </div>
+            <div className="crm-meta-track">
+              <div className={`crm-meta-fill ${pctMes >= 100 ? 'green' : pctMes >= 70 ? 'cyan' : pctMes >= 40 ? 'amber' : 'red'}`} style={{ width: `${pctMes}%` }} />
+              {pctMes < 100 && <div className="crm-meta-target" style={{ left: '100%' }} />}
+            </div>
+          </div>
+          <div className="crm-meta-row">
+            <div className="crm-meta-row-head">
+              <div>
+                <div className="crm-meta-row-label">Meta acumulada do ano</div>
+                <div className="crm-meta-row-sub">R$ {_fmtBR4(ganhoAcum, 0)} de R$ {_fmtBR4(META_ANO, 0)}</div>
+              </div>
+              <div className={`crm-meta-pct ${pctAno >= 100 ? 'green' : pctAno >= 70 ? 'cyan' : pctAno >= 40 ? 'amber' : 'red'}`}>
+                {pctAno.toFixed(1).replace(".", ",")}%
+              </div>
+            </div>
+            <div className="crm-meta-track">
+              <div className={`crm-meta-fill ${pctAno >= 100 ? 'green' : pctAno >= 70 ? 'cyan' : pctAno >= 40 ? 'amber' : 'red'}`} style={{ width: `${pctAno}%` }} />
+              {pctAno < 100 && <div className="crm-meta-target" style={{ left: '100%' }} />}
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Layout: 4 boxes meta + Funil central + chart projeção */}

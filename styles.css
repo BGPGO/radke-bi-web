@@ -2700,3 +2700,80 @@ table.t tr.total td {
   body.bi-print-mode .bi-print-page { background: var(--bg) !important; padding: 14mm 10mm !important; }
   @page { size: A4; margin: 8mm; }
 }
+
+/* ===== CRM metas (barras horizontais) ===== */
+.crm-metas-card { padding: 18px 20px; }
+.crm-metas-grid {
+  display: grid;
+  gap: 18px;
+  margin-top: 12px;
+}
+.crm-meta-row { display: flex; flex-direction: column; gap: 6px; }
+.crm-meta-row-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+}
+.crm-meta-row-label {
+  font-size: 11px;
+  color: var(--fg-3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+.crm-meta-row-sub {
+  font-size: 13px;
+  color: var(--text);
+  font-family: var(--font-mono);
+  margin-top: 4px;
+}
+.crm-meta-pct {
+  font-size: 22px;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  line-height: 1;
+}
+.crm-meta-pct.green { color: var(--green); }
+.crm-meta-pct.cyan { color: var(--cyan); }
+.crm-meta-pct.amber { color: #fbbf24; }
+.crm-meta-pct.red { color: var(--red); }
+.crm-meta-track {
+  position: relative;
+  width: 100%;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.crm-meta-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+  background: linear-gradient(90deg, rgba(255,255,255,0.18), rgba(255,255,255,0));
+}
+.crm-meta-fill.green {
+  background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.35);
+}
+.crm-meta-fill.cyan {
+  background: linear-gradient(90deg, #0891b2 0%, #22d3ee 100%);
+  box-shadow: 0 0 8px rgba(34, 211, 238, 0.35);
+}
+.crm-meta-fill.amber {
+  background: linear-gradient(90deg, #d97706 0%, #fbbf24 100%);
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.35);
+}
+.crm-meta-fill.red {
+  background: linear-gradient(90deg, #dc2626 0%, #ef4444 100%);
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.30);
+}
+.crm-meta-target {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 2px;
+  background: rgba(255,255,255,0.35);
+  pointer-events: none;
+}
