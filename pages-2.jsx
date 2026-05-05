@@ -246,9 +246,62 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
         </div>
       </div>
 
+      {/* Saldo real (planilha de saldos da RADKE) + projeção futura */}
+      {(function() {
+        const SALDOS = (window.BIT_RADKE_EXTRAS && window.BIT_RADKE_EXTRAS.saldos) || null;
+        if (!SALDOS || !SALDOS.last) return null;
+        const last = SALDOS.last;
+        const contas = Object.entries(last.contas).sort((a, b) => b[1] - a[1]);
+        // Projeção: saldo último + ∑(a receber) − ∑(a pagar) acumulado por mês.
+        // Usa BIT_SEGMENTS.a_pagar_receber pra somar ainda-pendente por mês futuro.
+        const seg = (window.BIT_SEGMENTS || {}).a_pagar_receber || { MONTH_DATA: [] };
+        const lastDate = new Date(last.data);
+        const lastMonthIdx = lastDate.getMonth();
+        const proj = [];
+        let saldo = last.total;
+        for (let i = lastMonthIdx + 1; i < 12; i++) {
+          const md = seg.MONTH_DATA[i] || { receita: 0, despesa: 0 };
+          saldo += (md.receita || 0) - (md.despesa || 0);
+          proj.push({ m: B.MONTHS_FULL[i] || `M${i+1}`, saldo });
+        }
+        const series = [last.total, ...proj.map(p => p.saldo)];
+        const labels = ['Hoje', ...proj.map(p => p.m.slice(0,3))];
+        const minProj = Math.min(...series);
+        const maxProj = Math.max(...series);
+        return (
+          <div className="card" style={{ marginBottom: 14 }}>
+            <div className="card-title-row">
+              <h2 className="card-title">Saldo atual e projeção</h2>
+              <span className="chip cyan">Última atualização: {last.data.split('-').reverse().join('/')}</span>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 12, marginBottom: 18 }}>
+              {contas.map(([nome, v]) => (
+                <div key={nome} className="indicator-card" style={{ padding: 12 }}>
+                  <div className="kpi-label" style={{ fontSize: 10 }}>{nome}</div>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: 16, color: v >= 0 ? 'var(--green)' : 'var(--red)' }}>{B.fmt(v)}</div>
+                </div>
+              ))}
+              <div className="indicator-card" style={{ padding: 12, background: 'rgba(34,211,238,0.08)' }}>
+                <div className="kpi-label" style={{ fontSize: 10 }}>Total</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: 18, color: 'var(--cyan)' }}>{B.fmt(last.total)}</div>
+              </div>
+            </div>
+            <div style={{ marginTop: 8 }}>
+              <div className="kpi-label" style={{ marginBottom: 6 }}>Projeção mensal (saldo + a receber − a pagar)</div>
+              <TrendChart values={series} labels={labels} color="var(--cyan)" height={200} showPoints={true} showLabels={true} gradientId="ts-proj" />
+              <div style={{ display: 'flex', gap: 24, marginTop: 8, fontSize: 11, color: 'var(--mute)' }}>
+                <span>Mínima projetada: <b style={{ color: minProj >= 0 ? 'var(--green)' : 'var(--red)' }}>{B.fmt(minProj)}</b></span>
+                <span>Máxima projetada: <b style={{ color: 'var(--green)' }}>{B.fmt(maxProj)}</b></span>
+                <span>Final do ano: <b style={{ color: series[series.length-1] >= 0 ? 'var(--green)' : 'var(--red)' }}>{B.fmt(series[series.length-1])}</b></span>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
       <div className="row" style={{ gridTemplateColumns: "minmax(0, 7fr) minmax(0, 5fr)" }}>
         <div className="card">
-          <h2 className="card-title">Saldo realizado por mês</h2>
+          <h2 className="card-title">Saldo realizado por mês (movimento)</h2>
           <div style={{ display: "flex", gap: 24, marginBottom: 14, flexWrap: "wrap" }}>
             <div><div className="kpi-label">Saldo Máximo</div><div style={{ fontFamily: "var(--font-mono)", fontWeight: 600, color: "var(--green)" }}>{B.fmt(sMax)}</div></div>
             <div><div className="kpi-label">Saldo Mínimo</div><div style={{ fontFamily: "var(--font-mono)", fontWeight: 600, color: "var(--red)" }}>{B.fmt(sMin)}</div></div>

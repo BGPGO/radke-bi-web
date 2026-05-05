@@ -212,6 +212,36 @@ const out = {
     campanhasAgg: adsCampanhasAgg,
     totais: adsTotais,
   },
+  saldos: (function() {
+    try {
+      const wb = XLSX.readFile(path.join(DRIVE, 'Saldos - Radke Soluções.xlsx'));
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      const rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: null }).slice(1);
+      const series = rows
+        .filter(r => r[0] != null && r[2])
+        .map(r => ({
+          data: excelToDate(r[0]) ? excelToDate(r[0]).toISOString().slice(0, 10) : null,
+          valor: num(r[1]),
+          conta: String(r[2]).trim(),
+        }))
+        .filter(r => r.data);
+      // Agrupa por data: total por dia + breakdown por conta
+      const byDate = new Map();
+      for (const r of series) {
+        if (!byDate.has(r.data)) byDate.set(r.data, { data: r.data, total: 0, contas: {} });
+        const o = byDate.get(r.data);
+        o.contas[r.conta] = r.valor;
+        o.total += r.valor;
+      }
+      const dailyArr = [...byDate.values()].sort((a, b) => a.data.localeCompare(b.data));
+      const last = dailyArr[dailyArr.length - 1] || null;
+      console.log(`\n=== Saldos ===\n  ${dailyArr.length} dias | ultima data: ${last && last.data} | total: R$ ${last && last.total.toFixed(2)}`);
+      return { daily: dailyArr, last, contas: [...new Set(series.map(r => r.conta))] };
+    } catch (e) {
+      console.error('  saldos erro:', e.message);
+      return { daily: [], last: null, contas: [] };
+    }
+  })(),
 };
 
 fs.writeFileSync(OUT, JSON.stringify(out, null, 2));
