@@ -1,4 +1,4 @@
-/* RADKE BI — gerado por build-data.cjs em 2026-05-08T05:31:52.782Z */
+/* RADKE BI — gerado por build-data.cjs em 2026-05-09T05:51:00.474Z */
 /* Empresa: (faltando) | Ano ref: 2026 */
 const MONTHS = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
 const MONTHS_FULL = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
