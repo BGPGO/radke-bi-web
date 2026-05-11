@@ -371,8 +371,12 @@ const PageIndicators = ({ statusFilter, drilldown, setDrilldown, year, month }) 
 
 const PageReceita = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, month }) => {
   const B = useMemo(() => window.getBit(statusFilter, drilldown, year, month), [statusFilter, drilldown, year, month]);
-  const mediaMes = B.TOTAL_RECEITA / 12;
-  const numClientes = B.RECEITA_CLIENTES.length;
+  // Média por mês = total / (meses com receita no período). Evita dividir por 12 fixo
+  // — quando filtra mês único divide por 1, quando ano corrente divide pelos meses ja decorridos.
+  const monthsWithData = B.MONTH_DATA.filter(m => m.receita > 0).length;
+  const mediaMes = monthsWithData > 0 ? B.TOTAL_RECEITA / monthsWithData : 0;
+  // Distinct count real (não top-12). Reage a drilldown/mês/status filter.
+  const numClientes = B.NUM_CLIENTES != null ? B.NUM_CLIENTES : B.RECEITA_CLIENTES.length;
   const ticket = numClientes > 0 ? B.TOTAL_RECEITA / numClientes : 0;
   const [range, setRange] = useState("12M");
   const refYear = (B.META && B.META.ref_year) || new Date().getFullYear();
@@ -475,8 +479,11 @@ const PageReceita = ({ filters, setFilters, onOpenFilters, statusFilter, drilldo
 const PageDespesa = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, month }) => {
   const B = useMemo(() => window.getBit(statusFilter, drilldown, year, month), [statusFilter, drilldown, year, month]);
   const totalDespesa = B.TOTAL_DESPESA;
-  const mediaMes = totalDespesa / 12;
-  const numFornec = B.DESPESA_FORNECEDORES.length;
+  // Média por mês = total / (meses com despesa no período). Mesma lógica de Receita.
+  const monthsWithData = B.MONTH_DATA.filter(m => m.despesa > 0).length;
+  const mediaMes = monthsWithData > 0 ? totalDespesa / monthsWithData : 0;
+  // Distinct count real (não top-12). Reage a drilldown/mês/status filter.
+  const numFornec = B.NUM_FORNECEDORES != null ? B.NUM_FORNECEDORES : B.DESPESA_FORNECEDORES.length;
   const mediaDesp = numFornec > 0 ? totalDespesa / numFornec : 0;
   const [range, setRange] = useState("12M");
   const refYear = (B.META && B.META.ref_year) || new Date().getFullYear();

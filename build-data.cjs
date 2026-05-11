@@ -261,6 +261,14 @@ if (movimentos.length > 1000) {
 console.log(`  receitas validas: ${recNorm.length}`);
 console.log(`  despesas validas: ${despNorm.length}`);
 
+// Filtra "Aporte de sócios" — não é receita operacional, é movimentação de capital.
+// Decidido pelo cliente (PDF Wave Y): exclui de toda métrica de receita do BI.
+const APORTE_RE = /aporte/i;
+const recBefore = recNorm.length;
+recNorm = recNorm.filter((t) => !APORTE_RE.test(t.categoria || ''));
+const recExcluded = recBefore - recNorm.length;
+if (recExcluded > 0) console.log(`  aporte de sócios excluído: ${recExcluded} lançamentos`);
+
 // ---------- decidir ano de referencia ----------
 // Default: ANO CORRENTE (operador quer ver o que ta acontecendo agora).
 // Tambem expomos lista de anos disponiveis pro selector no header.
@@ -334,6 +342,18 @@ function buildClienteAgg(items, year) {
   return Array.from(map.values()).sort((a, b) => b.value - a.value).slice(0, 12);
 }
 
+// Distinct count de clientes/fornecedores no período (não top-N).
+// Usado pros KPI cards "Clientes" e "Fornecedores" reagirem a filtro.
+function countDistinctCli(items, year) {
+  const set = new Set();
+  for (const t of items) {
+    const d = t.data_efetiva;
+    if (year && d && d.getFullYear() !== year) continue;
+    if (t.cliente) set.add(t.cliente);
+  }
+  return set.size;
+}
+
 function buildExtrato(rec, desp, limit = 200) {
   // tupla compativel com mock: [data, cc, categoria, cliente, valor, status]
   const all = [], recArr = [], despArr = [];
@@ -377,6 +397,8 @@ function buildSegment(rec, desp, year, label) {
   const DESPESA_CATEGORIAS = buildCategoriaAgg(d, year, 'despesa');
   const RECEITA_CLIENTES = buildClienteAgg(r, year);
   const DESPESA_FORNECEDORES = buildClienteAgg(d, year);
+  const NUM_CLIENTES = countDistinctCli(r, year);
+  const NUM_FORNECEDORES = countDistinctCli(d, year);
   const extOut = buildExtrato(r, d, 200);
   const EXTRATO = extOut.EXTRATO;
   const EXTRATO_RECEITAS = extOut.EXTRATO_RECEITAS;
@@ -463,6 +485,7 @@ function buildSegment(rec, desp, year, label) {
     MONTH_DATA, RECEITA_CATEGORIAS, DESPESA_CATEGORIAS,
     RECEITA_CLIENTES, DESPESA_FORNECEDORES, EXTRATO,
     EXTRATO_RECEITAS, EXTRATO_DESPESAS,
+    NUM_CLIENTES, NUM_FORNECEDORES,
     KPIS, RECEITA_DIA, DESPESA_DIA, SALDOS_MES,
     FLUXO_RECEITA, FLUXO_DESPESA, COMP_DATA,
   };
@@ -635,6 +658,8 @@ function aggregateTx(txList, year) {
     EXTRATO: extratoArr.slice(0, 200),
     EXTRATO_RECEITAS: extratoRecArr.slice(0, 200),
     EXTRATO_DESPESAS: extratoDespArr.slice(0, 200),
+    NUM_CLIENTES: recCli.size,
+    NUM_FORNECEDORES: despForn.size,
     KPIS: {
       TOTAL_RECEITA: totalReceita,
       TOTAL_DESPESA: totalDespesa,

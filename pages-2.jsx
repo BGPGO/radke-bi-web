@@ -261,23 +261,28 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
   const aReceberDiaSeg = (SEG.a_pagar_receber && SEG.a_pagar_receber.RECEITA_DIA) || B.RECEITA_DIA;
   const aPagarDiaSeg = (SEG.a_pagar_receber && SEG.a_pagar_receber.DESPESA_DIA) || B.DESPESA_DIA;
 
-  const saldosMes = (SEG.tudo && SEG.tudo.SALDOS_MES) || B.SALDOS_MES;
-  // Cumulativo (running balance): cada mês = saldo atual após acumular movimentos
+  // Saldo acumulado = evolução do caixa REAL (só realizado). Usar SEG.tudo aqui era bug:
+  // misturava a-pagar/receber futuro com movimento já realizado, e a back-projection
+  // de saldoInicial subtraia futuro de um saldo bancário atual, jogando o gráfico fundo.
+  // Projeção futura aparece no card "Projeção mensal" mais abaixo (esse aqui é só histórico).
+  const saldosMes = (SEG.realizado && SEG.realizado.SALDOS_MES) || B.SALDOS_MES;
   const SALDOS_REAIS = (window.BIT_RADKE_EXTRAS && window.BIT_RADKE_EXTRAS.saldos) || null;
-  // Saldo inicial do ano: usa o saldo real mais antigo da planilha (se disponível) menos os movimentos até o mês desse saldo.
-  // Sem isso, parte de 0 e mostra apenas o efeito dos movimentos.
+  // Saldo inicial do ano: saldoAtual - sum(realizado[0..mesAtual]). Bate com extrato bancário.
   const saldoInicial = (function() {
     if (!SALDOS_REAIS || !SALDOS_REAIS.last) return 0;
     const lastDate = new Date(SALDOS_REAIS.last.data);
     const lastMonthIdx = lastDate.getMonth();
-    // Saldo no mês N = saldoInicial + sum(saldosMes[0..N]). Sabemos saldo atual e queremos saldo inicial.
-    // saldoInicial = saldoAtual - sum(saldosMes[0..lastMonthIdx])
     let acumAteAgora = 0;
     for (let i = 0; i <= lastMonthIdx; i++) acumAteAgora += saldosMes[i] || 0;
     return SALDOS_REAIS.last.total - acumAteAgora;
   })();
+  // Para meses sem movimento realizado (futuro), repete último saldo conhecido
+  // em vez de continuar acumulando (que seria irreal — não temos dados de caixa futuro).
+  const todayMonth = new Date().getMonth();
   const saldosCum = saldosMes.reduce((acc, v, i) => {
-    acc.push((acc[i - 1] != null ? acc[i - 1] : saldoInicial) + (v || 0));
+    const prev = acc[i - 1] != null ? acc[i - 1] : saldoInicial;
+    const next = i > todayMonth ? prev : prev + (v || 0);
+    acc.push(next);
     return acc;
   }, []);
   const sMax = Math.max(...saldosCum, 0);

@@ -227,8 +227,8 @@ const PageFaturamentoProduto = ({ drilldown, setDrilldown }) => {
               <div className="fat-metric-value">R$ {formatBR(T.totalValor)}</div>
             </div>
             <div className="fat-metric">
-              <div className="fat-metric-label">Quantidade vendida</div>
-              <div className="fat-metric-value">{formatBR(T.totalQtd)}</div>
+              <div className="fat-metric-label">Notas emitidas</div>
+              <div className="fat-metric-value">{formatBR(T.numNFs)}</div>
             </div>
             <div className="fat-metric">
               <div className="fat-metric-label">Ticket médio</div>
@@ -255,7 +255,7 @@ const PageFaturamentoProduto = ({ drilldown, setDrilldown }) => {
           </div>
         </div>
         <div className="card fat-matriz">
-          <h2 className="card-title">ANÁLISE DE PRODUTOS POR ANÚNCIO</h2>
+          <h2 className="card-title">ANÁLISE DE PRODUTOS POR MÊS</h2>
           <div className="t-scroll" style={{ maxHeight: 420 }}>
             <table className="t fat-matriz-tbl">
               <thead>
