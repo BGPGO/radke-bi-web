@@ -7,6 +7,7 @@ data/_cache/
 # data.js (built artifact) eh commitado e contem so agregados.
 data/*.json
 !data/.gitkeep
+!data/_summary.json
 
 # OS
 .DS_Store

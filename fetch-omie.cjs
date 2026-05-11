@@ -15,10 +15,13 @@ const fs = require('node:fs');
 const path_mod = require('node:path');
 const path = path_mod; // backward compat com chamadas existentes path.join
 
-const APP_KEY = '925971407361';
-const APP_SECRET = '5825074fc4731e98d49dbe826b1bf670';
+// Credenciais via env (GitHub Secrets em CI). Fallback local pra dev rápido.
+// Pra mudar credenciais em prod: rotaciona no Omie + atualiza GitHub Secrets.
+try { require('dotenv').config({ path: require('path').join(__dirname, '.env') }); } catch {}
+const APP_KEY = process.env.OMIE_APP_KEY || '925971407361';
+const APP_SECRET = process.env.OMIE_APP_SECRET || '5825074fc4731e98d49dbe826b1bf670';
 const BASE = 'https://app.omie.com.br/api/v1';
-const OUT = 'C:/Projects/radke-bi/data';
+const OUT = path.join(__dirname, 'data');
 const PAGE_SIZE = 500;
 // Omie restringe chamadas paralelas DO MESMO metodo (1 por vez).
 // Paginacao dentro de um metodo SEMPRE sequencial. Paralelismo eh entre

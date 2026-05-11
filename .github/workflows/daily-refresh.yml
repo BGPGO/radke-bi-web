@@ -36,7 +36,17 @@ jobs:
 
       - name: Fetch data from API
         continue-on-error: true
-        run: '[ -f fetch-data.cjs ] && node fetch-data.cjs || echo "skip: fetch-data.cjs not found"'
+        env:
+          OMIE_APP_KEY: ${{ secrets.OMIE_APP_KEY }}
+          OMIE_APP_SECRET: ${{ secrets.OMIE_APP_SECRET }}
+        run: |
+          if [ -f fetch-data.cjs ]; then
+            node fetch-data.cjs
+          elif [ -f fetch-omie.cjs ]; then
+            node fetch-omie.cjs
+          else
+            echo "skip: nem fetch-data.cjs nem fetch-omie.cjs encontrado"
+          fi
 
       - name: Fetch saldos (bank balances)
         continue-on-error: true
@@ -53,8 +63,9 @@ jobs:
           git config user.email "bot@bgpgestao.online"
           git config user.name "BGP BI Bot"
           git add data.js app.bundle.js
-          [ -f saldos.json ]    && git add saldos.json    || true
-          [ -f data-extras.js ] && git add data-extras.js || true
+          [ -f saldos.json ]           && git add saldos.json           || true
+          [ -f data-extras.js ]        && git add data-extras.js        || true
+          [ -f data/_summary.json ]    && git add -f data/_summary.json || true
           if git diff --cached --quiet; then
             echo "No data changes — skipping commit"
           else
