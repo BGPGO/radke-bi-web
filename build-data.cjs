@@ -107,6 +107,14 @@ console.log(`  contas_pagar: ${contasPagar.length}`);
 console.log(`  contas_receber: ${contasReceber.length}`);
 console.log(`  movimentos: ${movimentos.length}`);
 
+// Guard: nunca gerar data.js zerado. Se TODOS os fetches falharam, aborta antes
+// de sobrescrever data.js bom em produção com um vazio (incidente 2026-05-11).
+if (movimentos.length === 0 && contasPagar.length === 0 && contasReceber.length === 0) {
+  console.error('\n❌ ERROR: nenhum movimento/conta encontrado em data/. Fetch falhou.');
+  console.error('   Abortando antes de gerar data.js zerado. Mantém a versão atual em produção.');
+  process.exit(1);
+}
+
 // ---------- montar mapas ----------
 const catById = new Map();
 for (const c of categorias) {

@@ -35,7 +35,6 @@ jobs:
           [ -n "$ANTHROPIC_API_KEY" ] && echo "ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY" >> .env || true
 
       - name: Fetch data from API
-        continue-on-error: true
         env:
           OMIE_APP_KEY: ${{ secrets.OMIE_APP_KEY }}
           OMIE_APP_SECRET: ${{ secrets.OMIE_APP_SECRET }}
@@ -45,8 +44,22 @@ jobs:
           elif [ -f fetch-omie.cjs ]; then
             node fetch-omie.cjs
           else
-            echo "skip: nem fetch-data.cjs nem fetch-omie.cjs encontrado"
+            echo "ERROR: nem fetch-data.cjs nem fetch-omie.cjs encontrado"
+            exit 1
           fi
+
+      - name: Sanity check fetched data
+        run: |
+          if [ ! -f data/_summary.json ]; then
+            echo "ERROR: data/_summary.json não foi gerado — fetch falhou"
+            exit 1
+          fi
+          MOVS=$(node -e "console.log((JSON.parse(require('fs').readFileSync('data/_summary.json','utf8')).counts || {}).movimentos || 0)")
+          if [ "$MOVS" -lt 1000 ]; then
+            echo "ERROR: apenas $MOVS movimentos em data/_summary.json — fetch incompleto, abortando antes de zerar data.js"
+            exit 1
+          fi
+          echo "OK: $MOVS movimentos válidos no fetch"
 
       - name: Fetch saldos (bank balances)
         continue-on-error: true
