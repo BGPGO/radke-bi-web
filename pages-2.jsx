@@ -468,8 +468,8 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
             </div>
           </div>
           {isMonthFilter
-            ? <DailyBars values={recDiaSeg} color="green" />
-            : <SingleBars values={recDiaSeg} labels={pulsoLabels} color="green" height={180} />}
+            ? <DailyBars values={recDiaSeg} valuesPrev={aReceberDiaSeg} color="green" />
+            : <SingleBars values={recDiaSeg} valuesPrev={aReceberDiaSeg} labels={pulsoLabels} color="green" height={180} />}
         </div>
         <div className="card">
           <div className="card-title-row">
@@ -480,8 +480,8 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
             </div>
           </div>
           {isMonthFilter
-            ? <DailyBars values={pagoDiaSeg} color="red" />
-            : <SingleBars values={pagoDiaSeg} labels={pulsoLabels} color="red" height={180} />}
+            ? <DailyBars values={pagoDiaSeg} valuesPrev={aPagarDiaSeg} color="red" />
+            : <SingleBars values={pagoDiaSeg} valuesPrev={aPagarDiaSeg} labels={pulsoLabels} color="red" height={180} />}
         </div>
       </div>
 

@@ -855,6 +855,34 @@ table.t tr.total td {
   font-size: 9px; color: var(--text-2);
   white-space: nowrap;
 }
+/* Stacked daily/single bars (Tesouraria pulso com realizado + previsto) */
+.daily-bars .daily-tower {
+  flex: 1;
+  display: flex;
+  flex-direction: column-reverse;
+  border-radius: 2px 2px 0 0;
+  overflow: hidden;
+  min-height: 2px;
+}
+.vbar-col .stack.stacked-tower {
+  flex-direction: column-reverse;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+.vbar-col .stack.stacked-tower .bar { border-radius: 0; }
+.vbar-col .stack.stacked-tower .bar-prev { border-radius: 3px 3px 0 0; }
+.vbar-col .stack.stacked-tower .stacked-v {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 2px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-2);
+  white-space: nowrap;
+}
 .daily-x {
   display: flex; justify-content: space-between;
   font-size: 9px; color: var(--mute-2);

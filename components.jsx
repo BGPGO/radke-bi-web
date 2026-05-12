@@ -390,13 +390,21 @@ const MonthlyBars = ({ data, height = 230, type = "both", showLabels = true, onB
   );
 };
 
-const SingleBars = ({ values, labels, color = "green", height = 200, onBarClick, activeIdx }) => {
-  const max = Math.max(...values);
+// SingleBars: barras verticais por mês. Quando valuesPrev é passado, empilha
+// "previsto" em cima do "realizado" (verde + ciano OU vermelho + âmbar).
+const SingleBars = ({ values, valuesPrev, labels, color = "green", colorPrev, height = 200, onBarClick, activeIdx }) => {
+  const hasPrev = Array.isArray(valuesPrev);
+  const max = Math.max(...values.map((v, i) => (v || 0) + (hasPrev ? (valuesPrev[i] || 0) : 0)));
   const hasActive = activeIdx != null && activeIdx >= 0;
+  const realBg = color === "cyan" ? "var(--cyan)" : (color === "red" ? "var(--red)" : "var(--green)");
+  const prevBg = colorPrev || (color === "red" ? "#f59e0b" : "#22d3ee");
   return (
     <div className="vbar-chart" style={{ height }}>
       {values.map((v, i) => {
-        const h = (v / max) * 100;
+        const p = hasPrev ? (valuesPrev[i] || 0) : 0;
+        const hR = (v / max) * 100;
+        const hP = (p / max) * 100;
+        const total = v + p;
         const cls = "vbar-col" + (onBarClick ? " clickable" : "") +
           (hasActive && i === activeIdx ? " active" : "") +
           (hasActive && i !== activeIdx ? " dimmed" : "");
@@ -405,12 +413,16 @@ const SingleBars = ({ values, labels, color = "green", height = 200, onBarClick,
             onClick={onBarClick ? () => onBarClick(v, i, labels[i]) : undefined}
             style={onBarClick ? { cursor: "pointer" } : undefined}
           >
-            <div className="stack">
-              <div className={`bar ${color === "red" ? "red" : ""}`} style={{ height: `${h}%`, width: 22, background: color === "cyan" ? "var(--cyan)" : (color === "red" ? "var(--red)" : "var(--green)") }} title={window.BIT.fmt(v)}>
-                <span className="v">{window.BIT.fmtK(v)}</span>
+            <div className="stack stacked-tower">
+              <div className="bar bar-real" style={{ height: `${hR}%`, width: 22, background: realBg, borderRadius: hasPrev && p > 0 ? 0 : '3px 3px 0 0' }} title={`Realizado: ${window.BIT.fmt(v)}`}>
+                {!hasPrev && <span className="v">{window.BIT.fmtK(v)}</span>}
               </div>
+              {hasPrev && p > 0 && (
+                <div className="bar bar-prev" style={{ height: `${hP}%`, width: 22, background: prevBg, borderRadius: '3px 3px 0 0' }} title={`Previsto: ${window.BIT.fmt(p)}`} />
+              )}
+              {hasPrev && total > 0 && <span className="v stacked-v">{window.BIT.fmtK(total)}</span>}
             </div>
-            <span className="x">{labels[i].slice(0, 3)}</span>
+            <span className="x">{(labels[i] || '').slice(0, 3)}</span>
           </div>
         );
       })}
@@ -418,25 +430,44 @@ const SingleBars = ({ values, labels, color = "green", height = 200, onBarClick,
   );
 };
 
-const DailyBars = ({ values, color = "green", onBarClick, activeIdx }) => {
-  const max = Math.max(...values);
-  const subPeaks = values.map((v, i) => ({ v, i })).sort((a, b) => b.v - a.v).slice(0, 3).map(o => o.i);
+// DailyBars: 31 dias do mês. Quando valuesPrev é passado, empilha previsto em cima.
+const DailyBars = ({ values, valuesPrev, color = "green", colorPrev, onBarClick, activeIdx }) => {
+  const hasPrev = Array.isArray(valuesPrev);
+  const max = Math.max(...values.map((v, i) => (v || 0) + (hasPrev ? (valuesPrev[i] || 0) : 0)), 1);
+  const subPeaks = values.map((v, i) => ({ v: v + (hasPrev ? (valuesPrev[i] || 0) : 0), i })).sort((a, b) => b.v - a.v).slice(0, 3).map(o => o.i);
   const hasActive = activeIdx != null && activeIdx >= 0;
+  const prevBg = colorPrev || (color === "red" ? "#f59e0b" : "#22d3ee");
   return (
     <div className="daily">
       <div className="daily-bars">
         {values.map((v, i) => {
-          const h = (v / max) * 100;
+          const p = hasPrev ? (valuesPrev[i] || 0) : 0;
+          const hR = (v / max) * 100;
+          const hP = (p / max) * 100;
+          const total = v + p;
           const cls = `b ${color === "red" ? "red" : ""} ${subPeaks.includes(i) ? "peak" : ""}` +
             (hasActive && i === activeIdx ? " active" : "") +
             (hasActive && i !== activeIdx ? " dimmed" : "");
+          if (!hasPrev) {
+            return (
+              <div key={i} className={cls}
+                style={{ height: `${Math.max(hR, 1)}%`, cursor: onBarClick ? "pointer" : undefined }}
+                data-v={window.BIT.fmtK(v)}
+                title={`Dia ${i + 1}: ${window.BIT.fmt(v)}`}
+                onClick={onBarClick ? () => onBarClick(i, v) : undefined}
+              />
+            );
+          }
+          // Stacked: tower com bar realizado embaixo + bar previsto em cima
           return (
-            <div key={i} className={cls}
-              style={{ height: `${Math.max(h, 1)}%`, cursor: onBarClick ? "pointer" : undefined }}
-              data-v={window.BIT.fmtK(v)}
-              title={`Dia ${i + 1}: ${window.BIT.fmt(v)}`}
+            <div key={i} className={cls + " daily-tower"}
+              style={{ height: `${Math.max(hR + hP, 1)}%`, cursor: onBarClick ? "pointer" : undefined, display: 'flex', flexDirection: 'column-reverse', background: 'transparent' }}
+              title={`Dia ${i + 1}: real ${window.BIT.fmt(v)} / prev ${window.BIT.fmt(p)} / total ${window.BIT.fmt(total)}`}
               onClick={onBarClick ? () => onBarClick(i, v) : undefined}
-            />
+            >
+              {v > 0 && <div className="daily-real" style={{ height: `${(hR / Math.max(hR + hP, 1)) * 100}%`, background: color === "red" ? "var(--red)" : "var(--green)", width: '100%' }} />}
+              {p > 0 && <div className="daily-prev" style={{ height: `${(hP / Math.max(hR + hP, 1)) * 100}%`, background: prevBg, width: '100%' }} />}
+            </div>
           );
         })}
       </div>
