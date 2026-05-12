@@ -612,6 +612,10 @@ function aggregateTx(txList, year) {
   year = year || REF_YEAR;
   const months = ${JSON.stringify(MONTHS_FULL)};
   const MONTH_DATA = months.map(m => ({ m, receita: 0, despesa: 0 }));
+  // Series diárias e cumulativo de saldos (antes só vinham do build-time SEG;
+  // sem isso a Tesouraria crashava quando lia Breal.RECEITA_DIA via getBit).
+  const RECEITA_DIA = Array(31).fill(0);
+  const DESPESA_DIA = Array(31).fill(0);
   const recCat = new Map(), despCat = new Map();
   const recCli = new Map(), despForn = new Map();
   const extratoArr = [];
@@ -625,13 +629,16 @@ function aggregateTx(txList, year) {
     if (Number(ymonth) !== year) continue;
     const mIdx = parseInt(mes.slice(5,7), 10) - 1;
     if (mIdx < 0 || mIdx > 11) continue;
+    const dIdx = (dia >= 1 && dia <= 31) ? dia - 1 : -1;
     if (kind === 'r') {
       MONTH_DATA[mIdx].receita += valor;
+      if (dIdx >= 0) RECEITA_DIA[dIdx] += valor;
       totalReceita += valor;
       recCat.set(categoria, (recCat.get(categoria) || 0) + valor);
       if (cliente) recCli.set(cliente, (recCli.get(cliente) || 0) + valor);
     } else {
       MONTH_DATA[mIdx].despesa += valor;
+      if (dIdx >= 0) DESPESA_DIA[dIdx] += valor;
       totalDespesa += valor;
       despCat.set(categoria, (despCat.get(categoria) || 0) + valor);
       if (fornecedor) despForn.set(fornecedor, (despForn.get(fornecedor) || 0) + valor);
@@ -642,6 +649,10 @@ function aggregateTx(txList, year) {
     extratoArr.push(extRow);
     if (kind === 'r') extratoRecArr.push(extRow); else extratoDespArr.push(extRow);
   }
+
+  // Cumulativo: SALDOS_MES[i] = receita - despesa do mês i (não-cumulativo, igual buildSegment).
+  // Page do Tesouraria faz o running balance em cima disso.
+  const SALDOS_MES = MONTH_DATA.map(m => m.receita - m.despesa);
 
   // sort por data desc (string DD/MM/YYYY → Date) — aplica nos 3 arrays
   const sortByDateDesc = (a, b) => {
@@ -659,6 +670,9 @@ function aggregateTx(txList, year) {
 
   return {
     MONTH_DATA,
+    RECEITA_DIA,
+    DESPESA_DIA,
+    SALDOS_MES,
     RECEITA_CATEGORIAS: topN(recCat, 12),
     DESPESA_CATEGORIAS: topN(despCat, 12),
     RECEITA_CLIENTES: topN(recCli, 12),
