@@ -515,26 +515,51 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
           const mIdx0 = months[0] - 1; // 0-based
           const daysInMonth = new Date(refY, mIdx0 + 1, 0).getDate();
           const ym = String(refY) + '-' + String(months[0]).padStart(2, '0');
-          // Agrega a_pagar_receber por dia desse mês
-          const dailyDelta = Array(daysInMonth + 1).fill(0); // index 1..daysInMonth
+          const today = new Date();
+          const isCurrentMonth = (today.getFullYear() === refY) && (today.getMonth() === mIdx0);
+          const todayDay = today.getDate();
+          // Separa fluxos do mês em realizado (caixa real) e previsto (a-pagar/receber)
+          const dailyReal = Array(daysInMonth + 1).fill(0);
+          const dailyPrev = Array(daysInMonth + 1).fill(0);
           const allTx = (window.ALL_TX || []);
           for (const r of allTx) {
-            if (r[6] !== 0) continue;            // só a_pagar_receber
-            if (r[1] !== ym) continue;           // mês exato
+            if (r[1] !== ym) continue;
             const d = r[2];
-            if (d >= 1 && d <= daysInMonth) {
-              dailyDelta[d] += r[0] === 'r' ? r[5] : -r[5];
+            if (d < 1 || d > daysInMonth) continue;
+            const delta = r[0] === 'r' ? r[5] : -r[5];
+            if (r[6] === 1) dailyReal[d] += delta;
+            else dailyPrev[d] += delta;
+          }
+          // Calcula saldo por dia. Se mês corrente: ancora em HOJE com totalOperacional,
+          // back-projeta dias anteriores subtraindo o realizado posterior, forward-projeta
+          // dias futuros somando previsto. Se passado/futuro: começa do dia 1 com
+          // totalOperacional e acumula previsto+realizado (anchor menos preciso, mas
+          // sem snapshot histórico de saldo bancário não dá pra melhorar).
+          const balByDay = Array(daysInMonth + 1).fill(0);
+          if (isCurrentMonth) {
+            balByDay[todayDay] = totalOperacional;
+            // Trás: cada dia anterior = saldo do dia seguinte − realizado desse dia seguinte
+            for (let d = todayDay - 1; d >= 1; d--) {
+              balByDay[d] = balByDay[d + 1] - dailyReal[d + 1];
+            }
+            // Frente: cada dia seguinte = saldo do dia anterior + previsto desse dia
+            for (let d = todayDay + 1; d <= daysInMonth; d++) {
+              balByDay[d] = balByDay[d - 1] + dailyPrev[d];
+            }
+          } else {
+            let saldoD = totalOperacional;
+            for (let d = 1; d <= daysInMonth; d++) {
+              saldoD += (dailyReal[d] + dailyPrev[d]);
+              balByDay[d] = saldoD;
             }
           }
-          series = [totalOperacional];
-          labels = ['Início'];
-          let saldoD = totalOperacional;
+          series = [];
+          labels = [];
           for (let d = 1; d <= daysInMonth; d++) {
-            saldoD += dailyDelta[d];
-            series.push(saldoD);
+            series.push(balByDay[d]);
             labels.push(String(d).padStart(2, '0'));
           }
-          modoProj = 'dia';
+          modoProj = isCurrentMonth ? `dia · âncora hoje (${todayDay})` : 'dia';
         } else {
           // Mês-a-mês usando o segment build-time a_pagar_receber (12 valores fixos)
           const seg = (window.BIT_SEGMENTS || {}).a_pagar_receber || { MONTH_DATA: [] };
@@ -634,7 +659,7 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
             </div>
             <div style={{ marginTop: 8 }}>
               <div className="kpi-label" style={{ marginBottom: 6 }}>
-                Projeção · {modoProj === 'dia' ? `dia a dia (${B.MONTHS_FULL ? B.MONTHS_FULL[months[0] - 1] : 'mês'})` : 'mês a mês'} · operacional + a receber − a pagar · aplicação fora
+                Projeção · {modoProj.startsWith('dia') ? `${modoProj} · ${B.MONTHS_FULL ? B.MONTHS_FULL[months[0] - 1] : 'mês'}` : 'mês a mês'} · operacional + a receber − a pagar · aplicação fora
               </div>
               <TrendChart values={series} labels={labels} color="var(--cyan)" height={isMobile ? 160 : 200} showPoints={true} showLabels={!isMobile} gradientId="ts-proj" />
               <div style={{ display: 'flex', gap: 24, marginTop: 8, fontSize: 11, color: 'var(--mute)' }}>
