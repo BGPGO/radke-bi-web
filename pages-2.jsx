@@ -506,19 +506,51 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
         // Ordena por valor desc dentro de cada grupo
         contasOperacional.sort((a, b) => b[1] - a[1]);
         contasAplicacao.sort((a, b) => b[1] - a[1]);
-        // Projeção futura usando apenas operacional (aplicação não move dia-a-dia)
-        const seg = (window.BIT_SEGMENTS || {}).a_pagar_receber || { MONTH_DATA: [] };
-        const lastDate = new Date(last.data);
-        const lastMonthIdx = lastDate.getMonth();
-        const proj = [];
-        let saldoP = totalOperacional;
-        for (let i = lastMonthIdx + 1; i < 12; i++) {
-          const md = seg.MONTH_DATA[i] || { receita: 0, despesa: 0 };
-          saldoP += (md.receita || 0) - (md.despesa || 0);
-          proj.push({ m: B.MONTHS_FULL[i] || `M${i + 1}`, saldo: saldoP });
+        // Projeção operacional (#10+#11):
+        //  - Sem filtro de mês ou multi: mês-a-mês começando do mês após o "last.data"
+        //  - 1 mês selecionado: dia-a-dia (1..diasDoMês) usando a_pagar_receber daquele mês
+        const refY = year || (B.META && B.META.ref_year) || new Date().getFullYear();
+        let series, labels, modoProj;
+        if (isMonthFilter) {
+          const mIdx0 = months[0] - 1; // 0-based
+          const daysInMonth = new Date(refY, mIdx0 + 1, 0).getDate();
+          const ym = String(refY) + '-' + String(months[0]).padStart(2, '0');
+          // Agrega a_pagar_receber por dia desse mês
+          const dailyDelta = Array(daysInMonth + 1).fill(0); // index 1..daysInMonth
+          const allTx = (window.ALL_TX || []);
+          for (const r of allTx) {
+            if (r[6] !== 0) continue;            // só a_pagar_receber
+            if (r[1] !== ym) continue;           // mês exato
+            const d = r[2];
+            if (d >= 1 && d <= daysInMonth) {
+              dailyDelta[d] += r[0] === 'r' ? r[5] : -r[5];
+            }
+          }
+          series = [totalOperacional];
+          labels = ['Início'];
+          let saldoD = totalOperacional;
+          for (let d = 1; d <= daysInMonth; d++) {
+            saldoD += dailyDelta[d];
+            series.push(saldoD);
+            labels.push(String(d).padStart(2, '0'));
+          }
+          modoProj = 'dia';
+        } else {
+          // Mês-a-mês usando o segment build-time a_pagar_receber (12 valores fixos)
+          const seg = (window.BIT_SEGMENTS || {}).a_pagar_receber || { MONTH_DATA: [] };
+          const lastDate = new Date(last.data);
+          const lastMonthIdx = lastDate.getMonth();
+          const proj = [];
+          let saldoP = totalOperacional;
+          for (let i = lastMonthIdx + 1; i < 12; i++) {
+            const md = seg.MONTH_DATA[i] || { receita: 0, despesa: 0 };
+            saldoP += (md.receita || 0) - (md.despesa || 0);
+            proj.push({ m: B.MONTHS_FULL[i] || `M${i + 1}`, saldo: saldoP });
+          }
+          series = [totalOperacional, ...proj.map(p => p.saldo)];
+          labels = ['Hoje', ...proj.map(p => p.m.slice(0, 3))];
+          modoProj = 'mes';
         }
-        const series = [totalOperacional, ...proj.map(p => p.saldo)];
-        const labels = ['Hoje', ...proj.map(p => p.m.slice(0, 3))];
         const minProj = Math.min(...series);
         const maxProj = Math.max(...series);
         // Componente inline pra editar saldo de uma conta
@@ -601,7 +633,9 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
               </div>
             </div>
             <div style={{ marginTop: 8 }}>
-              <div className="kpi-label" style={{ marginBottom: 6 }}>Projeção mensal (operacional + a receber − a pagar · aplicação fora)</div>
+              <div className="kpi-label" style={{ marginBottom: 6 }}>
+                Projeção · {modoProj === 'dia' ? `dia a dia (${B.MONTHS_FULL ? B.MONTHS_FULL[months[0] - 1] : 'mês'})` : 'mês a mês'} · operacional + a receber − a pagar · aplicação fora
+              </div>
               <TrendChart values={series} labels={labels} color="var(--cyan)" height={isMobile ? 160 : 200} showPoints={true} showLabels={!isMobile} gradientId="ts-proj" />
               <div style={{ display: 'flex', gap: 24, marginTop: 8, fontSize: 11, color: 'var(--mute)' }}>
                 <span>Mínima projetada: <b style={{ color: minProj >= 0 ? 'var(--green)' : 'var(--red)' }}>{B.fmt(minProj)}</b></span>
