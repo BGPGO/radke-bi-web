@@ -35,7 +35,7 @@ const _MiniKpi4 = ({ label, value, hint, tone, nonMonetary }) => (
 // ============================================================
 // PageHierarquia — Arvore visual com SVG conectores (estilo PBIX)
 // ============================================================
-const PageHierarquia = ({ statusFilter, year, month, drilldown, setDrilldown }) => {
+const PageHierarquia = ({ statusFilter, year, months, drilldown, setDrilldown }) => {
   const E = (typeof window !== "undefined" && window.BIT_RADKE_EXTRAS) || null;
   if (!E || !E.ads || !E.ads.rows || E.ads.rows.length === 0) {
     return (
@@ -349,7 +349,7 @@ const PageHierarquia = ({ statusFilter, year, month, drilldown, setDrilldown }) 
 // ============================================================
 // PageDetalhado — 2 BarLists topo + matrix qtd × faturado
 // ============================================================
-const PageDetalhado = ({ statusFilter, year, month, drilldown, setDrilldown }) => {
+const PageDetalhado = ({ statusFilter, year, months, drilldown, setDrilldown }) => {
   const E = (typeof window !== "undefined" && window.BIT_RADKE_EXTRAS) || null;
   if (!E || !E.faturamento || !E.abc) {
     return (
@@ -366,16 +366,21 @@ const PageDetalhado = ({ statusFilter, year, month, drilldown, setDrilldown }) =
   const A = E.abc;
   const items = F.items || [];
 
-  // Filtro reativo por mês do header (year fixo no anoRef do faturamento)
-  const monthIdxFiltered = (month && month > 0) ? (month - 1) : null;
+  // Filtro reativo por mês(es) do header. months: number[] (1-12). Vazio = todos.
+  // monthSet contém os índices 0-based pra bater com it.mes do build.
+  const monthSet = useMemo(() => {
+    if (!Array.isArray(months) || months.length === 0) return null;
+    return new Set(months.map(m => m - 1));
+  }, [months]);
+  const monthIdxFiltered = (Array.isArray(months) && months.length === 1) ? (months[0] - 1) : null;
   const monthsAbbr = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
 
   const itemsFiltered = useMemo(() => {
     return items.filter(it => {
-      if (monthIdxFiltered != null && it.mes !== monthIdxFiltered) return false;
+      if (monthSet && !monthSet.has(it.mes)) return false;
       return true;
     });
-  }, [items, monthIdxFiltered]);
+  }, [items, monthSet]);
 
   // Recomputa familia x valor e cliente x valor a partir dos items filtrados
   const aggBy = (arr, keyFn) => {
@@ -558,7 +563,7 @@ const PageDetalhado = ({ statusFilter, year, month, drilldown, setDrilldown }) =
 // ============================================================
 // PageProfundaCliente — Tabela com bar overlay por linha
 // ============================================================
-const PageProfundaCliente = ({ statusFilter, year, month, drilldown, setDrilldown }) => {
+const PageProfundaCliente = ({ statusFilter, year, months, drilldown, setDrilldown }) => {
   const ALL_TX = (typeof window !== "undefined" && window.ALL_TX) || [];
   const REF_YEAR = (typeof window !== "undefined" && window.REF_YEAR) || new Date().getFullYear();
 
@@ -728,7 +733,7 @@ const _Funnel = ({ levels }) => {
   );
 };
 
-const PageCRM = ({ statusFilter, year, month, drilldown, setDrilldown }) => {
+const PageCRM = ({ statusFilter, year, months, drilldown, setDrilldown }) => {
   const E = (typeof window !== "undefined" && window.BIT_RADKE_EXTRAS) || null;
   const C0 = E && E.crm;
   const hasData = C0 && Array.isArray(C0.rows) && C0.rows.length > 0;
@@ -747,16 +752,21 @@ const PageCRM = ({ statusFilter, year, month, drilldown, setDrilldown }) => {
 
   const refYearCRM = (C0.totais && C0.totais.anoCRM) || (window.REF_YEAR || new Date().getFullYear());
   const yearActive = year || refYearCRM;
-  const monthIdxFiltered = (month && month > 0) ? (month - 1) : null; // 0-based; null = ano completo
+  // months: number[] (1-12). Vazio = ano completo. monthSet com índice 0-based pra bater com r.mes.
+  const monthSet = useMemo(() => {
+    if (!Array.isArray(months) || months.length === 0) return null;
+    return new Set(months.map(m => m - 1));
+  }, [months]);
+  const monthIdxFiltered = (Array.isArray(months) && months.length === 1) ? (months[0] - 1) : null;
 
-  // Aplica filtro reativo (year + month) no escopo da PageCRM apenas — não toca no build,
+  // Aplica filtro reativo (year + months) no escopo da PageCRM apenas — não toca no build,
   // pra não estragar nada das outras telas. Recomputa totais, funil, aggregates client-side.
   const C = useMemo(() => {
     const FASES_ORDER = ['03 Proposta', '04 Negociação', '05 Aguardando Pedido', '06 Conclusão'];
     const faseRank = (f) => FASES_ORDER.indexOf(f);
     const rows = C0.rows.filter(r => {
       if (r.ano !== yearActive) return false;
-      if (monthIdxFiltered != null && r.mes !== monthIdxFiltered) return false;
+      if (monthSet && !monthSet.has(r.mes)) return false;
       return true;
     });
     const totalLeads = rows.length;
@@ -816,7 +826,7 @@ const PageCRM = ({ statusFilter, year, month, drilldown, setDrilldown }) => {
         ticketMedio, anoCRM: yearActive,
       },
     };
-  }, [C0, yearActive, monthIdxFiltered]);
+  }, [C0, yearActive, monthSet]);
 
   const T = C.totais;
 

@@ -1100,7 +1100,28 @@ table.t tr.total td {
   transition: filter 150ms;
 }
 .ov-bar.red { background: #ef4444; }
+/* Cores "previsto" (modo Tudo): azul ciano em cima do verde realizado,
+   amarelo ámbar em cima do vermelho pago. Bordas mais arredondadas em cima
+   pra indicar fim do stack. */
+.ov-bar.cyan-prev { background: #22d3ee; border-radius: 3px 3px 0 0; }
+.ov-bar.amber-prev { background: #f59e0b; border-radius: 3px 3px 0 0; }
 .ov-bar:hover { filter: brightness(1.15); }
+.ov-bar-tower {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: flex-start;
+  width: 18px;
+  height: 100%;
+  position: relative;
+}
+.ov-bar-tower .ov-bar { width: 100%; border-radius: 0; }
+.ov-bar-tower .ov-bar:first-child { border-radius: 3px 3px 0 0; }
+.ov-bar-tower .ov-bar.green,
+.ov-bar-tower .ov-bar.red { border-radius: 0; }
+.ov-bar-tower .ov-bar.green:only-child,
+.ov-bar-tower .ov-bar.red:only-child { border-radius: 3px 3px 0 0; }
+.ov-bar-chip.stacked { position: absolute; left: 50%; transform: translateX(-50%); top: auto; }
 .ov-bar-chip {
   position: absolute;
   top: -22px;
@@ -1208,6 +1229,67 @@ table.t tr.total td {
 .legend-pill.green .dot { background: var(--green); box-shadow: 0 0 8px -1px rgba(16,185,129,0.7); }
 .legend-pill.red   .dot { background: var(--red);   box-shadow: 0 0 8px -1px rgba(239,68,68,0.65); }
 .legend-pill.cyan  .dot { background: var(--cyan);  box-shadow: 0 0 8px -1px rgba(34,211,238,0.65); }
+.legend-pill.amber .dot { background: #f59e0b;     box-shadow: 0 0 8px -1px rgba(245,158,11,0.65); }
+
+/* ============== TESOURARIA — SALDO EDITÁVEL ============== */
+.saldo-banco-card { transition: border-color 120ms, background 120ms; }
+.saldo-banco-card:hover { border-color: rgba(34,211,238,0.45); }
+.saldo-banco-card.aplicacao { border-color: rgba(168,85,247,0.30); background: rgba(168,85,247,0.05); }
+.saldo-edit-input {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1.5px solid var(--cyan);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text);
+  outline: none;
+}
+.btn-mini {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--mute);
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  line-height: 1;
+}
+.btn-mini:hover { color: var(--cyan); border-color: var(--cyan-dim); }
+.card4-adiant-fornec { border-color: rgba(245,158,11,0.30); background: rgba(245,158,11,0.05); }
+.card4-adiant-cli    { border-color: rgba(16,185,129,0.30); background: rgba(16,185,129,0.05); }
+.card4-pag-atr       { border-color: rgba(239,68,68,0.30); background: rgba(239,68,68,0.05); }
+.card4-rec-atr       { border-color: rgba(251,191,36,0.30); background: rgba(251,191,36,0.05); }
+
+/* ============== FATURAMENTO — TABS ============== */
+.fat-tabs {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.fat-tab {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 140ms;
+}
+.fat-tab:hover { background: var(--surface-2); color: var(--text); border-color: var(--cyan-dim); }
+.fat-tab.active {
+  background: rgba(34,211,238,0.12);
+  color: var(--cyan);
+  border-color: rgba(34,211,238,0.30);
+  font-weight: 600;
+}
 .legend-pill .lbl  { color: var(--text-2); font-weight: 500; }
 .legend-pill .val  {
   color: var(--text);
@@ -1901,6 +1983,62 @@ table.t tr.total td {
 .header-year:hover { border-color: var(--cyan-dim); }
 .header-year:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(34,211,238,0.15); }
 .header-year option { background: var(--surface); color: var(--text); }
+
+/* ============== MONTH MULTI-SELECT (header) ============== */
+.mms { position: relative; display: inline-block; margin-right: 10px; }
+.mms-trigger {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 0;
+  min-width: 140px;
+  justify-content: space-between;
+  font-family: inherit;
+}
+.mms-trigger:hover { border-color: var(--cyan-dim); }
+.mms-pop {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  border-radius: 10px;
+  padding: 8px;
+  min-width: 220px;
+  z-index: 50;
+  box-shadow: 0 12px 32px -8px rgba(0,0,0,0.65);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+.mms-preset {
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-2);
+  padding: 8px 10px;
+  border-radius: 7px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.mms-preset:hover { background: var(--surface-2); color: var(--text); }
+.mms-preset.active { background: rgba(34,211,238,0.12); color: var(--cyan); border-color: rgba(34,211,238,0.25); }
+.mms-sep { height: 1px; background: var(--border); margin: 6px 4px; }
+.mms-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+  color: var(--text-2);
+  cursor: pointer;
+  border-radius: 6px;
+  user-select: none;
+}
+.mms-row:hover { background: var(--surface-2); color: var(--text); }
+.mms-row input[type="checkbox"] { accent-color: var(--cyan); width: 14px; height: 14px; cursor: pointer; }
 
 /* ============== HIERARQUIA ADS (PageHierarquia) ============== */
 .hier-filters {

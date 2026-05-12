@@ -5,8 +5,8 @@ const { useState, useMemo, useEffect } = React;
 // concatenado (build-jsx.cjs). Reutilizado aqui pra ajustar height/showLabels dos
 // TrendCharts em mobile.
 
-const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, month }) => {
-  const B = useMemo(() => window.getBit(statusFilter, drilldown, year, month), [statusFilter, drilldown, year, month]);
+const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, months }) => {
+  const B = useMemo(() => window.getBit(statusFilter, drilldown, year, months), [statusFilter, drilldown, year, months]);
   const isMobile = useIsMobile();
   const [view, setView] = useState("horizontal");
   const [range, setRange] = useState("12M");
@@ -248,18 +248,25 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
   );
 };
 
-const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, month }) => {
-  const B = useMemo(() => window.getBit(statusFilter, drilldown, year, month), [statusFilter, drilldown, year, month]);
+const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, months }) => {
+  const B = useMemo(() => window.getBit(statusFilter, drilldown, year, months), [statusFilter, drilldown, year, months]);
   const isMobile = useIsMobile();
-  const SEG = window.BIT_SEGMENTS || {};
-  const recebido = (SEG.realizado && SEG.realizado.KPIS && SEG.realizado.KPIS.TOTAL_RECEITA) || 0;
-  const aReceber = (SEG.a_pagar_receber && SEG.a_pagar_receber.KPIS && SEG.a_pagar_receber.KPIS.TOTAL_RECEITA) || 0;
-  const pago = (SEG.realizado && SEG.realizado.KPIS && SEG.realizado.KPIS.TOTAL_DESPESA) || 0;
-  const aPagar = (SEG.a_pagar_receber && SEG.a_pagar_receber.KPIS && SEG.a_pagar_receber.KPIS.TOTAL_DESPESA) || 0;
-  const recDiaSeg = (SEG.realizado && SEG.realizado.RECEITA_DIA) || B.RECEITA_DIA;
-  const pagoDiaSeg = (SEG.realizado && SEG.realizado.DESPESA_DIA) || B.DESPESA_DIA;
-  const aReceberDiaSeg = (SEG.a_pagar_receber && SEG.a_pagar_receber.RECEITA_DIA) || B.RECEITA_DIA;
-  const aPagarDiaSeg = (SEG.a_pagar_receber && SEG.a_pagar_receber.DESPESA_DIA) || B.DESPESA_DIA;
+  // KPIs e pulso REATIVOS a filtro (antes vinha de window.BIT_SEGMENTS global, "congelava" com filtro de mês).
+  const Breal = useMemo(() => window.getBit('realizado', drilldown, year, months), [drilldown, year, months]);
+  const Bprev = useMemo(() => window.getBit('a_pagar_receber', drilldown, year, months), [drilldown, year, months]);
+  const recebido = Breal.TOTAL_RECEITA;
+  const aReceber = Bprev.TOTAL_RECEITA;
+  const pago = Breal.TOTAL_DESPESA;
+  const aPagar = Bprev.TOTAL_DESPESA;
+  // Granularidade: 1 mês selecionado → pulso dia-a-dia (31 valores); ano/multi → mês-a-mês (12 valores).
+  const isMonthFilter = Array.isArray(months) && months.length === 1;
+  const pulsoLabels = isMonthFilter
+    ? Array.from({ length: 31 }, (_, i) => String(i + 1))
+    : (B.MONTHS || []).map(m => m.slice(0, 3));
+  const recDiaSeg = isMonthFilter ? Breal.RECEITA_DIA : Breal.MONTH_DATA.map(m => m.receita);
+  const pagoDiaSeg = isMonthFilter ? Breal.DESPESA_DIA : Breal.MONTH_DATA.map(m => m.despesa);
+  const aReceberDiaSeg = isMonthFilter ? Bprev.RECEITA_DIA : Bprev.MONTH_DATA.map(m => m.receita);
+  const aPagarDiaSeg = isMonthFilter ? Bprev.DESPESA_DIA : Bprev.MONTH_DATA.map(m => m.despesa);
 
   // Saldo acumulado = evolução do caixa REAL (só realizado). Usar SEG.tudo aqui era bug:
   // misturava a-pagar/receber futuro com movimento já realizado, e a back-projection
@@ -375,6 +382,59 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
     return [...byDay.entries()].map(([data, saldo]) => ({ data, saldo }));
   }, [fluxoFuturoFull]);
 
+  // ============ SALDOS BANCÁRIOS EDITÁVEIS (#12) ============
+  // Override por conta em localStorage. Quando o usuário edita, valor sobrescreve
+  // o que veio da planilha. Reset volta pro valor original.
+  const [saldoOverride, setSaldoOverride] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('radke.saldos.override') || '{}'); } catch (e) { return {}; }
+  });
+  const [editingBanco, setEditingBanco] = useState(null);
+  const [editValue, setEditValue] = useState('');
+  const saveOverride = (nome) => {
+    const num = parseFloat(editValue.replace(/\./g, '').replace(',', '.'));
+    if (!isFinite(num)) { setEditingBanco(null); return; }
+    const next = Object.assign({}, saldoOverride, { [nome]: num });
+    setSaldoOverride(next);
+    try { localStorage.setItem('radke.saldos.override', JSON.stringify(next)); } catch (e) {}
+    setEditingBanco(null);
+  };
+  const resetOverride = (nome) => {
+    const next = Object.assign({}, saldoOverride);
+    delete next[nome];
+    setSaldoOverride(next);
+    try { localStorage.setItem('radke.saldos.override', JSON.stringify(next)); } catch (e) {}
+    setEditingBanco(null);
+  };
+
+  // ============ 4 CARDS NOVOS (#14): Adiantamentos + Atrasados ============
+  // Adiantamentos: categoria contém "adiantamento" (independente de realizado).
+  // Atrasados: não realizado + data de vencimento < hoje.
+  const cards4 = useMemo(() => {
+    const allTx = window.ALL_TX || [];
+    let adiantFornec = 0, adiantCli = 0, pagAtrasado = 0, recAtrasado = 0;
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const tk = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    const refY = year || (B.META && B.META.ref_year) || new Date().getFullYear();
+    for (const r of allTx) {
+      const kind = r[0], mes = r[1], dia = r[2], categoria = r[3] || '', valor = r[5] || 0, realizado = r[6];
+      if (!mes || !dia) continue;
+      if (parseInt(mes.slice(0, 4), 10) !== refY) continue;
+      if (/adiantamento/i.test(categoria)) {
+        if (kind === 'd') adiantFornec += valor;
+        else if (kind === 'r') adiantCli += valor;
+        continue;
+      }
+      if (realizado === 0) {
+        const dKey = parseInt(mes.slice(0, 4), 10) * 10000 + parseInt(mes.slice(5, 7), 10) * 100 + dia;
+        if (dKey < tk) {
+          if (kind === 'd') pagAtrasado += valor;
+          else if (kind === 'r') recAtrasado += valor;
+        }
+      }
+    }
+    return { adiantFornec, adiantCli, pagAtrasado, recAtrasado };
+  }, [year, B.META]);
+
   return (
     <div className="page">
       <div className="page-title">
@@ -398,73 +458,152 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
       <div className="row row-1-1">
         <div className="card">
           <div className="card-title-row">
-            <h2 className="card-title">Pulso de receitas</h2>
+            <h2 className="card-title">Pulso de receitas · {isMonthFilter ? "dia a dia" : "mês a mês"}</h2>
             <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
               <span className="chip green">Recebido · {B.fmt(recebido)}</span>
               <span className="chip cyan">A receber · {B.fmt(aReceber)}</span>
             </div>
           </div>
-          <DailyBars values={recDiaSeg} color="green" />
+          {isMonthFilter
+            ? <DailyBars values={recDiaSeg} color="green" />
+            : <SingleBars values={recDiaSeg} labels={pulsoLabels} color="green" height={180} />}
         </div>
         <div className="card">
           <div className="card-title-row">
-            <h2 className="card-title">Pulso de despesas</h2>
+            <h2 className="card-title">Pulso de despesas · {isMonthFilter ? "dia a dia" : "mês a mês"}</h2>
             <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
               <span className="chip red">Pago · {B.fmt(pago)}</span>
               <span className="chip" style={{ background: "rgba(245,158,11,0.12)", color: "#fcd34d", borderColor: "rgba(245,158,11,0.28)" }}>A pagar · {B.fmt(aPagar)}</span>
             </div>
           </div>
-          <DailyBars values={pagoDiaSeg} color="red" />
+          {isMonthFilter
+            ? <DailyBars values={pagoDiaSeg} color="red" />
+            : <SingleBars values={pagoDiaSeg} labels={pulsoLabels} color="red" height={180} />}
         </div>
       </div>
 
-      {/* Saldo real (planilha de saldos da RADKE) + projeção futura */}
-      {(function() {
+      {/* Saldo real (planilha + override) + 4 cards novos + projeção futura */}
+      {(function () {
         const SALDOS = (window.BIT_RADKE_EXTRAS && window.BIT_RADKE_EXTRAS.saldos) || null;
         if (!SALDOS || !SALDOS.last) return null;
         const last = SALDOS.last;
-        const contas = Object.entries(last.contas).sort((a, b) => b[1] - a[1]);
-        // Projeção: saldo último + ∑(a receber) − ∑(a pagar) acumulado por mês.
-        // Usa BIT_SEGMENTS.a_pagar_receber pra somar ainda-pendente por mês futuro.
+        // Aplica override por conta antes de qualquer cálculo
+        const contasOverridden = Object.entries(last.contas).map(([nome, v]) => {
+          const eff = saldoOverride[nome] != null ? saldoOverride[nome] : v;
+          return [nome, eff, v];  // [nome, valor efetivo, valor original]
+        });
+        // Separa aplicação (#13) do saldo operacional. Padrão: nomes que contêm "invest" ou "aplicaç".
+        const APL_RE = /(invest|aplicaç)/i;
+        const contasOperacional = contasOverridden.filter(([nome]) => !APL_RE.test(nome));
+        const contasAplicacao = contasOverridden.filter(([nome]) => APL_RE.test(nome));
+        // Total operacional (entra na projeção). Total aplicação (informativo apenas).
+        const totalOperacional = contasOperacional.reduce((s, [, v]) => s + v, 0);
+        const totalAplicacao = contasAplicacao.reduce((s, [, v]) => s + v, 0);
+        const totalEfetivo = totalOperacional + totalAplicacao;
+        // Ordena por valor desc dentro de cada grupo
+        contasOperacional.sort((a, b) => b[1] - a[1]);
+        contasAplicacao.sort((a, b) => b[1] - a[1]);
+        // Projeção futura usando apenas operacional (aplicação não move dia-a-dia)
         const seg = (window.BIT_SEGMENTS || {}).a_pagar_receber || { MONTH_DATA: [] };
         const lastDate = new Date(last.data);
         const lastMonthIdx = lastDate.getMonth();
         const proj = [];
-        let saldo = last.total;
+        let saldoP = totalOperacional;
         for (let i = lastMonthIdx + 1; i < 12; i++) {
           const md = seg.MONTH_DATA[i] || { receita: 0, despesa: 0 };
-          saldo += (md.receita || 0) - (md.despesa || 0);
-          proj.push({ m: B.MONTHS_FULL[i] || `M${i+1}`, saldo });
+          saldoP += (md.receita || 0) - (md.despesa || 0);
+          proj.push({ m: B.MONTHS_FULL[i] || `M${i + 1}`, saldo: saldoP });
         }
-        const series = [last.total, ...proj.map(p => p.saldo)];
-        const labels = ['Hoje', ...proj.map(p => p.m.slice(0,3))];
+        const series = [totalOperacional, ...proj.map(p => p.saldo)];
+        const labels = ['Hoje', ...proj.map(p => p.m.slice(0, 3))];
         const minProj = Math.min(...series);
         const maxProj = Math.max(...series);
+        // Componente inline pra editar saldo de uma conta
+        const renderCard = ([nome, valor, original], aplicacao) => {
+          const isEditing = editingBanco === nome;
+          const isEdited = saldoOverride[nome] != null;
+          return (
+            <div key={nome} className={`indicator-card saldo-banco-card ${aplicacao ? 'aplicacao' : ''}`} style={{ padding: 12 }}>
+              <div className="kpi-label" style={{ fontSize: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 6 }}>
+                <span>{nome}{aplicacao ? ' · APLICAÇÃO' : ''}</span>
+                {isEdited && (
+                  <button type="button" className="btn-mini" onClick={() => resetOverride(nome)} title={`Original: ${B.fmt(original)}`}>↺</button>
+                )}
+              </div>
+              {isEditing ? (
+                <input
+                  className="saldo-edit-input"
+                  type="text"
+                  autoFocus
+                  value={editValue}
+                  onChange={(e) => setEditValue(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') saveOverride(nome);
+                    else if (e.key === 'Escape') setEditingBanco(null);
+                  }}
+                  onBlur={() => saveOverride(nome)}
+                />
+              ) : (
+                <div
+                  style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: 16, color: valor >= 0 ? 'var(--green)' : 'var(--red)', cursor: 'pointer' }}
+                  onClick={() => { setEditingBanco(nome); setEditValue(String(valor.toFixed(2)).replace('.', ',')); }}
+                  title="Clique para editar"
+                >
+                  {B.fmt(valor)}{isEdited && <span style={{ marginLeft: 6, color: 'var(--cyan)', fontSize: 10 }}>(editado)</span>}
+                </div>
+              )}
+            </div>
+          );
+        };
         return (
           <div className="card" style={{ marginBottom: 14 }}>
             <div className="card-title-row">
               <h2 className="card-title">Saldo atual e projeção</h2>
-              <span className="chip cyan">Última atualização: {last.data.split('-').reverse().join('/')}</span>
+              <span className="chip cyan">Última atualização: {last.data.split('-').reverse().join('/')} · clique no valor para editar</span>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 12, marginBottom: 18 }}>
-              {contas.map(([nome, v]) => (
-                <div key={nome} className="indicator-card" style={{ padding: 12 }}>
-                  <div className="kpi-label" style={{ fontSize: 10 }}>{nome}</div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: 16, color: v >= 0 ? 'var(--green)' : 'var(--red)' }}>{B.fmt(v)}</div>
-                </div>
-              ))}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 12, marginBottom: 12 }}>
+              {contasOperacional.map(c => renderCard(c, false))}
               <div className="indicator-card" style={{ padding: 12, background: 'rgba(34,211,238,0.08)' }}>
-                <div className="kpi-label" style={{ fontSize: 10 }}>Total</div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: 18, color: 'var(--cyan)' }}>{B.fmt(last.total)}</div>
+                <div className="kpi-label" style={{ fontSize: 10 }}>Total operacional</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: 18, color: 'var(--cyan)' }}>{B.fmt(totalOperacional)}</div>
+              </div>
+            </div>
+            {contasAplicacao.length > 0 && (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 12, marginBottom: 12 }}>
+                {contasAplicacao.map(c => renderCard(c, true))}
+                <div className="indicator-card" style={{ padding: 12, background: 'rgba(168,85,247,0.08)' }}>
+                  <div className="kpi-label" style={{ fontSize: 10 }}>Total aplicação (informativo)</div>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: 16, color: '#a78bfa' }}>{B.fmt(totalAplicacao)}</div>
+                  <div className="kpi-label" style={{ fontSize: 9, marginTop: 4 }}>Total geral (op + apl): <b>{B.fmt(totalEfetivo)}</b></div>
+                </div>
+              </div>
+            )}
+            {/* 4 cards novos: adiantamentos + atrasados */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: 12, marginBottom: 18 }}>
+              <div className="indicator-card card4-adiant-fornec" style={{ padding: 12 }}>
+                <div className="kpi-label" style={{ fontSize: 10 }}>ADIANTAMENTO A FORNECEDOR</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: 16, color: '#f59e0b' }}>{B.fmt(cards4.adiantFornec)}</div>
+              </div>
+              <div className="indicator-card card4-adiant-cli" style={{ padding: 12 }}>
+                <div className="kpi-label" style={{ fontSize: 10 }}>ADIANTAMENTO DE CLIENTES</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: 16, color: 'var(--green)' }}>{B.fmt(cards4.adiantCli)}</div>
+              </div>
+              <div className="indicator-card card4-pag-atr" style={{ padding: 12 }}>
+                <div className="kpi-label" style={{ fontSize: 10 }}>PAGAMENTOS ATRASADOS</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: 16, color: 'var(--red)' }}>{B.fmt(cards4.pagAtrasado)}</div>
+              </div>
+              <div className="indicator-card card4-rec-atr" style={{ padding: 12 }}>
+                <div className="kpi-label" style={{ fontSize: 10 }}>RECEBIMENTOS ATRASADOS</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: 16, color: '#fbbf24' }}>{B.fmt(cards4.recAtrasado)}</div>
               </div>
             </div>
             <div style={{ marginTop: 8 }}>
-              <div className="kpi-label" style={{ marginBottom: 6 }}>Projeção mensal (saldo + a receber − a pagar)</div>
+              <div className="kpi-label" style={{ marginBottom: 6 }}>Projeção mensal (operacional + a receber − a pagar · aplicação fora)</div>
               <TrendChart values={series} labels={labels} color="var(--cyan)" height={isMobile ? 160 : 200} showPoints={true} showLabels={!isMobile} gradientId="ts-proj" />
               <div style={{ display: 'flex', gap: 24, marginTop: 8, fontSize: 11, color: 'var(--mute)' }}>
                 <span>Mínima projetada: <b style={{ color: minProj >= 0 ? 'var(--green)' : 'var(--red)' }}>{B.fmt(minProj)}</b></span>
                 <span>Máxima projetada: <b style={{ color: 'var(--green)' }}>{B.fmt(maxProj)}</b></span>
-                <span>Final do ano: <b style={{ color: series[series.length-1] >= 0 ? 'var(--green)' : 'var(--red)' }}>{B.fmt(series[series.length-1])}</b></span>
+                <span>Final do ano: <b style={{ color: series[series.length - 1] >= 0 ? 'var(--green)' : 'var(--red)' }}>{B.fmt(series[series.length - 1])}</b></span>
               </div>
             </div>
           </div>
@@ -640,8 +779,8 @@ const SaldoProjetadoChart = ({ pontos, saldoInicial }) => {
   );
 };
 
-const PageComparativo = ({ statusFilter, drilldown, setDrilldown, year, month }) => {
-  const B = useMemo(() => window.getBit(statusFilter, drilldown, year, month), [statusFilter, drilldown, year, month]);
+const PageComparativo = ({ statusFilter, drilldown, setDrilldown, year, months }) => {
+  const B = useMemo(() => window.getBit(statusFilter, drilldown, year, months), [statusFilter, drilldown, year, months]);
   const refYear = window.REF_YEAR || new Date().getFullYear();
   const fmt = (B && B.fmt) || (n => `R$ ${n.toFixed(2)}`);
   const fmtPct = (B && B.fmtPct) || (n => `${n.toFixed(1)}%`);

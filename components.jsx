@@ -157,23 +157,93 @@ const YearSelect = ({ value, onChange, available }) => {
 };
 
 const MONTH_OPTS = [
-  { v: 0, label: "Ano completo" },
   { v: 1, label: "Janeiro" }, { v: 2, label: "Fevereiro" }, { v: 3, label: "Março" },
   { v: 4, label: "Abril" }, { v: 5, label: "Maio" }, { v: 6, label: "Junho" },
   { v: 7, label: "Julho" }, { v: 8, label: "Agosto" }, { v: 9, label: "Setembro" },
   { v: 10, label: "Outubro" }, { v: 11, label: "Novembro" }, { v: 12, label: "Dezembro" },
 ];
+const MONTH_SHORT = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
 
-const MonthSelect = ({ value, onChange }) => (
-  <select
-    className="header-year"
-    value={value || 0}
-    onChange={e => onChange(Number(e.target.value))}
-    title="Mês de referência (Ano completo = todos)"
-  >
-    {MONTH_OPTS.map(o => <option key={o.v} value={o.v}>{o.label}</option>)}
-  </select>
-);
+// Multi-select de mês com checkboxes. Live filter (sem botão Aplicar).
+// Estado: months: number[] (1-12). Vazio = "Ano completo".
+// Preset "Ano corrente": months = [1..mesAtual].
+const MonthMultiSelect = ({ months, onChange }) => {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  const safe = Array.isArray(months) ? months : [];
+  // Click-outside fecha o dropdown
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e) => { if (ref.current && !ref.current.contains(e.target)) setOpen(false); };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [open]);
+  const toggle = (v) => {
+    const set = new Set(safe);
+    if (set.has(v)) set.delete(v); else set.add(v);
+    onChange([...set].sort((a, b) => a - b));
+  };
+  const setAnoCompleto = () => onChange([]);
+  const setAnoCorrente = () => {
+    const today = new Date();
+    // YTD: meses 1..mesAtual (1-indexed). Janeiro = 1; mês 12 = dezembro.
+    const cur = today.getMonth() + 1;
+    onChange(Array.from({ length: cur }, (_, i) => i + 1));
+  };
+  // Detecta se a seleção atual é exatamente "Ano corrente" (1..mesAtual)
+  const isAnoCorrente = (() => {
+    if (safe.length === 0) return false;
+    const today = new Date();
+    const cur = today.getMonth() + 1;
+    if (safe.length !== cur) return false;
+    for (let i = 0; i < cur; i++) if (safe[i] !== i + 1) return false;
+    return true;
+  })();
+  // Label do botão
+  const label = (() => {
+    if (safe.length === 0) return "Ano completo";
+    if (isAnoCorrente) return "Ano corrente";
+    if (safe.length === 1) return MONTH_OPTS.find(o => o.v === safe[0]).label;
+    if (safe.length === 12) return "Todos os meses";
+    return `${safe.length} meses`;
+  })();
+  return (
+    <div className="mms" ref={ref}>
+      <button
+        type="button"
+        className="header-year mms-trigger"
+        onClick={() => setOpen(o => !o)}
+        title="Mês(es) de referência"
+      >
+        <span>{label}</span>
+        <svg width="10" height="10" viewBox="0 0 10 10" style={{ marginLeft: 6, opacity: 0.6 }}>
+          <path d="M2 4 L5 7 L8 4" stroke="currentColor" fill="none" strokeWidth="1.5" />
+        </svg>
+      </button>
+      {open && (
+        <div className="mms-pop">
+          <button type="button" className={`mms-preset ${safe.length === 0 ? "active" : ""}`} onClick={setAnoCompleto}>
+            Ano completo
+          </button>
+          <button type="button" className={`mms-preset ${isAnoCorrente ? "active" : ""}`} onClick={setAnoCorrente}>
+            Ano corrente (YTD)
+          </button>
+          <div className="mms-sep" />
+          {MONTH_OPTS.map(o => (
+            <label key={o.v} className="mms-row">
+              <input
+                type="checkbox"
+                checked={safe.includes(o.v)}
+                onChange={() => toggle(o.v)}
+              />
+              <span>{o.label}</span>
+            </label>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
 // BiExportButton: modal com checkboxes pra exportar telas selecionadas como PDF
 const BI_EXPORT_PAGES = [
@@ -255,7 +325,7 @@ const BiExportButton = () => {
 };
 
 // Header: breadcrumb + YearSelect + MonthSelect + StatusFilter
-const Header = ({ page, onToggleSidebar, statusFilter, setStatusFilter, year, setYear, month, setMonth }) => {
+const Header = ({ page, onToggleSidebar, statusFilter, setStatusFilter, year, setYear, months, setMonths }) => {
   return (
     <header className="header">
       <button className="hd-icon-btn hd-menu-btn" title="Menu" onClick={onToggleSidebar}><Icon name="menu" /></button>
@@ -268,7 +338,7 @@ const Header = ({ page, onToggleSidebar, statusFilter, setStatusFilter, year, se
       </div>
       <div style={{ flex: 1 }} />
       {setYear && <YearSelect value={year} onChange={setYear} available={window.AVAILABLE_YEARS} />}
-      {setMonth && <MonthSelect value={month} onChange={setMonth} />}
+      {setMonths && <MonthMultiSelect months={months} onChange={setMonths} />}
       {setStatusFilter && <StatusFilterSeg value={statusFilter} onChange={setStatusFilter} />}
       <BiExportButton />
     </header>

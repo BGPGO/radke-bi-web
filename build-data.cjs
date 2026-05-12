@@ -687,6 +687,10 @@ function filterTx(allTx, statusFilter, drilldown) {
   else if (statusFilter === 'a_pagar_receber') out = out.filter(r => r[6] === 0);
   if (drilldown) {
     if (drilldown.type === 'mes') out = out.filter(r => r[1] === drilldown.value);
+    else if (drilldown.type === 'meses') {
+      const set = new Set(drilldown.values || []);
+      out = out.filter(r => set.has(r[1]));
+    }
     else if (drilldown.type === 'categoria') out = out.filter(r => r[3] === drilldown.value);
     else if (drilldown.type === 'cliente') out = out.filter(r => r[0] === 'r' && r[4] === drilldown.value);
     else if (drilldown.type === 'fornecedor') out = out.filter(r => r[0] === 'd' && r[7] === drilldown.value);
@@ -746,14 +750,28 @@ window.filterTx = filterTx;
 // getBit: SEMPRE recomputa via recomputeBit (sem cache de window.BIT).
 // Evita lag no toggle Previsto/Realizado e suporta year/month arbitrario.
 // month: 0 = ano completo, 1-12 = mes especifico.
-window.getBit = function (statusFilter, drilldown, year, month) {
+// monthOrMonths: number (legacy: 0 = todos, 1-12 = mês único) ou number[] (multi-select).
+// Quando array com 1 elemento: drilldown type 'mes' (single, mantém comportamento legado).
+// Quando array com >1 elementos: drilldown type 'meses' (novo, multi).
+// Quando vazio ou 0: sem filtro de mês (drilldown original preservado se houver).
+window.getBit = function (statusFilter, drilldown, year, monthOrMonths) {
   const sf = statusFilter || window.BIT_FILTER || 'realizado';
   const y = year || window.REF_YEAR;
   let dd = drilldown;
-  if (!dd && month && month >= 1 && month <= 12) {
-    const mm = String(month).padStart(2, '0');
-    const ym = y + '-' + mm;
-    dd = { type: 'mes', value: ym, label: ym };
+  if (!dd && monthOrMonths != null) {
+    const months = Array.isArray(monthOrMonths)
+      ? monthOrMonths.filter(m => m >= 1 && m <= 12)
+      : (monthOrMonths >= 1 && monthOrMonths <= 12 ? [monthOrMonths] : []);
+    if (months.length === 1) {
+      const mm = String(months[0]).padStart(2, '0');
+      const ym = y + '-' + mm;
+      dd = { type: 'mes', value: ym, label: ym };
+    } else if (months.length > 1) {
+      const sorted = months.slice().sort((a, b) => a - b);
+      const values = sorted.map(m => y + '-' + String(m).padStart(2, '0'));
+      const label = sorted.length === 12 ? 'todos os meses' : (sorted.length + ' meses');
+      dd = { type: 'meses', values: values, label: label };
+    }
   }
   return window.recomputeBit(sf, dd, y);
 };

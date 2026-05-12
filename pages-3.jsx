@@ -76,14 +76,14 @@ const FatVerticalBars = ({ items, height = 240, formatter = (v) => "R$ " + forma
   );
 };
 
-const PageFaturamentoProduto = ({ drilldown, setDrilldown }) => {
+// ============================================================
+// FaturamentoProdutoBody — corpo do tab "por Produto" (XLSX-based, original)
+// ============================================================
+const FaturamentoProdutoBody = ({ drilldown, setDrilldown }) => {
   const E = (typeof window !== "undefined" && window.BIT_RADKE_EXTRAS) || null;
   if (!E || !E.faturamento || !E.faturamento.items) {
     return (
-      <div className="page">
-        <div className="page-title"><div><h1>Faturamento por Produto</h1></div></div>
-        <div className="card"><h2 className="card-title">Sem dados</h2><p>Rode <code>node build-radke-extras.cjs</code> pra gerar data-extras.js.</p></div>
-      </div>
+      <div className="card"><h2 className="card-title">Sem dados</h2><p>Rode <code>node build-radke-extras.cjs</code> pra gerar data-extras.js.</p></div>
     );
   }
 
@@ -181,18 +181,10 @@ const PageFaturamentoProduto = ({ drilldown, setDrilldown }) => {
   const limparFiltros = () => { setFMes("Todos"); setFVendedor("Todos"); setFFamilia("Todos"); };
 
   return (
-    <div className="page">
-      <div className="page-title">
-        <div>
-          <h1>Faturamento por Produto</h1>
-          <div className="status-line">
-            {T.numNFs} NFs · {T.numProdutos} produtos · {T.numClientes} clientes · ano {T.anoRef}
-            {filtroAtivo && <> · <b style={{ color: "var(--cyan)" }}>filtrado</b></>}
-          </div>
-        </div>
-        <div className="actions">
-          {filtroAtivo && <button className="btn-ghost" onClick={limparFiltros}>Limpar filtros</button>}
-        </div>
+    <>
+      <div className="status-line" style={{ marginBottom: 8 }}>
+        {T.numNFs} NFs · {T.numProdutos} produtos · {T.numClientes} clientes · ano {T.anoRef}
+        {filtroAtivo && <> · <b style={{ color: "var(--cyan)" }}>filtrado</b> · <button className="btn-ghost" style={{ padding: '2px 8px', fontSize: 11 }} onClick={limparFiltros}>Limpar</button></>}
       </div>
 
       {/* ===== Header de filtros funcionais ===== */}
@@ -282,6 +274,226 @@ const PageFaturamentoProduto = ({ drilldown, setDrilldown }) => {
           </div>
         </div>
       </div>
+    </>
+  );
+};
+
+// ============================================================
+// FaturamentoServicoBody — receitas Omie com categoria "Serviços - *"
+// ============================================================
+const FaturamentoServicoBody = ({ year, months }) => {
+  const allTx = (typeof window !== "undefined" && window.ALL_TX) || [];
+  const refY = year || (typeof window !== "undefined" && window.REF_YEAR) || new Date().getFullYear();
+  const monthSet = useMemo(() => {
+    if (!Array.isArray(months) || months.length === 0) return null;
+    return new Set(months);
+  }, [months]);
+
+  const receitas = useMemo(() => {
+    return allTx.filter(r => {
+      if (r[0] !== 'r') return false;
+      const mes = r[1]; if (!mes) return false;
+      if (parseInt(mes.slice(0, 4), 10) !== refY) return false;
+      if (monthSet && !monthSet.has(parseInt(mes.slice(5, 7), 10))) return false;
+      return /serviços/i.test(r[3] || '');
+    });
+  }, [allTx, refY, monthSet]);
+
+  const total = receitas.reduce((s, r) => s + (r[5] || 0), 0);
+  const realizado = receitas.filter(r => r[6] === 1).reduce((s, r) => s + r[5], 0);
+  const aReceber = total - realizado;
+  const numNFs = new Set(receitas.map(r => r[1] + '-' + r[4])).size; // proxy: cliente×mês como NF
+  const numCli = new Set(receitas.map(r => r[4]).filter(Boolean)).size;
+  const ticket = numNFs > 0 ? total / numNFs : 0;
+
+  const porCat = useMemo(() => {
+    const map = new Map();
+    for (const r of receitas) {
+      const k = (r[3] || 'Sem categoria').replace(/^Serviços\s*[-—]\s*/i, '');
+      map.set(k, (map.get(k) || 0) + r[5]);
+    }
+    return Array.from(map.entries()).map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value);
+  }, [receitas]);
+
+  const porCli = useMemo(() => {
+    const map = new Map();
+    for (const r of receitas) {
+      const k = r[4] || 'Sem cliente';
+      map.set(k, (map.get(k) || 0) + r[5]);
+    }
+    return Array.from(map.entries()).map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value).slice(0, 12);
+  }, [receitas]);
+
+  const porMes = useMemo(() => {
+    const arr = Array(12).fill(0);
+    for (const r of receitas) {
+      const m = parseInt(r[1].slice(5, 7), 10) - 1;
+      if (m >= 0 && m < 12) arr[m] += r[5];
+    }
+    return arr;
+  }, [receitas]);
+
+  const B = (typeof window !== "undefined" && window.BIT) || { fmt: (n) => n, MONTHS_FULL: [] };
+  const fmtBR = (n) => (B.fmt ? B.fmt(n) : String(n));
+
+  return (
+    <>
+      <div className="status-line" style={{ marginBottom: 8 }}>
+        Receitas Omie cuja categoria contém <b>Serviços</b> · ano {refY}
+        {monthSet ? <> · <b style={{ color: "var(--cyan)" }}>{months.length} {months.length === 1 ? 'mês' : 'meses'} filtrado{months.length === 1 ? '' : 's'}</b></> : null}
+      </div>
+
+      <div className="row row-4">
+        <KpiTile label="Faturamento total" value={(total / 1e6).toFixed(2).replace(".", ",")} unit="M" sparkValues={porMes} sparkColor="var(--green)" tone="green" />
+        <KpiTile label="Recebido" value={(realizado / 1e6).toFixed(2).replace(".", ",")} unit="M" sparkValues={porMes} sparkColor="var(--green)" tone="green" />
+        <KpiTile label="A receber" value={(aReceber / 1e6).toFixed(2).replace(".", ",")} unit="M" sparkValues={porMes} sparkColor="var(--cyan)" tone="cyan" />
+        <KpiTile label="Clientes" value={String(numCli)} sparkValues={porMes.map(v => v > 0 ? 1 : 0)} sparkColor="var(--cyan)" tone="cyan" nonMonetary />
+      </div>
+
+      <div className="card">
+        <h2 className="card-title">FATURAMENTO DE SERVIÇOS POR MÊS</h2>
+        <SingleBars values={porMes} labels={B.MONTHS_FULL || []} color="green" height={240} />
+      </div>
+
+      <div className="row" style={{ gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)" }}>
+        <div className="card">
+          <h2 className="card-title">POR TIPO DE SERVIÇO</h2>
+          <BarList items={porCat} color="green" />
+        </div>
+        <div className="card">
+          <h2 className="card-title">POR CLIENTE (TOP 12)</h2>
+          <BarList items={porCli} color="green" />
+        </div>
+      </div>
+    </>
+  );
+};
+
+// ============================================================
+// FaturamentoTotalBody — consolidado: TODAS as receitas Omie + breakdown
+// ============================================================
+const FaturamentoTotalBody = ({ year, months }) => {
+  const allTx = (typeof window !== "undefined" && window.ALL_TX) || [];
+  const refY = year || (typeof window !== "undefined" && window.REF_YEAR) || new Date().getFullYear();
+  const monthSet = useMemo(() => {
+    if (!Array.isArray(months) || months.length === 0) return null;
+    return new Set(months);
+  }, [months]);
+
+  const receitas = useMemo(() => {
+    return allTx.filter(r => {
+      if (r[0] !== 'r') return false;
+      const mes = r[1]; if (!mes) return false;
+      if (parseInt(mes.slice(0, 4), 10) !== refY) return false;
+      if (monthSet && !monthSet.has(parseInt(mes.slice(5, 7), 10))) return false;
+      return true;
+    });
+  }, [allTx, refY, monthSet]);
+
+  const total = receitas.reduce((s, r) => s + (r[5] || 0), 0);
+  const realizado = receitas.filter(r => r[6] === 1).reduce((s, r) => s + r[5], 0);
+  const aReceber = total - realizado;
+  const totalServicos = receitas.filter(r => /serviços/i.test(r[3] || '')).reduce((s, r) => s + r[5], 0);
+  const totalProdutos = receitas.filter(r => /venda|mercadoria|produto/i.test(r[3] || '')).reduce((s, r) => s + r[5], 0);
+  const totalOutros = total - totalServicos - totalProdutos;
+  const numCli = new Set(receitas.map(r => r[4]).filter(Boolean)).size;
+
+  const porCat = useMemo(() => {
+    const map = new Map();
+    for (const r of receitas) {
+      const k = r[3] || 'Sem categoria';
+      map.set(k, (map.get(k) || 0) + r[5]);
+    }
+    return Array.from(map.entries()).map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value).slice(0, 15);
+  }, [receitas]);
+
+  const porMes = useMemo(() => {
+    const arr = Array(12).fill(0);
+    for (const r of receitas) {
+      const m = parseInt(r[1].slice(5, 7), 10) - 1;
+      if (m >= 0 && m < 12) arr[m] += r[5];
+    }
+    return arr;
+  }, [receitas]);
+
+  const B = (typeof window !== "undefined" && window.BIT) || { fmt: (n) => n, MONTHS_FULL: [] };
+
+  const breakdown = [
+    { name: "Serviços", value: totalServicos, color: "var(--green)" },
+    { name: "Produtos/Vendas", value: totalProdutos, color: "var(--cyan)" },
+    { name: "Outras receitas", value: totalOutros, color: "#a78bfa" },
+  ];
+
+  return (
+    <>
+      <div className="status-line" style={{ marginBottom: 8 }}>
+        TODAS as receitas Omie consolidadas · ano {refY}
+        {monthSet ? <> · <b style={{ color: "var(--cyan)" }}>{months.length} {months.length === 1 ? 'mês' : 'meses'} filtrado{months.length === 1 ? '' : 's'}</b></> : null}
+      </div>
+
+      <div className="row row-4">
+        <KpiTile label="Faturamento total" value={(total / 1e6).toFixed(2).replace(".", ",")} unit="M" sparkValues={porMes} sparkColor="var(--green)" tone="green" />
+        <KpiTile label="Recebido" value={(realizado / 1e6).toFixed(2).replace(".", ",")} unit="M" sparkValues={porMes} sparkColor="var(--green)" tone="green" />
+        <KpiTile label="A receber" value={(aReceber / 1e6).toFixed(2).replace(".", ",")} unit="M" sparkValues={porMes} sparkColor="var(--cyan)" tone="cyan" />
+        <KpiTile label="Clientes" value={String(numCli)} sparkValues={porMes.map(v => v > 0 ? 1 : 0)} sparkColor="var(--cyan)" tone="cyan" nonMonetary />
+      </div>
+
+      <div className="row" style={{ gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)" }}>
+        <div className="card">
+          <h2 className="card-title">BREAKDOWN POR ORIGEM</h2>
+          <div style={{ display: 'grid', gap: 10, padding: '8px 0' }}>
+            {breakdown.map((b, i) => {
+              const pct = total > 0 ? (b.value / total) * 100 : 0;
+              return (
+                <div key={i}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4, fontSize: 12 }}>
+                    <span style={{ color: 'var(--text)' }}>{b.name}</span>
+                    <span style={{ fontFamily: 'var(--font-mono)', color: 'var(--text)', fontWeight: 600 }}>
+                      {B.fmt(b.value)} <span style={{ color: 'var(--mute)', fontWeight: 400 }}>({pct.toFixed(1).replace('.', ',')}%)</span>
+                    </span>
+                  </div>
+                  <div style={{ height: 10, background: 'rgba(255,255,255,0.05)', borderRadius: 5, overflow: 'hidden' }}>
+                    <div style={{ width: `${pct}%`, height: '100%', background: b.color, transition: 'width 200ms' }} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div className="card">
+          <h2 className="card-title">TOP CATEGORIAS</h2>
+          <BarList items={porCat} color="green" />
+        </div>
+      </div>
+
+      <div className="card">
+        <h2 className="card-title">FATURAMENTO TOTAL POR MÊS</h2>
+        <SingleBars values={porMes} labels={B.MONTHS_FULL || []} color="green" height={240} />
+      </div>
+    </>
+  );
+};
+
+// ============================================================
+// PageFaturamentoProduto — umbrella com 3 tabs (Produto / Serviço / Total)
+// ============================================================
+const PageFaturamentoProduto = (props) => {
+  const [tab, setTab] = useState('produto');
+  return (
+    <div className="page">
+      <div className="page-title">
+        <div>
+          <h1>Faturamento</h1>
+          <div className="fat-tabs">
+            <button type="button" className={`fat-tab ${tab === 'produto' ? 'active' : ''}`} onClick={() => setTab('produto')}>por Produto</button>
+            <button type="button" className={`fat-tab ${tab === 'servico' ? 'active' : ''}`} onClick={() => setTab('servico')}>por Serviço</button>
+            <button type="button" className={`fat-tab ${tab === 'total' ? 'active' : ''}`} onClick={() => setTab('total')}>Total</button>
+          </div>
+        </div>
+      </div>
+      {tab === 'produto' && <FaturamentoProdutoBody {...props} />}
+      {tab === 'servico' && <FaturamentoServicoBody {...props} />}
+      {tab === 'total' && <FaturamentoTotalBody {...props} />}
     </div>
   );
 };

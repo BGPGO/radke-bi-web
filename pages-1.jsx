@@ -31,10 +31,15 @@ const SectionHeading = ({ strong, soft }) => (
   <h2 className="card-title">{[strong, soft].filter(Boolean).join(" ")}</h2>
 );
 
-// Side-by-side monthly bars (Receita green / Despesa red) with floating value chips
-const OverviewBars = ({ data, height = 220, year = "2026", onBarClick, activeIdx }) => {
+// Side-by-side monthly bars (Receita green / Despesa red) with floating value chips.
+// Quando data tem receita_prevista/despesa_prevista (modo "tudo"), renderiza stack:
+//   verde (realizado) embaixo + azul (a-receber) em cima
+//   vermelho (pago) embaixo + amarelo (a-pagar) em cima
+const OverviewBars = ({ data, height = 220, year = "2026", onBarClick, activeIdx, showPrevisto = false }) => {
   const B = window.BIT;
-  const max = Math.max(...data.map(d => Math.max(d.receita, d.despesa)), 1);
+  const totRec = (d) => (d.receita || 0) + (d.receita_prevista || 0);
+  const totDesp = (d) => (d.despesa || 0) + (d.despesa_prevista || 0);
+  const max = Math.max(...data.map(d => Math.max(totRec(d), totDesp(d))), 1);
   const niceMax = Math.max(Math.ceil(max / 200000) * 200000, 200000);
   const ticks = [];
   for (let v = 0; v <= niceMax; v += 200000) ticks.push(v);
@@ -53,8 +58,16 @@ const OverviewBars = ({ data, height = 220, year = "2026", onBarClick, activeIdx
         </div>
         <div className="ov-bars-cols">
           {data.map((d, i) => {
-            const rH = (d.receita / niceMax) * 100;
-            const dH = (d.despesa / niceMax) * 100;
+            const recReal = d.receita || 0;
+            const recPrev = d.receita_prevista || 0;
+            const despReal = d.despesa || 0;
+            const despPrev = d.despesa_prevista || 0;
+            const rRealH = (recReal / niceMax) * 100;
+            const rPrevH = (recPrev / niceMax) * 100;
+            const dRealH = (despReal / niceMax) * 100;
+            const dPrevH = (despPrev / niceMax) * 100;
+            const recTotal = recReal + recPrev;
+            const despTotal = despReal + despPrev;
             const cls = "ov-bar-col" + (onBarClick ? " clickable" : "") +
               (hasActive && i === activeIdx ? " active" : "") +
               (hasActive && i !== activeIdx ? " dimmed" : "");
@@ -64,11 +77,29 @@ const OverviewBars = ({ data, height = 220, year = "2026", onBarClick, activeIdx
                 style={onBarClick ? { cursor: "pointer" } : undefined}
               >
                 <div className="ov-bar-stack">
-                  <div className="ov-bar green" style={{ height: `${rH}%` }} title={`Receita: ${B.fmt(d.receita)}`}>
-                    <span className="ov-bar-chip">R${Math.round(d.receita / 1000)} K</span>
+                  <div className="ov-bar-tower">
+                    <div className="ov-bar green" style={{ height: `${rRealH}%` }} title={`Receita realizada: ${B.fmt(recReal)}`}>
+                      {!showPrevisto && <span className="ov-bar-chip">R${Math.round(recReal / 1000)} K</span>}
+                    </div>
+                    {showPrevisto && recPrev > 0 && (
+                      <div className="ov-bar cyan-prev" style={{ height: `${rPrevH}%` }} title={`A receber (previsto): ${B.fmt(recPrev)}`}>
+                      </div>
+                    )}
+                    {showPrevisto && recTotal > 0 && (
+                      <span className="ov-bar-chip stacked" style={{ bottom: `calc(${rRealH + rPrevH}% + 4px)` }}>R${Math.round(recTotal / 1000)} K</span>
+                    )}
                   </div>
-                  <div className="ov-bar red" style={{ height: `${dH}%` }} title={`Despesa: ${B.fmt(d.despesa)}`}>
-                    <span className="ov-bar-chip">R${Math.round(d.despesa / 1000)} K</span>
+                  <div className="ov-bar-tower">
+                    <div className="ov-bar red" style={{ height: `${dRealH}%` }} title={`Despesa paga: ${B.fmt(despReal)}`}>
+                      {!showPrevisto && <span className="ov-bar-chip">R${Math.round(despReal / 1000)} K</span>}
+                    </div>
+                    {showPrevisto && despPrev > 0 && (
+                      <div className="ov-bar amber-prev" style={{ height: `${dPrevH}%` }} title={`A pagar (previsto): ${B.fmt(despPrev)}`}>
+                      </div>
+                    )}
+                    {showPrevisto && despTotal > 0 && (
+                      <span className="ov-bar-chip stacked" style={{ bottom: `calc(${dRealH + dPrevH}% + 4px)` }}>R${Math.round(despTotal / 1000)} K</span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -166,8 +197,23 @@ const IndicatorLine = ({ values, labels, height = 240, color = "var(--cyan)", fo
   );
 };
 
-const PageOverview = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, month }) => {
-  const B = useMemo(() => window.getBit(statusFilter, drilldown, year, month), [statusFilter, drilldown, year, month]);
+const PageOverview = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, months }) => {
+  const B = useMemo(() => window.getBit(statusFilter, drilldown, year, months), [statusFilter, drilldown, year, months]);
+  // Quando filter=tudo, monta MONTH_DATA com split realizado vs previsto pro stacked chart.
+  // Senão, usa B.MONTH_DATA flat (compatível com modo realizado/a_pagar_receber).
+  const isTudoMode = statusFilter === 'tudo';
+  const monthDataStacked = useMemo(() => {
+    if (!isTudoMode) return B.MONTH_DATA;
+    const real = window.getBit('realizado', drilldown, year, months);
+    const prev = window.getBit('a_pagar_receber', drilldown, year, months);
+    return B.MONTH_DATA.map((m, i) => ({
+      m: m.m,
+      receita: (real.MONTH_DATA[i] && real.MONTH_DATA[i].receita) || 0,
+      despesa: (real.MONTH_DATA[i] && real.MONTH_DATA[i].despesa) || 0,
+      receita_prevista: (prev.MONTH_DATA[i] && prev.MONTH_DATA[i].receita) || 0,
+      despesa_prevista: (prev.MONTH_DATA[i] && prev.MONTH_DATA[i].despesa) || 0,
+    }));
+  }, [isTudoMode, B.MONTH_DATA, drilldown, year, months]);
   const [indicator, setIndicator] = useState("Valor líquido");
   const refYear = (B.META && B.META.ref_year) || new Date().getFullYear();
   // descobre o indice ativo se o drilldown for de mes (pra destacar a barra)
@@ -252,16 +298,34 @@ const PageOverview = ({ filters, setFilters, onOpenFilters, statusFilter, drilld
             <div className="legend-pills">
               <span className="legend-pill green">
                 <span className="dot" />
-                <span className="lbl">Soma de receita</span>
-                <span className="val">{B.fmtK(B.TOTAL_RECEITA)}</span>
+                <span className="lbl">Receita {isTudoMode ? "(realizada)" : ""}</span>
+                <span className="val">{B.fmtK(isTudoMode
+                  ? monthDataStacked.reduce((s, m) => s + (m.receita || 0), 0)
+                  : B.TOTAL_RECEITA)}</span>
               </span>
+              {isTudoMode && (
+                <span className="legend-pill cyan">
+                  <span className="dot" />
+                  <span className="lbl">A receber (previsto)</span>
+                  <span className="val">{B.fmtK(monthDataStacked.reduce((s, m) => s + (m.receita_prevista || 0), 0))}</span>
+                </span>
+              )}
               <span className="legend-pill red">
                 <span className="dot" />
-                <span className="lbl">Soma de despesas</span>
-                <span className="val">{B.fmtK(B.TOTAL_DESPESA)}</span>
+                <span className="lbl">Despesa {isTudoMode ? "(paga)" : ""}</span>
+                <span className="val">{B.fmtK(isTudoMode
+                  ? monthDataStacked.reduce((s, m) => s + (m.despesa || 0), 0)
+                  : B.TOTAL_DESPESA)}</span>
               </span>
+              {isTudoMode && (
+                <span className="legend-pill amber">
+                  <span className="dot" />
+                  <span className="lbl">A pagar (previsto)</span>
+                  <span className="val">{B.fmtK(monthDataStacked.reduce((s, m) => s + (m.despesa_prevista || 0), 0))}</span>
+                </span>
+              )}
             </div>
-            <OverviewBars data={B.MONTH_DATA} height={220} year={String(refYear)} onBarClick={handleBarMes} activeIdx={activeMonthIdx} />
+            <OverviewBars data={monthDataStacked} height={220} year={String(refYear)} onBarClick={handleBarMes} activeIdx={activeMonthIdx} showPrevisto={isTudoMode} />
           </div>
 
           <div className="card">
@@ -290,8 +354,8 @@ const PageOverview = ({ filters, setFilters, onOpenFilters, statusFilter, drilld
   );
 };
 
-const PageIndicators = ({ statusFilter, drilldown, setDrilldown, year, month }) => {
-  const B = useMemo(() => window.getBit(statusFilter, drilldown, year, month), [statusFilter, drilldown, year, month]);
+const PageIndicators = ({ statusFilter, drilldown, setDrilldown, year, months }) => {
+  const B = useMemo(() => window.getBit(statusFilter, drilldown, year, months), [statusFilter, drilldown, year, months]);
   const totalReceita = B.TOTAL_RECEITA;
   const totalDespesa = B.TOTAL_DESPESA;
   const valorLiq = B.VALOR_LIQUIDO;
@@ -369,8 +433,8 @@ const PageIndicators = ({ statusFilter, drilldown, setDrilldown, year, month }) 
   );
 };
 
-const PageReceita = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, month }) => {
-  const B = useMemo(() => window.getBit(statusFilter, drilldown, year, month), [statusFilter, drilldown, year, month]);
+const PageReceita = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, months }) => {
+  const B = useMemo(() => window.getBit(statusFilter, drilldown, year, months), [statusFilter, drilldown, year, months]);
   // Média por mês = total / (meses com receita no período). Evita dividir por 12 fixo
   // — quando filtra mês único divide por 1, quando ano corrente divide pelos meses ja decorridos.
   const monthsWithData = B.MONTH_DATA.filter(m => m.receita > 0).length;
@@ -476,8 +540,8 @@ const PageReceita = ({ filters, setFilters, onOpenFilters, statusFilter, drilldo
   );
 };
 
-const PageDespesa = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, month }) => {
-  const B = useMemo(() => window.getBit(statusFilter, drilldown, year, month), [statusFilter, drilldown, year, month]);
+const PageDespesa = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, months }) => {
+  const B = useMemo(() => window.getBit(statusFilter, drilldown, year, months), [statusFilter, drilldown, year, months]);
   const totalDespesa = B.TOTAL_DESPESA;
   // Média por mês = total / (meses com despesa no período). Mesma lógica de Receita.
   const monthsWithData = B.MONTH_DATA.filter(m => m.despesa > 0).length;

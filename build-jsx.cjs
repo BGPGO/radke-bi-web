@@ -79,10 +79,16 @@ const SOURCES = [
       try { var y = parseInt(localStorage.getItem('radke.year'), 10); return y > 1900 ? y : (window.REF_YEAR || new Date().getFullYear()); } catch (e) { return window.REF_YEAR || new Date().getFullYear(); }
     });
     var year = ys[0], setYear = ys[1];
+    // months: number[] (1-12). Vazio = "Ano completo". Legado: lê 'radke.month' single se existir.
     var ms = useState(function () {
-      try { var m = parseInt(localStorage.getItem('radke.month'), 10); return (m >= 0 && m <= 12) ? m : 0; } catch (e) { return 0; }
+      try {
+        var raw = localStorage.getItem('radke.months');
+        if (raw) { var arr = JSON.parse(raw); if (Array.isArray(arr)) return arr.filter(function (n) { return n >= 1 && n <= 12; }); }
+        var m = parseInt(localStorage.getItem('radke.month'), 10);
+        return (m >= 1 && m <= 12) ? [m] : [];
+      } catch (e) { return []; }
     });
-    var month = ms[0], setMonth = ms[1];
+    var months = ms[0], setMonths = ms[1];
 
     // BI export multi-tela: array de page-ids ou null. Quando setado, renderiza
     // todas as telas em sequencia + chama window.print() depois do layout pintar.
@@ -165,9 +171,9 @@ const SOURCES = [
     }, [year]);
 
     useEffect(function () {
-      try { localStorage.setItem('radke.month', String(month)); } catch (e) {}
+      try { localStorage.setItem('radke.months', JSON.stringify(months)); } catch (e) {}
       setDrilldown(null);
-    }, [month]);
+    }, [months]);
 
     var handleSetPage = function (newPage) {
       setPage(newPage);
@@ -202,8 +208,8 @@ const SOURCES = [
       statusFilter: statusFilter,
       year: year,
       setYear: setYear,
-      month: month,
-      setMonth: setMonth,
+      months: months,
+      setMonths: setMonths,
       drilldown: drilldown,
       setDrilldown: setDrilldown,
     };
@@ -244,8 +250,8 @@ const SOURCES = [
             setStatusFilter={setStatusFilter}
             year={year}
             setYear={setYear}
-            month={month}
-            setMonth={setMonth}
+            months={months}
+            setMonths={setMonths}
           />
           <PageComp {...commonProps} />
         </div>
