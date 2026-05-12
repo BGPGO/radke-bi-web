@@ -272,7 +272,10 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
   // misturava a-pagar/receber futuro com movimento já realizado, e a back-projection
   // de saldoInicial subtraia futuro de um saldo bancário atual, jogando o gráfico fundo.
   // Projeção futura aparece no card "Projeção mensal" mais abaixo (esse aqui é só histórico).
-  const saldosMes = (SEG.realizado && SEG.realizado.SALDOS_MES) || B.SALDOS_MES;
+  // Saldo acumulado anual: usa o SEG.realizado build-time (12 valores fixos do ano todo),
+  // não Breal.SALDOS_MES porque o último é filtrado pelo header (perde a trajetória).
+  const SEG_BUILDTIME = window.BIT_SEGMENTS || {};
+  const saldosMes = (SEG_BUILDTIME.realizado && SEG_BUILDTIME.realizado.SALDOS_MES) || B.SALDOS_MES;
   const SALDOS_REAIS = (window.BIT_RADKE_EXTRAS && window.BIT_RADKE_EXTRAS.saldos) || null;
   // Saldo inicial do ano: saldoAtual - sum(realizado[0..mesAtual]). Bate com extrato bancário.
   const saldoInicial = (function() {
