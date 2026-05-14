@@ -277,10 +277,16 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
   const SEG_BUILDTIME = window.BIT_SEGMENTS || {};
   const saldosMes = (SEG_BUILDTIME.realizado && SEG_BUILDTIME.realizado.SALDOS_MES) || B.SALDOS_MES;
   const SALDOS_REAIS = (window.BIT_RADKE_EXTRAS && window.BIT_RADKE_EXTRAS.saldos) || null;
+  // Override manual da data de última atualização (declarado cedo pra ser
+  // usado no saldoInicial). null = usa data original da planilha.
+  const [lastUpdateOverride, setLastUpdateOverride] = useState(() => {
+    try { return localStorage.getItem('radke.saldos.lastUpdate') || null; } catch (e) { return null; }
+  });
+  const lastDataAnchor = lastUpdateOverride || (SALDOS_REAIS && SALDOS_REAIS.last && SALDOS_REAIS.last.data) || null;
   // Saldo inicial do ano: saldoAtual - sum(realizado[0..mesAtual]). Bate com extrato bancário.
   const saldoInicial = (function() {
-    if (!SALDOS_REAIS || !SALDOS_REAIS.last) return 0;
-    const lastDate = new Date(SALDOS_REAIS.last.data);
+    if (!SALDOS_REAIS || !SALDOS_REAIS.last || !lastDataAnchor) return 0;
+    const lastDate = new Date(lastDataAnchor);
     const lastMonthIdx = lastDate.getMonth();
     let acumAteAgora = 0;
     for (let i = 0; i <= lastMonthIdx; i++) acumAteAgora += saldosMes[i] || 0;
@@ -409,6 +415,22 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
     setEditingBanco(null);
   };
 
+  // Última atualização editável (sincroniza com edição manual dos saldos).
+  // O state lastUpdateOverride foi declarado mais cedo (pra saldoInicial usar).
+  const [editingLastUpdate, setEditingLastUpdate] = useState(false);
+  const [editLastUpdateValue, setEditLastUpdateValue] = useState('');
+  const saveLastUpdate = () => {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(editLastUpdateValue)) { setEditingLastUpdate(false); return; }
+    setLastUpdateOverride(editLastUpdateValue);
+    try { localStorage.setItem('radke.saldos.lastUpdate', editLastUpdateValue); } catch (e) {}
+    setEditingLastUpdate(false);
+  };
+  const resetLastUpdate = () => {
+    setLastUpdateOverride(null);
+    try { localStorage.removeItem('radke.saldos.lastUpdate'); } catch (e) {}
+    setEditingLastUpdate(false);
+  };
+
   // ============ 4 CARDS NOVOS (#14): Adiantamentos + Atrasados ============
   // Adiantamentos: categoria contém "adiantamento" (independente de realizado).
   // Atrasados: não realizado + data de vencimento < hoje.
@@ -489,7 +511,8 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
       {(function () {
         const SALDOS = (window.BIT_RADKE_EXTRAS && window.BIT_RADKE_EXTRAS.saldos) || null;
         if (!SALDOS || !SALDOS.last) return null;
-        const last = SALDOS.last;
+        // last com data sobrescrita por lastUpdateOverride (se houver)
+        const last = Object.assign({}, SALDOS.last, { data: lastDataAnchor });
         // Aplica override por conta antes de qualquer cálculo
         const contasOverridden = Object.entries(last.contas).map(([nome, v]) => {
           const eff = saldoOverride[nome] != null ? saldoOverride[nome] : v;
@@ -503,9 +526,10 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
         const totalOperacional = contasOperacional.reduce((s, [, v]) => s + v, 0);
         const totalAplicacao = contasAplicacao.reduce((s, [, v]) => s + v, 0);
         const totalEfetivo = totalOperacional + totalAplicacao;
-        // Ordena por valor desc dentro de cada grupo
-        contasOperacional.sort((a, b) => b[1] - a[1]);
-        contasAplicacao.sort((a, b) => b[1] - a[1]);
+        // Ordena por valor ORIGINAL desc (b[2]) — não pelo efetivo (b[1]) —
+        // pra cards não trocarem de posição quando o usuário edita um saldo.
+        contasOperacional.sort((a, b) => b[2] - a[2]);
+        contasAplicacao.sort((a, b) => b[2] - a[2]);
         // Projeção operacional (#10+#11):
         //  - Sem filtro de mês ou multi: mês-a-mês começando do mês após o "last.data"
         //  - 1 mês selecionado: dia-a-dia (1..diasDoMês) usando a_pagar_receber daquele mês
@@ -619,7 +643,44 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
           <div className="card" style={{ marginBottom: 14 }}>
             <div className="card-title-row">
               <h2 className="card-title">Saldo atual e projeção</h2>
-              <span className="chip cyan">Última atualização: {last.data.split('-').reverse().join('/')} · clique no valor para editar</span>
+              {editingLastUpdate ? (
+                <span className="chip cyan" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "2px 8px" }}>
+                  Última atualização:
+                  <input
+                    type="date"
+                    autoFocus
+                    value={editLastUpdateValue}
+                    onChange={(e) => setEditLastUpdateValue(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") saveLastUpdate();
+                      else if (e.key === "Escape") setEditingLastUpdate(false);
+                    }}
+                    onBlur={saveLastUpdate}
+                    style={{ background: "rgba(34,211,238,0.08)", color: "var(--cyan)", border: "1px solid rgba(34,211,238,0.3)", borderRadius: 4, padding: "2px 4px", fontSize: 12, fontFamily: "inherit" }}
+                  />
+                </span>
+              ) : (
+                <span
+                  className="chip cyan"
+                  style={{ cursor: "pointer" }}
+                  title="Clique pra editar a data"
+                  onClick={() => {
+                    setEditingLastUpdate(true);
+                    setEditLastUpdateValue(lastDataAnchor || "");
+                  }}
+                >
+                  Última atualização: {last.data.split('-').reverse().join('/')}
+                  {lastUpdateOverride && (
+                    <button
+                      type="button"
+                      className="btn-mini"
+                      style={{ marginLeft: 6 }}
+                      onClick={(e) => { e.stopPropagation(); resetLastUpdate(); }}
+                      title={`Original: ${SALDOS.last.data.split('-').reverse().join('/')}`}
+                    >↺</button>
+                  )}
+                </span>
+              )}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 12, marginBottom: 12 }}>
               {contasOperacional.map(c => renderCard(c, false))}

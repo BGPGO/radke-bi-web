@@ -1,4 +1,4 @@
-/* RADKE BI — gerado por build-data.cjs em 2026-05-14T14:18:43.150Z */
+/* RADKE BI — gerado por build-data.cjs em 2026-05-14T14:31:45.986Z */
 /* Empresa: RADKE SOLUÇÕES INSTRALOGISTICAS | Ano ref: 2026 */
 const MONTHS = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
 const MONTHS_FULL = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
@@ -16372,8 +16372,10 @@ window.ADIANTAMENTO_LUCROS_TX = ADIANTAMENTO_LUCROS_TX;
 
 // aggregateAdiantamentoLucros: monta porMes[12] + acumulado + porSocio do ano
 // selecionado, respeitando statusFilter (realizado/a_pagar_receber/tudo) e
-// filtro de meses (igual ao restante do BI).
-window.aggregateAdiantamentoLucros = function (statusFilter, year, months) {
+// filtro de meses (igual ao restante do BI). socioFilter opcional: filtra
+// porMes/acumulado pra um sócio específico, mas porSocio SEMPRE retorna a lista
+// completa (totais por sócio) pra alimentar os pills clicáveis.
+window.aggregateAdiantamentoLucros = function (statusFilter, year, months, socioFilter) {
   const y = year || REF_YEAR;
   let monthSet = null;
   if (Array.isArray(months) && months.length > 0 && months.length < 12) {
@@ -16393,9 +16395,12 @@ window.aggregateAdiantamentoLucros = function (statusFilter, year, months) {
     if (monthSet && !monthSet.has(ym)) continue;
     const mIdx = parseInt(ym.slice(5, 7), 10) - 1;
     if (mIdx < 0 || mIdx > 11) continue;
+    // porSocio sempre acumula (independente de socioFilter) pra pills mostrarem totais reais.
+    porSocio.set(socio, (porSocio.get(socio) || 0) + valor);
+    // porMes/acumulado respeitam o socioFilter quando ativo.
+    if (socioFilter && socio !== socioFilter) continue;
     porMes[mIdx] += valor;
     acumulado += valor;
-    porSocio.set(socio, (porSocio.get(socio) || 0) + valor);
   }
   return {
     porMes,

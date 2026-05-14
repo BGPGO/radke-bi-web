@@ -363,12 +363,14 @@ const PageIndicators = ({ statusFilter, drilldown, setDrilldown, year, months })
   const refYear = (B.META && B.META.ref_year) || new Date().getFullYear();
   // Adiantamento de lucros aos sócios — excluído das despesas operacionais
   // no build, exposto via aggregateAdiantamentoLucros runtime pra reagir
-  // a year/months/statusFilter.
+  // a year/months/statusFilter. selectedSocio filtra o chart pra um sócio
+  // específico (toggle via clique no pill); porSocio sempre tem a lista completa.
+  const [selectedSocio, setSelectedSocio] = useState(null);
   const adiantData = useMemo(() => (
     typeof window.aggregateAdiantamentoLucros === 'function'
-      ? window.aggregateAdiantamentoLucros(statusFilter, year, months)
+      ? window.aggregateAdiantamentoLucros(statusFilter, year, months, selectedSocio)
       : { porMes: Array(12).fill(0), acumulado: 0, porSocio: [] }
-  ), [statusFilter, year, months]);
+  ), [statusFilter, year, months, selectedSocio]);
   // sem segregacao de impostos no Omie sem mapeamento de categorias, deixamos 0 e mostramos "—" se nao houver dado
   const margemSeries = B.MONTH_DATA.map(m => m.receita > 0 ? ((m.receita - m.despesa) / m.receita) * 100 : 0);
 
@@ -440,25 +442,43 @@ const PageIndicators = ({ statusFilter, drilldown, setDrilldown, year, months })
 
       <div className="card">
         <div className="card-title-row" style={{ marginBottom: 12 }}>
-          <h2 className="card-title">Adiantamento de lucros aos sócios</h2>
+          <h2 className="card-title">
+            Adiantamento de lucros aos sócios
+            {selectedSocio && (
+              <span style={{ fontSize: 12, fontWeight: 400, color: "var(--mute)", marginLeft: 8 }}>
+                · filtrando por <b style={{ color: "#a78bfa" }}>{selectedSocio}</b>
+                <button type="button" className="btn-mini" style={{ marginLeft: 6 }} onClick={() => setSelectedSocio(null)} title="Limpar filtro">×</button>
+              </span>
+            )}
+          </h2>
         </div>
         <div className="legend-pills">
-          <span className="legend-pill" style={{ background: "rgba(167,139,250,0.12)", color: "#a78bfa" }}>
-            <span className="dot" style={{ background: "#a78bfa" }} />
-            <span className="lbl">Por mês</span>
-            <span className="val">{B.fmtK(adiantData.porMes.reduce((s, v) => s + v, 0))}</span>
-          </span>
           <span className="legend-pill cyan">
             <span className="dot" />
-            <span className="lbl">Acumulado no ano</span>
+            <span className="lbl">{selectedSocio ? `${selectedSocio} (acumulado)` : "Acumulado no ano"}</span>
             <span className="val">{B.fmt(adiantData.acumulado)}</span>
           </span>
-          {adiantData.porSocio.slice(0, 5).map((s, i) => (
-            <span key={i} className="legend-pill" style={{ background: "rgba(255,255,255,0.04)" }}>
-              <span className="lbl">{s.name}</span>
-              <span className="val">{B.fmtK(s.value)}</span>
-            </span>
-          ))}
+          {adiantData.porSocio.map((s, i) => {
+            const isActive = selectedSocio === s.name;
+            return (
+              <span
+                key={i}
+                className="legend-pill"
+                style={{
+                  background: isActive ? "rgba(167,139,250,0.28)" : "rgba(255,255,255,0.04)",
+                  border: isActive ? "1px solid #a78bfa" : "1px solid transparent",
+                  color: isActive ? "#c4b5fd" : undefined,
+                  cursor: "pointer",
+                  transition: "background 0.15s, border-color 0.15s",
+                }}
+                onClick={() => setSelectedSocio(isActive ? null : s.name)}
+                title={isActive ? "Clique pra limpar" : `Clique pra filtrar por ${s.name}`}
+              >
+                <span className="lbl">{s.name}</span>
+                <span className="val">{B.fmtK(s.value)}</span>
+              </span>
+            );
+          })}
         </div>
         <AdiantamentoBars porMes={adiantData.porMes} acumulado={adiantData.acumulado} height={240} />
       </div>
