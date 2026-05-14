@@ -277,6 +277,15 @@ recNorm = recNorm.filter((t) => !APORTE_RE.test(t.categoria || ''));
 const recExcluded = recBefore - recNorm.length;
 if (recExcluded > 0) console.log(`  aporte de sócios excluído: ${recExcluded} lançamentos`);
 
+// Filtra "X - Adiantamento de Lucros" das despesas — não é despesa operacional,
+// é distribuição de lucros aos sócios (Leonardo/Marco/Rodrigo/Helmut/Diogo,
+// categorias 2.08.92/96/97/98/99). Mantém em array separado pra alimentar
+// chart dedicado em PageIndicators. Pedido cliente 2026-05-14.
+const ADIANTAMENTO_LUCROS_RE = /adiantamento de lucros/i;
+const adiantamentoLucrosTx = despNorm.filter((t) => ADIANTAMENTO_LUCROS_RE.test(t.categoria || ''));
+despNorm = despNorm.filter((t) => !ADIANTAMENTO_LUCROS_RE.test(t.categoria || ''));
+if (adiantamentoLucrosTx.length > 0) console.log(`  adiantamento de lucros separado: ${adiantamentoLucrosTx.length} lançamentos`);
+
 // ---------- decidir ano de referencia ----------
 // Default: ANO CORRENTE (operador quer ver o que ta acontecendo agora).
 // Tambem expomos lista de anos disponiveis pro selector no header.
@@ -605,6 +614,21 @@ const ALL_TX = ${JSON.stringify([
 const REF_YEAR = ${REF_YEAR};
 const AVAILABLE_YEARS = ${JSON.stringify(AVAILABLE_YEARS)};
 
+// ADIANTAMENTO_LUCROS_TX: tx de "X - Adiantamento de Lucros" separadas das
+// despesas. NÃO entram em ALL_TX (foram filtradas globalmente do despNorm).
+// Tupla: [ym, dia, valor, realizado_int, socio]
+const ADIANTAMENTO_LUCROS_TX = ${JSON.stringify(adiantamentoLucrosTx.map(t => {
+  const m = (t.categoria || '').match(/^([^-]+?)\s*-\s*adiantamento de lucros/i);
+  const socio = m ? m[1].trim() : 'Outros';
+  return [
+    t.data_efetiva ? t.data_efetiva.toISOString().slice(0, 7) : '',
+    t.data_efetiva ? t.data_efetiva.getDate() : 0,
+    t.valor,
+    t.realizado ? 1 : 0,
+    socio,
+  ];
+}))};
+
 // aggregateTx: recomputa MONTH_DATA, KPIS, top categorias/clientes/fornecedores
 // e EXTRATO a partir de uma lista filtrada de transacoes. Chamada pelas Pages
 // quando drilldown ou statusFilter estao ativos.
@@ -761,6 +785,41 @@ window.REF_YEAR = REF_YEAR;
 window.AVAILABLE_YEARS = AVAILABLE_YEARS;
 window.aggregateTx = aggregateTx;
 window.filterTx = filterTx;
+window.ADIANTAMENTO_LUCROS_TX = ADIANTAMENTO_LUCROS_TX;
+
+// aggregateAdiantamentoLucros: monta porMes[12] + acumulado + porSocio do ano
+// selecionado, respeitando statusFilter (realizado/a_pagar_receber/tudo) e
+// filtro de meses (igual ao restante do BI).
+window.aggregateAdiantamentoLucros = function (statusFilter, year, months) {
+  const y = year || REF_YEAR;
+  let monthSet = null;
+  if (Array.isArray(months) && months.length > 0 && months.length < 12) {
+    monthSet = new Set(months.map(m => y + '-' + String(m).padStart(2, '0')));
+  } else if (typeof months === 'number' && months >= 1 && months <= 12) {
+    monthSet = new Set([y + '-' + String(months).padStart(2, '0')]);
+  }
+  const porMes = Array(12).fill(0);
+  const porSocio = new Map();
+  let acumulado = 0;
+  for (const row of ADIANTAMENTO_LUCROS_TX) {
+    const ym = row[0], valor = row[2], realizado = row[3], socio = row[4];
+    if (!ym) continue;
+    if (parseInt(ym.slice(0, 4), 10) !== y) continue;
+    if (statusFilter === 'realizado' && realizado !== 1) continue;
+    if (statusFilter === 'a_pagar_receber' && realizado !== 0) continue;
+    if (monthSet && !monthSet.has(ym)) continue;
+    const mIdx = parseInt(ym.slice(5, 7), 10) - 1;
+    if (mIdx < 0 || mIdx > 11) continue;
+    porMes[mIdx] += valor;
+    acumulado += valor;
+    porSocio.set(socio, (porSocio.get(socio) || 0) + valor);
+  }
+  return {
+    porMes,
+    acumulado,
+    porSocio: Array.from(porSocio.entries()).map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value),
+  };
+};
 // getBit: SEMPRE recomputa via recomputeBit (sem cache de window.BIT).
 // Evita lag no toggle Previsto/Realizado e suporta year/month arbitrario.
 // month: 0 = ano completo, 1-12 = mes especifico.

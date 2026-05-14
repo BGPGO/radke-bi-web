@@ -390,6 +390,46 @@ const MonthlyBars = ({ data, height = 230, type = "both", showLabels = true, onB
   );
 };
 
+// AdiantamentoBars: 12 barras de mês + separador + barra final "Acumulado".
+// Mesma escala pros 13 (Acumulado domina visualmente — é o efeito desejado).
+const AdiantamentoBars = ({ porMes, acumulado, height = 240 }) => {
+  const months = window.BIT.MONTHS;
+  const maxVal = Math.max(1, acumulado, ...porMes);
+  const grids = [0, 0.25, 0.5, 0.75, 1].map(p => p * maxVal);
+  return (
+    <div style={{ position: "relative" }}>
+      <div className="vbar-axis" style={{ height: height - 24 }}>
+        {grids.map((g, i) => (<div key={i} className="grid" style={{ bottom: `${(g / maxVal) * 100}%` }} />))}
+        {grids.map((g, i) => (<div key={"l" + i} className="glabel" style={{ bottom: `${(g / maxVal) * 100}%` }}>{window.BIT.fmtK(g)}</div>))}
+      </div>
+      <div className="vbar-chart" style={{ height }}>
+        {porMes.map((v, i) => {
+          const h = (v / maxVal) * 100;
+          return (
+            <div key={i} className="vbar-col">
+              <div className="stack">
+                <div className="bar" style={{ height: `${h}%`, background: "#a78bfa" }} title={`${months[i]}: ${window.BIT.fmt(v)}`}>
+                  {v > 0 && <span className="v">{window.BIT.fmtK(v)}</span>}
+                </div>
+              </div>
+              <span className="x">{months[i]}</span>
+            </div>
+          );
+        })}
+        <div style={{ width: 1, borderLeft: "1px dashed rgba(255,255,255,0.18)", margin: "0 6px 24px", alignSelf: "stretch" }} />
+        <div className="vbar-col">
+          <div className="stack">
+            <div className="bar" style={{ height: `${(acumulado / maxVal) * 100}%`, background: "var(--cyan)" }} title={`Acumulado: ${window.BIT.fmt(acumulado)}`}>
+              {acumulado > 0 && <span className="v">{window.BIT.fmtK(acumulado)}</span>}
+            </div>
+          </div>
+          <span className="x" style={{ fontWeight: 600 }}>Acum.</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // SingleBars: barras verticais por mês. Quando valuesPrev é passado, empilha
 // "previsto" em cima do "realizado" (verde + ciano OU vermelho + âmbar).
 const SingleBars = ({ values, valuesPrev, labels, color = "green", colorPrev, height = 200, onBarClick, activeIdx }) => {

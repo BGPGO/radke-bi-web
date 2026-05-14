@@ -361,6 +361,14 @@ const PageIndicators = ({ statusFilter, drilldown, setDrilldown, year, months })
   const valorLiq = B.VALOR_LIQUIDO;
   const margemLiq = B.MARGEM_LIQUIDA;
   const refYear = (B.META && B.META.ref_year) || new Date().getFullYear();
+  // Adiantamento de lucros aos sócios — excluído das despesas operacionais
+  // no build, exposto via aggregateAdiantamentoLucros runtime pra reagir
+  // a year/months/statusFilter.
+  const adiantData = useMemo(() => (
+    typeof window.aggregateAdiantamentoLucros === 'function'
+      ? window.aggregateAdiantamentoLucros(statusFilter, year, months)
+      : { porMes: Array(12).fill(0), acumulado: 0, porSocio: [] }
+  ), [statusFilter, year, months]);
   // sem segregacao de impostos no Omie sem mapeamento de categorias, deixamos 0 e mostramos "—" se nao houver dado
   const margemSeries = B.MONTH_DATA.map(m => m.receita > 0 ? ((m.receita - m.despesa) / m.receita) * 100 : 0);
 
@@ -428,6 +436,31 @@ const PageIndicators = ({ statusFilter, drilldown, setDrilldown, year, months })
           <h2 className="card-title">Receita vs Despesa por mês</h2>
           <MonthlyBars data={B.MONTH_DATA} height={240} onBarClick={handleBarMes} activeIdx={activeMonthIdx} />
         </div>
+      </div>
+
+      <div className="card">
+        <div className="card-title-row" style={{ marginBottom: 12 }}>
+          <h2 className="card-title">Adiantamento de lucros aos sócios</h2>
+        </div>
+        <div className="legend-pills">
+          <span className="legend-pill" style={{ background: "rgba(167,139,250,0.12)", color: "#a78bfa" }}>
+            <span className="dot" style={{ background: "#a78bfa" }} />
+            <span className="lbl">Por mês</span>
+            <span className="val">{B.fmtK(adiantData.porMes.reduce((s, v) => s + v, 0))}</span>
+          </span>
+          <span className="legend-pill cyan">
+            <span className="dot" />
+            <span className="lbl">Acumulado no ano</span>
+            <span className="val">{B.fmt(adiantData.acumulado)}</span>
+          </span>
+          {adiantData.porSocio.slice(0, 5).map((s, i) => (
+            <span key={i} className="legend-pill" style={{ background: "rgba(255,255,255,0.04)" }}>
+              <span className="lbl">{s.name}</span>
+              <span className="val">{B.fmtK(s.value)}</span>
+            </span>
+          ))}
+        </div>
+        <AdiantamentoBars porMes={adiantData.porMes} acumulado={adiantData.acumulado} height={240} />
       </div>
     </div>
   );
