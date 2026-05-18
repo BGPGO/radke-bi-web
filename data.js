@@ -1,4 +1,4 @@
-/* RADKE BI — gerado por build-data.cjs em 2026-05-17T06:39:11.667Z */
+/* RADKE BI — gerado por build-data.cjs em 2026-05-18T07:12:22.111Z */
 /* Empresa: RADKE SOLUÇÕES INSTRALOGISTICAS | Ano ref: 2026 */
 const MONTHS = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
 const MONTHS_FULL = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
@@ -30,7 +30,7 @@ const META = {
     "cnpj": "16.665.716/0001-48",
     "cidade": "PORTO ALEGRE (RS)"
   },
-  "fetched_at": "2026-05-17T06:39:10.389Z",
+  "fetched_at": "2026-05-18T07:12:20.813Z",
   "ref_year": 2026,
   "counts": {
     "contas_pagar": 15666,
@@ -8087,7 +8087,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "ZAFFARI - LOJA 27 - OTTO",
         3425.78,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "18/05/2026",
@@ -8095,7 +8095,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "CIA ZAFFARI - LOJA 12 - BB CANOAS",
         3965.91,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "18/05/2026",
@@ -8103,7 +8103,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "COND. BB SHOPP - SAO LEOPOLDO",
         2281.94,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "30/04/2026",
@@ -12446,7 +12446,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "ZAFFARI - LOJA 27 - OTTO",
         3425.78,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "18/05/2026",
@@ -12454,7 +12454,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "CIA ZAFFARI - LOJA 12 - BB CANOAS",
         3965.91,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "18/05/2026",
@@ -12462,7 +12462,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "COND. BB SHOPP - SAO LEOPOLDO",
         2281.94,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "15/05/2026",
