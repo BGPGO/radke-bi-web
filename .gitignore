@@ -8,6 +8,9 @@ data/_cache/
 data/*.json
 !data/.gitkeep
 !data/_summary.json
+# radke_extras.json: snapshot que o GHA usa como fallback pros XLSX do Drive
+# (ABC/Fat/ADS/Saldos não acessíveis no runner). CRM dentro dele é sempre fresco.
+!data/radke_extras.json
 
 # OS
 .DS_Store

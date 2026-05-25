@@ -25,6 +25,20 @@ function readSheet(file, sheetName) {
   return XLSX.utils.sheet_to_json(wb.Sheets[sn], { defval: '' });
 }
 
+// Permite rodar no GHA mesmo sem o Drive sincronizado: se XLSX falta,
+// loga e devolve null pro chamador preservar o snapshot anterior.
+function safeReadSheet(file, sheetName) {
+  try { return readSheet(file, sheetName); }
+  catch (e) {
+    console.error(`  [SKIP] ${file}: ${(e.message||'').slice(0,80)} — preserva snapshot anterior`);
+    return null;
+  }
+}
+
+// Snapshot anterior usado como fallback quando algum XLSX está ausente.
+let prev = {};
+try { prev = JSON.parse(fs.readFileSync(OUT, 'utf8')); } catch {}
+
 function num(v) {
   if (v == null || v === '') return 0;
   if (typeof v === 'number') return v;
@@ -41,71 +55,54 @@ function excelToDate(serial) {
 }
 
 console.log('=== Curva ABC ===');
-const abcRaw = readSheet('CurvaABCPRodutos.xlsx');
-// XLSX traz a coluna ABC mas a classificação está embaralhada (A único, ordem inconsistente).
-// Recalculamos do zero: sort por valor faturado desc, classifica pela regra 80/15/5
-// (A = primeiros 80% da receita acumulada, B = 80-95%, C = 95-100%).
-const abcSrc = abcRaw.map(r => ({
-  codigo: r['Código do Produto'] || '',
-  descricao: (r['Descrição do Produto'] || '').toString().trim(),
-  marca: r['Marca'] || '',
-  familia: r['Família de Produto'] || 'Sem Família',
-  unidade: r['Unidade'] || '',
-  valorFaturado: num(r['Valor Faturado']),
-  qtdFaturada: num(r['Quantidade Faturada']),
-})).filter(x => x.descricao && x.valorFaturado > 0)
-  .sort((a, b) => b.valorFaturado - a.valorFaturado);
-const abcTotal = abcSrc.reduce((s, x) => s + x.valorFaturado, 0);
-let abcAcum = 0;
-const abc = abcSrc.map((p, i) => {
-  abcAcum += p.valorFaturado;
-  const pctAcumulado = abcTotal > 0 ? (abcAcum / abcTotal) * 100 : 0;
-  const pctValor = abcTotal > 0 ? (p.valorFaturado / abcTotal) * 100 : 0;
-  let abcClass;
-  if (pctAcumulado <= 80) abcClass = 'A';
-  else if (pctAcumulado <= 95) abcClass = 'B';
-  else abcClass = 'C';
-  return {
-    ...p,
-    abc: abcClass,
-    pctValor,
-    valorAcumulado: abcAcum,
-    pctAcumulado,
-    ordem: i + 1,
-  };
-});
-console.log('  ', abc.length, 'produtos · total R$', abcTotal.toFixed(2));
-const abcCount = { A: 0, B: 0, C: 0 };
-abc.forEach(p => abcCount[p.abc]++);
-console.log('  classes (regra 80/15/5):', abcCount);
+const abcRaw = safeReadSheet('CurvaABCPRodutos.xlsx');
+let abc = [];
+let abcCount = { A: 0, B: 0, C: 0 };
+if (abcRaw) {
+  // XLSX traz a coluna ABC mas a classificação está embaralhada (A único, ordem inconsistente).
+  // Recalculamos do zero: sort por valor faturado desc, classifica pela regra 80/15/5
+  // (A = primeiros 80% da receita acumulada, B = 80-95%, C = 95-100%).
+  const abcSrc = abcRaw.map(r => ({
+    codigo: r['Código do Produto'] || '',
+    descricao: (r['Descrição do Produto'] || '').toString().trim(),
+    marca: r['Marca'] || '',
+    familia: r['Família de Produto'] || 'Sem Família',
+    unidade: r['Unidade'] || '',
+    valorFaturado: num(r['Valor Faturado']),
+    qtdFaturada: num(r['Quantidade Faturada']),
+  })).filter(x => x.descricao && x.valorFaturado > 0)
+    .sort((a, b) => b.valorFaturado - a.valorFaturado);
+  const abcTotal = abcSrc.reduce((s, x) => s + x.valorFaturado, 0);
+  let abcAcum = 0;
+  abc = abcSrc.map((p, i) => {
+    abcAcum += p.valorFaturado;
+    const pctAcumulado = abcTotal > 0 ? (abcAcum / abcTotal) * 100 : 0;
+    const pctValor = abcTotal > 0 ? (p.valorFaturado / abcTotal) * 100 : 0;
+    let abcClass;
+    if (pctAcumulado <= 80) abcClass = 'A';
+    else if (pctAcumulado <= 95) abcClass = 'B';
+    else abcClass = 'C';
+    return {
+      ...p, abc: abcClass, pctValor,
+      valorAcumulado: abcAcum, pctAcumulado, ordem: i + 1,
+    };
+  });
+  console.log('  ', abc.length, 'produtos · total R$', abcTotal.toFixed(2));
+  abc.forEach(p => abcCount[p.abc]++);
+  console.log('  classes (regra 80/15/5):', abcCount);
+} else if (prev.abc) {
+  abc = prev.abc.rows || [];
+  abcCount = prev.abc.counts || abcCount;
+  console.log('  preservando snapshot anterior: ' + abc.length + ' produtos');
+}
 
 console.log('\n=== Faturamento por Produto ===');
-const fatRawAll = readSheet('FaturamentoPorProduto.xlsx');
+const fatRawAll = safeReadSheet('FaturamentoPorProduto.xlsx');
 // Filtro RADKE: só PEDIDO autorizado conta como faturamento (igual ao PBI).
 // Remessa de Produto e Devolucoes são etapas/contramovimentos da mesma venda.
-const fatRaw = fatRawAll.filter(r => r['Operação'] === 'PEDIDO' && r['Situação'] === 'Autorizado');
-console.log('  filtro PEDIDO + Autorizado: ' + fatRaw.length + ' de ' + fatRawAll.length + ' rows');
-// linhas de NF, cada linha = 1 item de NF
-const fatItems = fatRaw.map(r => {
-  const dEm = excelToDate(num(r['Data de Emissão']));
-  return {
-    operacao: r['Operação'] || '',
-    situacao: r['Situação'] || '',
-    nf: r['Nota Fiscal'] || '',
-    dataEmissao: dEm ? `${String(dEm.getDate()).padStart(2,'0')}/${String(dEm.getMonth()+1).padStart(2,'0')}/${dEm.getFullYear()}` : '',
-    mes: dEm ? dEm.getMonth() : null,
-    ano: dEm ? dEm.getFullYear() : null,
-    cliente: r['Cliente (Razão Social)'] || r['Cliente (Nome Fantasia)'] || r['Cliente'] || '',
-    produto: r['Descrição do Produto'] || r['Produto'] || '',
-    familia: r['Família de Produto'] || 'Sem Família',
-    vendedor: r['Vendedor'] || 'Sem Vendedor',
-    qtd: num(r['Quantidade']),
-    valor: num(r['Total de Mercadoria']),
-  };
-}).filter(x => x.valor > 0); // ignora linhas zero
-console.log('  itens com valor > 0:', fatItems.length);
-
-// agregacoes
+const fatRaw = fatRawAll ? fatRawAll.filter(r => r['Operação'] === 'PEDIDO' && r['Situação'] === 'Autorizado') : null;
+if (fatRaw) console.log('  filtro PEDIDO + Autorizado: ' + fatRaw.length + ' de ' + fatRawAll.length + ' rows');
+// agregacao helper (usada por Faturamento + outros)
 function aggBy(items, keyFn, valueFn = (x) => x.valor) {
   const map = new Map();
   for (const it of items) {
@@ -118,116 +115,157 @@ function aggBy(items, keyFn, valueFn = (x) => x.valor) {
   return Array.from(map.values()).sort((a, b) => b.value - a.value);
 }
 
-// Ano de referência = ano max nos dados (último ano com faturamento)
-const anoRef = (() => {
-  const ys = fatItems.map(x => x.ano).filter(Boolean);
-  return ys.length ? Math.max(...ys) : new Date().getFullYear();
-})();
-// CORREÇÃO: PBI mostra só o ano de referência. Antes, totais/agg somavam TODOS
-// os anos do XLSX (2025+2026 = R$ 9M). Agora restringimos ao ano corrente (R$ 3.5M).
-const fatItemsAno = fatItems.filter(x => x.ano === anoRef);
-console.log('  itens 2025+2026: ' + fatItems.length + ' | apenas ' + anoRef + ': ' + fatItemsAno.length);
+let fatPorFamilia, fatPorVendedor, fatPorCliente, fatPorMes, fatTotais, fatDetalhado, fatProdutoMes, fatItemsAno;
+if (fatRaw) {
+  // linhas de NF, cada linha = 1 item de NF
+  const fatItems = fatRaw.map(r => {
+    const dEm = excelToDate(num(r['Data de Emissão']));
+    return {
+      operacao: r['Operação'] || '',
+      situacao: r['Situação'] || '',
+      nf: r['Nota Fiscal'] || '',
+      dataEmissao: dEm ? `${String(dEm.getDate()).padStart(2,'0')}/${String(dEm.getMonth()+1).padStart(2,'0')}/${dEm.getFullYear()}` : '',
+      mes: dEm ? dEm.getMonth() : null,
+      ano: dEm ? dEm.getFullYear() : null,
+      cliente: r['Cliente (Razão Social)'] || r['Cliente (Nome Fantasia)'] || r['Cliente'] || '',
+      produto: r['Descrição do Produto'] || r['Produto'] || '',
+      familia: r['Família de Produto'] || 'Sem Família',
+      vendedor: r['Vendedor'] || 'Sem Vendedor',
+      qtd: num(r['Quantidade']),
+      valor: num(r['Total de Mercadoria']),
+    };
+  }).filter(x => x.valor > 0);
+  console.log('  itens com valor > 0:', fatItems.length);
 
-const fatPorFamilia = aggBy(fatItemsAno, x => x.familia).slice(0, 20);
-const fatPorVendedor = aggBy(fatItemsAno, x => x.vendedor).slice(0, 20);
-const fatPorCliente = aggBy(fatItemsAno, x => x.cliente).slice(0, 15);
+  // Ano de referência = ano max nos dados (último ano com faturamento)
+  const anoRef = (() => {
+    const ys = fatItems.map(x => x.ano).filter(Boolean);
+    return ys.length ? Math.max(...ys) : new Date().getFullYear();
+  })();
+  fatItemsAno = fatItems.filter(x => x.ano === anoRef);
+  console.log('  itens 2025+2026: ' + fatItems.length + ' | apenas ' + anoRef + ': ' + fatItemsAno.length);
 
-const fatPorMes = Array(12).fill(0).map((_, i) => ({
-  m: ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'][i],
-  valor: 0,
-  qtd: 0,
-}));
-for (const it of fatItemsAno) {
-  if (it.mes == null) continue;
-  fatPorMes[it.mes].valor += it.valor;
-  fatPorMes[it.mes].qtd += it.qtd;
-}
+  fatPorFamilia = aggBy(fatItemsAno, x => x.familia).slice(0, 20);
+  fatPorVendedor = aggBy(fatItemsAno, x => x.vendedor).slice(0, 20);
+  fatPorCliente = aggBy(fatItemsAno, x => x.cliente).slice(0, 15);
 
-const fatTotais = {
-  totalValor: fatItemsAno.reduce((s, x) => s + x.valor, 0),
-  totalQtd: fatItemsAno.reduce((s, x) => s + x.qtd, 0),
-  numItens: fatItemsAno.length,
-  numNFs: new Set(fatItemsAno.map(x => x.nf).filter(Boolean)).size,
-  numClientes: new Set(fatItemsAno.map(x => x.cliente).filter(Boolean)).size,
-  numProdutos: new Set(fatItemsAno.map(x => x.produto).filter(Boolean)).size,
-  anoRef,
-};
-fatTotais.ticketMedio = fatTotais.numNFs > 0 ? fatTotais.totalValor / fatTotais.numNFs : 0;
-console.log('  ' + anoRef + ': R$ ' + fatTotais.totalValor.toFixed(2) + ' | NFs: ' + fatTotais.numNFs + ' | ticketMedio: ' + fatTotais.ticketMedio.toFixed(2));
-
-// detalhamento familia x produto (top 100 do ano)
-const fatDetalhado = aggBy(fatItemsAno, x => x.familia + ' ▸ ' + x.produto).slice(0, 100);
-
-// matriz REAL produto x mes (top 12 produtos do ano de referência)
-const fatProdutoMes = (function() {
-  const map = new Map();
+  fatPorMes = Array(12).fill(0).map((_, i) => ({
+    m: ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'][i],
+    valor: 0, qtd: 0,
+  }));
   for (const it of fatItemsAno) {
     if (it.mes == null) continue;
-    if (!map.has(it.produto)) map.set(it.produto, { nome: it.produto, total: 0, meses: Array(12).fill(0) });
-    const o = map.get(it.produto);
-    o.total += it.valor;
-    o.meses[it.mes] += it.valor;
+    fatPorMes[it.mes].valor += it.valor;
+    fatPorMes[it.mes].qtd += it.qtd;
   }
-  return [...map.values()].sort((a, b) => b.total - a.total).slice(0, 12);
-})();
+
+  fatTotais = {
+    totalValor: fatItemsAno.reduce((s, x) => s + x.valor, 0),
+    totalQtd: fatItemsAno.reduce((s, x) => s + x.qtd, 0),
+    numItens: fatItemsAno.length,
+    numNFs: new Set(fatItemsAno.map(x => x.nf).filter(Boolean)).size,
+    numClientes: new Set(fatItemsAno.map(x => x.cliente).filter(Boolean)).size,
+    numProdutos: new Set(fatItemsAno.map(x => x.produto).filter(Boolean)).size,
+    anoRef,
+  };
+  fatTotais.ticketMedio = fatTotais.numNFs > 0 ? fatTotais.totalValor / fatTotais.numNFs : 0;
+  console.log('  ' + anoRef + ': R$ ' + fatTotais.totalValor.toFixed(2) + ' | NFs: ' + fatTotais.numNFs + ' | ticketMedio: ' + fatTotais.ticketMedio.toFixed(2));
+
+  fatDetalhado = aggBy(fatItemsAno, x => x.familia + ' ▸ ' + x.produto).slice(0, 100);
+
+  fatProdutoMes = (function() {
+    const map = new Map();
+    for (const it of fatItemsAno) {
+      if (it.mes == null) continue;
+      if (!map.has(it.produto)) map.set(it.produto, { nome: it.produto, total: 0, meses: Array(12).fill(0) });
+      const o = map.get(it.produto);
+      o.total += it.valor;
+      o.meses[it.mes] += it.valor;
+    }
+    return [...map.values()].sort((a, b) => b.total - a.total).slice(0, 12);
+  })();
+} else if (prev.faturamento) {
+  // XLSX ausente — preserva snapshot anterior.
+  fatPorFamilia = prev.faturamento.porFamilia || [];
+  fatPorVendedor = prev.faturamento.porVendedor || [];
+  fatPorCliente = prev.faturamento.porCliente || [];
+  fatPorMes = prev.faturamento.porMes || [];
+  fatDetalhado = prev.faturamento.detalhado || [];
+  fatProdutoMes = prev.faturamento.produtoMes || [];
+  fatTotais = prev.faturamento.totais || {};
+  fatItemsAno = prev.faturamento.items || [];
+  console.log('  preservando snapshot anterior: ' + (fatTotais.numNFs || 0) + ' NFs');
+} else {
+  fatPorFamilia = []; fatPorVendedor = []; fatPorCliente = [];
+  fatPorMes = []; fatDetalhado = []; fatProdutoMes = [];
+  fatTotais = {}; fatItemsAno = [];
+}
 
 console.log('\n=== Marketing ADS ===');
-const adsRaw = readSheet('RadkeADS.xlsx', 'Formatted Report');
-const ads = adsRaw.map(r => ({
-  campanha: r['Nome da campanha'] || '',
-  conjunto: r['Nome do conjunto de anúncios'] || '',
-  anuncio: r['Nome do anúncio'] || '',
-  status: r['Status de veiculação'] || '',
-  alcance: num(r['Alcance']),
-  impressoes: num(r['Impressões']),
-  frequencia: num(r['Frequência']),
-  resultados: num(r['Resultados']),
-  custoPorResultado: num(r['Custo por resultado']),
-  valorBRL: num(r['Valor usado (BRL)']),
-  cpm: num(r['CPM (custo por 1.000 impressões)']),
-  cliques: num(r['Cliques no link']),
-  cpc: num(r['CPC (custo por clique no link)']),
-  ctr: num(r['CTR (taxa de cliques no link)']),
-  leads: num(r['Leads (formulário)']),
-  cliquesTodos: num(r['Cliques (todos)']),
-})).filter(x => x.campanha || x.valorBRL > 0);
+const adsRaw = safeReadSheet('RadkeADS.xlsx', 'Formatted Report');
+let ads = [], adsTotais = {}, adsCampanhasAgg = [];
+if (adsRaw) {
+  ads = adsRaw.map(r => ({
+    campanha: r['Nome da campanha'] || '',
+    conjunto: r['Nome do conjunto de anúncios'] || '',
+    anuncio: r['Nome do anúncio'] || '',
+    status: r['Status de veiculação'] || '',
+    alcance: num(r['Alcance']),
+    impressoes: num(r['Impressões']),
+    frequencia: num(r['Frequência']),
+    resultados: num(r['Resultados']),
+    custoPorResultado: num(r['Custo por resultado']),
+    valorBRL: num(r['Valor usado (BRL)']),
+    cpm: num(r['CPM (custo por 1.000 impressões)']),
+    cliques: num(r['Cliques no link']),
+    cpc: num(r['CPC (custo por clique no link)']),
+    ctr: num(r['CTR (taxa de cliques no link)']),
+    leads: num(r['Leads (formulário)']),
+    cliquesTodos: num(r['Cliques (todos)']),
+  })).filter(x => x.campanha || x.valorBRL > 0);
 
-const adsTotais = {
-  gastoTotal: ads.reduce((s, x) => s + x.valorBRL, 0),
-  alcanceTotal: ads.reduce((s, x) => s + x.alcance, 0),
-  impressoesTotal: ads.reduce((s, x) => s + x.impressoes, 0),
-  cliquesTotal: ads.reduce((s, x) => s + x.cliques, 0),
-  resultadosTotal: ads.reduce((s, x) => s + x.resultados, 0),
-  numCampanhas: new Set(ads.map(x => x.campanha).filter(Boolean)).size,
-};
-adsTotais.ctrMedio = adsTotais.impressoesTotal > 0 ? (adsTotais.cliquesTotal / adsTotais.impressoesTotal) * 100 : 0;
-adsTotais.cpmMedio = adsTotais.impressoesTotal > 0 ? (adsTotais.gastoTotal / adsTotais.impressoesTotal) * 1000 : 0;
-adsTotais.cpcMedio = adsTotais.cliquesTotal > 0 ? adsTotais.gastoTotal / adsTotais.cliquesTotal : 0;
-console.log('  campanhas:', adsTotais.numCampanhas, '| gasto: R$', adsTotais.gastoTotal.toFixed(2), '| CTR:', adsTotais.ctrMedio.toFixed(2), '%');
+  adsTotais = {
+    gastoTotal: ads.reduce((s, x) => s + x.valorBRL, 0),
+    alcanceTotal: ads.reduce((s, x) => s + x.alcance, 0),
+    impressoesTotal: ads.reduce((s, x) => s + x.impressoes, 0),
+    cliquesTotal: ads.reduce((s, x) => s + x.cliques, 0),
+    resultadosTotal: ads.reduce((s, x) => s + x.resultados, 0),
+    numCampanhas: new Set(ads.map(x => x.campanha).filter(Boolean)).size,
+  };
+  adsTotais.ctrMedio = adsTotais.impressoesTotal > 0 ? (adsTotais.cliquesTotal / adsTotais.impressoesTotal) * 100 : 0;
+  adsTotais.cpmMedio = adsTotais.impressoesTotal > 0 ? (adsTotais.gastoTotal / adsTotais.impressoesTotal) * 1000 : 0;
+  adsTotais.cpcMedio = adsTotais.cliquesTotal > 0 ? adsTotais.gastoTotal / adsTotais.cliquesTotal : 0;
+  console.log('  campanhas:', adsTotais.numCampanhas, '| gasto: R$', adsTotais.gastoTotal.toFixed(2), '| CTR:', adsTotais.ctrMedio.toFixed(2), '%');
 
-// agg por campanha (alguns rows tem o mesmo nome em niveis diferentes)
-function aggCampanha(items) {
-  const map = new Map();
-  for (const it of items) {
-    if (!it.campanha) continue;
-    const k = it.campanha;
-    if (!map.has(k)) map.set(k, { campanha: k, valorBRL: 0, alcance: 0, impressoes: 0, cliques: 0, resultados: 0, leads: 0 });
-    const o = map.get(k);
-    o.valorBRL += it.valorBRL;
-    o.alcance = Math.max(o.alcance, it.alcance);
-    o.impressoes += it.impressoes;
-    o.cliques += it.cliques;
-    o.resultados += it.resultados;
-    o.leads += it.leads;
-  }
-  for (const o of map.values()) {
-    o.cpm = o.impressoes > 0 ? (o.valorBRL / o.impressoes) * 1000 : 0;
-    o.cpc = o.cliques > 0 ? o.valorBRL / o.cliques : 0;
-    o.ctr = o.impressoes > 0 ? (o.cliques / o.impressoes) * 100 : 0;
-  }
-  return Array.from(map.values()).sort((a, b) => b.valorBRL - a.valorBRL);
+  // agg por campanha (alguns rows tem o mesmo nome em niveis diferentes)
+  const aggCampanha = (items) => {
+    const map = new Map();
+    for (const it of items) {
+      if (!it.campanha) continue;
+      const k = it.campanha;
+      if (!map.has(k)) map.set(k, { campanha: k, valorBRL: 0, alcance: 0, impressoes: 0, cliques: 0, resultados: 0, leads: 0 });
+      const o = map.get(k);
+      o.valorBRL += it.valorBRL;
+      o.alcance = Math.max(o.alcance, it.alcance);
+      o.impressoes += it.impressoes;
+      o.cliques += it.cliques;
+      o.resultados += it.resultados;
+      o.leads += it.leads;
+    }
+    for (const o of map.values()) {
+      o.cpm = o.impressoes > 0 ? (o.valorBRL / o.impressoes) * 1000 : 0;
+      o.cpc = o.cliques > 0 ? o.valorBRL / o.cliques : 0;
+      o.ctr = o.impressoes > 0 ? (o.cliques / o.impressoes) * 100 : 0;
+    }
+    return Array.from(map.values()).sort((a, b) => b.valorBRL - a.valorBRL);
+  };
+  adsCampanhasAgg = aggCampanha(ads);
+} else if (prev.ads) {
+  ads = prev.ads.rows || [];
+  adsCampanhasAgg = prev.ads.campanhasAgg || [];
+  adsTotais = prev.ads.totais || {};
+  console.log('  preservando snapshot anterior: ' + (adsTotais.numCampanhas || 0) + ' campanhas');
 }
-const adsCampanhasAgg = aggCampanha(ads);
 
 const out = {
   fetched_at: new Date().toISOString(),
@@ -253,59 +291,64 @@ const out = {
   },
   crm: (function() {
     try {
-      const wb = XLSX.readFile(path.join(DRIVE, 'consolidado (33).xlsx'));
-      const ws = wb.Sheets[wb.SheetNames[0]];
-      const raw = XLSX.utils.sheet_to_json(ws, { defval: '' });
+      // CRM agora vem da API Omie via fetch-omie-crm.cjs (não mais do XLSX).
+      // Auditado em 2026-05-25: 82 ganhos, R$ 3.349.867,14 ticket ganho — bate centavo a
+      // centavo com consolidado (33).xlsx. XLSX defasava porque dependia de export manual.
+      const opPath = path.join(__dirname, 'data', 'oportunidades.json');
+      const opData = JSON.parse(fs.readFileSync(opPath, 'utf8'));
+      const raw = Array.isArray(opData.oportunidades) ? opData.oportunidades : [];
 
-      // Normaliza fase: "06 Conclusão" → "Conclusão" (mas mantemos a chave do funil)
-      const cleanStr = (s) => (s == null ? '' : String(s).trim());
-      const ND = (s) => (!s || s === 'N/D' ? '' : s);
+      // Converte DD/MM/YYYY → Date.
+      const parseBR = (s) => {
+        if (!s || typeof s !== 'string') return null;
+        const m = s.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+        if (!m) return null;
+        const d = new Date(Number(m[3]), Number(m[2]) - 1, Number(m[1]));
+        return isNaN(d) ? null : d;
+      };
 
       const rowsAll = raw.map(r => {
-        const sit = cleanStr(r['Situação']);
-        // Conquistado em DD/MM/YYYY = ganho. Motivo presente + Fase 06 = perdido. Senao em andamento.
-        const ganho = /^Conquistado/i.test(sit);
-        const motivo = ND(cleanStr(r['Motivo de Conclusão']));
-        const fase = cleanStr(r['Fase Atual']);
-        // Perdido: tem motivo (≠N/D) e nao é Conquistado
+        const ganho = /^Conquistado/i.test(r.situacao || '');
+        const motivo = r.motivo || '';
+        // Mesma definição do XLSX: perdido = tem motivo ≠ 'Oportunidade nunca existiu' e não é ganho.
         const perdido = !ganho && motivo && motivo !== 'Oportunidade nunca existiu';
         const aberto = !ganho && !perdido;
-        const dataAtual = excelToDate(num(r['Data de atualização (completa)']));
-        const dataIncl = excelToDate(num(r['Data de inclusão (completa)']));
-        const dataConcl = excelToDate(num(r['Data de 06 Conclusão(completa)']));
+        const dataIncl = parseBR(r.dInclusao);
+        const dataAtual = parseBR(r.dAlteracao);
+        const dataConcl = parseBR(r.dConclusao);
         const dataRef = ganho && dataConcl ? dataConcl : (dataAtual || dataIncl);
         return {
-          descricao: cleanStr(r['Descrição da Oportunidade']),
-          fase,
-          situacao: sit,
+          descricao: r.descricao || '',
+          fase: r.fase || '',
+          situacao: r.situacao || '',
           ganho, perdido, aberto,
           motivo,
-          vendedor: cleanStr(r['Vendedor']) || 'Sem Vendedor',
-          origem: cleanStr(r['Origem']) || 'Sem Origem',
-          tipo: cleanStr(r['Tipo']),
-          produto: cleanStr(r['Solução']) || cleanStr(r['Produto']) || '',
-          conta: cleanStr(r['Conta']),
-          ticket: num(r['Ticket']),
-          produtos: num(r['Produtos']),
-          servicos: num(r['Serviços']),
-          recorrencia: num(r['Recorrência']),
-          temperatura: num(r['Temperatura']),
-          anoPrev: num(r['Ano previsão']),
-          mesPrev: cleanStr(r['Mês previsão']),
+          vendedor: r.vendedor || 'Sem Vendedor',
+          origem: r.origem || 'Sem Origem',
+          tipo: r.tipo || '',
+          produto: r.solucao || '',
+          conta: r.conta || '',
+          ticket: r.ticket || 0,
+          produtos: r.produtos || 0,
+          servicos: r.servicos || 0,
+          recorrencia: r.recorrencia || 0,
+          temperatura: r.temperatura || 0,
+          anoPrev: r.anoPrev || 0,
+          mesPrev: r.mesPrev || '',
           dataIncl: dataIncl ? dataIncl.toISOString().slice(0,10) : null,
           dataAtual: dataAtual ? dataAtual.toISOString().slice(0,10) : null,
           dataConcl: dataConcl ? dataConcl.toISOString().slice(0,10) : null,
           dataRef: dataRef ? dataRef.toISOString().slice(0,10) : null,
           ano: dataRef ? dataRef.getFullYear() : null,
           mes: dataRef ? dataRef.getMonth() : null,
-          tempoCiclo: num(r['Tempo de ciclo']),
+          tempoCiclo: r.tempoCiclo || 0,
         };
       }).filter(x => x.descricao);
 
       // Filtro RADKE: excluir Prospect e Qualificação (fases muito iniciais
       // que o PBI da empresa não considera no pipeline ativo).
       const rows = rowsAll.filter(r => r.fase !== '01 Prospect' && r.fase !== '02 Qualificação');
-      console.log('  filtro Prospect/Qualif: removidas ' + (rowsAll.length - rows.length) + ' oportunidades de ' + rowsAll.length);
+      console.log('  fonte API Omie · ' + rowsAll.length + ' opps · filtro Prospect/Qualif removeu ' + (rowsAll.length - rows.length));
 
       // Funil (a partir de 03 Proposta). O funil cumulativo: passou pela fase X = chegou em X ou maior.
       const FASES_ORDER = ['03 Proposta', '04 Negociação', '05 Aguardando Pedido', '06 Conclusão'];
@@ -416,6 +459,10 @@ const out = {
       console.log(`\n=== Saldos ===\n  ${dailyArr.length} dias | ultima data: ${last && last.data} | total: R$ ${last && last.total.toFixed(2)}`);
       return { daily: dailyArr, last, contas: [...new Set(series.map(r => r.conta))] };
     } catch (e) {
+      if (prev.saldos) {
+        console.error('  saldos erro: ' + (e.message||'').slice(0,80) + ' — preserva snapshot anterior');
+        return prev.saldos;
+      }
       console.error('  saldos erro:', e.message);
       return { daily: [], last: null, contas: [] };
     }
