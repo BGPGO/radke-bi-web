@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-05-25T19:50:06.371Z",
+  "fetched_at": "2026-05-26T07:03:10.291Z",
   "abc": {
     "rows": [
       {
@@ -9956,31 +9956,31 @@
       },
       {
         "descricao": "Valmont - Laudo",
-        "fase": "06 Conclusão",
+        "fase": "04 Negociação",
         "situacao": "Em Andamento",
         "ganho": false,
-        "perdido": true,
-        "aberto": false,
-        "motivo": "Preço",
+        "perdido": "",
+        "aberto": true,
+        "motivo": "",
         "vendedor": "Felipe",
         "origem": "Passivo - E-mail",
         "tipo": "Cliente Novo",
         "produto": "Porta Pallet - Laudos",
         "conta": "VALMONT INDUSTRIA E COMERCIO LTDA",
-        "ticket": 16604.4,
+        "ticket": 13764,
         "produtos": 0,
-        "servicos": 16604.4,
+        "servicos": 13764,
         "recorrencia": 0,
-        "temperatura": 25,
+        "temperatura": 40,
         "anoPrev": 2026,
-        "mesPrev": "Abril",
+        "mesPrev": "Maio",
         "dataIncl": "2026-03-02",
-        "dataAtual": "2026-05-04",
-        "dataConcl": "2026-05-04",
-        "dataRef": "2026-05-04",
+        "dataAtual": "2026-05-25",
+        "dataConcl": null,
+        "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 63
+        "tempoCiclo": 85
       },
       {
         "descricao": "MANUT. ESTRUTURAS - ADIENT GRV",
@@ -12277,65 +12277,93 @@
         "ano": 2026,
         "mes": 4,
         "tempoCiclo": 1
+      },
+      {
+        "descricao": "TDK ELECTRONICS DO BRASIL LTDA. -  Porta Pallet - Laudos",
+        "fase": "03 Proposta",
+        "situacao": "Em Andamento",
+        "ganho": false,
+        "perdido": "",
+        "aberto": true,
+        "motivo": "",
+        "vendedor": "DIOGO DE BEM ALMEIDA",
+        "origem": "Passivo - E-mail",
+        "tipo": "Cliente Novo",
+        "produto": "Porta Pallet - Laudos",
+        "conta": "TDK ELECTRONICS DO BRASIL LTDA.",
+        "ticket": 6800,
+        "produtos": 0,
+        "servicos": 6800,
+        "recorrencia": 0,
+        "temperatura": 60,
+        "anoPrev": 2026,
+        "mesPrev": "Maio",
+        "dataIncl": "2026-05-25",
+        "dataAtual": "2026-05-25",
+        "dataConcl": null,
+        "dataRef": "2026-05-25",
+        "ano": 2026,
+        "mes": 4,
+        "tempoCiclo": 1
       }
     ],
     "funil": [
       {
         "fase": "Proposta",
         "chave": "03 Proposta",
-        "atual": 41,
-        "cumulativo": 246
+        "atual": 42,
+        "cumulativo": 247
       },
       {
         "fase": "Negociação",
         "chave": "04 Negociação",
-        "atual": 30,
+        "atual": 31,
         "cumulativo": 205
       },
       {
         "fase": "Aguardando Pedido",
         "chave": "05 Aguardando Pedido",
         "atual": 2,
-        "cumulativo": 175
+        "cumulativo": 174
       },
       {
         "fase": "Conclusão",
         "chave": "06 Conclusão",
-        "atual": 173,
-        "cumulativo": 173
+        "atual": 172,
+        "cumulativo": 172
       }
     ],
     "totais": {
-      "totalLeads": 246,
+      "totalLeads": 247,
       "totalGanhos": 82,
-      "totalPerdidos": 53,
-      "totalAbertos": 111,
-      "taxaConversao": 33.33333333333333,
-      "totalTicket": 18526652.999999996,
+      "totalPerdidos": 52,
+      "totalAbertos": 113,
+      "taxaConversao": 33.198380566801625,
+      "totalTicket": 18530612.599999998,
       "totalGanhoTicket": 3349867.139999999,
-      "totalAbertoTicket": 11797668.889999991,
-      "totalPerdidoTicket": 3379116.9699999993,
-      "ticketMedio": 75311.5975609756,
+      "totalAbertoTicket": 11818232.889999991,
+      "totalPerdidoTicket": 3362512.5699999994,
+      "ticketMedio": 75022.72307692307,
       "anoCRM": 2026
     },
     "porVendedor": [
       {
         "name": "DIOGO DE BEM ALMEIDA",
-        "qtd": 57,
+        "qtd": 58,
         "ganhos": 21,
         "perdidos": 2,
-        "abertos": 34,
-        "ticket": 11945592.950000003,
+        "abertos": 35,
+        "ticket": 11952392.950000003,
         "ticketGanho": 1193892.8599999999,
-        "conversao": 36.84210526315789
+        "conversao": 36.206896551724135
       },
       {
         "name": "Felipe",
         "qtd": 68,
         "ganhos": 6,
-        "perdidos": 32,
-        "abertos": 30,
-        "ticket": 2847790.09,
+        "perdidos": 31,
+        "abertos": 31,
+        "ticket": 2844949.69,
         "ticketGanho": 187778.5,
         "conversao": 8.823529411764707
       },
@@ -12423,13 +12451,13 @@
       },
       {
         "name": "Passivo - E-mail",
-        "qtd": 60,
+        "qtd": 61,
         "ganhos": 39,
-        "perdidos": 1,
-        "abertos": 20,
-        "ticket": 869141.8600000001,
+        "perdidos": 0,
+        "abertos": 22,
+        "ticket": 873101.4600000001,
         "ticketGanho": 421665.96000000014,
-        "conversao": 65
+        "conversao": 63.934426229508205
       },
       {
         "name": "MARKETING - PARALELA",
@@ -12545,13 +12573,13 @@
       },
       {
         "name": "Preço",
-        "qtd": 31,
+        "qtd": 30,
         "ganhos": 25,
-        "perdidos": 6,
+        "perdidos": 5,
         "abertos": 0,
-        "ticket": 1133870.1499999997,
+        "ticket": 1117265.7499999995,
         "ticketGanho": 920266.8,
-        "conversao": 80.64516129032258
+        "conversao": 83.33333333333334
       },
       {
         "name": "Projeto cancelado internamente",
@@ -12607,13 +12635,13 @@
     "porTipo": [
       {
         "name": "Cliente Novo",
-        "qtd": 180,
+        "qtd": 181,
         "ganhos": 51,
-        "perdidos": 49,
-        "abertos": 80,
-        "ticket": 13271973.309999997,
+        "perdidos": 48,
+        "abertos": 82,
+        "ticket": 13275932.909999996,
         "ticketGanho": 955920.3699999998,
-        "conversao": 28.333333333333332
+        "conversao": 28.176795580110497
       },
       {
         "name": "Cliente Corrente",
@@ -12699,13 +12727,13 @@
       },
       {
         "name": "Porta Pallet - Laudos",
-        "qtd": 23,
+        "qtd": 24,
         "ganhos": 7,
-        "perdidos": 5,
-        "abertos": 11,
-        "ticket": 153108.33000000002,
+        "perdidos": 4,
+        "abertos": 13,
+        "ticket": 157067.93,
         "ticketGanho": 109227.93000000001,
-        "conversao": 30.434782608695656
+        "conversao": 29.166666666666668
       },
       {
         "name": "Serralheria - Linha de Vida",
@@ -12985,10 +13013,10 @@
       },
       {
         "m": "mai",
-        "leads": 58,
+        "leads": 59,
         "ganhos": 19,
-        "perdidos": 4,
-        "ticket": 2650553.17,
+        "perdidos": 3,
+        "ticket": 2654512.77,
         "ticketGanho": 440452.27999999997
       },
       {
