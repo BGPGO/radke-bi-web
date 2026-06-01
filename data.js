@@ -1,4 +1,4 @@
-/* RADKE BI — gerado por build-data.cjs em 2026-05-31T07:15:14.795Z */
+/* RADKE BI — gerado por build-data.cjs em 2026-06-01T08:50:24.806Z */
 /* Empresa: RADKE SOLUÇÕES INSTRALOGISTICAS | Ano ref: 2026 */
 const MONTHS = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
 const MONTHS_FULL = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
@@ -30,7 +30,7 @@ const META = {
     "cnpj": "16.665.716/0001-48",
     "cidade": "PORTO ALEGRE (RS)"
   },
-  "fetched_at": "2026-05-31T07:15:02.302Z",
+  "fetched_at": "2026-06-01T08:50:14.204Z",
   "ref_year": 2026,
   "counts": {
     "contas_pagar": 16295,
@@ -8127,7 +8127,7 @@ const SEGMENTS = {
         "Serviços - Engenharia",
         "BUSCHLE &amp; LEPPER - CANOAS/RS",
         2956.27,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "01/06/2026",
@@ -8135,7 +8135,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "CIA ZAFFARI - LOJA 02 - PROTÁSIO",
         400.2,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "01/06/2026",
@@ -8143,7 +8143,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "CIA ZAFFARI - LOJA 02 - PROTÁSIO",
         600.29,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "01/06/2026",
@@ -8151,7 +8151,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "CIA ZAFFARI - LOJA 02 - PROTÁSIO",
         200.08,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "01/06/2026",
@@ -8159,7 +8159,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "CIA ZAFFARI - LOJA 02 - PROTÁSIO",
         200.08,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "01/06/2026",
@@ -8167,7 +8167,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "LOJA 44 - ZAFF CARLOS GOMES",
         3439.7,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "01/06/2026",
@@ -8175,7 +8175,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "LOJA 44 - ZAFF CARLOS GOMES",
         4028.67,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "01/06/2026",
@@ -8183,7 +8183,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "LOJA 44 - ZAFF CARLOS GOMES",
         3629.41,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "01/06/2026",
@@ -8191,7 +8191,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "LOJA 44 - ZAFF CARLOS GOMES",
         3597.79,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "01/06/2026",
@@ -8199,7 +8199,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "LOJA 44 - ZAFF CARLOS GOMES",
         3439.7,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "01/06/2026",
@@ -8207,7 +8207,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "LOJA 44 - ZAFF CARLOS GOMES",
         3128.89,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "29/05/2026",
@@ -12601,7 +12601,7 @@ const SEGMENTS = {
         "Serviços - Engenharia",
         "BUSCHLE &amp; LEPPER - CANOAS/RS",
         2956.27,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "01/06/2026",
@@ -12609,7 +12609,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "CIA ZAFFARI - LOJA 02 - PROTÁSIO",
         400.2,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "01/06/2026",
@@ -12617,7 +12617,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "CIA ZAFFARI - LOJA 02 - PROTÁSIO",
         600.29,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "01/06/2026",
@@ -12625,7 +12625,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "CIA ZAFFARI - LOJA 02 - PROTÁSIO",
         200.08,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "01/06/2026",
@@ -12633,7 +12633,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "CIA ZAFFARI - LOJA 02 - PROTÁSIO",
         200.08,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "01/06/2026",
@@ -12641,7 +12641,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "LOJA 44 - ZAFF CARLOS GOMES",
         3439.7,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "01/06/2026",
@@ -12649,7 +12649,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "LOJA 44 - ZAFF CARLOS GOMES",
         4028.67,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "01/06/2026",
@@ -12657,7 +12657,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "LOJA 44 - ZAFF CARLOS GOMES",
         3629.41,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "01/06/2026",
@@ -12665,7 +12665,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "LOJA 44 - ZAFF CARLOS GOMES",
         3597.79,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "01/06/2026",
@@ -12673,7 +12673,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "LOJA 44 - ZAFF CARLOS GOMES",
         3439.7,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "01/06/2026",
@@ -12681,7 +12681,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "LOJA 44 - ZAFF CARLOS GOMES",
         3128.89,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "29/05/2026",
