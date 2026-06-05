@@ -564,8 +564,12 @@ const PageDetalhado = ({ statusFilter, year, months, drilldown, setDrilldown }) 
 // PageProfundaCliente — Tabela com bar overlay por linha
 // ============================================================
 const PageProfundaCliente = ({ statusFilter, year, months, drilldown, setDrilldown }) => {
-  const ALL_TX = (typeof window !== "undefined" && window.ALL_TX) || [];
-  const REF_YEAR = (typeof window !== "undefined" && window.REF_YEAR) || new Date().getFullYear();
+  // #8 — fonte: itens de pedidos FATURADOS da API Omie (valor do produto c/ IPI),
+  // não mais os títulos financeiros. "Valor venda" = vMerc + IPI, datado pelo faturamento.
+  const E = (typeof window !== "undefined" && window.BIT_RADKE_EXTRAS) || null;
+  const itemsAll = (E && E.faturamento && E.faturamento.itemsAll) || [];
+  const REF_YEAR = (E && E.faturamento && E.faturamento.totais && E.faturamento.totais.anoRef)
+    || (typeof window !== "undefined" && window.REF_YEAR) || new Date().getFullYear();
 
   const [clienteFiltro, setClienteFiltro] = useState("todos");
   const [mesIni, setMesIni] = useState(0);
@@ -574,34 +578,26 @@ const PageProfundaCliente = ({ statusFilter, year, months, drilldown, setDrilldo
   const clientesAgg = useMemo(() => {
     const map = new Map();
     const yearTarget = year || REF_YEAR;
-    for (const row of ALL_TX) {
-      const [kind, mes, dia, categoria, cliente, valor, realizado] = row;
-      if (kind !== "r") continue;
-      if (!cliente) continue;
-      if (!mes) continue;
-      const yr = parseInt(mes.slice(0, 4), 10);
-      if (yr !== yearTarget) continue;
-      const mIdx = parseInt(mes.slice(5, 7), 10) - 1;
-      if (mIdx < mesIni || mIdx > mesFim) continue;
-      if (statusFilter === "realizado" && realizado !== 1) continue;
-      if (statusFilter === "a_pagar_receber" && realizado !== 0) continue;
-      if (clienteFiltro !== "todos" && cliente !== clienteFiltro) continue;
-
-      map.set(cliente, (map.get(cliente) || 0) + valor);
+    for (const it of itemsAll) {
+      if (!it.cliente) continue;
+      if (it.ano !== yearTarget) continue;
+      if (it.mes == null || it.mes < mesIni || it.mes > mesFim) continue;
+      if (clienteFiltro !== "todos" && it.cliente !== clienteFiltro) continue;
+      map.set(it.cliente, (map.get(it.cliente) || 0) + it.valor);
     }
     return Array.from(map.entries())
       .map(([name, value]) => ({ name, value }))
       .sort((a, b) => b.value - a.value);
-  }, [ALL_TX, year, mesIni, mesFim, statusFilter, clienteFiltro, REF_YEAR]);
+  }, [itemsAll, year, mesIni, mesFim, clienteFiltro, REF_YEAR]);
 
   const totalGeral = clientesAgg.reduce((s, x) => s + x.value, 0);
   const maxVal = Math.max(...clientesAgg.map(x => x.value), 1);
 
   const clientesUniq = useMemo(() => {
     const s = new Set();
-    for (const row of ALL_TX) { if (row[0] === "r" && row[4]) s.add(row[4]); }
+    for (const it of itemsAll) { if (it.cliente) s.add(it.cliente); }
     return Array.from(s).sort();
-  }, [ALL_TX]);
+  }, [itemsAll]);
 
   return (
     <div className="page">
@@ -759,14 +755,25 @@ const PageCRM = ({ statusFilter, year, months, drilldown, setDrilldown }) => {
   }, [months]);
   const monthIdxFiltered = (Array.isArray(months) && months.length === 1) ? (months[0] - 1) : null;
 
-  // Aplica filtro reativo (year + months) no escopo da PageCRM apenas — não toca no build,
+  // #3 — filtro do CRM por vendedor (mesmo padrão dos demais filtros da app).
+  const [fVendedor, setFVendedor] = useState("Todos");
+  // #2 — modal de oportunidades: { dim: 'vendedor'|'origem'|'motivo', value }
+  const [opModal, setOpModal] = useState(null);
+  const vendedorOpts = useMemo(
+    () => ["Todos", ...[...new Set(C0.rows.map(r => r.vendedor).filter(v => v && v !== 'Sem Vendedor'))].sort()],
+    [C0]
+  );
+
+  // Aplica filtro reativo (year + months + vendedor) no escopo da PageCRM apenas — não toca no build,
   // pra não estragar nada das outras telas. Recomputa totais, funil, aggregates client-side.
   const C = useMemo(() => {
     const FASES_ORDER = ['03 Proposta', '04 Negociação', '05 Aguardando Pedido', '06 Conclusão'];
     const faseRank = (f) => FASES_ORDER.indexOf(f);
+    const vendedorOk = (r) => fVendedor === "Todos" || r.vendedor === fVendedor;
     const rows = C0.rows.filter(r => {
       if (r.ano !== yearActive) return false;
       if (monthSet && !monthSet.has(r.mes)) return false;
+      if (!vendedorOk(r)) return false;
       return true;
     });
     const totalLeads = rows.length;
@@ -808,8 +815,8 @@ const PageCRM = ({ statusFilter, year, months, drilldown, setDrilldown }) => {
       m: ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'][i],
       leads: 0, ganhos: 0, perdidos: 0, ticket: 0, ticketGanho: 0,
     }));
-    // Pra projeção mês a mês, sempre usa o ano inteiro (ignora o filtro de mês)
-    const rowsAno = C0.rows.filter(r => r.ano === yearActive);
+    // Pra projeção mês a mês, sempre usa o ano inteiro (ignora o filtro de mês, respeita vendedor)
+    const rowsAno = C0.rows.filter(r => r.ano === yearActive && vendedorOk(r));
     for (const r of rowsAno) {
       if (r.mes == null) continue;
       const o = porMes[r.mes];
@@ -826,7 +833,7 @@ const PageCRM = ({ statusFilter, year, months, drilldown, setDrilldown }) => {
         ticketMedio, anoCRM: yearActive,
       },
     };
-  }, [C0, yearActive, monthSet]);
+  }, [C0, yearActive, monthSet, fVendedor]);
 
   const T = C.totais;
 
@@ -874,6 +881,12 @@ const PageCRM = ({ statusFilter, year, months, drilldown, setDrilldown }) => {
           </div>
         </div>
         <div className="actions">
+          <label className="fat-filter">
+            <span>Vendedor</span>
+            <select className="filter-select" value={fVendedor} onChange={e => setFVendedor(e.target.value)}>
+              {vendedorOpts.map(o => <option key={o}>{o}</option>)}
+            </select>
+          </label>
         </div>
       </div>
 
@@ -978,6 +991,12 @@ const PageCRM = ({ statusFilter, year, months, drilldown, setDrilldown }) => {
                   <g key={i}>
                     <circle cx={pad + i * stepX} cy={yScale(p.leads)} r="3" fill="#22d3ee" />
                     {p.ganhos > 0 && <circle cx={pad + i * stepX} cy={yScale(p.ganhos)} r="2.5" fill="#10b981" />}
+                    {p.leads > 0 && (
+                      <text x={pad + i * stepX} y={yScale(p.leads) - 7} textAnchor="middle"
+                        fill="#22d3ee" fontSize="9" fontWeight="700" fontFamily="JetBrains Mono">
+                        {p.leads}
+                      </text>
+                    )}
                   </g>
                 ))}
               </svg>
@@ -999,7 +1018,8 @@ const PageCRM = ({ statusFilter, year, months, drilldown, setDrilldown }) => {
               const max = (C.porVendedor[0] && C.porVendedor[0].ticket) || 1;
               const w = (v.ticket / max) * 100;
               return (
-                <div key={i} className="bar-row">
+                <div key={i} className="bar-row clickable" style={{ cursor: "pointer" }}
+                  onClick={() => setOpModal({ dim: "vendedor", value: v.name })} title="Ver operações">
                   <div className="row-meta">
                     <span className="label">{v.name} · {v.qtd} opp · {v.conversao.toFixed(0)}% conv</span>
                     <span className="val">R$ {_fmtBR4(v.ticket, 0)}</span>
@@ -1017,7 +1037,8 @@ const PageCRM = ({ statusFilter, year, months, drilldown, setDrilldown }) => {
               const max = (C.porOrigem[0] && C.porOrigem[0].ticket) || 1;
               const w = (o.ticket / max) * 100;
               return (
-                <div key={i} className="bar-row">
+                <div key={i} className="bar-row clickable" style={{ cursor: "pointer" }}
+                  onClick={() => setOpModal({ dim: "origem", value: o.name })} title="Ver operações">
                   <div className="row-meta">
                     <span className="label">{o.name} · {o.qtd} opp</span>
                     <span className="val">R$ {_fmtBR4(o.ticket, 0)}</span>
@@ -1039,7 +1060,8 @@ const PageCRM = ({ statusFilter, year, months, drilldown, setDrilldown }) => {
               const max = (C.porMotivo[0] && C.porMotivo[0].qtd) || 1;
               const w = (m.qtd / max) * 100;
               return (
-                <div key={i} className="bar-row">
+                <div key={i} className="bar-row clickable" style={{ cursor: "pointer" }}
+                  onClick={() => setOpModal({ dim: "motivo", value: m.name })} title="Ver operações">
                   <div className="row-meta">
                     <span className="label">{m.name}</span>
                     <span className="val">{m.qtd} opp · R$ {_fmtBR4(m.ticket, 0)}</span>
@@ -1053,8 +1075,54 @@ const PageCRM = ({ statusFilter, year, months, drilldown, setDrilldown }) => {
       )}
 
       <div className="status-line" style={{ marginTop: 12, fontSize: 11, color: "var(--fg-3)" }}>
-        Fonte: <code>consolidado (33).xlsx</code> · {C.rows.length} oportunidades extraídas. Atualize via <code>node build-radke-extras.cjs</code>.
+        Fonte: API Omie CRM · {C.rows.length} oportunidades{fVendedor !== "Todos" ? ` · vendedor ${fVendedor}` : ""}.
       </div>
+
+      {/* #2 — modal com as oportunidades individuais ao clicar em vendedor/origem/motivo */}
+      {opModal && (() => {
+        const dim = opModal.dim;
+        const ops = (C.rows || [])
+          .filter(r => (dim === "vendedor" ? r.vendedor : dim === "origem" ? r.origem : r.motivo) === opModal.value)
+          .sort((a, b) => (b.ticket || 0) - (a.ticket || 0));
+        const totalTk = ops.reduce((s, r) => s + (r.ticket || 0), 0);
+        const dimLabel = dim === "vendedor" ? "Vendedor" : dim === "origem" ? "Origem" : "Motivo";
+        const statusTag = (r) => r.ganho ? { t: "Ganho", c: "var(--green)" } : r.perdido ? { t: "Perdido", c: "var(--red)" } : { t: "Em aberto", c: "var(--amber)" };
+        return (
+          <div className="drawer-overlay no-print" onClick={() => setOpModal(null)}>
+            <div className="card" onClick={e => e.stopPropagation()} style={{ maxWidth: 920, width: "92%", maxHeight: "82vh", display: "flex", flexDirection: "column" }}>
+              <div className="card-title-row">
+                <h2 className="card-title">Operações · {dimLabel}: {opModal.value}</h2>
+                <button className="drawer-close" onClick={() => setOpModal(null)} aria-label="Fechar">✕</button>
+              </div>
+              <div className="status-line" style={{ marginBottom: 8 }}>
+                {ops.length} oportunidade{ops.length === 1 ? "" : "s"} · ticket total R$ {_fmtBR4(totalTk, 0)}
+              </div>
+              <div className="t-scroll" style={{ overflow: "auto", flex: 1 }}>
+                <table className="t">
+                  <thead>
+                    <tr><th>Oportunidade</th><th>Conta</th><th>Fase</th><th>Situação</th><th className="num">Ticket</th></tr>
+                  </thead>
+                  <tbody>
+                    {ops.map((r, i) => {
+                      const st = statusTag(r);
+                      return (
+                        <tr key={i}>
+                          <td title={r.descricao}>{(r.descricao || "—").length > 48 ? r.descricao.slice(0, 48) + "…" : (r.descricao || "—")}</td>
+                          <td>{r.conta || "—"}</td>
+                          <td>{r.fase || "—"}</td>
+                          <td><span style={{ color: st.c, fontWeight: 600 }}>{st.t}</span></td>
+                          <td className="num">R$ {_fmtBR4(r.ticket || 0, 0)}</td>
+                        </tr>
+                      );
+                    })}
+                    {ops.length === 0 && <tr><td colSpan="5" style={{ textAlign: "center", padding: 18, color: "var(--mute)" }}>Sem operações.</td></tr>}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
     </div>
   );
 };

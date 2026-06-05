@@ -96,12 +96,34 @@ if (abcRaw) {
   console.log('  preservando snapshot anterior: ' + abc.length + ' produtos');
 }
 
-console.log('\n=== Faturamento por Produto ===');
-const fatRawAll = safeReadSheet('FaturamentoPorProduto.xlsx');
-// Filtro RADKE: só PEDIDO autorizado conta como faturamento (igual ao PBI).
-// Remessa de Produto e Devolucoes são etapas/contramovimentos da mesma venda.
-const fatRaw = fatRawAll ? fatRawAll.filter(r => r['Operação'] === 'PEDIDO' && r['Situação'] === 'Autorizado') : null;
-if (fatRaw) console.log('  filtro PEDIDO + Autorizado: ' + fatRaw.length + ' de ' + fatRawAll.length + ' rows');
+console.log('\n=== Faturamento por Produto (API Omie — pedidos de venda) ===');
+// Fonte: data/pedidos.json (fetch-omie-pedidos.cjs). Substitui FaturamentoPorProduto.xlsx (#5).
+// Metodologia validada centavo-a-centavo contra o XLSX/PBI em 2026-06-04:
+//   faturado='S' && cancelado!=='S', mês por dFat, valor_mercadoria por item
+//   → jan/fev/abr 2026 EXATOS; mar +0,27% (pedido faturado após o export manual).
+// #4 — REMESSA FUTURA: venda p/ entrega futura gera DOIS pedidos faturados:
+//   5922/6922 (simples faturamento = a VENDA, na data da venda) e
+//   5116/6116 (a entrega/remessa, meses depois). O PBI somava os dois (bug reportado
+//   pelo cliente). Mantemos 5922/6922 e excluímos 5116/6116 (e 5117/6117).
+// #6/#8 — valor = vMerc + IPI (valor total do produto c/ IPI). valorSemIPI preservado.
+const REMESSA_FUTURA_RE = /^(5116|6116|5117|6117)$/;
+let pedidosData = null;
+try { pedidosData = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'pedidos.json'), 'utf8')); }
+catch (e) { console.error('  [SKIP] data/pedidos.json: ' + (e.message || '').slice(0, 60) + ' — preserva snapshot anterior'); }
+
+// Lookup de cliente: data/clientes.json (já baixado pelo fetch-omie.cjs)
+let cliNomeById = new Map();
+try {
+  const clis = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'clientes.json'), 'utf8'));
+  for (const c of (Array.isArray(clis) ? clis : [])) {
+    if (c.codigo_cliente_omie) cliNomeById.set(c.codigo_cliente_omie, c.razao_social || c.nome_fantasia || '');
+  }
+} catch {}
+const parseBRdate = (s) => {
+  const m = typeof s === 'string' && s.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+  return m ? new Date(Number(m[3]), Number(m[2]) - 1, Number(m[1])) : null;
+};
+
 // agregacao helper (usada por Faturamento + outros)
 function aggBy(items, keyFn, valueFn = (x) => x.valor) {
   const map = new Map();
@@ -115,27 +137,63 @@ function aggBy(items, keyFn, valueFn = (x) => x.valor) {
   return Array.from(map.values()).sort((a, b) => b.value - a.value);
 }
 
-let fatPorFamilia, fatPorVendedor, fatPorCliente, fatPorMes, fatTotais, fatDetalhado, fatProdutoMes, fatItemsAno;
-if (fatRaw) {
-  // linhas de NF, cada linha = 1 item de NF
-  const fatItems = fatRaw.map(r => {
-    const dEm = excelToDate(num(r['Data de Emissão']));
-    return {
-      operacao: r['Operação'] || '',
-      situacao: r['Situação'] || '',
-      nf: r['Nota Fiscal'] || '',
-      dataEmissao: dEm ? `${String(dEm.getDate()).padStart(2,'0')}/${String(dEm.getMonth()+1).padStart(2,'0')}/${dEm.getFullYear()}` : '',
-      mes: dEm ? dEm.getMonth() : null,
-      ano: dEm ? dEm.getFullYear() : null,
-      cliente: r['Cliente (Razão Social)'] || r['Cliente (Nome Fantasia)'] || r['Cliente'] || '',
-      produto: r['Descrição do Produto'] || r['Produto'] || '',
-      familia: r['Família de Produto'] || 'Sem Família',
-      vendedor: r['Vendedor'] || 'Sem Vendedor',
-      qtd: num(r['Quantidade']),
-      valor: num(r['Total de Mercadoria']),
-    };
-  }).filter(x => x.valor > 0);
-  console.log('  itens com valor > 0:', fatItems.length);
+let fatPorFamilia, fatPorVendedor, fatPorCliente, fatPorMes, fatTotais, fatDetalhado, fatProdutoMes, fatItemsAno, fatItemsAll, naoFaturados;
+if (pedidosData && Array.isArray(pedidosData.pedidos)) {
+  const fatItems = [];
+  let remessaFuturaExcl = 0, remessaFuturaValor = 0;
+  for (const p of pedidosData.pedidos) {
+    if (p.faturado !== 'S' || p.cancelado === 'S') continue;
+    const dEm = parseBRdate(p.dFat);
+    if (!dEm) continue;
+    const cliente = cliNomeById.get(p.codCliente) || `Cliente ${p.codCliente || '?'}`;
+    for (const it of (p.itens || [])) {
+      if (REMESSA_FUTURA_RE.test(it.cfop)) { remessaFuturaExcl++; remessaFuturaValor += it.vMerc; continue; } // #4
+      fatItems.push({
+        operacao: 'PEDIDO',
+        situacao: 'Autorizado',
+        nf: p.numero || '',
+        dataEmissao: p.dFat,
+        mes: dEm.getMonth(),
+        ano: dEm.getFullYear(),
+        cliente,
+        produto: it.descricao || '',
+        familia: it.familia || 'Sem Família',
+        vendedor: p.vendedor || 'Sem Vendedor',
+        qtd: it.qtd,
+        valor: (it.vMerc || 0) + (it.ipi || 0), // #6 — total c/ IPI
+        valorSemIPI: it.vMerc || 0,
+        ipi: it.ipi || 0,
+        cfop: it.cfop,
+      });
+    }
+  }
+  console.log('  pedidos faturados → ' + fatItems.length + ' itens · remessa futura excluída (#4): '
+    + remessaFuturaExcl + ' itens / R$ ' + remessaFuturaValor.toFixed(2));
+  fatItemsAll = fatItems.filter(x => x.valor > 0); // multi-ano (#9 — Curva ABC com filtro de ano)
+
+  // #14 — pedidos AINDA NÃO FATURADOS: por mês da data de previsão.
+  // Conta só pedidos CONFIRMADOS aguardando faturamento (etapas 10/20/50 — planejamento/
+  // executa/emitir NF). Etapa 00 = orçamento/proposta (403 pedidos mortos) fica FORA,
+  // senão o gráfico mostraria R$ 26M de propostas nunca convertidas.
+  naoFaturados = (function () {
+    const porAno = {};
+    let totalGeral = 0, qtdPedidos = 0;
+    for (const p of pedidosData.pedidos) {
+      if (p.faturado === 'S' || p.cancelado === 'S') continue;
+      if (p.etapa === '00' || p.etapa === '') continue; // orçamentos/propostas não confirmadas
+      const d = parseBRdate(p.dataPrevisao) || parseBRdate(p.dInc);
+      if (!d) continue;
+      const v = (p.itens || []).filter(i => !REMESSA_FUTURA_RE.test(i.cfop))
+        .reduce((s, i) => s + (i.vMerc || 0) + (i.ipi || 0), 0);
+      if (v <= 0) continue;
+      const y = d.getFullYear();
+      if (!porAno[y]) porAno[y] = Array(12).fill(0);
+      porAno[y][d.getMonth()] += v;
+      totalGeral += v; qtdPedidos++;
+    }
+    console.log('  não faturados (#14): ' + qtdPedidos + ' pedidos · R$ ' + totalGeral.toFixed(2));
+    return { porAno, totalGeral, qtdPedidos };
+  })();
 
   // Ano de referência = ano max nos dados (último ano com faturamento)
   const anoRef = (() => {
@@ -185,7 +243,7 @@ if (fatRaw) {
     return [...map.values()].sort((a, b) => b.total - a.total).slice(0, 12);
   })();
 } else if (prev.faturamento) {
-  // XLSX ausente — preserva snapshot anterior.
+  // pedidos.json ausente — preserva snapshot anterior.
   fatPorFamilia = prev.faturamento.porFamilia || [];
   fatPorVendedor = prev.faturamento.porVendedor || [];
   fatPorCliente = prev.faturamento.porCliente || [];
@@ -194,11 +252,40 @@ if (fatRaw) {
   fatProdutoMes = prev.faturamento.produtoMes || [];
   fatTotais = prev.faturamento.totais || {};
   fatItemsAno = prev.faturamento.items || [];
+  fatItemsAll = prev.faturamento.itemsAll || fatItemsAno;
+  naoFaturados = prev.naoFaturados || { porAno: {}, totalGeral: 0, qtdPedidos: 0 };
   console.log('  preservando snapshot anterior: ' + (fatTotais.numNFs || 0) + ' NFs');
 } else {
   fatPorFamilia = []; fatPorVendedor = []; fatPorCliente = [];
   fatPorMes = []; fatDetalhado = []; fatProdutoMes = [];
-  fatTotais = {}; fatItemsAno = [];
+  fatTotais = {}; fatItemsAno = []; fatItemsAll = [];
+  naoFaturados = { porAno: {}, totalGeral: 0, qtdPedidos: 0 };
+}
+
+// #9 — Curva ABC agora deriva dos pedidos da API (não mais do CurvaABCPRodutos.xlsx defasado).
+// Recalcula 80/15/5 pro anoRef; o filtro de ano na página recomputa client-side de itemsAll.
+if (fatItemsAll && fatItemsAll.length) {
+  const itensAnoRef = fatItemsAll.filter(x => x.ano === (fatTotais && fatTotais.anoRef));
+  const byProd = new Map();
+  for (const it of itensAnoRef) {
+    if (!byProd.has(it.produto)) byProd.set(it.produto, { codigo: '', descricao: it.produto, marca: '', familia: it.familia, unidade: '', valorFaturado: 0, qtdFaturada: 0 });
+    const o = byProd.get(it.produto);
+    o.valorFaturado += it.valor;
+    o.qtdFaturada += it.qtd || 0;
+  }
+  const abcSrc = [...byProd.values()].filter(x => x.valorFaturado > 0).sort((a, b) => b.valorFaturado - a.valorFaturado);
+  const abcTotal = abcSrc.reduce((s, x) => s + x.valorFaturado, 0);
+  let abcAcum = 0;
+  abc = abcSrc.map((p, i) => {
+    abcAcum += p.valorFaturado;
+    const pctAcumulado = abcTotal > 0 ? (abcAcum / abcTotal) * 100 : 0;
+    return { ...p, abc: pctAcumulado <= 80 ? 'A' : pctAcumulado <= 95 ? 'B' : 'C',
+      pctValor: abcTotal > 0 ? (p.valorFaturado / abcTotal) * 100 : 0,
+      valorAcumulado: abcAcum, pctAcumulado, ordem: i + 1 };
+  });
+  abcCount = { A: 0, B: 0, C: 0 };
+  abc.forEach(p => abcCount[p.abc]++);
+  console.log('  Curva ABC (API, ano ' + (fatTotais && fatTotais.anoRef) + '): ' + abc.length + ' produtos · ' + JSON.stringify(abcCount));
 }
 
 console.log('\n=== Marketing ADS ===');
@@ -283,7 +370,10 @@ const out = {
     produtoMes: fatProdutoMes,
     totais: fatTotais,
     items: fatItemsAno, // raw items do ano (pra filtros reativos no client)
+    itemsAll: fatItemsAll, // multi-ano — Curva ABC com filtro de ano (#9) + Profunda Cliente (#8)
   },
+  naoFaturados, // #14 — pedidos ainda não faturados, por ano/mês da previsão
+
   ads: {
     rows: ads,
     campanhasAgg: adsCampanhasAgg,

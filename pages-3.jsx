@@ -229,7 +229,7 @@ const FaturamentoProdutoBody = ({ drilldown, setDrilldown }) => {
           </div>
         </div>
         <div className="card fat-vendas-anuncio">
-          <h2 className="card-title">VENDAS POR ANÚNCIO</h2>
+          <h2 className="card-title">VENDAS POR CATEGORIA</h2>
           <FatVerticalBars items={vendasPorAnuncio} height={260} />
         </div>
       </div>
@@ -289,10 +289,12 @@ const FaturamentoServicoBody = ({ year, months }) => {
     return new Set(months);
   }, [months]);
 
+  // #11 — Faturamento é regime de COMPETÊNCIA: data por EMISSÃO da NF (r[9]), não recebimento (r[1]).
+  const emYM = (r) => r[9] || r[1];
   const receitas = useMemo(() => {
     return allTx.filter(r => {
       if (r[0] !== 'r') return false;
-      const mes = r[1]; if (!mes) return false;
+      const mes = emYM(r); if (!mes) return false;
       if (parseInt(mes.slice(0, 4), 10) !== refY) return false;
       if (monthSet && !monthSet.has(parseInt(mes.slice(5, 7), 10))) return false;
       return /serviços/i.test(r[3] || '');
@@ -302,7 +304,7 @@ const FaturamentoServicoBody = ({ year, months }) => {
   const total = receitas.reduce((s, r) => s + (r[5] || 0), 0);
   const realizado = receitas.filter(r => r[6] === 1).reduce((s, r) => s + r[5], 0);
   const aReceber = total - realizado;
-  const numNFs = new Set(receitas.map(r => r[1] + '-' + r[4])).size; // proxy: cliente×mês como NF
+  const numNFs = new Set(receitas.map(r => emYM(r) + '-' + r[4])).size; // proxy: cliente×mês como NF
   const numCli = new Set(receitas.map(r => r[4]).filter(Boolean)).size;
   const ticket = numNFs > 0 ? total / numNFs : 0;
 
@@ -327,7 +329,7 @@ const FaturamentoServicoBody = ({ year, months }) => {
   const porMes = useMemo(() => {
     const arr = Array(12).fill(0);
     for (const r of receitas) {
-      const m = parseInt(r[1].slice(5, 7), 10) - 1;
+      const m = parseInt(emYM(r).slice(5, 7), 10) - 1;
       if (m >= 0 && m < 12) arr[m] += r[5];
     }
     return arr;
@@ -380,10 +382,12 @@ const FaturamentoTotalBody = ({ year, months }) => {
     return new Set(months);
   }, [months]);
 
+  // #11 — Faturamento é regime de COMPETÊNCIA: data por EMISSÃO da NF (r[9]), não recebimento (r[1]).
+  const emYM = (r) => r[9] || r[1];
   const receitas = useMemo(() => {
     return allTx.filter(r => {
       if (r[0] !== 'r') return false;
-      const mes = r[1]; if (!mes) return false;
+      const mes = emYM(r); if (!mes) return false;
       if (parseInt(mes.slice(0, 4), 10) !== refY) return false;
       if (monthSet && !monthSet.has(parseInt(mes.slice(5, 7), 10))) return false;
       return true;
@@ -410,7 +414,7 @@ const FaturamentoTotalBody = ({ year, months }) => {
   const porMes = useMemo(() => {
     const arr = Array(12).fill(0);
     for (const r of receitas) {
-      const m = parseInt(r[1].slice(5, 7), 10) - 1;
+      const m = parseInt(emYM(r).slice(5, 7), 10) - 1;
       if (m >= 0 && m < 12) arr[m] += r[5];
     }
     return arr;
@@ -511,8 +515,36 @@ const PageCurvaABC = ({ drilldown, setDrilldown }) => {
       </div>
     );
   }
-  const A = E.abc;
   const [classFilter, setClassFilter] = useState("todas"); // todas | A | B | C
+
+  // #9 — filtro por ano: recomputa a curva ABC do ano selecionado a partir dos itens
+  // multi-ano da API (faturamento.itemsAll). Fallback: snapshot E.abc (anoRef).
+  const itemsAll = (E.faturamento && E.faturamento.itemsAll) || [];
+  const anosDisp = useMemo(() => [...new Set(itemsAll.map(i => i.ano).filter(Boolean))].sort((a, b) => b - a), [itemsAll]);
+  const anoRefFat = (E.faturamento && E.faturamento.totais && E.faturamento.totais.anoRef) || anosDisp[0] || new Date().getFullYear();
+  const [anoSel, setAnoSel] = useState(anoRefFat);
+  const A = useMemo(() => {
+    if (!itemsAll.length) return E.abc;
+    const byProd = new Map();
+    for (const it of itemsAll) {
+      if (it.ano !== anoSel) continue;
+      if (!byProd.has(it.produto)) byProd.set(it.produto, { codigo: '', descricao: it.produto, marca: '', familia: it.familia, unidade: '', valorFaturado: 0, qtdFaturada: 0 });
+      const o = byProd.get(it.produto);
+      o.valorFaturado += it.valor;
+      o.qtdFaturada += it.qtd || 0;
+    }
+    const src = [...byProd.values()].filter(x => x.valorFaturado > 0).sort((a, b) => b.valorFaturado - a.valorFaturado);
+    const tot = src.reduce((s, x) => s + x.valorFaturado, 0);
+    let acum = 0;
+    const rows = src.map((p, i) => {
+      acum += p.valorFaturado;
+      const pa = tot > 0 ? (acum / tot) * 100 : 0;
+      return { ...p, abc: pa <= 80 ? 'A' : pa <= 95 ? 'B' : 'C', pctValor: tot > 0 ? (p.valorFaturado / tot) * 100 : 0, valorAcumulado: acum, pctAcumulado: pa, ordem: i + 1 };
+    });
+    const counts = { A: 0, B: 0, C: 0 };
+    rows.forEach(r => counts[r.abc]++);
+    return { rows, counts, total: rows.length };
+  }, [itemsAll, anoSel, E.abc]);
 
   const filtered = useMemo(() => {
     if (classFilter === "todas") return A.rows;
@@ -554,9 +586,17 @@ const PageCurvaABC = ({ drilldown, setDrilldown }) => {
       <div className="page-title">
         <div>
           <h1>Curva ABC de Produtos</h1>
-          <div className="status-line">{A.total} produtos · A: {A.counts.A} · B: {A.counts.B} · C: {A.counts.C}</div>
+          <div className="status-line">{A.total} produtos · A: {A.counts.A} · B: {A.counts.B} · C: {A.counts.C} · ano {anoSel}</div>
         </div>
         <div className="actions">
+          {anosDisp.length > 0 && (
+            <label className="fat-filter">
+              <span>Período</span>
+              <select className="filter-select" value={anoSel} onChange={e => setAnoSel(Number(e.target.value))}>
+                {anosDisp.map(a => <option key={a} value={a}>{a}</option>)}
+              </select>
+            </label>
+          )}
           <div className="seg">
             <button className={classFilter === "todas" ? "active" : ""} onClick={() => setClassFilter("todas")}>Todas</button>
             <button className={classFilter === "A" ? "active" : ""} onClick={() => setClassFilter("A")}>A (top)</button>

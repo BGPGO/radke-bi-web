@@ -37,12 +37,23 @@ const SectionHeading = ({ strong, soft }) => (
 //   vermelho (pago) embaixo + amarelo (a-pagar) em cima
 const OverviewBars = ({ data, height = 220, year = "2026", onBarClick, activeIdx, showPrevisto = false }) => {
   const B = window.BIT;
-  const totRec = (d) => (d.receita || 0) + (d.receita_prevista || 0);
+  // #14 — pedidos confirmados ainda não faturados (roxo) empilham na torre de receita
+  const totRec = (d) => (d.receita || 0) + (d.receita_prevista || 0) + (d.pedidos_nao_faturados || 0);
   const totDesp = (d) => (d.despesa || 0) + (d.despesa_prevista || 0);
   const max = Math.max(...data.map(d => Math.max(totRec(d), totDesp(d))), 1);
-  const niceMax = Math.max(Math.ceil(max / 200000) * 200000, 200000);
+  // Step de tick adaptativo (~5 ticks). Pro caso mensal (max ~900K) dá 200K — mesmo
+  // comportamento de antes; pro caso diário (max ~50K) dá 10K, sem barras minúsculas.
+  const niceStep = (m) => {
+    const raw = m / 5;
+    const pow = Math.pow(10, Math.floor(Math.log10(raw)));
+    const n = raw / pow;
+    const mult = n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10;
+    return mult * pow;
+  };
+  const step = niceStep(max);
+  const niceMax = Math.max(Math.ceil(max / step) * step, step);
   const ticks = [];
-  for (let v = 0; v <= niceMax; v += 200000) ticks.push(v);
+  for (let v = 0; v <= niceMax; v += step) ticks.push(v);
   const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1, 3);
   const hasActive = activeIdx != null && activeIdx >= 0;
 
@@ -60,13 +71,15 @@ const OverviewBars = ({ data, height = 220, year = "2026", onBarClick, activeIdx
           {data.map((d, i) => {
             const recReal = d.receita || 0;
             const recPrev = d.receita_prevista || 0;
+            const pedNF = d.pedidos_nao_faturados || 0;
             const despReal = d.despesa || 0;
             const despPrev = d.despesa_prevista || 0;
             const rRealH = (recReal / niceMax) * 100;
             const rPrevH = (recPrev / niceMax) * 100;
+            const pNFH = (pedNF / niceMax) * 100;
             const dRealH = (despReal / niceMax) * 100;
             const dPrevH = (despPrev / niceMax) * 100;
-            const recTotal = recReal + recPrev;
+            const recTotal = recReal + recPrev + pedNF;
             const despTotal = despReal + despPrev;
             const cls = "ov-bar-col" + (onBarClick ? " clickable" : "") +
               (hasActive && i === activeIdx ? " active" : "") +
@@ -85,8 +98,12 @@ const OverviewBars = ({ data, height = 220, year = "2026", onBarClick, activeIdx
                       <div className="ov-bar cyan-prev" style={{ height: `${rPrevH}%` }} title={`A receber (previsto): ${B.fmt(recPrev)}`}>
                       </div>
                     )}
+                    {showPrevisto && pedNF > 0 && (
+                      <div className="ov-bar" style={{ height: `${pNFH}%`, background: "#a78bfa" }} title={`Pedidos não faturados: ${B.fmt(pedNF)}`}>
+                      </div>
+                    )}
                     {showPrevisto && recTotal > 0 && (
-                      <span className="ov-bar-chip stacked" style={{ bottom: `calc(${rRealH + rPrevH}% + 4px)` }}>R${Math.round(recTotal / 1000)} K</span>
+                      <span className="ov-bar-chip stacked" style={{ bottom: `calc(${rRealH + rPrevH + pNFH}% + 4px)` }}>R${Math.round(recTotal / 1000)} K</span>
                     )}
                   </div>
                   <div className="ov-bar-tower">
@@ -232,6 +249,53 @@ const PageOverview = ({ filters, setFilters, onOpenFilters, statusFilter, drilld
     setDrilldown({ type: "mes", value: ym, label: lbl });
   };
 
+  // #12+1 — ao filtrar um único mês, o gráfico Receitas×Despesas vira análise DIÁRIA.
+  const MESES_NOMES_OV = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+  const singleMonth = (Array.isArray(months) && months.length === 1) ? months[0] : null;
+  const dailyData = useMemo(() => {
+    if (singleMonth == null) return null;
+    const ym = `${refYear}-${String(singleMonth).padStart(2, "0")}`;
+    const ALL = (typeof window !== "undefined" && window.ALL_TX) || [];
+    const daysInMonth = new Date(refYear, singleMonth, 0).getDate();
+    const arr = Array.from({ length: daysInMonth }, (_, i) => ({
+      m: String(i + 1).padStart(2, "0"),
+      receita: 0, despesa: 0, receita_prevista: 0, despesa_prevista: 0,
+    }));
+    for (const r of ALL) {
+      if (r[1] !== ym) continue;
+      const dia = r[2]; if (!dia || dia < 1 || dia > daysInMonth) continue;
+      const real = r[6] === 1;
+      // Respeita o status filter da página (realizado / a vencer / tudo).
+      if (statusFilter === 'realizado' && !real) continue;
+      if (statusFilter === 'a_pagar_receber' && real) continue;
+      const o = arr[dia - 1];
+      const val = r[5] || 0;
+      if (r[0] === 'r') {
+        if (isTudoMode && !real) o.receita_prevista += val; else o.receita += val;
+      } else {
+        if (isTudoMode && !real) o.despesa_prevista += val; else o.despesa += val;
+      }
+    }
+    return arr;
+  }, [singleMonth, refYear, statusFilter, isTudoMode]);
+
+  // #14 — pedidos confirmados ainda não faturados (sem NF), por mês de previsão (roxo).
+  // Só no modo "Tudo" (acompanha as séries previstas) e só na visão mensal.
+  const naoFatPorMes = useMemo(() => {
+    const E = (typeof window !== "undefined" && window.BIT_RADKE_EXTRAS) || null;
+    return (E && E.naoFaturados && E.naoFaturados.porAno && E.naoFaturados.porAno[refYear]) || null;
+  }, [refYear]);
+  const mSetOv = (Array.isArray(months) && months.length) ? new Set(months) : null;
+  const showNaoFat = isTudoMode && !dailyData && !!naoFatPorMes && naoFatPorMes.some(v => v > 0);
+  const chartData = useMemo(() => {
+    const base = dailyData || monthDataStacked;
+    if (!showNaoFat) return base;
+    return base.map((m, i) => ({
+      ...m,
+      pedidos_nao_faturados: (!mSetOv || mSetOv.has(i + 1)) ? (naoFatPorMes[i] || 0) : 0,
+    }));
+  }, [dailyData, monthDataStacked, showNaoFat, naoFatPorMes, months]);
+
   // Indicator series for the toggle chart (derived da MONTH_DATA real)
   const margemSeries = B.MONTH_DATA.map(m => m.receita > 0 ? ((m.receita - m.despesa) / m.receita) * 100 : 0);
   const indicatorSeries = {
@@ -293,39 +357,46 @@ const PageOverview = ({ filters, setFilters, onOpenFilters, statusFilter, drilld
         <div style={{ display: "grid", gap: 16, minWidth: 0 }}>
           <div className="card">
             <div className="card-title-row" style={{ marginBottom: 10 }}>
-              <h2 className="card-title">Receitas e despesas</h2>
+              <h2 className="card-title">Receitas e despesas{singleMonth != null ? ` · ${MESES_NOMES_OV[singleMonth - 1]} (diário)` : ""}</h2>
             </div>
             <div className="legend-pills">
               <span className="legend-pill green">
                 <span className="dot" />
                 <span className="lbl">Receita {isTudoMode ? "(realizada)" : ""}</span>
                 <span className="val">{B.fmtK(isTudoMode
-                  ? monthDataStacked.reduce((s, m) => s + (m.receita || 0), 0)
+                  ? chartData.reduce((s, m) => s + (m.receita || 0), 0)
                   : B.TOTAL_RECEITA)}</span>
               </span>
               {isTudoMode && (
                 <span className="legend-pill cyan">
                   <span className="dot" />
                   <span className="lbl">A receber (previsto)</span>
-                  <span className="val">{B.fmtK(monthDataStacked.reduce((s, m) => s + (m.receita_prevista || 0), 0))}</span>
+                  <span className="val">{B.fmtK(chartData.reduce((s, m) => s + (m.receita_prevista || 0), 0))}</span>
+                </span>
+              )}
+              {showNaoFat && (
+                <span className="legend-pill">
+                  <span className="dot" style={{ background: "#a78bfa" }} />
+                  <span className="lbl">Pedidos não faturados</span>
+                  <span className="val">{B.fmtK(chartData.reduce((s, m) => s + (m.pedidos_nao_faturados || 0), 0))}</span>
                 </span>
               )}
               <span className="legend-pill red">
                 <span className="dot" />
                 <span className="lbl">Despesa {isTudoMode ? "(paga)" : ""}</span>
                 <span className="val">{B.fmtK(isTudoMode
-                  ? monthDataStacked.reduce((s, m) => s + (m.despesa || 0), 0)
+                  ? chartData.reduce((s, m) => s + (m.despesa || 0), 0)
                   : B.TOTAL_DESPESA)}</span>
               </span>
               {isTudoMode && (
                 <span className="legend-pill amber">
                   <span className="dot" />
                   <span className="lbl">A pagar (previsto)</span>
-                  <span className="val">{B.fmtK(monthDataStacked.reduce((s, m) => s + (m.despesa_prevista || 0), 0))}</span>
+                  <span className="val">{B.fmtK(chartData.reduce((s, m) => s + (m.despesa_prevista || 0), 0))}</span>
                 </span>
               )}
             </div>
-            <OverviewBars data={monthDataStacked} height={220} year={String(refYear)} onBarClick={handleBarMes} activeIdx={activeMonthIdx} showPrevisto={isTudoMode} />
+            <OverviewBars data={chartData} height={220} year={singleMonth != null ? `${MESES_NOMES_OV[singleMonth - 1]}/${refYear}` : String(refYear)} onBarClick={singleMonth != null ? undefined : handleBarMes} activeIdx={singleMonth != null ? -1 : activeMonthIdx} showPrevisto={isTudoMode} />
           </div>
 
           <div className="card">
@@ -488,39 +559,83 @@ const PageIndicators = ({ statusFilter, drilldown, setDrilldown, year, months })
 
 const PageReceita = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, months }) => {
   const B = useMemo(() => window.getBit(statusFilter, drilldown, year, months), [statusFilter, drilldown, year, months]);
-  // Média por mês = total / (meses com receita no período). Evita dividir por 12 fixo
-  // — quando filtra mês único divide por 1, quando ano corrente divide pelos meses ja decorridos.
-  const monthsWithData = B.MONTH_DATA.filter(m => m.receita > 0).length;
-  const mediaMes = monthsWithData > 0 ? B.TOTAL_RECEITA / monthsWithData : 0;
-  // Distinct count real (não top-12). Reage a drilldown/mês/status filter.
-  const numClientes = B.NUM_CLIENTES != null ? B.NUM_CLIENTES : B.RECEITA_CLIENTES.length;
-  const ticket = numClientes > 0 ? B.TOTAL_RECEITA / numClientes : 0;
-  const [range, setRange] = useState("12M");
   const refYear = (B.META && B.META.ref_year) || new Date().getFullYear();
+  const MONTHS_FULL = B.MONTHS_FULL || [];
+  const [range, setRange] = useState("12M");
+
+  // #15 — Receita por COMPETÊNCIA: cada NF entra no mês da sua EMISSÃO (r[9]),
+  // não no mês de recebimento (r[1]). Recalcula tudo de ALL_TX por emissão,
+  // sem tocar no regime de caixa das outras telas (Overview/Fluxo/Despesa).
+  const allTx = (typeof window !== "undefined" && window.ALL_TX) || [];
+  const emYM = (r) => r[9] || r[1];
+  const emDia = (r) => r[10] || r[2];
+  const pad2 = (n) => String(n).padStart(2, "0");
+  const monthSet = useMemo(() => (Array.isArray(months) && months.length) ? new Set(months) : null, [months]);
+
+  const recRows = useMemo(() => allTx.filter(r => {
+    if (r[0] !== 'r') return false;
+    const ym = emYM(r); if (!ym) return false;
+    if (parseInt(ym.slice(0, 4), 10) !== refYear) return false;
+    if (monthSet && !monthSet.has(parseInt(ym.slice(5, 7), 10))) return false;
+    if (statusFilter === 'realizado' && r[6] !== 1) return false;
+    if (statusFilter === 'a_pagar_receber' && r[6] !== 0) return false;
+    return true;
+  }), [allTx, refYear, monthSet, statusFilter]);
+
+  const recFiltradas = useMemo(() => {
+    if (!drilldown) return recRows;
+    if (drilldown.type === 'mes') return recRows.filter(r => emYM(r) === drilldown.value);
+    if (drilldown.type === 'categoria') return recRows.filter(r => r[3] === drilldown.value);
+    if (drilldown.type === 'cliente') return recRows.filter(r => r[4] === drilldown.value);
+    return recRows;
+  }, [recRows, drilldown]);
+
+  const monthSeries = useMemo(() => {
+    const arr = Array(12).fill(0);
+    for (const r of recRows) { const m = parseInt(emYM(r).slice(5, 7), 10) - 1; if (m >= 0 && m < 12) arr[m] += r[5]; }
+    return arr;
+  }, [recRows]);
+
+  const TOTAL_RECEITA = useMemo(() => recRows.reduce((s, r) => s + r[5], 0), [recRows]);
+  const monthsWithData = monthSeries.filter(v => v > 0).length;
+  const mediaMes = monthsWithData > 0 ? TOTAL_RECEITA / monthsWithData : 0;
+  const numClientes = useMemo(() => new Set(recRows.map(r => r[4]).filter(Boolean)).size, [recRows]);
+  const ticket = numClientes > 0 ? TOTAL_RECEITA / numClientes : 0;
+
+  const RECEITA_CATEGORIAS = useMemo(() => {
+    const m = new Map();
+    for (const r of recRows) { const k = r[3] || 'Sem categoria'; m.set(k, (m.get(k) || 0) + r[5]); }
+    return [...m.entries()].map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value).slice(0, 12);
+  }, [recRows]);
+  const RECEITA_CLIENTES = useMemo(() => {
+    const m = new Map();
+    for (const r of recRows) { const k = r[4] || 'Sem cliente'; m.set(k, (m.get(k) || 0) + r[5]); }
+    return [...m.entries()].map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value).slice(0, 12);
+  }, [recRows]);
+
+  // Extrato por emissão — tupla [data, cc, categoria, cliente, valor, status] compat com a tabela.
+  const extratoFiltrado = useMemo(() => recFiltradas.map(r => {
+    const ym = emYM(r); const dia = emDia(r) || 1;
+    return [`${pad2(dia)}/${ym.slice(5, 7)}/${ym.slice(0, 4)}`, r[8] || 'Operações', r[3], r[4], r[5], r[6] === 1 ? 'RECEBIDO' : 'A RECEBER'];
+  }).sort((a, b) => {
+    const [da, ma, ya] = a[0].split('/').map(Number); const [db, mb, yb] = b[0].split('/').map(Number);
+    return new Date(yb, mb - 1, db) - new Date(ya, ma - 1, da);
+  }), [recFiltradas]);
+  const totalFiltrado = drilldown ? recFiltradas.reduce((s, r) => s + r[5], 0) : TOTAL_RECEITA;
 
   // Drilldown handlers
   const handleBarMes = (v, i) => {
-    const mm = String(i + 1).padStart(2, "0");
-    const ym = `${refYear}-${mm}`;
-    const mn = B.MONTHS_FULL[i] || "";
+    const ym = `${refYear}-${pad2(i + 1)}`;
+    const mn = MONTHS_FULL[i] || "";
     setDrilldown({ type: "mes", value: ym, label: `${mn.charAt(0).toUpperCase() + mn.slice(1, 3)}/${refYear}` });
   };
   const handleCategoria = (it) => setDrilldown({ type: "categoria", value: it.name, label: it.name });
   const handleCliente = (it) => setDrilldown({ type: "cliente", value: it.name, label: it.name });
 
-  // Indices ativos para destaque
   const activeMonthIdx = (drilldown && drilldown.type === "mes")
     ? parseInt(drilldown.value.slice(5, 7), 10) - 1 : -1;
   const activeCategoria = (drilldown && drilldown.type === "categoria") ? drilldown.value : null;
   const activeCliente = (drilldown && drilldown.type === "cliente") ? drilldown.value : null;
-
-  // Extrato filtrado de receitas (usa EXTRATO_RECEITAS pre-separado pelo build,
-  // fallback pro filtro inline pra compat com BIT base)
-  const extratoReceitas = B.EXTRATO_RECEITAS || B.EXTRATO.filter(e => e[4] > 0);
-  const extratoFiltrado = window.applyDrilldown(extratoReceitas, drilldown);
-  const totalFiltrado = drilldown
-    ? extratoFiltrado.reduce((s, e) => s + e[4], 0)
-    : B.TOTAL_RECEITA;
 
   return (
     <div className="page">
@@ -536,22 +651,22 @@ const PageReceita = ({ filters, setFilters, onOpenFilters, statusFilter, drilldo
       <DrilldownBadge drilldown={drilldown} onClear={() => setDrilldown(null)} />
 
       <div className="row row-4">
-        <KpiTile label="Receita total" value={(B.TOTAL_RECEITA / 1e6).toFixed(2).replace(".", ",")} unit="M" sparkValues={B.MONTH_DATA.map(m => m.receita)} sparkColor="var(--green)" tone="green" />
-        <KpiTile label="Média por mês" value={(mediaMes / 1e3).toFixed(0)} unit="K" sparkValues={B.MONTH_DATA.map(m => m.receita)} sparkColor="var(--cyan)" tone="cyan" />
-        <KpiTile label="Clientes" value={String(numClientes)} sparkValues={B.MONTH_DATA.map(m => m.receita > 0 ? 1 : 0)} sparkColor="var(--cyan)" tone="cyan" nonMonetary />
-        <KpiTile label="Ticket médio" value={ticket > 0 ? (ticket / 1e3).toFixed(2).replace(".", ",") : "0,00"} unit="K" sparkValues={B.MONTH_DATA.map(m => m.receita / 30)} sparkColor="var(--green)" tone="green" />
+        <KpiTile label="Receita total" value={(TOTAL_RECEITA / 1e6).toFixed(2).replace(".", ",")} unit="M" sparkValues={monthSeries} sparkColor="var(--green)" tone="green" />
+        <KpiTile label="Média por mês" value={(mediaMes / 1e3).toFixed(0)} unit="K" sparkValues={monthSeries} sparkColor="var(--cyan)" tone="cyan" />
+        <KpiTile label="Clientes" value={String(numClientes)} sparkValues={monthSeries.map(v => v > 0 ? 1 : 0)} sparkColor="var(--cyan)" tone="cyan" nonMonetary />
+        <KpiTile label="Ticket médio" value={ticket > 0 ? (ticket / 1e3).toFixed(2).replace(".", ",") : "0,00"} unit="K" sparkValues={monthSeries.map(v => v / 30)} sparkColor="var(--green)" tone="green" />
       </div>
 
       <div className="card">
-        <h2 className="card-title">Receita por mês</h2>
-        <SingleBars values={B.MONTH_DATA.map(m => m.receita)} labels={B.MONTHS_FULL} color="green" height={240}
+        <h2 className="card-title">Receita por mês <span style={{ fontSize: 11, color: "var(--mute)", fontWeight: 400 }}>· por emissão da NF</span></h2>
+        <SingleBars values={monthSeries} labels={MONTHS_FULL} color="green" height={240}
           onBarClick={handleBarMes} activeIdx={activeMonthIdx} />
       </div>
 
       <div className="row" style={{ gridTemplateColumns: "minmax(0, 4fr) minmax(0, 5fr) minmax(0, 4fr)" }}>
         <div className="card">
           <h2 className="card-title">Receita por categoria</h2>
-          <BarList items={B.RECEITA_CATEGORIAS} color="green" onItemClick={handleCategoria} activeName={activeCategoria} />
+          <BarList items={RECEITA_CATEGORIAS} color="green" onItemClick={handleCategoria} activeName={activeCategoria} />
         </div>
 
         <div className="card">
@@ -586,7 +701,7 @@ const PageReceita = ({ filters, setFilters, onOpenFilters, statusFilter, drilldo
 
         <div className="card">
           <h2 className="card-title">Receita por cliente</h2>
-          <BarList items={B.RECEITA_CLIENTES} color="green" onItemClick={handleCliente} activeName={activeCliente} />
+          <BarList items={RECEITA_CLIENTES} color="green" onItemClick={handleCliente} activeName={activeCliente} />
         </div>
       </div>
     </div>

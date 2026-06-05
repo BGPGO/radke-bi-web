@@ -71,12 +71,21 @@ jobs:
           OMIE_APP_SECRET: ${{ secrets.OMIE_APP_SECRET }}
         run: '[ -f fetch-omie-crm.cjs ] && node fetch-omie-crm.cjs || echo "skip: fetch-omie-crm.cjs not found"'
 
+      # Pedidos de venda = fonte do Faturamento por Produto / Curva ABC / Profunda Cliente
+      # / pedidos não faturados (#14). SEM continue-on-error: se falhar, o workflow falha
+      # e o ar mantém os dados de ontem (lição do incidente de 11/05 que zerou o BI).
+      - name: Fetch pedidos de venda (Omie API)
+        env:
+          OMIE_APP_KEY: ${{ secrets.OMIE_APP_KEY }}
+          OMIE_APP_SECRET: ${{ secrets.OMIE_APP_SECRET }}
+        run: '[ -f fetch-omie-pedidos.cjs ] && node fetch-omie-pedidos.cjs || echo "skip: fetch-omie-pedidos.cjs not found"'
+
       - name: Build data + extras + JSX bundle
         run: |
           node build-data.cjs
           [ -f build-data-extras.cjs ] && node build-data-extras.cjs || true
-          # build-radke-extras: CRM vem da API; ABC/Fat/ADS/Saldos preservam snapshot
-          # commitado (XLSX vivem no Drive, GHA não acessa).
+          # build-radke-extras: CRM + Faturamento (pedidos) vêm da API; ADS/Saldos
+          # preservam snapshot commitado (XLSX vivem no Drive, GHA não acessa).
           [ -f build-radke-extras.cjs ] && node build-radke-extras.cjs || true
           node build-jsx.cjs
 

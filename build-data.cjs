@@ -225,7 +225,11 @@ function normalizeMovimento(m) {
 
   const dataPago = parseBR(d.dDtPagamento);
   const dataVenc = parseBR(d.dDtVenc) || parseBR(d.dDtPrevisao) || parseBR(d.dDtEmissao);
-  const data_efetiva = realizado ? (dataPago || dataVenc) : dataVenc;
+  const dataEmissao = parseBR(d.dDtEmissao); // #11/#15 — regime de competência (Receita/Faturamento)
+  // #12 — "A receber (previsto)" deve usar a PREVISÃO DE RECEBIMENTO, não o vencimento.
+  // Aplica só à receita prevista; a pagar previsto continua pelo vencimento.
+  const dataPrevista = (natureza === 'R') ? (parseBR(d.dDtPrevisao) || dataVenc) : dataVenc;
+  const data_efetiva = realizado ? (dataPago || dataVenc) : dataPrevista;
   if (!data_efetiva) return null;
   // Valor: realizado = nValPago (caixa). Previsto = nValAberto (saldo nao pago).
   let valor = realizado ? num(r.nValPago) : (num(r.nValAberto) || num(d.nValorTitulo));
@@ -240,6 +244,7 @@ function normalizeMovimento(m) {
     centroCusto: getDepartamentoNome(dept),
     data_venc: dataVenc,
     data_efetiva,
+    data_emissao: dataEmissao,
     valor: Math.abs(valor),
     status,
     realizado,
@@ -585,7 +590,9 @@ const SEGMENTS = ${JSON.stringify({ realizado, a_pagar_receber, tudo }, null, 2)
 // realizadas + a pagar + canceladas excluidas). Usada pra cross-filter real
 // — pagina recalcula KPIs/charts/tabelas em runtime via aggregateTx().
 // Cada row eh tupla compacta pra reduzir tamanho do bundle:
-// [kind, mes, dia, categoria, cliente, valor, realizado, fornecedor, centroCusto]
+// [kind, mes, dia, categoria, cliente, valor, realizado, fornecedor, centroCusto, emissaoYM, emissaoDia]
+// emissaoYM/emissaoDia (idx 9/10) = data de EMISSÃO da NF (regime competência), '' / 0 se ausente.
+// Páginas Receita/Faturamento agregam por emissão (#11/#15); demais seguem por data_efetiva.
 const ALL_TX = ${JSON.stringify([
   ...recNorm.map(t => [
     'r',
@@ -597,6 +604,8 @@ const ALL_TX = ${JSON.stringify([
     t.realizado ? 1 : 0,
     '',
     t.centroCusto || '',
+    t.data_emissao ? t.data_emissao.toISOString().slice(0,7) : '',
+    t.data_emissao ? t.data_emissao.getDate() : 0,
   ]),
   ...despNorm.map(t => [
     'd',
@@ -608,6 +617,8 @@ const ALL_TX = ${JSON.stringify([
     t.realizado ? 1 : 0,
     t.cliente,
     t.centroCusto || '',
+    t.data_emissao ? t.data_emissao.toISOString().slice(0,7) : '',
+    t.data_emissao ? t.data_emissao.getDate() : 0,
   ]),
 ])};
 
