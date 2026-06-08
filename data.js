@@ -1,4 +1,4 @@
-/* RADKE BI — gerado por build-data.cjs em 2026-06-07T07:24:57.543Z */
+/* RADKE BI — gerado por build-data.cjs em 2026-06-08T08:28:12.558Z */
 /* Empresa: RADKE SOLUÇÕES INSTRALOGISTICAS | Ano ref: 2026 */
 const MONTHS = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
 const MONTHS_FULL = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
@@ -30,7 +30,7 @@ const META = {
     "cnpj": "16.665.716/0001-48",
     "cidade": "PORTO ALEGRE (RS)"
   },
-  "fetched_at": "2026-06-07T07:22:10.430Z",
+  "fetched_at": "2026-06-08T08:25:48.217Z",
   "ref_year": 2026,
   "counts": {
     "contas_pagar": 16348,
@@ -8110,7 +8110,7 @@ const SEGMENTS = {
         "Venda - Mercadoria Fabricadas",
         "CD IMEC - LAJEADO_RS",
         51500,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "05/06/2026",
@@ -12447,7 +12447,7 @@ const SEGMENTS = {
         "Venda - Mercadoria Fabricadas",
         "CD IMEC - LAJEADO_RS",
         51500,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "05/06/2026",
