@@ -1,4 +1,4 @@
-/* RADKE BI — gerado por build-data.cjs em 2026-06-14T07:41:29.017Z */
+/* RADKE BI — gerado por build-data.cjs em 2026-06-15T09:41:50.364Z */
 /* Empresa: RADKE SOLUÇÕES INSTRALOGISTICAS | Ano ref: 2026 */
 const MONTHS = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
 const MONTHS_FULL = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
@@ -30,7 +30,7 @@ const META = {
     "cnpj": "16.665.716/0001-48",
     "cidade": "PORTO ALEGRE (RS)"
   },
-  "fetched_at": "2026-06-14T07:38:40.227Z",
+  "fetched_at": "2026-06-15T09:39:28.466Z",
   "ref_year": 2026,
   "counts": {
     "contas_pagar": 16418,
@@ -8102,7 +8102,7 @@ const SEGMENTS = {
         "Venda - Mercadoria Fabricadas",
         "FITESA - COSMÓPOLIS",
         7619.85,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "15/06/2026",
@@ -8110,7 +8110,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "BB SHOP TERESÓPOLIS",
         27461.31,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "15/06/2026",
@@ -8118,7 +8118,7 @@ const SEGMENTS = {
         "Serviços - Serralheria",
         "INDUSTRIA DE PLASTICOS HERC LTDA",
         4027.25,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "15/06/2026",
@@ -8126,7 +8126,7 @@ const SEGMENTS = {
         "Serviços - Serralheria",
         "GEDORE",
         26700,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "15/06/2026",
@@ -8134,7 +8134,7 @@ const SEGMENTS = {
         "Serviços - Serralheria",
         "GEDORE",
         3444.3,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "15/06/2026",
@@ -8142,7 +8142,7 @@ const SEGMENTS = {
         "Serviços - Engenharia",
         "GEDORE",
         1407.75,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "10/06/2026",
@@ -12393,7 +12393,7 @@ const SEGMENTS = {
         "Venda - Mercadoria Fabricadas",
         "FITESA - COSMÓPOLIS",
         7619.85,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "15/06/2026",
@@ -12401,7 +12401,7 @@ const SEGMENTS = {
         "Serviços - Restauração",
         "BB SHOP TERESÓPOLIS",
         27461.31,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "15/06/2026",
@@ -12409,7 +12409,7 @@ const SEGMENTS = {
         "Serviços - Serralheria",
         "INDUSTRIA DE PLASTICOS HERC LTDA",
         4027.25,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "15/06/2026",
@@ -12417,7 +12417,7 @@ const SEGMENTS = {
         "Serviços - Serralheria",
         "GEDORE",
         26700,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "15/06/2026",
@@ -12425,7 +12425,7 @@ const SEGMENTS = {
         "Serviços - Serralheria",
         "GEDORE",
         3444.3,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "15/06/2026",
@@ -12433,7 +12433,7 @@ const SEGMENTS = {
         "Serviços - Engenharia",
         "GEDORE",
         1407.75,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "12/06/2026",
