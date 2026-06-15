@@ -2,7 +2,7 @@ name: Daily Data Refresh
 
 on:
   schedule:
-    - cron: '0 3 * * *'   # 00:00 BRT (UTC-3)
+    - cron: '37 4 * * *'  # escalonado (evita thundering herd no Coolify)
   workflow_dispatch:        # permite rodar manualmente
 
 jobs:
@@ -51,15 +51,15 @@ jobs:
       - name: Sanity check fetched data
         run: |
           if [ ! -f data/_summary.json ]; then
-            echo "ERROR: data/_summary.json nÃ£o foi gerado â€” fetch falhou"
+            echo "ERROR: data/_summary.json não foi gerado — fetch falhou"
             exit 1
           fi
           MOVS=$(node -e "console.log((JSON.parse(require('fs').readFileSync('data/_summary.json','utf8')).counts || {}).movimentos || 0)")
           if [ "$MOVS" -lt 1000 ]; then
-            echo "ERROR: apenas $MOVS movimentos em data/_summary.json â€” fetch incompleto, abortando antes de zerar data.js"
+            echo "ERROR: apenas $MOVS movimentos em data/_summary.json — fetch incompleto, abortando antes de zerar data.js"
             exit 1
           fi
-          echo "OK: $MOVS movimentos vÃ¡lidos no fetch"
+          echo "OK: $MOVS movimentos válidos no fetch"
 
       - name: Fetch saldos (bank balances)
         continue-on-error: true
@@ -72,8 +72,8 @@ jobs:
         run: '[ -f fetch-omie-crm.cjs ] && node fetch-omie-crm.cjs || echo "skip: fetch-omie-crm.cjs not found"'
 
       # Pedidos de venda = fonte do Faturamento por Produto / Curva ABC / Profunda Cliente
-      # / pedidos nÃ£o faturados (#14). SEM continue-on-error: se falhar, o workflow falha
-      # e o ar mantÃ©m os dados de ontem (liÃ§Ã£o do incidente de 11/05 que zerou o BI).
+      # / pedidos não faturados (#14). SEM continue-on-error: se falhar, o workflow falha
+      # e o ar mantém os dados de ontem (lição do incidente de 11/05 que zerou o BI).
       - name: Fetch pedidos de venda (Omie API)
         env:
           OMIE_APP_KEY: ${{ secrets.OMIE_APP_KEY }}
@@ -84,8 +84,8 @@ jobs:
         run: |
           node build-data.cjs
           [ -f build-data-extras.cjs ] && node build-data-extras.cjs || true
-          # build-radke-extras: CRM + Faturamento (pedidos) vÃªm da API; ADS/Saldos
-          # preservam snapshot commitado (XLSX vivem no Drive, GHA nÃ£o acessa).
+          # build-radke-extras: CRM + Faturamento (pedidos) vêm da API; ADS/Saldos
+          # preservam snapshot commitado (XLSX vivem no Drive, GHA não acessa).
           [ -f build-radke-extras.cjs ] && node build-radke-extras.cjs || true
           node build-jsx.cjs
 
@@ -99,7 +99,7 @@ jobs:
           [ -f data/_summary.json ]         && git add -f data/_summary.json      || true
           [ -f data/radke_extras.json ]     && git add -f data/radke_extras.json  || true
           if git diff --cached --quiet; then
-            echo "No data changes â€” skipping commit"
+            echo "No data changes — skipping commit"
           else
             git commit -m "chore: daily data refresh [skip ci]"
             git push
@@ -117,5 +117,5 @@ jobs:
               && echo "Coolify deploy triggered: $COOLIFY_APP_UUID" \
               || echo "Coolify trigger failed (non-fatal)"
           else
-            echo "COOLIFY_APP_UUID or COOLIFY_TOKEN not set â€” skipping deploy trigger"
+            echo "COOLIFY_APP_UUID or COOLIFY_TOKEN not set — skipping deploy trigger"
           fi
