@@ -35,8 +35,26 @@ const SectionHeading = ({ strong, soft }) => (
 // Quando data tem receita_prevista/despesa_prevista (modo "tudo"), renderiza stack:
 //   verde (realizado) embaixo + azul (a-receber) em cima
 //   vermelho (pago) embaixo + amarelo (a-pagar) em cima
-const OverviewBars = ({ data, height = 220, year = "2026", onBarClick, activeIdx, showPrevisto = false }) => {
+const OverviewBars = ({ data, height = 220, year = "2026", onBarClick, onSegmentClick, activeIdx, showPrevisto = false }) => {
   const B = window.BIT;
+  // Clicar num segmento individual (verde/ciano/roxo/vermelho/âmbar) abre o modal de
+  // composição daquela fatia+mês. stopPropagation evita disparar o onBarClick (drilldown do mês).
+  const segHandler = (kind, i, value) => onSegmentClick
+    ? (e) => { e.stopPropagation(); if ((value || 0) > 0) onSegmentClick(kind, i, value); }
+    : undefined;
+  // Hover destaca a fatia (sem depender de CSS externo, pra respeitar o escopo de edição).
+  const [hoverSeg, setHoverSeg] = useState(null);
+  const segProps = (kind, i, value) => {
+    if (!onSegmentClick) return {};
+    const key = `${kind}-${i}`;
+    const active = hoverSeg === key;
+    return {
+      onClick: segHandler(kind, i, value),
+      onMouseEnter: () => setHoverSeg(key),
+      onMouseLeave: () => setHoverSeg(h => (h === key ? null : h)),
+      style: { cursor: "pointer", filter: active ? "brightness(1.18)" : undefined, outline: active ? "1px solid rgba(255,255,255,0.6)" : undefined },
+    };
+  };
   // #14 — pedidos confirmados ainda não faturados (roxo) empilham na torre de receita
   const totRec = (d) => (d.receita || 0) + (d.receita_prevista || 0) + (d.pedidos_nao_faturados || 0);
   const totDesp = (d) => (d.despesa || 0) + (d.despesa_prevista || 0);
@@ -91,29 +109,33 @@ const OverviewBars = ({ data, height = 220, year = "2026", onBarClick, activeIdx
               >
                 <div className="ov-bar-stack">
                   <div className="ov-bar-tower">
-                    <div className="ov-bar green" style={{ height: `${rRealH}%` }} title={`Receita realizada: ${B.fmt(recReal)}`}>
-                      {!showPrevisto && <span className="ov-bar-chip">R${Math.round(recReal / 1000)} K</span>}
-                    </div>
-                    {showPrevisto && recPrev > 0 && (
-                      <div className="ov-bar cyan-prev" style={{ height: `${rPrevH}%` }} title={`A receber (previsto): ${B.fmt(recPrev)}`}>
+                    {(() => { const p = segProps("receita_realizada", i, recReal); return (
+                      <div className="ov-bar green" {...p} style={{ height: `${rRealH}%`, ...p.style }} title={`Receita realizada: ${B.fmt(recReal)}${onSegmentClick && recReal > 0 ? " (clique p/ detalhar)" : ""}`}>
+                        {!showPrevisto && <span className="ov-bar-chip">R${Math.round(recReal / 1000)} K</span>}
                       </div>
-                    )}
-                    {showPrevisto && pedNF > 0 && (
-                      <div className="ov-bar" style={{ height: `${pNFH}%`, background: "#a78bfa" }} title={`Pedidos não faturados: ${B.fmt(pedNF)}`}>
+                    ); })()}
+                    {showPrevisto && recPrev > 0 && (() => { const p = segProps("receita_prevista", i, recPrev); return (
+                      <div className="ov-bar cyan-prev" {...p} style={{ height: `${rPrevH}%`, ...p.style }} title={`A receber (previsto): ${B.fmt(recPrev)}${onSegmentClick ? " (clique p/ detalhar)" : ""}`}>
                       </div>
-                    )}
+                    ); })()}
+                    {showPrevisto && pedNF > 0 && (() => { const p = segProps("nao_faturados", i, pedNF); return (
+                      <div className="ov-bar" {...p} style={{ height: `${pNFH}%`, background: "#a78bfa", ...p.style }} title={`Pedidos não faturados: ${B.fmt(pedNF)}${onSegmentClick ? " (clique p/ detalhar)" : ""}`}>
+                      </div>
+                    ); })()}
                     {showPrevisto && recTotal > 0 && (
                       <span className="ov-bar-chip stacked" style={{ bottom: `calc(${rRealH + rPrevH + pNFH}% + 4px)` }}>R${Math.round(recTotal / 1000)} K</span>
                     )}
                   </div>
                   <div className="ov-bar-tower">
-                    <div className="ov-bar red" style={{ height: `${dRealH}%` }} title={`Despesa paga: ${B.fmt(despReal)}`}>
-                      {!showPrevisto && <span className="ov-bar-chip">R${Math.round(despReal / 1000)} K</span>}
-                    </div>
-                    {showPrevisto && despPrev > 0 && (
-                      <div className="ov-bar amber-prev" style={{ height: `${dPrevH}%` }} title={`A pagar (previsto): ${B.fmt(despPrev)}`}>
+                    {(() => { const p = segProps("despesa_paga", i, despReal); return (
+                      <div className="ov-bar red" {...p} style={{ height: `${dRealH}%`, ...p.style }} title={`Despesa paga: ${B.fmt(despReal)}${onSegmentClick && despReal > 0 ? " (clique p/ detalhar)" : ""}`}>
+                        {!showPrevisto && <span className="ov-bar-chip">R${Math.round(despReal / 1000)} K</span>}
                       </div>
-                    )}
+                    ); })()}
+                    {showPrevisto && despPrev > 0 && (() => { const p = segProps("despesa_a_pagar", i, despPrev); return (
+                      <div className="ov-bar amber-prev" {...p} style={{ height: `${dPrevH}%`, ...p.style }} title={`A pagar (previsto): ${B.fmt(despPrev)}${onSegmentClick ? " (clique p/ detalhar)" : ""}`}>
+                      </div>
+                    ); })()}
                     {showPrevisto && despTotal > 0 && (
                       <span className="ov-bar-chip stacked" style={{ bottom: `calc(${dRealH + dPrevH}% + 4px)` }}>R${Math.round(despTotal / 1000)} K</span>
                     )}
@@ -214,6 +236,91 @@ const IndicatorLine = ({ values, labels, height = 240, color = "var(--cyan)", fo
   );
 };
 
+// Modal de composição de uma FATIA da barra empilhada da Visão Geral.
+// Lista os lançamentos/pedidos que somam o valor do segmento clicado (segmento + mês).
+// Fecha no ESC, no clique no backdrop e no botão ×.
+const SEG_META = {
+  receita_realizada: { titulo: "Receita realizada",       cor: "var(--green)", tipo: "tx" },
+  receita_prevista:  { titulo: "A receber (previsto)",     cor: "var(--cyan)",  tipo: "tx" },
+  despesa_paga:      { titulo: "Despesa paga",             cor: "var(--red)",   tipo: "tx" },
+  despesa_a_pagar:   { titulo: "A pagar (previsto)",       cor: "var(--amber)", tipo: "tx" },
+  nao_faturados:     { titulo: "Pedidos não faturados",    cor: "#a78bfa",      tipo: "pedidos" },
+};
+
+const OverviewSegmentModal = ({ seg, onClose }) => {
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+  if (!seg) return null;
+  const meta = SEG_META[seg.kind] || { titulo: seg.kind, cor: "var(--cyan)", tipo: "tx" };
+  const B = window.BIT;
+  const fmt = (v) => (B && B.fmt ? B.fmt(v) : `R$ ${(v || 0).toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`);
+
+  // Header e linhas por tipo de segmento.
+  const isPedidos = meta.tipo === "pedidos";
+  const total = seg.rows.reduce((s, r) => s + (r._valor || 0), 0);
+
+  return (
+    <div className="drawer-overlay no-print" style={{ justifyContent: "center", alignItems: "center" }} onClick={onClose}>
+      <div className="card" style={{ width: "min(820px, 94vw)", maxHeight: "82vh", margin: "auto", padding: 0, display: "flex", flexDirection: "column", overflow: "hidden" }} onClick={e => e.stopPropagation()}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "16px 20px", borderBottom: "1px solid var(--border)" }}>
+          <span style={{ width: 12, height: 12, borderRadius: 3, background: meta.cor, flex: "0 0 auto" }} />
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <h2 className="card-title" style={{ margin: 0 }}>{meta.titulo}</h2>
+            <div className="status-line" style={{ marginTop: 2 }}>{seg.label} · {seg.rows.length} {isPedidos ? "pedido(s)" : "lançamento(s)"}</div>
+          </div>
+          <button className="dd-clear" onClick={onClose} aria-label="Fechar">× Fechar</button>
+        </div>
+
+        <div style={{ overflow: "auto", flex: 1 }}>
+          {seg.note && (
+            <div style={{ padding: "10px 20px", color: "var(--amber)", fontSize: 13, borderBottom: "1px solid var(--border)" }}>{seg.note}</div>
+          )}
+          {seg.rows.length === 0 ? (
+            <div style={{ padding: 24, color: "var(--fg-3)", textAlign: "center" }}>Nenhum item para esta fatia.</div>
+          ) : (
+            <table className="t" style={{ width: "100%" }}>
+              <thead>
+                {isPedidos ? (
+                  <tr><th>Pedido</th><th>Tipo</th><th>Status</th><th>Cliente</th><th>Descrição</th><th className="num">Valor</th></tr>
+                ) : (
+                  <tr><th>Data</th><th>Categoria</th><th>{seg.kind.startsWith("receita") ? "Cliente" : "Fornecedor"}</th><th className="num">Valor</th></tr>
+                )}
+              </thead>
+              <tbody>
+                {seg.rows.map((r, idx) => isPedidos ? (
+                  <tr key={idx}>
+                    <td>{r.numero != null ? r.numero : "—"}</td>
+                    <td>{r.tipo || "—"}</td>
+                    <td>{r.status || "—"}</td>
+                    <td>{r.cliente || "—"}</td>
+                    <td>{r.descricao || "—"}</td>
+                    <td className="num">{fmt(r._valor)}</td>
+                  </tr>
+                ) : (
+                  <tr key={idx}>
+                    <td>{r._data}</td>
+                    <td>{r._categoria || "—"}</td>
+                    <td>{r._nome || "—"}</td>
+                    <td className="num">{fmt(r._valor)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "14px 20px", borderTop: "1px solid var(--border)", background: "var(--surface-2)" }}>
+          <span style={{ color: "var(--fg-2)", fontSize: 13 }}>Total da fatia</span>
+          <b style={{ color: meta.cor, fontFamily: "var(--font-mono)", fontSize: 16 }}>{fmt(total)}</b>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const PageOverview = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, months }) => {
   const B = useMemo(() => window.getBit(statusFilter, drilldown, year, months), [statusFilter, drilldown, year, months]);
   // Quando filter=tudo, monta MONTH_DATA com split realizado vs previsto pro stacked chart.
@@ -247,6 +354,46 @@ const PageOverview = ({ filters, setFilters, onOpenFilters, statusFilter, drilld
     const ym = `${refYear}-${mm}`;
     const lbl = `${d.m.charAt(0).toUpperCase() + d.m.slice(1, 3)}/${refYear}`;
     setDrilldown({ type: "mes", value: ym, label: lbl });
+  };
+
+  // Modal de composição da fatia clicada (segmento + mês).
+  const [segModal, setSegModal] = useState(null);
+  const MESES_NOMES_MODAL = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+  const handleSegmentClick = (kind, i, expectedValue) => {
+    const mm = String(i + 1).padStart(2, "0");
+    const ym = `${refYear}-${mm}`;
+    const monthLabel = `${MESES_NOMES_MODAL[i]}/${refYear}`;
+
+    // Segmento roxo: pedidos não faturados — vem de BIT_RADKE_EXTRAS.naoFaturados.detalhe.
+    if (kind === "nao_faturados") {
+      const E = (typeof window !== "undefined" && window.BIT_RADKE_EXTRAS) || null;
+      const detalhe = (E && E.naoFaturados && E.naoFaturados.detalhe) || [];
+      const rows = detalhe
+        .filter(d => d && d.ano === refYear && d.mes === i)
+        .map(d => ({ numero: d.numero, tipo: d.tipo, status: d.status, cliente: d.cliente, descricao: d.descricao, _valor: d.valor || 0 }));
+      const note = (!detalhe || detalhe.length === 0)
+        ? `Detalhe por pedido indisponível. Total agregado do mês: ${B.fmt(expectedValue || 0)}.`
+        : null;
+      setSegModal({ kind, label: monthLabel, rows, note });
+      return;
+    }
+
+    // Segmentos de transação: usa filterTx (mesma fonte do drilldown) por mês + status,
+    // depois filtra por sinal (receita 'r' vs despesa 'd').
+    const ALL = (typeof window !== "undefined" && window.ALL_TX) || [];
+    const isReceita = kind.startsWith("receita");
+    const statusReal = (kind === "receita_realizada" || kind === "despesa_paga");
+    const sf = statusReal ? "realizado" : "a_pagar_receber";
+    const dd = { type: "mes", value: ym, label: monthLabel };
+    const filtered = (window.filterTx ? window.filterTx(ALL, sf, dd) : [])
+      .filter(r => r[0] === (isReceita ? "r" : "d"));
+    const rows = filtered.map(r => ({
+      _data: `${String(r[2]).padStart(2, "0")}/${r[1].slice(5, 7)}/${r[1].slice(0, 4)}`,
+      _categoria: r[3],
+      _nome: isReceita ? r[4] : r[7],
+      _valor: r[5] || 0,
+    }));
+    setSegModal({ kind, label: monthLabel, rows, note: null });
   };
 
   // #12+1 — ao filtrar um único mês, o gráfico Receitas×Despesas vira análise DIÁRIA.
@@ -396,7 +543,7 @@ const PageOverview = ({ filters, setFilters, onOpenFilters, statusFilter, drilld
                 </span>
               )}
             </div>
-            <OverviewBars data={chartData} height={220} year={singleMonth != null ? `${MESES_NOMES_OV[singleMonth - 1]}/${refYear}` : String(refYear)} onBarClick={singleMonth != null ? undefined : handleBarMes} activeIdx={singleMonth != null ? -1 : activeMonthIdx} showPrevisto={isTudoMode} />
+            <OverviewBars data={chartData} height={220} year={singleMonth != null ? `${MESES_NOMES_OV[singleMonth - 1]}/${refYear}` : String(refYear)} onBarClick={singleMonth != null ? undefined : handleBarMes} onSegmentClick={singleMonth != null ? undefined : handleSegmentClick} activeIdx={singleMonth != null ? -1 : activeMonthIdx} showPrevisto={isTudoMode} />
           </div>
 
           <div className="card">
@@ -421,6 +568,8 @@ const PageOverview = ({ filters, setFilters, onOpenFilters, statusFilter, drilld
           </div>
         </div>
       </div>
+
+      <OverviewSegmentModal seg={segModal} onClose={() => setSegModal(null)} />
     </div>
   );
 };
@@ -558,70 +707,35 @@ const PageIndicators = ({ statusFilter, drilldown, setDrilldown, year, months })
 };
 
 const PageReceita = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown, setDrilldown, year, months }) => {
+  // FONTE ÚNICA: getBit (regime de CAIXA, por data_efetiva r[1]) — mesma base da
+  // tela Visão Geral (âncora). A tela Receita PRECISA bater com a âncora, então
+  // ela consome exatamente os mesmos agregados que o Overview/Indicadores usam.
+  // (Versão anterior recalculava por COMPETÊNCIA/emissão r[9], divergindo da
+  //  âncora em ~R$ 596k no realizado — 144 NFs emitidas em ano != recebimento.)
   const B = useMemo(() => window.getBit(statusFilter, drilldown, year, months), [statusFilter, drilldown, year, months]);
   const refYear = (B.META && B.META.ref_year) || new Date().getFullYear();
   const MONTHS_FULL = B.MONTHS_FULL || [];
   const [range, setRange] = useState("12M");
-
-  // #15 — Receita por COMPETÊNCIA: cada NF entra no mês da sua EMISSÃO (r[9]),
-  // não no mês de recebimento (r[1]). Recalcula tudo de ALL_TX por emissão,
-  // sem tocar no regime de caixa das outras telas (Overview/Fluxo/Despesa).
-  const allTx = (typeof window !== "undefined" && window.ALL_TX) || [];
-  const emYM = (r) => r[9] || r[1];
-  const emDia = (r) => r[10] || r[2];
   const pad2 = (n) => String(n).padStart(2, "0");
-  const monthSet = useMemo(() => (Array.isArray(months) && months.length) ? new Set(months) : null, [months]);
 
-  const recRows = useMemo(() => allTx.filter(r => {
-    if (r[0] !== 'r') return false;
-    const ym = emYM(r); if (!ym) return false;
-    if (parseInt(ym.slice(0, 4), 10) !== refYear) return false;
-    if (monthSet && !monthSet.has(parseInt(ym.slice(5, 7), 10))) return false;
-    if (statusFilter === 'realizado' && r[6] !== 1) return false;
-    if (statusFilter === 'a_pagar_receber' && r[6] !== 0) return false;
-    return true;
-  }), [allTx, refYear, monthSet, statusFilter]);
-
-  const recFiltradas = useMemo(() => {
-    if (!drilldown) return recRows;
-    if (drilldown.type === 'mes') return recRows.filter(r => emYM(r) === drilldown.value);
-    if (drilldown.type === 'categoria') return recRows.filter(r => r[3] === drilldown.value);
-    if (drilldown.type === 'cliente') return recRows.filter(r => r[4] === drilldown.value);
-    return recRows;
-  }, [recRows, drilldown]);
-
-  const monthSeries = useMemo(() => {
-    const arr = Array(12).fill(0);
-    for (const r of recRows) { const m = parseInt(emYM(r).slice(5, 7), 10) - 1; if (m >= 0 && m < 12) arr[m] += r[5]; }
-    return arr;
-  }, [recRows]);
-
-  const TOTAL_RECEITA = useMemo(() => recRows.reduce((s, r) => s + r[5], 0), [recRows]);
+  // monthSeries / total / categorias / clientes / extrato vêm todos do MESMO
+  // agregado (aggregateTx por r[1]) que alimenta a âncora.
+  const monthSeries = useMemo(() => (B.MONTH_DATA || []).map(m => m.receita || 0), [B.MONTH_DATA]);
+  const TOTAL_RECEITA = B.TOTAL_RECEITA || 0;
   const monthsWithData = monthSeries.filter(v => v > 0).length;
   const mediaMes = monthsWithData > 0 ? TOTAL_RECEITA / monthsWithData : 0;
-  const numClientes = useMemo(() => new Set(recRows.map(r => r[4]).filter(Boolean)).size, [recRows]);
+  const numClientes = B.NUM_CLIENTES != null ? B.NUM_CLIENTES : (B.RECEITA_CLIENTES || []).length;
   const ticket = numClientes > 0 ? TOTAL_RECEITA / numClientes : 0;
 
-  const RECEITA_CATEGORIAS = useMemo(() => {
-    const m = new Map();
-    for (const r of recRows) { const k = r[3] || 'Sem categoria'; m.set(k, (m.get(k) || 0) + r[5]); }
-    return [...m.entries()].map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value).slice(0, 12);
-  }, [recRows]);
-  const RECEITA_CLIENTES = useMemo(() => {
-    const m = new Map();
-    for (const r of recRows) { const k = r[4] || 'Sem cliente'; m.set(k, (m.get(k) || 0) + r[5]); }
-    return [...m.entries()].map(([name, value]) => ({ name, value })).sort((a, b) => b.value - a.value).slice(0, 12);
-  }, [recRows]);
+  const RECEITA_CATEGORIAS = B.RECEITA_CATEGORIAS || [];
+  const RECEITA_CLIENTES = B.RECEITA_CLIENTES || [];
 
-  // Extrato por emissão — tupla [data, cc, categoria, cliente, valor, status] compat com a tabela.
-  const extratoFiltrado = useMemo(() => recFiltradas.map(r => {
-    const ym = emYM(r); const dia = emDia(r) || 1;
-    return [`${pad2(dia)}/${ym.slice(5, 7)}/${ym.slice(0, 4)}`, r[8] || 'Operações', r[3], r[4], r[5], r[6] === 1 ? 'RECEBIDO' : 'A RECEBER'];
-  }).sort((a, b) => {
-    const [da, ma, ya] = a[0].split('/').map(Number); const [db, mb, yb] = b[0].split('/').map(Number);
-    return new Date(yb, mb - 1, db) - new Date(ya, ma - 1, da);
-  }), [recFiltradas]);
-  const totalFiltrado = drilldown ? recFiltradas.reduce((s, r) => s + r[5], 0) : TOTAL_RECEITA;
+  // Extrato de receitas — já agregado/filtrado por getBit (drilldown incluso),
+  // tupla [data DD/MM/YYYY, cc, categoria, cliente/forn, valor, status].
+  const extratoFiltrado = B.EXTRATO_RECEITAS || (B.EXTRATO || []).filter(e => e[4] > 0);
+  const totalFiltrado = drilldown
+    ? extratoFiltrado.reduce((s, e) => s + e[4], 0)
+    : TOTAL_RECEITA;
 
   // Drilldown handlers
   const handleBarMes = (v, i) => {
@@ -658,7 +772,7 @@ const PageReceita = ({ filters, setFilters, onOpenFilters, statusFilter, drilldo
       </div>
 
       <div className="card">
-        <h2 className="card-title">Receita por mês <span style={{ fontSize: 11, color: "var(--mute)", fontWeight: 400 }}>· por emissão da NF</span></h2>
+        <h2 className="card-title">Receita por mês <span style={{ fontSize: 11, color: "var(--mute)", fontWeight: 400 }}>· regime de caixa</span></h2>
         <SingleBars values={monthSeries} labels={MONTHS_FULL} color="green" height={240}
           onBarClick={handleBarMes} activeIdx={activeMonthIdx} />
       </div>

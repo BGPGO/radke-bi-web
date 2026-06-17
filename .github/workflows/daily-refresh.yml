@@ -80,6 +80,16 @@ jobs:
           OMIE_APP_SECRET: ${{ secrets.OMIE_APP_SECRET }}
         run: '[ -f fetch-omie-pedidos.cjs ] && node fetch-omie-pedidos.cjs || echo "skip: fetch-omie-pedidos.cjs not found"'
 
+      # Ordens de Serviço = leg SERVIÇO dos pedidos não faturados (#14). ~R$ 500k que o BI
+      # ignorava por só puxar pedidos de produto. continue-on-error: se a API de OS falhar,
+      # build-radke-extras preserva snapshot (não zera produto, que vem de pedidos.json).
+      - name: Fetch ordens de serviço (Omie API)
+        continue-on-error: true
+        env:
+          OMIE_APP_KEY: ${{ secrets.OMIE_APP_KEY }}
+          OMIE_APP_SECRET: ${{ secrets.OMIE_APP_SECRET }}
+        run: '[ -f fetch-omie-os.cjs ] && node fetch-omie-os.cjs || echo "skip: fetch-omie-os.cjs not found"'
+
       - name: Build data + extras + JSX bundle
         run: |
           node build-data.cjs

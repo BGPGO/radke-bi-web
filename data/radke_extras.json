@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-06-17T09:35:53.108Z",
+  "fetched_at": "2026-06-17T12:59:55.315Z",
   "abc": {
     "rows": [
       {
@@ -19114,17 +19114,511 @@
         0,
         0,
         0,
-        8786.580000000002,
-        190439.13999999998,
-        0,
+        179356.74,
+        546665.0100000001,
+        6146.16,
         0,
         0,
         0,
         0
       ]
     },
-    "totalGeral": 238727.11,
-    "qtdPedidos": 4
+    "produto": {
+      "total": 238727.10999999996,
+      "qtd": 4,
+      "atrasado": 39501.39000000001,
+      "aFaturar": 199225.71999999997
+    },
+    "servico": {
+      "total": 532942.1900000001,
+      "qtd": 44,
+      "atrasado": 43508.8,
+      "aFaturar": 489433.3900000001
+    },
+    "detalhe": [
+      {
+        "numero": "730",
+        "tipo": "produto",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 190439.13999999998,
+        "cliente": "DIMED S/A - DISTRIBUIDORA DE MEDICAMENTOS",
+        "descricao": "DIVISÓRIA GALVANIZADA 1500mm - FLOWRACK"
+      },
+      {
+        "numero": "2438",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 43686.4,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO -  FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX · SERVIÇO DE REPARAÇÃO -  FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX · SERVIÇO DE REPARAÇÃO -  "
+      },
+      {
+        "numero": "1925",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 41206,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO -  ADEQUAÇÕES DE SERRALHERIA E FUNILARIA, PARA INSTALAÇÃO DE IMPERMEABILIZAÇÃO TPO ENTRE O PÓRTICO 3 E 4"
+      },
+      {
+        "numero": "2439",
+        "tipo": "servico",
+        "status": "atrasado",
+        "ano": 2026,
+        "mes": 5,
+        "valor": 39881,
+        "cliente": "FITESA NAOTECIDOS S/A",
+        "descricao": "SERVIÇO DE SERRALHERIA: EXECUÇÃO DE MONTAGEM, INSTALAÇÃO E TESTES DOS CONTRAVENTOS"
+      },
+      {
+        "numero": "105",
+        "tipo": "produto",
+        "status": "atrasado",
+        "ano": 2024,
+        "mes": 2,
+        "valor": 36515.810000000005,
+        "cliente": "UNIQUE RUBBER TECHNOLOGIES LTDA.",
+        "descricao": "RADKE DUPLO 2100 - COLUNA 80 - MONTANTE 800"
+      },
+      {
+        "numero": "2448",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 33561.94,
+        "cliente": "FITESA NAOTECIDOS S/A",
+        "descricao": "SERVIÇO DE SERRALHERIA: EXECUÇÃO DE MONTAGEM DAS TAMPAS MET. P/ CANALETAS S/ RECORTES - QTDE 104 · SERVIÇO DE SERRALHERIA: EXECUÇÃO DE MONTAGEM DAS TAMPAS MET. "
+      },
+      {
+        "numero": "2393",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 5,
+        "valor": 30388.89,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO -  ADEQUAÇÃO PARA FECHAMENTO DAS LATERAIS E PROLONGAMENTO DA COBERTURA DA ÁREA TÉCNICA ONDE ESTÃO OS EQUIPAMENTOS DE REFRIGERAÇÃO (INVERSOR"
+      },
+      {
+        "numero": "2454",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 5,
+        "valor": 27497.68,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO -  FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX NA PADARIA · SERVIÇO DE REPARAÇÃO -  FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX NA PADARIA · SE"
+      },
+      {
+        "numero": "2497",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 26747.17,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO - EXECUÇÃO DE CAIXAS DE ESGOTO FABRICADAS EM AÇO CARBONO + GALVANIZAÇÃO A FOGO"
+      },
+      {
+        "numero": "2410",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 24390,
+        "cliente": "DIMED S/A - DISTRIBUIDORA DE MEDICAMENTOS",
+        "descricao": "SERVIÇO DE SERRALHERIA - MANUTENÇÃO NAS ESTRUTURAS DE FLOWRACK - GVL · MOBILIZAÇÃO DE EQUIPE: TODOS OS CUSTOS DE DESLOCAMENTO, ALIMENTAÇÃO ESTÃO INCLUSOS"
+      },
+      {
+        "numero": "2326",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 23467.45,
+        "cliente": "FITESA NAOTECIDOS S/A",
+        "descricao": "SERVIÇO DE SERRALHERIA: EXECUÇÃO DE DESCARREGADORES DE BIG BAG · SERVIÇO DE SERRALHERIA - MOBILIZAÇÃO"
+      },
+      {
+        "numero": "2409",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 21150,
+        "cliente": "DIMED S/A - DISTRIBUIDORA DE MEDICAMENTOS",
+        "descricao": "SERVIÇO DE SERRALHERIA - MANUTENÇÃO NAS ESTRUTURAS DE FLOWRACK - M8 · MOBILIZAÇÃO DE EQUIPE: TODOS OS CUSTOS DE DESLOCAMENTO, ALIMENTAÇÃO ESTÃO INCLUSOS"
+      },
+      {
+        "numero": "2412",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 19075.2,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO -  CAIXAS DE INOX - LANCHONETE - LOJA 15 · SERVIÇO DE REPARAÇÃO -  CAIXAS DE INOX - LANCHONETE - LOJA 15 · SERVIÇO DE REPARAÇÃO -  CAIXAS D"
+      },
+      {
+        "numero": "2408",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 17620,
+        "cliente": "DIMED S/A - DISTRIBUIDORA DE MEDICAMENTOS",
+        "descricao": "SERVIÇO DE SERRALHERIA - MANUTENÇÃO NAS ESTRUTURAS DE FLOWRACK - M12 · MOBILIZAÇÃO DE EQUIPE: TODOS OS CUSTOS DE DESLOCAMENTO, ALIMENTAÇÃO ESTÃO INCLUSOS"
+      },
+      {
+        "numero": "2461",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 5,
+        "valor": 16261.6,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX · FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX · FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX · FABRICAÇÃO E INSTALAÇÃO DE C"
+      },
+      {
+        "numero": "2452",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 5,
+        "valor": 13943.23,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO - FABRICAÇÃO E INSTALAÇÃO DE GRELHAS GALVANIZADAS NO DEPÓSITO"
+      },
+      {
+        "numero": "2360",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 13000,
+        "cliente": "VALMONT INDUSTRIA E COMERCIO LTDA",
+        "descricao": "LAUDO DE INSPEÇÃO DE ESTRUTURA PORTA PALETE - CNAE 71.12-0-00 - ANEXO III"
+      },
+      {
+        "numero": "2492",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 12187.68,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO - ADEQUAÇÃO E REPARO NAS PORTA METÁLICAS DOS CONFINADOS"
+      },
+      {
+        "numero": "2432",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 11870.4,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO -   FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX · SERVIÇO DE REPARAÇÃO -   FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX · SERVIÇO DE REPARAÇÃO -"
+      },
+      {
+        "numero": "2451",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 5,
+        "valor": 10814.4,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO -  FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX NA PADARIA · SERVIÇO DE REPARAÇÃO -  FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX NA PADARIA · SE"
+      },
+      {
+        "numero": "2476",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 10788.44,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO - REFORMA DOS CORRIMÃOS DOCA"
+      },
+      {
+        "numero": "2435",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 10661.19,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO - ADEQUAÇÃO SLA DE PREPARO DE TORTAS."
+      },
+      {
+        "numero": "759",
+        "tipo": "produto",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 5,
+        "valor": 8786.580000000002,
+        "cliente": "FITESA NAOTECIDOS S/A",
+        "descricao": "ESTRUTURA METÁLICA"
+      },
+      {
+        "numero": "2486",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 6530,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO - FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX · SERVIÇO DE REPARAÇÃO - FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX · SERVIÇO DE REPARAÇÃO - FAB"
+      },
+      {
+        "numero": "2463",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 5,
+        "valor": 5907.7,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO -  FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX · SERVIÇO DE REPARAÇÃO -  FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX · SERVIÇO DE REPARAÇÃO -  "
+      },
+      {
+        "numero": "2211",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 5897.59,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO - PROTEÇÕES EM AÇO INOX NO SALÃO DE VENDAS"
+      },
+      {
+        "numero": "2502",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 5687.5,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO -  FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX · SERVIÇO DE REPARAÇÃO -  FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX · SERVIÇO DE REPARAÇÃO -  "
+      },
+      {
+        "numero": "2383",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 5680,
+        "cliente": "Cliente Consumidor",
+        "descricao": "SERVIÇO DE REPARAÇÃO - Zaffari Otto - Complemento inox parede"
+      },
+      {
+        "numero": "2384",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 5196.2,
+        "cliente": "Cliente Consumidor",
+        "descricao": "SERVIÇO DE REPARAÇÃO - Zaffari Fernando Machado - emergencial ralo rotisseria"
+      },
+      {
+        "numero": "2192",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 5,
+        "valor": 5130,
+        "cliente": "BRS SP SUPRIMENTOS CORPORATIVOS S/A",
+        "descricao": "SERVIÇO DE SERRALHERIA - REPOSICIONAR 03 MONTANTES E INSTALAR NOVOS ESPAÇADORES PARA ALINHAMENTO DAS ESTRUTURAS, FIXADORES INCLUSO - PRÉDIO 2 · SERVIÇO DE SERRA"
+      },
+      {
+        "numero": "2483",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 5,
+        "valor": 4500,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO - FABRICAÇÃO E INSTALAÇÃO DE CESTO DE INOX."
+      },
+      {
+        "numero": "2445",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 5,
+        "valor": 3995.36,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO -  FABRICAÇÃO E INSTALAÇÃO DE PILARETES DE INOX"
+      },
+      {
+        "numero": "2513",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 3926.4,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO - FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX · SERVIÇO DE REPARAÇÃO - FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX · SERVIÇO DE REPARAÇÃO - FAB"
+      },
+      {
+        "numero": "2515",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 7,
+        "valor": 3792.24,
+        "cliente": "CONDOMINIO LINKED TERESOPOLIS",
+        "descricao": "SERVIÇO DE REPARAÇÃO -  FABRICAÇÃO E INSTALAÇÃO DE BANDEJAS PARA COLETA E DRENAGEM DE ÁGUA"
+      },
+      {
+        "numero": "2487",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 3658.8,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO - FABRICAÇÃO E INSTALAÇÃO DE CESTO DE INOX"
+      },
+      {
+        "numero": "2505",
+        "tipo": "servico",
+        "status": "atrasado",
+        "ano": 2026,
+        "mes": 5,
+        "valor": 3627.8,
+        "cliente": "FITESA NAOTECIDOS S/A",
+        "descricao": "SERVIÇO DE SERRALHERIA: EXECUÇÃO DE MONTAGEM DAS PROTEÇÃO MET. P/ PAINEL CHILLER EREMA · SERVIÇO DE SERRALHERIA: EXECUÇÃO DE MONTAGEM DAS PROTEÇÃO MET. P/ P/ QD"
+      },
+      {
+        "numero": "2490",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 3081.52,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO - FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX. · SERVIÇO DE REPARAÇÃO - FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX. · SERVIÇO DE REPARAÇÃO - F"
+      },
+      {
+        "numero": "111",
+        "tipo": "produto",
+        "status": "atrasado",
+        "ano": 2024,
+        "mes": 2,
+        "valor": 2985.58,
+        "cliente": "UNIQUE RUBBER TECHNOLOGIES LTDA.",
+        "descricao": "PROTETOR DE COLUNA 1/8&quot;x300mm"
+      },
+      {
+        "numero": "2489",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 2607.52,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO - FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX. · SERVIÇO DE REPARAÇÃO - FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX. · SERVIÇO DE REPARAÇÃO - F"
+      },
+      {
+        "numero": "2455",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 5,
+        "valor": 2531.2,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO -  FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX · SERVIÇO DE REPARAÇÃO -  FABRICAÇÃO E INSTALAÇÃO DE CAIXAS DE INOX"
+      },
+      {
+        "numero": "2516",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 7,
+        "valor": 2353.92,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO - FORNECIMENTO E INSTALAÇÃO DE GRADIL ENTRADA DO REFEITÓRIO"
+      },
+      {
+        "numero": "2484",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 5,
+        "valor": 2250,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO - FABRICAÇÃO E INSTALAÇÃO DE CESTO DE INOX."
+      },
+      {
+        "numero": "2485",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 5,
+        "valor": 2250,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO - FABRICAÇÃO E INSTALAÇÃO DE CESTO DE INOX."
+      },
+      {
+        "numero": "2444",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 5,
+        "valor": 1591.3,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO - SUPORTES EM CHAPA DE ALUMÍNIO PARA ENCOSTO DE TUBULAÇÕES"
+      },
+      {
+        "numero": "2499",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 1522.39,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO - FABRICAÇÃO DE BASES PARA NOBREAKS"
+      },
+      {
+        "numero": "2501",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 1522.39,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO - FABRICAÇÃO DE BASES PARA NOBREAKS"
+      },
+      {
+        "numero": "2500",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 761.19,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO - FABRICAÇÃO DE BASES PARA NOBREAKS"
+      },
+      {
+        "numero": "2427",
+        "tipo": "servico",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 742.5,
+        "cliente": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA",
+        "descricao": "SERVIÇO DE REPARAÇÃO - GRADE COM TELA MÍLIMÉTRICA PARA CAIXAS DE INOX NA SALA DE DEPÓSITO"
+      }
+    ],
+    "totalGeral": 771669.3,
+    "qtdPedidos": 48
   },
   "ads": {
     "rows": [

@@ -111,6 +111,11 @@ let pedidosData = null;
 try { pedidosData = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'pedidos.json'), 'utf8')); }
 catch (e) { console.error('  [SKIP] data/pedidos.json: ' + (e.message || '').slice(0, 60) + ' — preserva snapshot anterior'); }
 
+// Ordens de Serviço (fetch-omie-os.cjs) — leg SERVIÇO dos não faturados (#14).
+let osData = null;
+try { osData = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'os.json'), 'utf8')); }
+catch (e) { console.error('  [SKIP] data/os.json: ' + (e.message || '').slice(0, 60) + ' — serviço fica de fora'); }
+
 // Lookup de cliente: data/clientes.json (já baixado pelo fetch-omie.cjs)
 let cliNomeById = new Map();
 try {
@@ -171,28 +176,77 @@ if (pedidosData && Array.isArray(pedidosData.pedidos)) {
     + remessaFuturaExcl + ' itens / R$ ' + remessaFuturaValor.toFixed(2));
   fatItemsAll = fatItems.filter(x => x.valor > 0); // multi-ano (#9 — Curva ABC com filtro de ano)
 
-  // #14 — pedidos AINDA NÃO FATURADOS: por mês da data de previsão.
-  // Conta só pedidos CONFIRMADOS aguardando faturamento (etapas 10/20/50 — planejamento/
-  // executa/emitir NF). Etapa 00 = orçamento/proposta (403 pedidos mortos) fica FORA,
-  // senão o gráfico mostraria R$ 26M de propostas nunca convertidas.
+  // #14 — PEDIDOS/OS AINDA NÃO FATURADOS, separados por tipo (produto vs serviço) e status.
+  // Conta só CONFIRMADOS aguardando faturamento (etapas != 00; 00 = orçamento/proposta morto
+  // — milhares de R$ em propostas nunca convertidas — fica FORA, igual no PBI).
+  //   • PRODUTO: data/pedidos.json (exclui remessa futura #4, valor = vMerc+IPI). ~R$ 200k.
+  //   • SERVIÇO: data/os.json (valor = nValorTotal da OS). ~R$ 500k.
+  // Cruzado 2026-06-17 com 2 prints do cliente: produto ~200k (a faturar), serviço ~500k
+  // (mix atrasado + a faturar). atrasado = data_previsao < hoje.
+  // porAno = produto+serviço combinados por mês de previsão (segmento roxo da Visão Geral).
+  // detalhe = lista por pedido/OS p/ o modal de drilldown por fatia.
   naoFaturados = (function () {
-    const porAno = {};
-    let totalGeral = 0, qtdPedidos = 0;
-    for (const p of pedidosData.pedidos) {
+    const hoje = new Date();
+    // Monta cada leg como lista de entradas {numero,tipo,status,ano,mes,valor,cliente,descricao}.
+    const mk = (tipo, numero, valor, dPrev, cliente, descricao) => {
+      if (!(valor > 0)) return null;
+      const d = dPrev || hoje;
+      const status = (dPrev && dPrev < hoje) ? 'atrasado' : 'a_faturar';
+      return { numero, tipo, status, ano: d.getFullYear(), mes: d.getMonth(), valor, cliente, descricao };
+    };
+
+    // PRODUTO (pedidos de venda) — sempre fresco (pedidos.json falha o workflow se ausente).
+    const produtoDet = [];
+    for (const p of (pedidosData && pedidosData.pedidos) || []) {
       if (p.faturado === 'S' || p.cancelado === 'S') continue;
-      if (p.etapa === '00' || p.etapa === '') continue; // orçamentos/propostas não confirmadas
-      const d = parseBRdate(p.dataPrevisao) || parseBRdate(p.dInc);
-      if (!d) continue;
+      if (p.etapa === '00' || p.etapa === '') continue;
       const v = (p.itens || []).filter(i => !REMESSA_FUTURA_RE.test(i.cfop))
         .reduce((s, i) => s + (i.vMerc || 0) + (i.ipi || 0), 0);
-      if (v <= 0) continue;
-      const y = d.getFullYear();
-      if (!porAno[y]) porAno[y] = Array(12).fill(0);
-      porAno[y][d.getMonth()] += v;
-      totalGeral += v; qtdPedidos++;
+      const d = parseBRdate(p.dataPrevisao) || parseBRdate(p.dInc);
+      const cliente = cliNomeById.get(p.codCliente) || `Cliente ${p.codCliente || '?'}`;
+      const desc = ((p.itens || []).map(i => i.descricao).filter(Boolean)[0] || '').slice(0, 120);
+      const e = mk('produto', p.numero, v, d, cliente, desc);
+      if (e) produtoDet.push(e);
     }
-    console.log('  não faturados (#14): ' + qtdPedidos + ' pedidos · R$ ' + totalGeral.toFixed(2));
-    return { porAno, totalGeral, qtdPedidos };
+
+    // SERVIÇO (ordens de serviço) — os.json é efêmero (gitignored) e o fetch usa
+    // continue-on-error. Se faltar, PRESERVA o serviço do snapshot anterior (radke_extras.json)
+    // em vez de zerar (lição do incidente 11/05: nunca sobrescrever bom com vazio).
+    let servicoDet;
+    if (osData && Array.isArray(osData.os)) {
+      servicoDet = [];
+      for (const o of osData.os) {
+        if (o.faturada === 'S' || o.cancelada === 'S') continue;
+        if (o.etapa === '00' || o.etapa === '') continue;
+        const d = parseBRdate(o.dataPrevisao) || parseBRdate(o.dInc);
+        const cliente = cliNomeById.get(o.codCliente) || `Cliente ${o.codCliente || '?'}`;
+        const e = mk('servico', o.numero, o.valorTotal || 0, d, cliente, o.descricao || '');
+        if (e) servicoDet.push(e);
+      }
+    } else {
+      servicoDet = ((prev.naoFaturados && prev.naoFaturados.detalhe) || []).filter(d => d.tipo === 'servico');
+      console.error('  [os.json ausente] serviço preservado do snapshot: ' + servicoDet.length + ' OS');
+    }
+
+    // Merge produto + serviço → porAno (segmento roxo) + detalhe + agregados.
+    const detalhe = [...produtoDet, ...servicoDet].sort((a, b) => b.valor - a.valor);
+    const porAno = {};
+    const acc = {
+      produto: { total: 0, qtd: 0, atrasado: 0, aFaturar: 0 },
+      servico: { total: 0, qtd: 0, atrasado: 0, aFaturar: 0 },
+    };
+    for (const e of detalhe) {
+      if (!porAno[e.ano]) porAno[e.ano] = Array(12).fill(0);
+      porAno[e.ano][e.mes] += e.valor;
+      acc[e.tipo].total += e.valor; acc[e.tipo].qtd++;
+      acc[e.tipo][e.status === 'atrasado' ? 'atrasado' : 'aFaturar'] += e.valor;
+    }
+    const totalGeral = acc.produto.total + acc.servico.total;
+    const qtdPedidos = acc.produto.qtd + acc.servico.qtd;
+    console.log('  não faturados (#14): produto R$ ' + acc.produto.total.toFixed(2) + ' (' + acc.produto.qtd + ' ped) · ' +
+      'serviço R$ ' + acc.servico.total.toFixed(2) + ' (' + acc.servico.qtd + ' OS · atrasado ' +
+      acc.servico.atrasado.toFixed(2) + ' / a faturar ' + acc.servico.aFaturar.toFixed(2) + ')');
+    return { porAno, produto: acc.produto, servico: acc.servico, detalhe, totalGeral, qtdPedidos };
   })();
 
   // Ano de referência = ano max nos dados (último ano com faturamento)
