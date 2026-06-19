@@ -1,12 +1,12 @@
 {
-  "fetched_at": "2026-06-18T09:17:54.588Z",
+  "fetched_at": "2026-06-19T09:33:56.307Z",
   "empresa": "RADKE SOLUÇÕES INSTRALOGISTICAS",
   "counts": {
-    "contas_pagar": 16496,
+    "contas_pagar": 16497,
     "contas_receber": 2303,
     "categorias": 248,
     "departamentos": 0,
-    "clientes_fornecedores": 2246,
-    "movimentos": 52010
+    "clientes_fornecedores": 2250,
+    "movimentos": 52028
   }
 }
