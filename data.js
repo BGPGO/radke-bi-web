@@ -1,4 +1,4 @@
-/* RADKE BI — gerado por build-data.cjs em 2026-06-21T09:04:14.658Z */
+/* RADKE BI — gerado por build-data.cjs em 2026-06-22T10:39:45.515Z */
 /* Empresa: RADKE SOLUÇÕES INSTRALOGISTICAS | Ano ref: 2026 */
 const MONTHS = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
 const MONTHS_FULL = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
@@ -30,7 +30,7 @@ const META = {
     "cnpj": "16.665.716/0001-48",
     "cidade": "PORTO ALEGRE (RS)"
   },
-  "fetched_at": "2026-06-21T09:00:40.444Z",
+  "fetched_at": "2026-06-22T10:36:21.809Z",
   "ref_year": 2026,
   "counts": {
     "contas_pagar": 16527,
@@ -8029,7 +8029,7 @@ const SEGMENTS = {
         "Venda - Mercadoria Fabricadas",
         "FITESA - COSMÓPOLIS",
         25373.99,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "16/06/2026",
@@ -12147,7 +12147,7 @@ const SEGMENTS = {
         "Venda - Mercadoria Fabricadas",
         "FITESA - COSMÓPOLIS",
         25373.99,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "19/06/2026",
