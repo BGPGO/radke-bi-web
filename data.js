@@ -1,4 +1,4 @@
-/* RADKE BI — gerado por build-data.cjs em 2026-06-27T07:53:11.684Z */
+/* RADKE BI — gerado por build-data.cjs em 2026-06-28T08:19:43.395Z */
 /* Empresa: RADKE SOLUÇÕES INSTRALOGISTICAS | Ano ref: 2026 */
 const MONTHS = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
 const MONTHS_FULL = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
@@ -30,14 +30,14 @@ const META = {
     "cnpj": "16.665.716/0001-48",
     "cidade": "PORTO ALEGRE (RS)"
   },
-  "fetched_at": "2026-06-27T07:49:35.076Z",
+  "fetched_at": "2026-06-28T08:16:23.885Z",
   "ref_year": 2026,
   "counts": {
     "contas_pagar": 16540,
     "contas_receber": 2304,
     "categorias": 248,
     "departamentos": 0,
-    "clientes": 2260
+    "clientes": 2261
   }
 };
 const POSICAO_CAIXA = [
