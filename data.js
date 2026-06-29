@@ -1,4 +1,4 @@
-/* RADKE BI — gerado por build-data.cjs em 2026-06-28T08:19:43.395Z */
+/* RADKE BI — gerado por build-data.cjs em 2026-06-29T09:34:04.534Z */
 /* Empresa: RADKE SOLUÇÕES INSTRALOGISTICAS | Ano ref: 2026 */
 const MONTHS = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
 const MONTHS_FULL = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
@@ -30,7 +30,7 @@ const META = {
     "cnpj": "16.665.716/0001-48",
     "cidade": "PORTO ALEGRE (RS)"
   },
-  "fetched_at": "2026-06-28T08:16:23.885Z",
+  "fetched_at": "2026-06-29T09:30:24.824Z",
   "ref_year": 2026,
   "counts": {
     "contas_pagar": 16540,
@@ -8013,7 +8013,7 @@ const SEGMENTS = {
         "Venda - Mercadoria Fabricadas",
         "CD SUL LOGISTICA LTDA",
         25000,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "24/06/2026",
@@ -12029,7 +12029,7 @@ const SEGMENTS = {
         "Venda - Mercadoria Fabricadas",
         "CD SUL LOGISTICA LTDA",
         25000,
-        "A VENCER"
+        "VENCE HOJE"
       ],
       [
         "26/06/2026",
