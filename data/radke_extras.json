@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-06-29T09:34:04.784Z",
+  "fetched_at": "2026-06-30T08:25:14.867Z",
   "abc": {
     "rows": [
       {
@@ -11,9 +11,9 @@
         "valorFaturado": 312816.53,
         "qtdFaturada": 2,
         "abc": "A",
-        "pctValor": 13.164685148871447,
+        "pctValor": 13.116184431196471,
         "valorAcumulado": 312816.53,
-        "pctAcumulado": 13.164685148871447,
+        "pctAcumulado": 13.116184431196471,
         "ordem": 1
       },
       {
@@ -22,12 +22,12 @@
         "marca": "",
         "familia": "Sem Família",
         "unidade": "",
-        "valorFaturado": 224889.56,
-        "qtdFaturada": 10,
+        "valorFaturado": 233676.14,
+        "qtdFaturada": 15,
         "abc": "A",
-        "pctValor": 9.464334415666057,
-        "valorAcumulado": 537706.0900000001,
-        "pctAcumulado": 22.629019564537504,
+        "pctValor": 9.797881682947148,
+        "valorAcumulado": 546492.67,
+        "pctAcumulado": 22.91406611414362,
         "ordem": 2
       },
       {
@@ -39,9 +39,9 @@
         "valorFaturado": 224083.48,
         "qtdFaturada": 2,
         "abc": "A",
-        "pctValor": 9.430411050411664,
-        "valorAcumulado": 761789.5700000001,
-        "pctAcumulado": 32.05943061494917,
+        "pctValor": 9.39566797082087,
+        "valorAcumulado": 770576.15,
+        "pctAcumulado": 32.30973408496449,
         "ordem": 3
       },
       {
@@ -53,9 +53,9 @@
         "valorFaturado": 207475.71,
         "qtdFaturada": 1,
         "abc": "A",
-        "pctValor": 8.731483589401618,
-        "valorAcumulado": 969265.28,
-        "pctAcumulado": 40.790914204350784,
+        "pctValor": 8.699315465693049,
+        "valorAcumulado": 978051.86,
+        "pctAcumulado": 41.00904955065754,
         "ordem": 4
       },
       {
@@ -67,9 +67,9 @@
         "valorFaturado": 116563.06,
         "qtdFaturada": 470,
         "abc": "A",
-        "pctValor": 4.905482408135565,
-        "valorAcumulado": 1085828.34,
-        "pctAcumulado": 45.69639661248635,
+        "pctValor": 4.887409859142099,
+        "valorAcumulado": 1094614.92,
+        "pctAcumulado": 45.896459409799625,
         "ordem": 5
       },
       {
@@ -81,9 +81,9 @@
         "valorFaturado": 108029.28,
         "qtdFaturada": 1,
         "abc": "A",
-        "pctValor": 4.546343692448974,
-        "valorAcumulado": 1193857.62,
-        "pctAcumulado": 50.24274030493533,
+        "pctValor": 4.529594265524793,
+        "valorAcumulado": 1202644.2,
+        "pctAcumulado": 50.426053675324425,
         "ordem": 6
       },
       {
@@ -95,9 +95,9 @@
         "valorFaturado": 76205.70999999999,
         "qtdFaturada": 1,
         "abc": "A",
-        "pctValor": 3.2070689445222227,
-        "valorAcumulado": 1270063.33,
-        "pctAcumulado": 53.449809249457545,
+        "pctValor": 3.1952536110232828,
+        "valorAcumulado": 1278849.91,
+        "pctAcumulado": 53.62130728634771,
         "ordem": 7
       },
       {
@@ -109,9 +109,9 @@
         "valorFaturado": 74736.95,
         "qtdFaturada": 56,
         "abc": "A",
-        "pctValor": 3.1452571120105057,
-        "valorAcumulado": 1344800.28,
-        "pctAcumulado": 56.59506636146805,
+        "pctValor": 3.133669502775666,
+        "valorAcumulado": 1353586.8599999999,
+        "pctAcumulado": 56.75497678912337,
         "ordem": 8
       },
       {
@@ -123,9 +123,9 @@
         "valorFaturado": 69244.61,
         "qtdFaturada": 1,
         "abc": "A",
-        "pctValor": 2.9141154685987827,
-        "valorAcumulado": 1414044.8900000001,
-        "pctAcumulado": 59.50918183006684,
+        "pctValor": 2.903379420602458,
+        "valorAcumulado": 1422831.47,
+        "pctAcumulado": 59.658356209725824,
         "ordem": 9
       },
       {
@@ -137,9 +137,9 @@
         "valorFaturado": 60920.119999999995,
         "qtdFaturada": 6,
         "abc": "A",
-        "pctValor": 2.563784589744878,
-        "valorAcumulado": 1474965.0100000002,
-        "pctAcumulado": 62.07296641981173,
+        "pctValor": 2.5543392143970802,
+        "valorAcumulado": 1483751.5899999999,
+        "pctAcumulado": 62.21269542412291,
         "ordem": 10
       },
       {
@@ -151,9 +151,9 @@
         "valorFaturado": 59998.58,
         "qtdFaturada": 390,
         "abc": "A",
-        "pctValor": 2.5250021636624362,
-        "valorAcumulado": 1534963.5900000003,
-        "pctAcumulado": 64.59796858347417,
+        "pctValor": 2.515699668716023,
+        "valorAcumulado": 1543750.17,
+        "pctAcumulado": 64.72839509283894,
         "ordem": 11
       },
       {
@@ -165,9 +165,9 @@
         "valorFaturado": 58926.08,
         "qtdFaturada": 1,
         "abc": "A",
-        "pctValor": 2.4798666817805657,
-        "valorAcumulado": 1593889.6700000004,
-        "pctAcumulado": 67.07783526525472,
+        "pctValor": 2.470730472866756,
+        "valorAcumulado": 1602676.25,
+        "pctAcumulado": 67.19912556570569,
         "ordem": 12
       },
       {
@@ -179,9 +179,9 @@
         "valorFaturado": 55042.58,
         "qtdFaturada": 1,
         "abc": "A",
-        "pctValor": 2.3164320487845336,
-        "valorAcumulado": 1648932.2500000005,
-        "pctAcumulado": 69.39426731403927,
+        "pctValor": 2.307897958106262,
+        "valorAcumulado": 1657718.83,
+        "pctAcumulado": 69.50702352381197,
         "ordem": 13
       },
       {
@@ -193,9 +193,9 @@
         "valorFaturado": 54820.91,
         "qtdFaturada": 63,
         "abc": "A",
-        "pctValor": 2.3071032075083058,
-        "valorAcumulado": 1703753.1600000004,
-        "pctAcumulado": 71.70137052154757,
+        "pctValor": 2.298603485711011,
+        "valorAcumulado": 1712539.74,
+        "pctAcumulado": 71.80562700952296,
         "ordem": 14
       },
       {
@@ -207,9 +207,9 @@
         "valorFaturado": 50466.979999999996,
         "qtdFaturada": 2,
         "abc": "A",
-        "pctValor": 2.123870826501375,
-        "valorAcumulado": 1754220.1400000004,
-        "pctAcumulado": 73.82524134804895,
+        "pctValor": 2.1160461608774432,
+        "valorAcumulado": 1763006.72,
+        "pctAcumulado": 73.92167317040041,
         "ordem": 15
       },
       {
@@ -221,9 +221,9 @@
         "valorFaturado": 38576.27,
         "qtdFaturada": 3,
         "abc": "A",
-        "pctValor": 1.623457842102702,
-        "valorAcumulado": 1792796.4100000004,
-        "pctAcumulado": 75.44869919015164,
+        "pctValor": 1.6174767746053298,
+        "valorAcumulado": 1801582.99,
+        "pctAcumulado": 75.53914994500573,
         "ordem": 16
       },
       {
@@ -235,9 +235,9 @@
         "valorFaturado": 30838,
         "qtdFaturada": 100,
         "abc": "A",
-        "pctValor": 1.2977976599283216,
-        "valorAcumulado": 1823634.4100000004,
-        "pctAcumulado": 76.74649685007996,
+        "pctValor": 1.2930163744519407,
+        "valorAcumulado": 1832420.99,
+        "pctAcumulado": 76.83216631945767,
         "ordem": 17
       },
       {
@@ -249,9 +249,9 @@
         "valorFaturado": 28732.409999999996,
         "qtdFaturada": 106,
         "abc": "A",
-        "pctValor": 1.2091852410046404,
-        "valorAcumulado": 1852366.8200000003,
-        "pctAcumulado": 77.95568209108461,
+        "pctValor": 1.2047304172600908,
+        "valorAcumulado": 1861153.4,
+        "pctAcumulado": 78.03689673671776,
         "ordem": 18
       },
       {
@@ -263,9 +263,9 @@
         "valorFaturado": 28732.409999999996,
         "qtdFaturada": 106,
         "abc": "A",
-        "pctValor": 1.2091852410046404,
-        "valorAcumulado": 1881099.2300000002,
-        "pctAcumulado": 79.16486733208924,
+        "pctValor": 1.2047304172600908,
+        "valorAcumulado": 1889885.8099999998,
+        "pctAcumulado": 79.24162715397786,
         "ordem": 19
       },
       {
@@ -277,9 +277,9 @@
         "valorFaturado": 28172.199999999997,
         "qtdFaturada": 1,
         "abc": "B",
-        "pctValor": 1.1856091586689366,
-        "valorAcumulado": 1909271.4300000002,
-        "pctAcumulado": 80.35047649075818,
+        "pctValor": 1.1812411928249227,
+        "valorAcumulado": 1918058.0099999998,
+        "pctAcumulado": 80.42286834680277,
         "ordem": 20
       },
       {
@@ -291,9 +291,9 @@
         "valorFaturado": 26463.68,
         "qtdFaturada": 1,
         "abc": "B",
-        "pctValor": 1.1137071787110684,
-        "valorAcumulado": 1935735.11,
-        "pctAcumulado": 81.46418366946925,
+        "pctValor": 1.109604110780736,
+        "valorAcumulado": 1944521.6899999997,
+        "pctAcumulado": 81.53247245758351,
         "ordem": 21
       },
       {
@@ -305,9 +305,9 @@
         "valorFaturado": 25582.25,
         "qtdFaturada": 18,
         "abc": "B",
-        "pctValor": 1.0766127565244603,
-        "valorAcumulado": 1961317.36,
-        "pctAcumulado": 82.5407964259937,
+        "pctValor": 1.072646350130461,
+        "valorAcumulado": 1970103.9399999997,
+        "pctAcumulado": 82.60511880771398,
         "ordem": 22
       },
       {
@@ -319,9 +319,9 @@
         "valorFaturado": 24123.33,
         "qtdFaturada": 1,
         "abc": "B",
-        "pctValor": 1.0152150341681911,
-        "valorAcumulado": 1985440.6900000002,
-        "pctAcumulado": 83.5560114601619,
+        "pctValor": 1.0114748263930131,
+        "valorAcumulado": 1994227.2699999998,
+        "pctAcumulado": 83.61659363410698,
         "ordem": 23
       },
       {
@@ -333,9 +333,9 @@
         "valorFaturado": 23315.56,
         "qtdFaturada": 1,
         "abc": "B",
-        "pctValor": 0.9812205463362857,
-        "valorAcumulado": 2008756.2500000002,
-        "pctAcumulado": 84.53723200649819,
+        "pctValor": 0.97760557946419,
+        "valorAcumulado": 2017542.8299999998,
+        "pctAcumulado": 84.59419921357117,
         "ordem": 24
       },
       {
@@ -347,9 +347,9 @@
         "valorFaturado": 21900.25,
         "qtdFaturada": 570,
         "abc": "B",
-        "pctValor": 0.9216581231547191,
-        "valorAcumulado": 2030656.5000000002,
-        "pctAcumulado": 85.45889012965291,
+        "pctValor": 0.9182625933780114,
+        "valorAcumulado": 2039443.0799999998,
+        "pctAcumulado": 85.51246180694919,
         "ordem": 25
       },
       {
@@ -361,9 +361,9 @@
         "valorFaturado": 20294.82,
         "qtdFaturada": 16,
         "abc": "B",
-        "pctValor": 0.8540946204250114,
-        "valorAcumulado": 2050951.3200000003,
-        "pctAcumulado": 86.31298475007792,
+        "pctValor": 0.8509480049469723,
+        "valorAcumulado": 2059737.9,
+        "pctAcumulado": 86.36340981189616,
         "ordem": 26
       },
       {
@@ -375,9 +375,9 @@
         "valorFaturado": 16379.58,
         "qtdFaturada": 600,
         "abc": "B",
-        "pctValor": 0.6893242296714683,
-        "valorAcumulado": 2067330.9000000004,
-        "pctAcumulado": 87.00230897974939,
+        "pctValor": 0.6867846535652611,
+        "valorAcumulado": 2076117.48,
+        "pctAcumulado": 87.05019446546143,
         "ordem": 27
       },
       {
@@ -389,9 +389,9 @@
         "valorFaturado": 16365.539999999999,
         "qtdFaturada": 1,
         "abc": "B",
-        "pctValor": 0.6887333651813783,
-        "valorAcumulado": 2083696.4400000004,
-        "pctAcumulado": 87.69104234493076,
+        "pctValor": 0.6861959659105069,
+        "valorAcumulado": 2092483.02,
+        "pctAcumulado": 87.73639043137193,
         "ordem": 28
       },
       {
@@ -403,9 +403,9 @@
         "valorFaturado": 15281,
         "qtdFaturada": 4,
         "abc": "B",
-        "pctValor": 0.6430911875401999,
-        "valorAcumulado": 2098977.4400000004,
-        "pctAcumulado": 88.33413353247097,
+        "pctValor": 0.6407219410467639,
+        "valorAcumulado": 2107764.02,
+        "pctAcumulado": 88.3771123724187,
         "ordem": 29
       },
       {
@@ -417,9 +417,9 @@
         "valorFaturado": 14003.94,
         "qtdFaturada": 50,
         "abc": "B",
-        "pctValor": 0.5893469278739419,
-        "valorAcumulado": 2112981.3800000004,
-        "pctAcumulado": 88.9234804603449,
+        "pctValor": 0.5871756834698265,
+        "valorAcumulado": 2121767.96,
+        "pctAcumulado": 88.96428805588852,
         "ordem": 30
       },
       {
@@ -431,9 +431,9 @@
         "valorFaturado": 11827.289999999999,
         "qtdFaturada": 21,
         "abc": "B",
-        "pctValor": 0.49774399394557484,
-        "valorAcumulado": 2124808.6700000004,
-        "pctAcumulado": 89.42122445429048,
+        "pctValor": 0.4959102287888868,
+        "valorAcumulado": 2133595.25,
+        "pctAcumulado": 89.46019828467742,
         "ordem": 31
       },
       {
@@ -445,9 +445,9 @@
         "valorFaturado": 11736.05,
         "qtdFaturada": 7,
         "abc": "B",
-        "pctValor": 0.49390421644729804,
-        "valorAcumulado": 2136544.72,
-        "pctAcumulado": 89.91512867073777,
+        "pctValor": 0.4920845976193884,
+        "valorAcumulado": 2145331.3,
+        "pctAcumulado": 89.9522828822968,
         "ordem": 32
       },
       {
@@ -459,9 +459,9 @@
         "valorFaturado": 11180.16,
         "qtdFaturada": 173,
         "abc": "B",
-        "pctValor": 0.47050993857008316,
-        "valorAcumulado": 2147724.8800000004,
-        "pctAcumulado": 90.38563860930786,
+        "pctValor": 0.46877650784722125,
+        "valorAcumulado": 2156511.46,
+        "pctAcumulado": 90.42105939014402,
         "ordem": 33
       },
       {
@@ -473,9 +473,9 @@
         "valorFaturado": 10273.89,
         "qtdFaturada": 7,
         "abc": "B",
-        "pctValor": 0.43237014074716207,
-        "valorAcumulado": 2157998.7700000005,
-        "pctAcumulado": 90.81800875005503,
+        "pctValor": 0.4307772228846892,
+        "valorAcumulado": 2166785.35,
+        "pctAcumulado": 90.85183661302871,
         "ordem": 34
       },
       {
@@ -487,9 +487,9 @@
         "valorFaturado": 10070.38,
         "qtdFaturada": 54,
         "abc": "B",
-        "pctValor": 0.4238055515464353,
-        "valorAcumulado": 2168069.1500000004,
-        "pctAcumulado": 91.24181430160147,
+        "pctValor": 0.4222441869431654,
+        "valorAcumulado": 2176855.73,
+        "pctAcumulado": 91.27408079997188,
         "ordem": 35
       },
       {
@@ -501,9 +501,9 @@
         "valorFaturado": 9711.31,
         "qtdFaturada": 171,
         "abc": "B",
-        "pctValor": 0.4086943184654812,
-        "valorAcumulado": 2177780.4600000004,
-        "pctAcumulado": 91.65050862006694,
+        "pctValor": 0.4071886259607911,
+        "valorAcumulado": 2186567.04,
+        "pctAcumulado": 91.68126942593267,
         "ordem": 36
       },
       {
@@ -515,9 +515,9 @@
         "valorFaturado": 8260,
         "qtdFaturada": 2,
         "abc": "B",
-        "pctValor": 0.3476168581298378,
-        "valorAcumulado": 2186040.4600000004,
-        "pctAcumulado": 91.99812547819678,
+        "pctValor": 0.3463361843496021,
+        "valorAcumulado": 2194827.04,
+        "pctAcumulado": 92.02760561028227,
         "ordem": 37
       },
       {
@@ -529,9 +529,9 @@
         "valorFaturado": 8024.59,
         "qtdFaturada": 8,
         "abc": "B",
-        "pctValor": 0.3377097776731374,
-        "valorAcumulado": 2194065.0500000003,
-        "pctAcumulado": 92.33583525586991,
+        "pctValor": 0.3364656030956385,
+        "valorAcumulado": 2202851.63,
+        "pctAcumulado": 92.36407121337791,
         "ordem": 38
       },
       {
@@ -543,9 +543,9 @@
         "valorFaturado": 7833.58,
         "qtdFaturada": 3,
         "abc": "B",
-        "pctValor": 0.32967124303979833,
-        "valorAcumulado": 2201898.6300000004,
-        "pctAcumulado": 92.66550649890972,
+        "pctValor": 0.32845668365585423,
+        "valorAcumulado": 2210685.21,
+        "pctAcumulado": 92.69252789703376,
         "ordem": 39
       },
       {
@@ -557,9 +557,9 @@
         "valorFaturado": 7807.35,
         "qtdFaturada": 20,
         "abc": "B",
-        "pctValor": 0.3285673701355919,
-        "valorAcumulado": 2209705.9800000004,
-        "pctAcumulado": 92.99407386904531,
+        "pctValor": 0.32735687758860366,
+        "valorAcumulado": 2218492.56,
+        "pctAcumulado": 93.01988477462237,
         "ordem": 40
       },
       {
@@ -571,9 +571,9 @@
         "valorFaturado": 7807.35,
         "qtdFaturada": 20,
         "abc": "B",
-        "pctValor": 0.3285673701355919,
-        "valorAcumulado": 2217513.3300000005,
-        "pctAcumulado": 93.32264123918091,
+        "pctValor": 0.32735687758860366,
+        "valorAcumulado": 2226299.91,
+        "pctAcumulado": 93.34724165221098,
         "ordem": 41
       },
       {
@@ -585,9 +585,9 @@
         "valorFaturado": 7619.85,
         "qtdFaturada": 1,
         "abc": "B",
-        "pctValor": 0.3206765516247754,
-        "valorAcumulado": 2225133.1800000006,
-        "pctAcumulado": 93.6433177908057,
+        "pctValor": 0.31949513006250796,
+        "valorAcumulado": 2233919.7600000002,
+        "pctAcumulado": 93.66673678227349,
         "ordem": 42
       },
       {
@@ -599,9 +599,9 @@
         "valorFaturado": 7508.34,
         "qtdFaturada": 17,
         "abc": "B",
-        "pctValor": 0.3159837240400225,
-        "valorAcumulado": 2232641.5200000005,
-        "pctAcumulado": 93.9593015148457,
+        "pctValor": 0.31481959157378836,
+        "valorAcumulado": 2241428.1,
+        "pctAcumulado": 93.98155637384727,
         "ordem": 43
       },
       {
@@ -613,9 +613,9 @@
         "valorFaturado": 7467.04,
         "qtdFaturada": 20,
         "abc": "B",
-        "pctValor": 0.3142456397493733,
-        "valorAcumulado": 2240108.5600000005,
-        "pctAcumulado": 94.27354715459508,
+        "pctValor": 0.31308791065204034,
+        "valorAcumulado": 2248895.14,
+        "pctAcumulado": 94.29464428449931,
         "ordem": 44
       },
       {
@@ -627,9 +627,9 @@
         "valorFaturado": 7467.04,
         "qtdFaturada": 20,
         "abc": "B",
-        "pctValor": 0.3142456397493733,
-        "valorAcumulado": 2247575.6000000006,
-        "pctAcumulado": 94.58779279434445,
+        "pctValor": 0.31308791065204034,
+        "valorAcumulado": 2256362.18,
+        "pctAcumulado": 94.60773219515136,
         "ordem": 45
       },
       {
@@ -641,9 +641,9 @@
         "valorFaturado": 7151.92,
         "qtdFaturada": 20,
         "abc": "B",
-        "pctValor": 0.3009840145273546,
-        "valorAcumulado": 2254727.5200000005,
-        "pctAcumulado": 94.88877680887181,
+        "pctValor": 0.2998751432897829,
+        "valorAcumulado": 2263514.1,
+        "pctAcumulado": 94.90760733844114,
         "ordem": 46
       },
       {
@@ -655,9 +655,9 @@
         "valorFaturado": 7151.92,
         "qtdFaturada": 20,
         "abc": "C",
-        "pctValor": 0.3009840145273546,
-        "valorAcumulado": 2261879.4400000004,
-        "pctAcumulado": 95.18976082339915,
+        "pctValor": 0.2998751432897829,
+        "valorAcumulado": 2270666.02,
+        "pctAcumulado": 95.2074824817309,
         "ordem": 47
       },
       {
@@ -669,9 +669,9 @@
         "valorFaturado": 6984.86,
         "qtdFaturada": 20,
         "abc": "C",
-        "pctValor": 0.2939534004451306,
-        "valorAcumulado": 2268864.3000000003,
-        "pctAcumulado": 95.48371422384429,
+        "pctValor": 0.29287043106733196,
+        "valorAcumulado": 2277650.88,
+        "pctAcumulado": 95.50035291279823,
         "ordem": 48
       },
       {
@@ -683,9 +683,9 @@
         "valorFaturado": 6984.86,
         "qtdFaturada": 20,
         "abc": "C",
-        "pctValor": 0.2939534004451306,
-        "valorAcumulado": 2275849.16,
-        "pctAcumulado": 95.7776676242894,
+        "pctValor": 0.29287043106733196,
+        "valorAcumulado": 2284635.7399999998,
+        "pctAcumulado": 95.79322334386556,
         "ordem": 49
       },
       {
@@ -697,9 +697,9 @@
         "valorFaturado": 6879.55,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.2895214959258021,
-        "valorAcumulado": 2282728.71,
-        "pctAcumulado": 96.0671891202152,
+        "pctValor": 0.2884548543634752,
+        "valorAcumulado": 2291515.2899999996,
+        "pctAcumulado": 96.08167819822904,
         "ordem": 50
       },
       {
@@ -711,9 +711,9 @@
         "valorFaturado": 6504.76,
         "qtdFaturada": 28,
         "abc": "C",
-        "pctValor": 0.2737486966209012,
-        "valorAcumulado": 2289233.4699999997,
-        "pctAcumulado": 96.34093781683609,
+        "pctValor": 0.27274016446851307,
+        "valorAcumulado": 2298020.0499999993,
+        "pctAcumulado": 96.35441836269753,
         "ordem": 51
       },
       {
@@ -725,9 +725,9 @@
         "valorFaturado": 6244.56,
         "qtdFaturada": 8,
         "abc": "C",
-        "pctValor": 0.2627983447461574,
-        "valorAcumulado": 2295478.03,
-        "pctAcumulado": 96.60373616158225,
+        "pctValor": 0.26183015536829923,
+        "valorAcumulado": 2304264.6099999994,
+        "pctAcumulado": 96.61624851806585,
         "ordem": 52
       },
       {
@@ -739,9 +739,9 @@
         "valorFaturado": 5297.31,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.22293392962951225,
-        "valorAcumulado": 2300775.34,
-        "pctAcumulado": 96.82667009121177,
+        "pctValor": 0.2221126068664638,
+        "valorAcumulado": 2309561.9199999995,
+        "pctAcumulado": 96.8383611249323,
         "ordem": 53
       },
       {
@@ -753,9 +753,9 @@
         "valorFaturado": 4872.110000000001,
         "qtdFaturada": 4,
         "abc": "C",
-        "pctValor": 0.2050396574652499,
-        "valorAcumulado": 2305647.4499999997,
-        "pctAcumulado": 97.031709748677,
+        "pctValor": 0.20428425994328575,
+        "valorAcumulado": 2314434.0299999993,
+        "pctAcumulado": 97.04264538487558,
         "ordem": 54
       },
       {
@@ -767,9 +767,9 @@
         "valorFaturado": 4460.4,
         "qtdFaturada": 4,
         "abc": "C",
-        "pctValor": 0.18771310339011238,
-        "valorAcumulado": 2310107.8499999996,
-        "pctAcumulado": 97.21942285206711,
+        "pctValor": 0.18702153954878514,
+        "valorAcumulado": 2318894.4299999992,
+        "pctAcumulado": 97.22966692442436,
         "ordem": 55
       },
       {
@@ -781,9 +781,9 @@
         "valorFaturado": 4325.5599999999995,
         "qtdFaturada": 20,
         "abc": "C",
-        "pctValor": 0.18203844756078702,
-        "valorAcumulado": 2314433.4099999997,
-        "pctAcumulado": 97.40146129962791,
+        "pctValor": 0.1813677900212185,
+        "valorAcumulado": 2323219.9899999993,
+        "pctAcumulado": 97.41103471444559,
         "ordem": 56
       },
       {
@@ -795,9 +795,9 @@
         "valorFaturado": 4325.5599999999995,
         "qtdFaturada": 20,
         "abc": "C",
-        "pctValor": 0.18203844756078702,
-        "valorAcumulado": 2318758.9699999997,
-        "pctAcumulado": 97.5834997471887,
+        "pctValor": 0.1813677900212185,
+        "valorAcumulado": 2327545.5499999993,
+        "pctAcumulado": 97.59240250446682,
         "ordem": 57
       },
       {
@@ -809,9 +809,9 @@
         "valorFaturado": 4292.5,
         "qtdFaturada": 27,
         "abc": "C",
-        "pctValor": 0.1806471384409599,
-        "valorAcumulado": 2323051.4699999997,
-        "pctAcumulado": 97.76414688562966,
+        "pctValor": 0.17998160669741733,
+        "valorAcumulado": 2331838.0499999993,
+        "pctAcumulado": 97.77238411116423,
         "ordem": 58
       },
       {
@@ -823,9 +823,9 @@
         "valorFaturado": 4078.38,
         "qtdFaturada": 5,
         "abc": "C",
-        "pctValor": 0.17163603412343437,
-        "valorAcumulado": 2327129.8499999996,
-        "pctAcumulado": 97.9357829197531,
+        "pctValor": 0.17100370066921675,
+        "valorAcumulado": 2335916.4299999992,
+        "pctAcumulado": 97.94338781183343,
         "ordem": 59
       },
       {
@@ -837,9 +837,9 @@
         "valorFaturado": 3727.33,
         "qtdFaturada": 38,
         "abc": "C",
-        "pctValor": 0.15686231765291625,
-        "valorAcumulado": 2330857.1799999997,
-        "pctAcumulado": 98.092645237406,
+        "pctValor": 0.15628441283435865,
+        "valorAcumulado": 2339643.7599999993,
+        "pctAcumulado": 98.0996722246678,
         "ordem": 60
       },
       {
@@ -851,9 +851,9 @@
         "valorFaturado": 3531.15,
         "qtdFaturada": 2,
         "abc": "C",
-        "pctValor": 0.14860620685050566,
-        "valorAcumulado": 2334388.3299999996,
-        "pctAcumulado": 98.2412514442565,
+        "pctValor": 0.1480587188094549,
+        "valorAcumulado": 2343174.909999999,
+        "pctAcumulado": 98.24773094347725,
         "ordem": 61
       },
       {
@@ -865,9 +865,9 @@
         "valorFaturado": 3252.51,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.13687981927795143,
-        "valorAcumulado": 2337640.8399999994,
-        "pctAcumulado": 98.37813126353446,
+        "pctValor": 0.13637553304587463,
+        "valorAcumulado": 2346427.419999999,
+        "pctAcumulado": 98.38410647652312,
         "ordem": 62
       },
       {
@@ -879,9 +879,9 @@
         "valorFaturado": 3252.38,
         "qtdFaturada": 7,
         "abc": "C",
-        "pctValor": 0.1368743483104506,
-        "valorAcumulado": 2340893.2199999993,
-        "pctAcumulado": 98.5150056118449,
+        "pctValor": 0.13637008223425653,
+        "valorAcumulado": 2349679.799999999,
+        "pctAcumulado": 98.52047655875737,
         "ordem": 63
       },
       {
@@ -893,9 +893,9 @@
         "valorFaturado": 2598.34,
         "qtdFaturada": 8,
         "abc": "C",
-        "pctValor": 0.10934948997010686,
-        "valorAcumulado": 2343491.559999999,
-        "pctAcumulado": 98.624355101815,
+        "pctValor": 0.1089466296904292,
+        "valorAcumulado": 2352278.1399999987,
+        "pctAcumulado": 98.62942318844779,
         "ordem": 64
       },
       {
@@ -907,9 +907,9 @@
         "valorFaturado": 2524.4700000000003,
         "qtdFaturada": 3,
         "abc": "C",
-        "pctValor": 0.10624071789867211,
-        "valorAcumulado": 2346016.0299999993,
-        "pctAcumulado": 98.73059581971368,
+        "pctValor": 0.1058493108117482,
+        "valorAcumulado": 2354802.609999999,
+        "pctAcumulado": 98.73527249925955,
         "ordem": 65
       },
       {
@@ -921,9 +921,9 @@
         "valorFaturado": 2501.72,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.10528329858602635,
-        "valorAcumulado": 2348517.7499999995,
-        "pctAcumulado": 98.83587911829972,
+        "pctValor": 0.1048954187785819,
+        "valorAcumulado": 2357304.329999999,
+        "pctAcumulado": 98.84016791803813,
         "ordem": 66
       },
       {
@@ -935,9 +935,9 @@
         "valorFaturado": 2224.42,
         "qtdFaturada": 8,
         "abc": "C",
-        "pctValor": 0.09361330406309609,
-        "valorAcumulado": 2350742.1699999995,
-        "pctAcumulado": 98.92949242236281,
+        "pctValor": 0.09326841830398813,
+        "valorAcumulado": 2359528.749999999,
+        "pctAcumulado": 98.93343633634211,
         "ordem": 67
       },
       {
@@ -949,9 +949,9 @@
         "valorFaturado": 2224.42,
         "qtdFaturada": 8,
         "abc": "C",
-        "pctValor": 0.09361330406309609,
-        "valorAcumulado": 2352966.5899999994,
-        "pctAcumulado": 99.0231057264259,
+        "pctValor": 0.09326841830398813,
+        "valorAcumulado": 2361753.169999999,
+        "pctAcumulado": 99.0267047546461,
         "ordem": 68
       },
       {
@@ -963,9 +963,9 @@
         "valorFaturado": 2156.33,
         "qtdFaturada": 2,
         "abc": "C",
-        "pctValor": 0.09074777962362143,
-        "valorAcumulado": 2355122.9199999995,
-        "pctAcumulado": 99.11385350604952,
+        "pctValor": 0.09041345089571157,
+        "valorAcumulado": 2363909.499999999,
+        "pctAcumulado": 99.11711820554181,
         "ordem": 69
       },
       {
@@ -977,9 +977,9 @@
         "valorFaturado": 2137.28,
         "qtdFaturada": 2,
         "abc": "C",
-        "pctValor": 0.08994607246292248,
-        "valorAcumulado": 2357260.1999999993,
-        "pctAcumulado": 99.20379957851245,
+        "pctValor": 0.08961469734706025,
+        "valorAcumulado": 2366046.779999999,
+        "pctAcumulado": 99.20673290288887,
         "ordem": 70
       },
       {
@@ -991,9 +991,9 @@
         "valorFaturado": 1744.51,
         "qtdFaturada": 40,
         "abc": "C",
-        "pctValor": 0.07341659626829096,
-        "valorAcumulado": 2359004.709999999,
-        "pctAcumulado": 99.27721617478072,
+        "pctValor": 0.0731461182759957,
+        "valorAcumulado": 2367791.2899999986,
+        "pctAcumulado": 99.27987902116486,
         "ordem": 71
       },
       {
@@ -1005,9 +1005,9 @@
         "valorFaturado": 1590.1200000000001,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.06691919109557115,
-        "valorAcumulado": 2360594.829999999,
-        "pctAcumulado": 99.3441353658763,
+        "pctValor": 0.06667265053970815,
+        "valorAcumulado": 2369381.4099999988,
+        "pctAcumulado": 99.34655167170457,
         "ordem": 72
       },
       {
@@ -1019,9 +1019,9 @@
         "valorFaturado": 1528.1,
         "qtdFaturada": 2,
         "abc": "C",
-        "pctValor": 0.06430911875401998,
-        "valorAcumulado": 2362122.9299999992,
-        "pctAcumulado": 99.40844448463032,
+        "pctValor": 0.06407219410467639,
+        "valorAcumulado": 2370909.509999999,
+        "pctAcumulado": 99.41062386580926,
         "ordem": 73
       },
       {
@@ -1033,9 +1033,9 @@
         "valorFaturado": 1428.98,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.06013771645646194,
-        "valorAcumulado": 2363551.909999999,
-        "pctAcumulado": 99.46858220108679,
+        "pctValor": 0.059916159892481176,
+        "valorAcumulado": 2372338.489999999,
+        "pctAcumulado": 99.47054002570174,
         "ordem": 74
       },
       {
@@ -1047,9 +1047,9 @@
         "valorFaturado": 1345.87,
         "qtdFaturada": 11,
         "abc": "C",
-        "pctValor": 0.05664008484881413,
-        "valorAcumulado": 2364897.7799999993,
-        "pctAcumulado": 99.5252222859356,
+        "pctValor": 0.05643141409571416,
+        "valorAcumulado": 2373684.359999999,
+        "pctAcumulado": 99.52697143979745,
         "ordem": 75
       },
       {
@@ -1061,9 +1061,9 @@
         "valorFaturado": 1345.87,
         "qtdFaturada": 11,
         "abc": "C",
-        "pctValor": 0.05664008484881413,
-        "valorAcumulado": 2366243.6499999994,
-        "pctAcumulado": 99.58186237078442,
+        "pctValor": 0.05643141409571416,
+        "valorAcumulado": 2375030.229999999,
+        "pctAcumulado": 99.58340285389316,
         "ordem": 76
       },
       {
@@ -1075,9 +1075,9 @@
         "valorFaturado": 1161.56,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.04888351546359495,
-        "valorAcumulado": 2367405.2099999995,
-        "pctAcumulado": 99.63074588624802,
+        "pctValor": 0.04870342110086245,
+        "valorAcumulado": 2376191.789999999,
+        "pctAcumulado": 99.63210627499404,
         "ordem": 77
       },
       {
@@ -1089,9 +1089,9 @@
         "valorFaturado": 1120.49,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.04715511057698571,
-        "valorAcumulado": 2368525.6999999997,
-        "pctAcumulado": 99.677900996825,
+        "pctValor": 0.04698138392274645,
+        "valorAcumulado": 2377312.2799999993,
+        "pctAcumulado": 99.67908765891679,
         "ordem": 78
       },
       {
@@ -1103,9 +1103,9 @@
         "valorFaturado": 1109.52,
         "qtdFaturada": 54,
         "abc": "C",
-        "pctValor": 0.046693445088646195,
-        "valorAcumulado": 2369635.2199999997,
-        "pctAcumulado": 99.72459444191367,
+        "pctValor": 0.04652141928081968,
+        "valorAcumulado": 2378421.7999999993,
+        "pctAcumulado": 99.7256090781976,
         "ordem": 79
       },
       {
@@ -1117,9 +1117,9 @@
         "valorFaturado": 1022.18,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.04301779661539438,
-        "valorAcumulado": 2370657.4,
-        "pctAcumulado": 99.76761223852905,
+        "pctValor": 0.042859312459863956,
+        "valorAcumulado": 2379443.9799999995,
+        "pctAcumulado": 99.76846839065749,
         "ordem": 80
       },
       {
@@ -1131,9 +1131,9 @@
         "valorFaturado": 893.11,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.03758596757437523,
-        "valorAcumulado": 2371550.51,
-        "pctAcumulado": 99.80519820610343,
+        "pctValor": 0.037447495109500385,
+        "valorAcumulado": 2380337.0899999994,
+        "pctAcumulado": 99.80591588576698,
         "ordem": 81
       },
       {
@@ -1145,9 +1145,9 @@
         "valorFaturado": 765.9,
         "qtdFaturada": 24,
         "abc": "C",
-        "pctValor": 0.03223241545298338,
-        "valorAcumulado": 2372316.4099999997,
-        "pctAcumulado": 99.83743062155641,
+        "pctValor": 0.03211366629459567,
+        "valorAcumulado": 2381102.9899999993,
+        "pctAcumulado": 99.83802955206157,
         "ordem": 82
       },
       {
@@ -1159,9 +1159,9 @@
         "valorFaturado": 743.73,
         "qtdFaturada": 8,
         "abc": "C",
-        "pctValor": 0.03129940507226444,
-        "valorAcumulado": 2373060.1399999997,
-        "pctAcumulado": 99.86873002662867,
+        "pctValor": 0.03118409326711012,
+        "valorAcumulado": 2381846.7199999993,
+        "pctAcumulado": 99.86921364532868,
         "ordem": 83
       },
       {
@@ -1173,9 +1173,9 @@
         "valorFaturado": 671.13,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.028244080144876272,
-        "valorAcumulado": 2373731.2699999996,
-        "pctAcumulado": 99.89697410677354,
+        "pctValor": 0.028140024625005866,
+        "valorAcumulado": 2382517.849999999,
+        "pctAcumulado": 99.89735366995369,
         "ordem": 84
       },
       {
@@ -1187,9 +1187,9 @@
         "valorFaturado": 629.83,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.02650599585422709,
-        "valorAcumulado": 2374361.0999999996,
-        "pctAcumulado": 99.92348010262776,
+        "pctValor": 0.026408343703257862,
+        "valorAcumulado": 2383147.6799999992,
+        "pctAcumulado": 99.92376201365694,
         "ordem": 85
       },
       {
@@ -1201,9 +1201,9 @@
         "valorFaturado": 627.76,
         "qtdFaturada": 2,
         "abc": "C",
-        "pctValor": 0.02641888121786767,
-        "valorAcumulado": 2374988.8599999994,
-        "pctAcumulado": 99.94989898384563,
+        "pctValor": 0.02632155001056976,
+        "valorAcumulado": 2383775.439999999,
+        "pctAcumulado": 99.9500835636675,
         "ordem": 86
       },
       {
@@ -1215,9 +1215,9 @@
         "valorFaturado": 505.93,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.02129174298227952,
-        "valorAcumulado": 2375494.7899999996,
-        "pctAcumulado": 99.97119072682791,
+        "pctValor": 0.021213300938013824,
+        "valorAcumulado": 2384281.369999999,
+        "pctAcumulado": 99.97129686460552,
         "ordem": 87
       },
       {
@@ -1229,9 +1229,9 @@
         "valorFaturado": 485.64,
         "qtdFaturada": 76,
         "abc": "C",
-        "pctValor": 0.020437851208495693,
-        "valorAcumulado": 2375980.4299999997,
-        "pctAcumulado": 99.99162857803641,
+        "pctValor": 0.020362555032389925,
+        "valorAcumulado": 2384767.0099999993,
+        "pctAcumulado": 99.99165941963791,
         "ordem": 88
       },
       {
@@ -1243,8 +1243,8 @@
         "valorFaturado": 198.92,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.008371421963582001,
-        "valorAcumulado": 2376179.3499999996,
+        "pctValor": 0.008340580362085091,
+        "valorAcumulado": 2384965.9299999992,
         "pctAcumulado": 100,
         "ordem": 89
       }
@@ -1265,8 +1265,8 @@
       },
       {
         "name": "Sem Família",
-        "value": 561205.54,
-        "qtd": 40
+        "value": 569992.1200000001,
+        "qtd": 45
       },
       {
         "name": "COMERCIAL",
@@ -1322,8 +1322,8 @@
     "porVendedor": [
       {
         "name": "Sem Vendedor",
-        "value": 1455556.3300000005,
-        "qtd": 513
+        "value": 1464342.9100000006,
+        "qtd": 518
       },
       {
         "name": "DIOGO ALMEIDA",
@@ -1354,8 +1354,8 @@
     "porCliente": [
       {
         "name": "FITESA NAOTECIDOS S/A",
-        "value": 1646761.7400000007,
-        "qtd": 46
+        "value": 1655548.3200000008,
+        "qtd": 51
       },
       {
         "name": "BERTOLINI S/A",
@@ -1446,8 +1446,8 @@
       },
       {
         "m": "jun",
-        "valor": 7975.2699999999995,
-        "qtd": 27
+        "valor": 16761.85,
+        "qtd": 32
       },
       {
         "m": "jul",
@@ -1488,8 +1488,8 @@
       },
       {
         "name": "Sem Família ▸ ESTRUTURA METÁLICA",
-        "value": 224889.56,
-        "qtd": 10
+        "value": 233676.14,
+        "qtd": 15
       },
       {
         "name": "PROJETO ESPECIAL - SERRALHERIA ▸ A-FRAMES - SP1",
@@ -1948,14 +1948,14 @@
       },
       {
         "nome": "ESTRUTURA METÁLICA",
-        "total": 224889.56,
+        "total": 233676.14,
         "meses": [
           0,
           0,
           0,
           0,
           224889.56,
-          0,
+          8786.58,
           0,
           0,
           0,
@@ -2146,14 +2146,14 @@
       }
     ],
     "totais": {
-      "totalValor": 2376179.35,
-      "totalQtd": 3645,
-      "numItens": 128,
-      "numNFs": 37,
+      "totalValor": 2384965.93,
+      "totalQtd": 3650,
+      "numItens": 131,
+      "numNFs": 38,
       "numClientes": 13,
       "numProdutos": 89,
       "anoRef": 2026,
-      "ticketMedio": 64221.063513513516
+      "ticketMedio": 62762.26131578948
     },
     "items": [
       {
@@ -3803,6 +3803,57 @@
         "valor": 24830,
         "valorSemIPI": 24830,
         "ipi": 0,
+        "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "759",
+        "dataEmissao": "29/06/2026",
+        "mes": 5,
+        "ano": 2026,
+        "cliente": "FITESA NAOTECIDOS S/A",
+        "produto": "ESTRUTURA METÁLICA",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 3,
+        "valor": 5364.87,
+        "valorSemIPI": 5196,
+        "ipi": 168.87,
+        "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "759",
+        "dataEmissao": "29/06/2026",
+        "mes": 5,
+        "ano": 2026,
+        "cliente": "FITESA NAOTECIDOS S/A",
+        "produto": "ESTRUTURA METÁLICA",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 1350.51,
+        "valorSemIPI": 1308,
+        "ipi": 42.51,
+        "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "759",
+        "dataEmissao": "29/06/2026",
+        "mes": 5,
+        "ano": 2026,
+        "cliente": "FITESA NAOTECIDOS S/A",
+        "produto": "ESTRUTURA METÁLICA",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 2071.2,
+        "valorSemIPI": 2006,
+        "ipi": 65.2,
         "cfop": "6101"
       },
       {
@@ -18566,6 +18617,57 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "759",
+        "dataEmissao": "29/06/2026",
+        "mes": 5,
+        "ano": 2026,
+        "cliente": "FITESA NAOTECIDOS S/A",
+        "produto": "ESTRUTURA METÁLICA",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 3,
+        "valor": 5364.87,
+        "valorSemIPI": 5196,
+        "ipi": 168.87,
+        "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "759",
+        "dataEmissao": "29/06/2026",
+        "mes": 5,
+        "ano": 2026,
+        "cliente": "FITESA NAOTECIDOS S/A",
+        "produto": "ESTRUTURA METÁLICA",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 1350.51,
+        "valorSemIPI": 1308,
+        "ipi": 42.51,
+        "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "759",
+        "dataEmissao": "29/06/2026",
+        "mes": 5,
+        "ano": 2026,
+        "cliente": "FITESA NAOTECIDOS S/A",
+        "produto": "ESTRUTURA METÁLICA",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 2071.2,
+        "valorSemIPI": 2006,
+        "ipi": 65.2,
+        "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "760",
         "dataEmissao": "29/05/2026",
         "mes": 4,
@@ -19114,8 +19216,8 @@
         0,
         0,
         0,
-        2775608.9599999995,
-        676790.2199999999,
+        2766822.3799999994,
+        681649.3099999998,
         2085847.1700000002,
         5687.5,
         0,
@@ -19124,10 +19226,10 @@
       ]
     },
     "produto": {
-      "total": 4917138.219999999,
+      "total": 4913210.729999999,
       "qtd": 8,
-      "atrasado": 2658351.4699999997,
-      "aFaturar": 2258786.75
+      "atrasado": 2649564.8899999997,
+      "aFaturar": 2263645.84
     },
     "servico": {
       "total": 666297.0199999999,
@@ -19397,16 +19499,6 @@
         "descricao": "SERVIÇO DE REPARAÇÃO - ADEQUAÇÃO SLA DE PREPARO DE TORTAS."
       },
       {
-        "numero": "759",
-        "tipo": "produto",
-        "status": "atrasado",
-        "ano": 2026,
-        "mes": 5,
-        "valor": 8786.580000000002,
-        "cliente": "FITESA NAOTECIDOS S/A",
-        "descricao": "ESTRUTURA METÁLICA"
-      },
-      {
         "numero": "2366",
         "tipo": "servico",
         "status": "a_faturar",
@@ -19495,6 +19587,16 @@
         "valor": 5130,
         "cliente": "BRS SP SUPRIMENTOS CORPORATIVOS S/A",
         "descricao": "SERVIÇO DE SERRALHERIA - REPOSICIONAR 03 MONTANTES E INSTALAR NOVOS ESPAÇADORES PARA ALINHAMENTO DAS ESTRUTURAS, FIXADORES INCLUSO - PRÉDIO 2 · SERVIÇO DE SERRA"
+      },
+      {
+        "numero": "754",
+        "tipo": "produto",
+        "status": "a_faturar",
+        "ano": 2026,
+        "mes": 6,
+        "valor": 4859.09,
+        "cliente": "COMFRIO SOLUCOES LOGISTICAS S/A",
+        "descricao": "SUPORTE VIGA TÚNEL GALVANIZADO (#2,65mm)"
       },
       {
         "numero": "2524",
@@ -19717,7 +19819,7 @@
         "descricao": "SERVIÇO DE REPARAÇÃO - GRADE COM TELA MÍLIMÉTRICA PARA CAIXAS DE INOX NA SALA DE DEPÓSITO"
       }
     ],
-    "totalGeral": 5583435.239999998,
+    "totalGeral": 5579507.749999998,
     "qtdPedidos": 58
   },
   "ads": {
@@ -22777,7 +22879,7 @@
         "dataRef": "2026-03-03",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 166
+        "tempoCiclo": 167
       },
       {
         "descricao": "BERTOLINI - Porta paletes TRILHO GUIA - Venda peças",
@@ -23001,7 +23103,7 @@
         "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 165
+        "tempoCiclo": 166
       },
       {
         "descricao": "SUPERFRIO - CWB III -  Porta Pallet - Restauração",
@@ -23029,7 +23131,7 @@
         "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 165
+        "tempoCiclo": 166
       },
       {
         "descricao": "SUPERFRIO -CAMBÉ/PR (LDNII) -  Porta Pallet - Restauração",
@@ -23057,7 +23159,7 @@
         "dataRef": "2026-05-13",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 165
+        "tempoCiclo": 166
       },
       {
         "descricao": "SUPERFRIO- CWB II - Porta Pallet - Restauração",
@@ -23085,7 +23187,7 @@
         "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 165
+        "tempoCiclo": 166
       },
       {
         "descricao": "PLATAFORMA CALANDRA",
@@ -23169,7 +23271,7 @@
         "dataRef": "2026-01-24",
         "ano": 2026,
         "mes": 0,
-        "tempoCiclo": 165
+        "tempoCiclo": 166
       },
       {
         "descricao": "UNIQUE  -  EXPEDIÇÃO - Porta Pallet - Restauração",
@@ -23197,7 +23299,7 @@
         "dataRef": "2026-01-24",
         "ano": 2026,
         "mes": 0,
-        "tempoCiclo": 164
+        "tempoCiclo": 165
       },
       {
         "descricao": "UNIQUE  -  MATÉRIA PRIMA - Porta Pallet - Restauração",
@@ -23225,7 +23327,7 @@
         "dataRef": "2026-01-24",
         "ano": 2026,
         "mes": 0,
-        "tempoCiclo": 164
+        "tempoCiclo": 165
       },
       {
         "descricao": "UNIQUE  - EMBALAGEM - Porta Pallet - Restauração",
@@ -23253,7 +23355,7 @@
         "dataRef": "2026-01-24",
         "ano": 2026,
         "mes": 0,
-        "tempoCiclo": 164
+        "tempoCiclo": 165
       },
       {
         "descricao": "UNIQUE  - ACABADOS - Porta Pallet - Restauração",
@@ -23281,7 +23383,7 @@
         "dataRef": "2026-01-24",
         "ano": 2026,
         "mes": 0,
-        "tempoCiclo": 164
+        "tempoCiclo": 165
       },
       {
         "descricao": "UNIQUE - PROTEÇÃO TELADA",
@@ -23309,7 +23411,7 @@
         "dataRef": "2026-01-24",
         "ano": 2026,
         "mes": 0,
-        "tempoCiclo": 164
+        "tempoCiclo": 165
       },
       {
         "descricao": "UNIQUE - Desmontagem e Montagem de modulos p.palete",
@@ -23337,7 +23439,7 @@
         "dataRef": "2026-02-05",
         "ano": 2026,
         "mes": 1,
-        "tempoCiclo": 164
+        "tempoCiclo": 165
       },
       {
         "descricao": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA -  Serralheria - Estruturas",
@@ -23365,7 +23467,7 @@
         "dataRef": "2026-02-04",
         "ano": 2026,
         "mes": 1,
-        "tempoCiclo": 164
+        "tempoCiclo": 165
       },
       {
         "descricao": "Restauro porta paletes (duplicada em 18/01/2026 às 15:47:32)",
@@ -23561,7 +23663,7 @@
         "dataRef": "2026-02-05",
         "ano": 2026,
         "mes": 1,
-        "tempoCiclo": 159
+        "tempoCiclo": 160
       },
       {
         "descricao": "LJ 200 - CESTTO WENCESLAU -  Serralheria - Estruturas",
@@ -23701,7 +23803,7 @@
         "dataRef": "2026-01-24",
         "ano": 2026,
         "mes": 0,
-        "tempoCiclo": 156
+        "tempoCiclo": 157
       },
       {
         "descricao": "IMEC -  Porta Pallet - Restauração (Galpão Novo)",
@@ -23748,16 +23850,16 @@
         "produtos": 224155.52,
         "servicos": 66196,
         "recorrencia": 0,
-        "temperatura": 40,
+        "temperatura": 60,
         "anoPrev": 2026,
         "mesPrev": "Julho",
         "dataIncl": "2026-01-27",
-        "dataAtual": "2026-06-26",
+        "dataAtual": "2026-06-29",
         "dataConcl": null,
-        "dataRef": "2026-06-26",
+        "dataRef": "2026-06-29",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 153
+        "tempoCiclo": 154
       },
       {
         "descricao": "COMERCIAL GOLLUB DE ALIMENTOS LTDA -  Guarda corpo modular",
@@ -23981,7 +24083,7 @@
         "dataRef": "2026-02-05",
         "ano": 2026,
         "mes": 1,
-        "tempoCiclo": 151
+        "tempoCiclo": 152
       },
       {
         "descricao": "CONDOMINIO DO BOURBON SHOPPING NOVO HAMBURGO -  Serralheria - Estruturas (1)",
@@ -24289,7 +24391,7 @@
         "dataRef": "2026-03-05",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 144
+        "tempoCiclo": 145
       },
       {
         "descricao": "CD ZAFFARI SERTORIO -  Serralheria - Estruturas",
@@ -24429,7 +24531,7 @@
         "dataRef": "2026-03-05",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 140
+        "tempoCiclo": 141
       },
       {
         "descricao": "LOJA 44 - ZAFF CARLOS GOMES -  Serralheria - Estruturas",
@@ -24457,7 +24559,7 @@
         "dataRef": "2026-03-05",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 140
+        "tempoCiclo": 141
       },
       {
         "descricao": "SUPERFRIO - BSB -  Mobilização",
@@ -24513,7 +24615,7 @@
         "dataRef": "2026-03-05",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 139
+        "tempoCiclo": 140
       },
       {
         "descricao": "MIBA SINTER  -  Porta Pallet - Venda 128 longarinas",
@@ -24737,7 +24839,7 @@
         "dataRef": "2026-02-20",
         "ano": 2026,
         "mes": 1,
-        "tempoCiclo": 129
+        "tempoCiclo": 130
       },
       {
         "descricao": "UNIDASUL  Serralheria - Linha de vida",
@@ -24765,7 +24867,7 @@
         "dataRef": "2026-02-20",
         "ano": 2026,
         "mes": 1,
-        "tempoCiclo": 129
+        "tempoCiclo": 130
       },
       {
         "descricao": "UNIDASUL  Serralheria - Linha de vida (duplicada em 20/02/2026 às 15:27:57)",
@@ -24793,7 +24895,7 @@
         "dataRef": "2026-02-20",
         "ano": 2026,
         "mes": 1,
-        "tempoCiclo": 129
+        "tempoCiclo": 130
       },
       {
         "descricao": "VETLOG DISTRIBUIDORA DE PRODUTOS PARA ANIMAIS LTDA -  Desmontagem / Montagem (mezanino)",
@@ -24853,12 +24955,12 @@
       },
       {
         "descricao": "VETLOG DISTRIBUIDORA DE PRODUTOS PARA ANIMAIS LTDA -  Aumento de um nível dos porta paletes",
-        "fase": "04 Negociação",
+        "fase": "06 Conclusão",
         "situacao": "Em Andamento",
         "ganho": false,
-        "perdido": "",
-        "aberto": true,
-        "motivo": "",
+        "perdido": true,
+        "aberto": false,
+        "motivo": "Projeto cancelado internamente",
         "vendedor": "Felipe",
         "origem": "Orgânico",
         "tipo": "Cliente Novo",
@@ -24872,9 +24974,9 @@
         "anoPrev": 2026,
         "mesPrev": "Junho",
         "dataIncl": "2026-02-25",
-        "dataAtual": "2026-06-02",
-        "dataConcl": null,
-        "dataRef": "2026-06-02",
+        "dataAtual": "2026-06-29",
+        "dataConcl": "2026-06-29",
+        "dataRef": "2026-06-29",
         "ano": 2026,
         "mes": 5,
         "tempoCiclo": 124
@@ -24905,7 +25007,7 @@
         "dataRef": "2026-03-05",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 123
+        "tempoCiclo": 124
       },
       {
         "descricao": "Bourbon Assis Brasil Loja 20 -  Serralheria - Estruturas",
@@ -24989,7 +25091,7 @@
         "dataRef": "2026-03-05",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 123
+        "tempoCiclo": 124
       },
       {
         "descricao": "VETLOG DISTRIBUIDORA DE PRODUTOS PARA ANIMAIS LTDA -  Instalação de P.P em POA (duplicada em 27/02/2",
@@ -25008,16 +25110,16 @@
         "produtos": 0,
         "servicos": 11000,
         "recorrencia": 0,
-        "temperatura": 40,
+        "temperatura": 10,
         "anoPrev": 2026,
-        "mesPrev": "Junho",
+        "mesPrev": "Julho",
         "dataIncl": "2026-02-27",
-        "dataAtual": "2026-06-01",
+        "dataAtual": "2026-06-29",
         "dataConcl": null,
-        "dataRef": "2026-06-01",
+        "dataRef": "2026-06-29",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 122
+        "tempoCiclo": 123
       },
       {
         "descricao": "VETLOG DISTRIBUIDORA DE PRODUTOS PARA ANIMAIS LTDA -  Instalação de produtos de segurança",
@@ -25297,7 +25399,7 @@
         "dataRef": "2026-03-16",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 105
+        "tempoCiclo": 106
       },
       {
         "descricao": "LJ 201 - CESTTO PROTÁSIO -  Serralheria - Estruturas (1)",
@@ -25353,7 +25455,7 @@
         "dataRef": "2026-03-17",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 104
+        "tempoCiclo": 105
       },
       {
         "descricao": "LOJA 44 - ZAFF CARLOS GOMES -  Serralheria industrial - Ralo Inox",
@@ -25465,7 +25567,7 @@
         "dataRef": "2026-06-18",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 102
+        "tempoCiclo": 103
       },
       {
         "descricao": "CÉLULA DE CARGA",
@@ -25549,7 +25651,7 @@
         "dataRef": "2026-03-26",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 95
+        "tempoCiclo": 96
       },
       {
         "descricao": "AGCO DO BRASIL - CANOAS -  Serralheria - Estruturas - RACK VIDROS",
@@ -25577,7 +25679,7 @@
         "dataRef": "2026-03-26",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 95
+        "tempoCiclo": 96
       },
       {
         "descricao": "AGCO DO BRASIL - CANOAS - PROT. COLUNA",
@@ -25605,7 +25707,7 @@
         "dataRef": "2026-03-26",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 95
+        "tempoCiclo": 96
       },
       {
         "descricao": "ATC - Reparo P.P",
@@ -25633,7 +25735,7 @@
         "dataRef": "2026-06-11",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 89
+        "tempoCiclo": 90
       },
       {
         "descricao": "DIMED S/A - Flow Rack M12 - Restauração",
@@ -25773,7 +25875,7 @@
         "dataRef": "2026-04-06",
         "ano": 2026,
         "mes": 3,
-        "tempoCiclo": 84
+        "tempoCiclo": 85
       },
       {
         "descricao": "CD SUL LOGISTICA LTDA -  Porta Pallet - Restauração (Médio)",
@@ -25801,7 +25903,7 @@
         "dataRef": "2026-04-06",
         "ano": 2026,
         "mes": 3,
-        "tempoCiclo": 84
+        "tempoCiclo": 85
       },
       {
         "descricao": "Bourbon Assis Brasil Loja 20 -  Serralheria - Estruturas (1)",
@@ -25829,7 +25931,7 @@
         "dataRef": "2026-04-07",
         "ano": 2026,
         "mes": 3,
-        "tempoCiclo": 83
+        "tempoCiclo": 84
       },
       {
         "descricao": "Bourbon Assis Brasil Loja 20 -  Serralheria industrial - Ralo Inox",
@@ -26025,7 +26127,7 @@
         "dataRef": "2026-05-11",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 75
+        "tempoCiclo": 76
       },
       {
         "descricao": "Magna - Laudo 100% estruturas",
@@ -26053,7 +26155,7 @@
         "dataRef": "2026-05-04",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 75
+        "tempoCiclo": 76
       },
       {
         "descricao": "ZAFFARI - Menino Deus - LJ 19 -  Serralheria industrial - Ralo Inox",
@@ -26193,7 +26295,7 @@
         "dataRef": "2026-04-16",
         "ano": 2026,
         "mes": 3,
-        "tempoCiclo": 74
+        "tempoCiclo": 75
       },
       {
         "descricao": "LOJA 44 - ZAFF CARLOS GOMES -  Serralheria industrial - Ralo Inox (3)",
@@ -26473,7 +26575,7 @@
         "dataRef": "2026-04-22",
         "ano": 2026,
         "mes": 3,
-        "tempoCiclo": 68
+        "tempoCiclo": 69
       },
       {
         "descricao": "COOL SEED TECNOLOGIA DE POS COLHEITA LTDA -  Serralheria - Linha de Vida",
@@ -26529,7 +26631,7 @@
         "dataRef": "2026-05-11",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 68
+        "tempoCiclo": 69
       },
       {
         "descricao": "TAMPAS METÁLICAS",
@@ -26613,7 +26715,7 @@
         "dataRef": "2026-04-23",
         "ano": 2026,
         "mes": 3,
-        "tempoCiclo": 67
+        "tempoCiclo": 68
       },
       {
         "descricao": "ZAFFARI FERNANDES VIEIRA - LOJA 03 -  Serralheria industrial - Ralo Inox (1)",
@@ -26641,7 +26743,7 @@
         "dataRef": "2026-05-06",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 66
+        "tempoCiclo": 67
       },
       {
         "descricao": "ZAFFARI FERNANDES VIEIRA - LOJA 03 -  Serralheria industrial - Ralo Inox (2)",
@@ -26669,7 +26771,7 @@
         "dataRef": "2026-04-24",
         "ano": 2026,
         "mes": 3,
-        "tempoCiclo": 66
+        "tempoCiclo": 67
       },
       {
         "descricao": "SUPORTE PARA ROLOS (Mezanino)",
@@ -26753,7 +26855,7 @@
         "dataRef": "2026-05-06",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 66
+        "tempoCiclo": 67
       },
       {
         "descricao": "Escada  - Cotação para Direcional Engenharia",
@@ -26865,7 +26967,7 @@
         "dataRef": "2026-06-25",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 54
+        "tempoCiclo": 55
       },
       {
         "descricao": "LAUDO EPP - CALIBRE",
@@ -26921,7 +27023,7 @@
         "dataRef": "2026-05-08",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 54
+        "tempoCiclo": 55
       },
       {
         "descricao": "Trilho Guia Drive In - Bertolini",
@@ -26977,7 +27079,7 @@
         "dataRef": "2026-05-08",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 52
+        "tempoCiclo": 53
       },
       {
         "descricao": "Sapata Reg",
@@ -27033,7 +27135,7 @@
         "dataRef": "2026-05-08",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 52
+        "tempoCiclo": 53
       },
       {
         "descricao": "Trilho Guia Drive In - Bertolini 2",
@@ -27089,7 +27191,7 @@
         "dataRef": "2026-05-12",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 48
+        "tempoCiclo": 49
       },
       {
         "descricao": "SUPERFRIO - LDN I -  Porta Pallet - Restauração",
@@ -27117,7 +27219,7 @@
         "dataRef": "2026-05-14",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 46
+        "tempoCiclo": 47
       },
       {
         "descricao": "Desmontagem e Montagem de Porta Paletes",
@@ -27173,7 +27275,7 @@
         "dataRef": "2026-05-15",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 45
+        "tempoCiclo": 46
       },
       {
         "descricao": "LJ 200 - CESTTO WENCESLAU -  Serralheria industrial - Ralo Inox",
@@ -27201,7 +27303,7 @@
         "dataRef": "2026-05-22",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 38
+        "tempoCiclo": 39
       },
       {
         "descricao": "ZAFFARI RUA DA PRAIA 04 -  Serralheria industrial - Ralo Inox",
@@ -27313,7 +27415,7 @@
         "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 35
+        "tempoCiclo": 36
       },
       {
         "descricao": "Guia Pallet Drive In",
@@ -27397,7 +27499,7 @@
         "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 35
+        "tempoCiclo": 36
       },
       {
         "descricao": "ARTESTAMPO -  Pórtico - Sem talha",
@@ -27425,7 +27527,7 @@
         "dataRef": "2026-06-24",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 35
+        "tempoCiclo": 36
       },
       {
         "descricao": "TRANSFORMADORES -  Pórtico - Sem talha",
@@ -27453,7 +27555,7 @@
         "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 35
+        "tempoCiclo": 36
       },
       {
         "descricao": "Montagem Porta Pallet",
@@ -27481,7 +27583,7 @@
         "dataRef": "2026-06-03",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 35
+        "tempoCiclo": 36
       },
       {
         "descricao": "TDK ELECTRONICS DO BRASIL LTDA. -  Porta Pallet - Laudos",
@@ -27509,7 +27611,7 @@
         "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 35
+        "tempoCiclo": 36
       },
       {
         "descricao": "KIT REPARO",
@@ -27593,7 +27695,7 @@
         "dataRef": "2026-05-28",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 32
+        "tempoCiclo": 33
       },
       {
         "descricao": "KIT REPARO - RPS 12",
@@ -27873,7 +27975,7 @@
         "dataRef": "2026-06-01",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 28
+        "tempoCiclo": 29
       },
       {
         "descricao": "HERC - Grade",
@@ -27929,7 +28031,7 @@
         "dataRef": "2026-06-01",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 28
+        "tempoCiclo": 29
       },
       {
         "descricao": "LJ 200 - CESTTO WENCESLAU -  Serralheria - Estruturas (1)",
@@ -28237,7 +28339,7 @@
         "dataRef": "2026-06-10",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 26
+        "tempoCiclo": 27
       },
       {
         "descricao": "Venda e colocação de protetores de coluna",
@@ -28265,7 +28367,7 @@
         "dataRef": "2026-06-10",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 20
+        "tempoCiclo": 21
       },
       {
         "descricao": "MELITTA -  Reparo de porta paletes",
@@ -28293,7 +28395,7 @@
         "dataRef": "2026-06-12",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 17
+        "tempoCiclo": 18
       },
       {
         "descricao": "PLUGSOM LOCACAO DE EQUIPAMENTOS E SERVICOS PARA EVENTOS LTDA -  Porta Pallet - Venda peças",
@@ -28321,7 +28423,7 @@
         "dataRef": "2026-06-12",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 17
+        "tempoCiclo": 18
       },
       {
         "descricao": "REVITALIZAÇÃO GRAVITACIONAL - FASE II",
@@ -28349,7 +28451,7 @@
         "dataRef": "2026-06-25",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 13
+        "tempoCiclo": 14
       },
       {
         "descricao": "GDC ALIMENTOS S.A -  Porta Pallet - Restauração",
@@ -28377,7 +28479,7 @@
         "dataRef": "2026-06-16",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 13
+        "tempoCiclo": 14
       },
       {
         "descricao": "CALIBRE SCIENTIFIC BRASIL LTDA. -  Porta Pallet - Montagens",
@@ -28405,7 +28507,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 11
+        "tempoCiclo": 12
       },
       {
         "descricao": "ADIENT DO BRASIL BANCOS AUTOMOTIVOS - SJP/PR -  Porta Pallet - Laudos de Inspeção de P.P",
@@ -28433,7 +28535,7 @@
         "dataRef": "2026-06-26",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 10
+        "tempoCiclo": 11
       },
       {
         "descricao": "LJ 200 - CESTTO WENCESLAU -  Serralheria industrial - Ralo Inox (2)",
@@ -28489,7 +28591,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 7
+        "tempoCiclo": 8
       },
       {
         "descricao": "Bourbon Assis Brasil Loja 20 -  Serralheria industrial - Ralo Inox (1)",
@@ -28545,7 +28647,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 7
+        "tempoCiclo": 8
       },
       {
         "descricao": "BB. WALLIG - LOJA 25 -  Serralheria - Estruturas (1)",
@@ -28685,7 +28787,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 7
+        "tempoCiclo": 8
       },
       {
         "descricao": "ZAFFARI MALL HIPICA -  Serralheria - Estruturas",
@@ -28713,7 +28815,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 7
+        "tempoCiclo": 8
       },
       {
         "descricao": "BB SHOP TERESÓPOLIS -  Serralheria - Estruturas (1)",
@@ -28797,7 +28899,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 7
+        "tempoCiclo": 8
       },
       {
         "descricao": "LJ 201 - CESTTO PROTÁSIO -  Serralheria - Estruturas (3)",
@@ -28825,7 +28927,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 7
+        "tempoCiclo": 8
       },
       {
         "descricao": "Zaffari Ipiranga Loja 08 -  Serralheria - Estruturas (2)",
@@ -28853,7 +28955,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 7
+        "tempoCiclo": 8
       },
       {
         "descricao": "ZAFFARI LIMA E SlLVA -  Serralheria - Estruturas (2)",
@@ -28881,7 +28983,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 7
+        "tempoCiclo": 8
       },
       {
         "descricao": "ZAFFARI - SÃO LEOPOLDO - LOJA 31 -  Serralheria industrial - Ralo Inox (3)",
@@ -28937,7 +29039,7 @@
         "dataRef": "2026-06-26",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 7
+        "tempoCiclo": 8
       },
       {
         "descricao": "ZAFFARI - SÃO LEOPOLDO - LOJA 31 -  Serralheria - Estruturas",
@@ -28965,7 +29067,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 7
+        "tempoCiclo": 8
       },
       {
         "descricao": "ZAFFARI MAL FLORIANO - LOJA 11 -  Serralheria - Estruturas (2)",
@@ -28993,7 +29095,7 @@
         "dataRef": "2026-06-23",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 6
+        "tempoCiclo": 7
       },
       {
         "descricao": "Bourbon Assis Brasil Loja 20 -  Serralheria - Estruturas (5)",
@@ -29021,7 +29123,7 @@
         "dataRef": "2026-06-23",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 6
+        "tempoCiclo": 7
       },
       {
         "descricao": "Valmont - Laudo (duplicada em 23/06/2026 às 16:32:47)",
@@ -29108,6 +29210,34 @@
         "tempoCiclo": 0
       },
       {
+        "descricao": "ADIENT DO BRASIL BANCOS AUTOMOTIVOS - SJP/PR -  Porta Pallet - Laudos de Inspeção de P.P (duplicada",
+        "fase": "04 Negociação",
+        "situacao": "Em Andamento",
+        "ganho": false,
+        "perdido": "",
+        "aberto": true,
+        "motivo": "",
+        "vendedor": "Felipe",
+        "origem": "Orgânico",
+        "tipo": "Cliente Novo",
+        "produto": "Porta Pallet - Venda peças",
+        "conta": "ADIENT - SÃO JOSÉ PINHAIS/PR",
+        "ticket": 35923.05,
+        "produtos": 26386.8,
+        "servicos": 9536.25,
+        "recorrencia": 0,
+        "temperatura": 40,
+        "anoPrev": 2026,
+        "mesPrev": "Junho",
+        "dataIncl": "2026-06-24",
+        "dataAtual": "2026-06-29",
+        "dataConcl": null,
+        "dataRef": "2026-06-29",
+        "ano": 2026,
+        "mes": 5,
+        "tempoCiclo": 6
+      },
+      {
         "descricao": "Zaffari Ipiranga Loja 08 -  Serralheria - Estruturas (3)",
         "fase": "05 Aguardando Pedido",
         "situacao": "Em Andamento",
@@ -29133,7 +29263,63 @@
         "dataRef": "2026-06-24",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 5
+        "tempoCiclo": 6
+      },
+      {
+        "descricao": "Venda de Produtos (protetor de montante, guard-rail )",
+        "fase": "04 Negociação",
+        "situacao": "Em Andamento",
+        "ganho": false,
+        "perdido": "",
+        "aberto": true,
+        "motivo": "",
+        "vendedor": "Felipe",
+        "origem": "Passivo - Telefone",
+        "tipo": "Cliente Novo",
+        "produto": "Porta Pallet - Restauração",
+        "conta": "LABORATORIO INDUSTRIAL FARMACEUTICO LIFAR LTDA",
+        "ticket": 13642.78,
+        "produtos": 10520.28,
+        "servicos": 3122.5,
+        "recorrencia": 0,
+        "temperatura": 25,
+        "anoPrev": 2026,
+        "mesPrev": "Julho",
+        "dataIncl": "2026-06-24",
+        "dataAtual": "2026-06-29",
+        "dataConcl": null,
+        "dataRef": "2026-06-29",
+        "ano": 2026,
+        "mes": 5,
+        "tempoCiclo": 6
+      },
+      {
+        "descricao": "Venda de Produtos (protetor de montante, guard-rail ) (duplicada em 24/06/2026 às 12:45:09)",
+        "fase": "04 Negociação",
+        "situacao": "Em Andamento",
+        "ganho": false,
+        "perdido": "",
+        "aberto": true,
+        "motivo": "",
+        "vendedor": "Felipe",
+        "origem": "Passivo - Telefone",
+        "tipo": "Cliente Novo",
+        "produto": "Porta Pallet - Restauração",
+        "conta": "LABORATORIO INDUSTRIAL FARMACEUTICO LIFAR LTDA",
+        "ticket": 20220.07,
+        "produtos": 14790.07,
+        "servicos": 5430,
+        "recorrencia": 0,
+        "temperatura": 25,
+        "anoPrev": 2026,
+        "mesPrev": "Julho",
+        "dataIncl": "2026-06-24",
+        "dataAtual": "2026-06-29",
+        "dataConcl": null,
+        "dataRef": "2026-06-29",
+        "ano": 2026,
+        "mes": 5,
+        "tempoCiclo": 6
       },
       {
         "descricao": "Zaffari Ipiranga Loja 08 -  Serralheria - Estruturas (4)",
@@ -29161,7 +29347,7 @@
         "dataRef": "2026-06-24",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 5
+        "tempoCiclo": 6
       },
       {
         "descricao": "CONDOMINIO EDIFICIO MOINHOS SHOPPING E HOTEL 23 -  Serralheria industrial - Ralo Inox",
@@ -29217,7 +29403,7 @@
         "dataRef": "2026-06-24",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 5
+        "tempoCiclo": 6
       },
       {
         "descricao": "INDUSTRALIZAÇÃO LONGARINAS",
@@ -29245,7 +29431,7 @@
         "dataRef": "2026-06-25",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 4
+        "tempoCiclo": 5
       },
       {
         "descricao": "BB SHOP TERESÓPOLIS -  Serralheria industrial - Ralo Inox",
@@ -29273,7 +29459,7 @@
         "dataRef": "2026-06-26",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 3
+        "tempoCiclo": 4
       },
       {
         "descricao": "CONDOMINIO DO BOURBON SHOPPING NOVO HAMBURGO -  Serralheria - Estruturas (3)",
@@ -29301,7 +29487,7 @@
         "dataRef": "2026-06-26",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 3
+        "tempoCiclo": 4
       },
       {
         "descricao": "LJ 201 - CESTTO PROTÁSIO -  Serralheria - Estruturas (4)",
@@ -29329,11 +29515,11 @@
         "dataRef": "2026-06-26",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 3
+        "tempoCiclo": 4
       },
       {
         "descricao": "VLS FERRO E ACO - Portico Movel 4x4m + Trole + Talha Eletrica Industrial (Orc. 797)",
-        "fase": "03 Proposta",
+        "fase": "04 Negociação",
         "situacao": "Em Andamento",
         "ganho": false,
         "perdido": "",
@@ -29348,55 +29534,111 @@
         "produtos": 39389.88,
         "servicos": 0,
         "recorrencia": 0,
-        "temperatura": 10,
+        "temperatura": 80,
         "anoPrev": 2026,
         "mesPrev": "Julho",
         "dataIncl": "2026-06-26",
-        "dataAtual": "2026-06-26",
+        "dataAtual": "2026-06-29",
         "dataConcl": null,
-        "dataRef": "2026-06-26",
+        "dataRef": "2026-06-29",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 3
+        "tempoCiclo": 4
+      },
+      {
+        "descricao": "DRUL CHEMICALS - Protetores de Coluna (39un 400mm) + Guard-Rail 2500x400mm (Orc. 807)",
+        "fase": "04 Negociação",
+        "situacao": "Em Andamento",
+        "ganho": false,
+        "perdido": "",
+        "aberto": true,
+        "motivo": "",
+        "vendedor": "Leonardo Aleff",
+        "origem": "Orgânico",
+        "tipo": "Cliente Novo",
+        "produto": "Porta Pallet - Venda peças",
+        "conta": "DRUL CHEMICALS LTDA",
+        "ticket": 0,
+        "produtos": 0,
+        "servicos": 0,
+        "recorrencia": 0,
+        "temperatura": 60,
+        "anoPrev": 2026,
+        "mesPrev": "Julho",
+        "dataIncl": "2026-06-29",
+        "dataAtual": "2026-06-29",
+        "dataConcl": null,
+        "dataRef": "2026-06-29",
+        "ano": 2026,
+        "mes": 5,
+        "tempoCiclo": 1
+      },
+      {
+        "descricao": "MAINTECH - 288x Longarinas 1760mm Cap.100kg + 576 travessas (Orc. 808)",
+        "fase": "04 Negociação",
+        "situacao": "Em Andamento",
+        "ganho": false,
+        "perdido": "",
+        "aberto": true,
+        "motivo": "",
+        "vendedor": "Leonardo Aleff",
+        "origem": "Orgânico",
+        "tipo": "Cliente Novo",
+        "produto": "Porta Pallet - Venda peças",
+        "conta": "MAINTECH SOLUCOES TECNICAS LTDA",
+        "ticket": 70325.64,
+        "produtos": 70325.64,
+        "servicos": 0,
+        "recorrencia": 0,
+        "temperatura": 60,
+        "anoPrev": 2026,
+        "mesPrev": "Julho",
+        "dataIncl": "2026-06-29",
+        "dataAtual": "2026-06-29",
+        "dataConcl": null,
+        "dataRef": "2026-06-29",
+        "ano": 2026,
+        "mes": 5,
+        "tempoCiclo": 1
       }
     ],
     "funil": [
       {
         "fase": "Proposta",
         "chave": "03 Proposta",
-        "atual": 61,
-        "cumulativo": 317
+        "atual": 60,
+        "cumulativo": 322
       },
       {
         "fase": "Negociação",
         "chave": "04 Negociação",
-        "atual": 26,
-        "cumulativo": 256
+        "atual": 31,
+        "cumulativo": 262
       },
       {
         "fase": "Aguardando Pedido",
         "chave": "05 Aguardando Pedido",
         "atual": 5,
-        "cumulativo": 230
+        "cumulativo": 231
       },
       {
         "fase": "Conclusão",
         "chave": "06 Conclusão",
-        "atual": 225,
-        "cumulativo": 225
+        "atual": 226,
+        "cumulativo": 226
       }
     ],
     "totais": {
-      "totalLeads": 317,
+      "totalLeads": 322,
       "totalGanhos": 127,
-      "totalPerdidos": 62,
-      "totalAbertos": 128,
-      "taxaConversao": 40.063091482649845,
-      "totalTicket": 25128199.930000007,
+      "totalPerdidos": 63,
+      "totalAbertos": 132,
+      "taxaConversao": 39.44099378881988,
+      "totalTicket": 25268311.47000001,
       "totalGanhoTicket": 6272731.120000001,
-      "totalAbertoTicket": 7916094.909999999,
-      "totalPerdidoTicket": 10939373.9,
-      "ticketMedio": 79268.76949526816,
+      "totalAbertoTicket": 8008395.85,
+      "totalPerdidoTicket": 10987184.5,
+      "ticketMedio": 78473.01698757768,
       "anoCRM": 2026
     },
     "porVendedor": [
@@ -29412,13 +29654,23 @@
       },
       {
         "name": "Felipe",
-        "qtd": 75,
+        "qtd": 78,
         "ganhos": 10,
-        "perdidos": 36,
-        "abertos": 29,
-        "ticket": 3062798.93,
+        "perdidos": 37,
+        "abertos": 31,
+        "ticket": 3132584.8299999996,
         "ticketGanho": 220958.5,
-        "conversao": 13.333333333333334
+        "conversao": 12.82051282051282
+      },
+      {
+        "name": "Leonardo Aleff",
+        "qtd": 51,
+        "ganhos": 9,
+        "perdidos": 10,
+        "abertos": 32,
+        "ticket": 1507810.19,
+        "ticketGanho": 123617.65,
+        "conversao": 17.647058823529413
       },
       {
         "name": "Helmut Radke",
@@ -29429,16 +29681,6 @@
         "ticket": 1448432.7500000002,
         "ticketGanho": 1408459.51,
         "conversao": 87.5
-      },
-      {
-        "name": "Leonardo Aleff",
-        "qtd": 49,
-        "ganhos": 9,
-        "perdidos": 10,
-        "abertos": 30,
-        "ticket": 1437484.55,
-        "ticketGanho": 123617.65,
-        "conversao": 18.367346938775512
       },
       {
         "name": "maykon",
@@ -29474,13 +29716,13 @@
       },
       {
         "name": "Orgânico",
-        "qtd": 53,
+        "qtd": 56,
         "ganhos": 22,
-        "perdidos": 13,
-        "abertos": 18,
-        "ticket": 5311544.25,
+        "perdidos": 14,
+        "abertos": 20,
+        "ticket": 5417792.9399999995,
         "ticketGanho": 1922978.0499999998,
-        "conversao": 41.509433962264154
+        "conversao": 39.285714285714285
       },
       {
         "name": "Indicação Cliente",
@@ -29494,13 +29736,13 @@
       },
       {
         "name": "Passivo - Telefone",
-        "qtd": 47,
+        "qtd": 49,
         "ganhos": 14,
         "perdidos": 10,
-        "abertos": 23,
-        "ticket": 2584872.6300000004,
+        "abertos": 25,
+        "ticket": 2618735.48,
         "ticketGanho": 504024.57,
-        "conversao": 29.78723404255319
+        "conversao": 28.57142857142857
       },
       {
         "name": "Passivo - E-mail",
@@ -29646,11 +29888,11 @@
       },
       {
         "name": "Projeto cancelado internamente",
-        "qtd": 22,
+        "qtd": 23,
         "ganhos": 0,
-        "perdidos": 22,
+        "perdidos": 23,
         "abertos": 0,
-        "ticket": 1121063.76,
+        "ticket": 1168874.36,
         "ticketGanho": 0,
         "conversao": 0
       },
@@ -29688,13 +29930,13 @@
     "porTipo": [
       {
         "name": "Cliente Novo",
-        "qtd": 231,
+        "qtd": 236,
         "ganhos": 83,
-        "perdidos": 57,
-        "abertos": 91,
-        "ticket": 16500949.06,
+        "perdidos": 58,
+        "abertos": 95,
+        "ticket": 16641060.600000001,
         "ticketGanho": 3569859.5700000003,
-        "conversao": 35.93073593073593
+        "conversao": 35.16949152542373
       },
       {
         "name": "Cliente Corrente",
@@ -29720,30 +29962,30 @@
     "porProduto": [
       {
         "name": "Porta Pallet - Venda peças",
-        "qtd": 39,
+        "qtd": 42,
         "ganhos": 14,
         "perdidos": 14,
-        "abertos": 11,
-        "ticket": 9298803.29,
+        "abertos": 14,
+        "ticket": 9405051.98,
         "ticketGanho": 554229.07,
-        "conversao": 35.8974358974359
+        "conversao": 33.33333333333333
       },
       {
         "name": "Porta Pallet - Restauração",
-        "qtd": 63,
+        "qtd": 65,
         "ganhos": 15,
         "perdidos": 13,
-        "abertos": 35,
-        "ticket": 7624795.839999999,
+        "abertos": 37,
+        "ticket": 7658658.6899999995,
         "ticketGanho": 2956595.11,
-        "conversao": 23.809523809523807
+        "conversao": 23.076923076923077
       },
       {
         "name": "Serralheria - Estruturas",
         "qtd": 109,
         "ganhos": 41,
-        "perdidos": 15,
-        "abertos": 53,
+        "perdidos": 16,
+        "abertos": 52,
         "ticket": 5941856.520000001,
         "ticketGanho": 2114207.0100000002,
         "conversao": 37.61467889908257
@@ -29991,11 +30233,21 @@
         "conversao": 0
       },
       {
+        "name": "LABORATORIO INDUSTRIAL FARMACEUTICO LIFAR LTDA",
+        "qtd": 4,
+        "ganhos": 0,
+        "perdidos": 1,
+        "abertos": 3,
+        "ticket": 196793.75999999998,
+        "ticketGanho": 0,
+        "conversao": 0
+      },
+      {
         "name": "VETLOG DISTRIBUIDORA DE PRODUTOS PARA ANIMAIS LTDA",
         "qtd": 7,
         "ganhos": 2,
-        "perdidos": 2,
-        "abertos": 3,
+        "perdidos": 3,
+        "abertos": 2,
         "ticket": 195092.62,
         "ticketGanho": 31136.74,
         "conversao": 28.57142857142857
@@ -30019,16 +30271,6 @@
         "ticket": 180428.63,
         "ticketGanho": 3200,
         "conversao": 50
-      },
-      {
-        "name": "PASSAFARO METAL MECANICA DO BRASIL LTDA",
-        "qtd": 1,
-        "ganhos": 0,
-        "perdidos": 1,
-        "abertos": 0,
-        "ticket": 166341.4,
-        "ticketGanho": 0,
-        "conversao": 0
       }
     ],
     "porMes": [
@@ -30074,10 +30316,10 @@
       },
       {
         "m": "jun",
-        "leads": 63,
+        "leads": 68,
         "ganhos": 18,
-        "perdidos": 9,
-        "ticket": 14741680.280000003,
+        "perdidos": 10,
+        "ticket": 14881791.820000004,
         "ticketGanho": 2522469.5500000003
       },
       {
