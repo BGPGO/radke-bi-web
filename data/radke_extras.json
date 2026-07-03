@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-07-02T08:08:35.747Z",
+  "fetched_at": "2026-07-03T08:04:09.283Z",
   "abc": {
     "rows": [
       {
@@ -22857,7 +22857,7 @@
         "dataRef": "2026-03-03",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 169
+        "tempoCiclo": 170
       },
       {
         "descricao": "BERTOLINI - Porta paletes TRILHO GUIA - Venda peças",
@@ -23081,7 +23081,7 @@
         "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 168
+        "tempoCiclo": 169
       },
       {
         "descricao": "SUPERFRIO - CWB III -  Porta Pallet - Restauração",
@@ -23109,7 +23109,7 @@
         "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 168
+        "tempoCiclo": 169
       },
       {
         "descricao": "SUPERFRIO -CAMBÉ/PR (LDNII) -  Porta Pallet - Restauração",
@@ -23137,7 +23137,7 @@
         "dataRef": "2026-05-13",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 168
+        "tempoCiclo": 169
       },
       {
         "descricao": "SUPERFRIO- CWB II - Porta Pallet - Restauração",
@@ -23165,7 +23165,7 @@
         "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 168
+        "tempoCiclo": 169
       },
       {
         "descricao": "PLATAFORMA CALANDRA",
@@ -23249,7 +23249,7 @@
         "dataRef": "2026-01-24",
         "ano": 2026,
         "mes": 0,
-        "tempoCiclo": 168
+        "tempoCiclo": 169
       },
       {
         "descricao": "UNIQUE  -  EXPEDIÇÃO - Porta Pallet - Restauração",
@@ -23277,7 +23277,7 @@
         "dataRef": "2026-01-24",
         "ano": 2026,
         "mes": 0,
-        "tempoCiclo": 167
+        "tempoCiclo": 168
       },
       {
         "descricao": "UNIQUE  -  MATÉRIA PRIMA - Porta Pallet - Restauração",
@@ -23305,7 +23305,7 @@
         "dataRef": "2026-01-24",
         "ano": 2026,
         "mes": 0,
-        "tempoCiclo": 167
+        "tempoCiclo": 168
       },
       {
         "descricao": "UNIQUE  - EMBALAGEM - Porta Pallet - Restauração",
@@ -23333,7 +23333,7 @@
         "dataRef": "2026-01-24",
         "ano": 2026,
         "mes": 0,
-        "tempoCiclo": 167
+        "tempoCiclo": 168
       },
       {
         "descricao": "UNIQUE  - ACABADOS - Porta Pallet - Restauração",
@@ -23361,7 +23361,7 @@
         "dataRef": "2026-01-24",
         "ano": 2026,
         "mes": 0,
-        "tempoCiclo": 167
+        "tempoCiclo": 168
       },
       {
         "descricao": "UNIQUE - PROTEÇÃO TELADA",
@@ -23389,7 +23389,7 @@
         "dataRef": "2026-01-24",
         "ano": 2026,
         "mes": 0,
-        "tempoCiclo": 167
+        "tempoCiclo": 168
       },
       {
         "descricao": "UNIQUE - Desmontagem e Montagem de modulos p.palete",
@@ -23417,7 +23417,7 @@
         "dataRef": "2026-02-05",
         "ano": 2026,
         "mes": 1,
-        "tempoCiclo": 167
+        "tempoCiclo": 168
       },
       {
         "descricao": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA -  Serralheria - Estruturas",
@@ -23445,7 +23445,7 @@
         "dataRef": "2026-02-04",
         "ano": 2026,
         "mes": 1,
-        "tempoCiclo": 167
+        "tempoCiclo": 168
       },
       {
         "descricao": "Restauro porta paletes (duplicada em 18/01/2026 às 15:47:32)",
@@ -23641,7 +23641,7 @@
         "dataRef": "2026-02-05",
         "ano": 2026,
         "mes": 1,
-        "tempoCiclo": 162
+        "tempoCiclo": 163
       },
       {
         "descricao": "LJ 200 - CESTTO WENCESLAU -  Serralheria - Estruturas",
@@ -23781,7 +23781,7 @@
         "dataRef": "2026-01-24",
         "ano": 2026,
         "mes": 0,
-        "tempoCiclo": 159
+        "tempoCiclo": 160
       },
       {
         "descricao": "IMEC -  Porta Pallet - Restauração (Galpão Novo)",
@@ -23837,7 +23837,7 @@
         "dataRef": "2026-07-01",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 156
+        "tempoCiclo": 157
       },
       {
         "descricao": "COMERCIAL GOLLUB DE ALIMENTOS LTDA -  Guarda corpo modular",
@@ -24061,7 +24061,7 @@
         "dataRef": "2026-02-05",
         "ano": 2026,
         "mes": 1,
-        "tempoCiclo": 154
+        "tempoCiclo": 155
       },
       {
         "descricao": "CONDOMINIO DO BOURBON SHOPPING NOVO HAMBURGO -  Serralheria - Estruturas (1)",
@@ -24369,7 +24369,7 @@
         "dataRef": "2026-03-05",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 147
+        "tempoCiclo": 148
       },
       {
         "descricao": "CD ZAFFARI SERTORIO -  Serralheria - Estruturas",
@@ -24509,7 +24509,7 @@
         "dataRef": "2026-03-05",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 143
+        "tempoCiclo": 144
       },
       {
         "descricao": "LOJA 44 - ZAFF CARLOS GOMES -  Serralheria - Estruturas",
@@ -24537,7 +24537,7 @@
         "dataRef": "2026-03-05",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 143
+        "tempoCiclo": 144
       },
       {
         "descricao": "SUPERFRIO - BSB -  Mobilização",
@@ -24593,7 +24593,7 @@
         "dataRef": "2026-03-05",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 142
+        "tempoCiclo": 143
       },
       {
         "descricao": "MIBA SINTER  -  Porta Pallet - Venda 128 longarinas",
@@ -24817,7 +24817,7 @@
         "dataRef": "2026-02-20",
         "ano": 2026,
         "mes": 1,
-        "tempoCiclo": 132
+        "tempoCiclo": 133
       },
       {
         "descricao": "UNIDASUL  Serralheria - Linha de vida",
@@ -24845,7 +24845,7 @@
         "dataRef": "2026-02-20",
         "ano": 2026,
         "mes": 1,
-        "tempoCiclo": 132
+        "tempoCiclo": 133
       },
       {
         "descricao": "UNIDASUL  Serralheria - Linha de vida (duplicada em 20/02/2026 às 15:27:57)",
@@ -24873,7 +24873,7 @@
         "dataRef": "2026-02-20",
         "ano": 2026,
         "mes": 1,
-        "tempoCiclo": 132
+        "tempoCiclo": 133
       },
       {
         "descricao": "VETLOG DISTRIBUIDORA DE PRODUTOS PARA ANIMAIS LTDA -  Desmontagem / Montagem (mezanino)",
@@ -24985,7 +24985,7 @@
         "dataRef": "2026-03-05",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 126
+        "tempoCiclo": 127
       },
       {
         "descricao": "Bourbon Assis Brasil Loja 20 -  Serralheria - Estruturas",
@@ -25069,7 +25069,7 @@
         "dataRef": "2026-03-05",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 126
+        "tempoCiclo": 127
       },
       {
         "descricao": "VETLOG DISTRIBUIDORA DE PRODUTOS PARA ANIMAIS LTDA -  Instalação de P.P em POA (duplicada em 27/02/2",
@@ -25097,7 +25097,7 @@
         "dataRef": "2026-06-29",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 125
+        "tempoCiclo": 126
       },
       {
         "descricao": "VETLOG DISTRIBUIDORA DE PRODUTOS PARA ANIMAIS LTDA -  Instalação de produtos de segurança",
@@ -25377,7 +25377,7 @@
         "dataRef": "2026-03-16",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 108
+        "tempoCiclo": 109
       },
       {
         "descricao": "LJ 201 - CESTTO PROTÁSIO -  Serralheria - Estruturas (1)",
@@ -25433,7 +25433,7 @@
         "dataRef": "2026-03-17",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 107
+        "tempoCiclo": 108
       },
       {
         "descricao": "LOJA 44 - ZAFF CARLOS GOMES -  Serralheria industrial - Ralo Inox",
@@ -25545,7 +25545,7 @@
         "dataRef": "2026-06-18",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 105
+        "tempoCiclo": 106
       },
       {
         "descricao": "CÉLULA DE CARGA",
@@ -25629,7 +25629,7 @@
         "dataRef": "2026-03-26",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 98
+        "tempoCiclo": 99
       },
       {
         "descricao": "AGCO DO BRASIL - CANOAS -  Serralheria - Estruturas - RACK VIDROS",
@@ -25657,7 +25657,7 @@
         "dataRef": "2026-03-26",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 98
+        "tempoCiclo": 99
       },
       {
         "descricao": "AGCO DO BRASIL - CANOAS - PROT. COLUNA",
@@ -25685,7 +25685,7 @@
         "dataRef": "2026-03-26",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 98
+        "tempoCiclo": 99
       },
       {
         "descricao": "ATC - Reparo P.P",
@@ -25853,7 +25853,7 @@
         "dataRef": "2026-04-06",
         "ano": 2026,
         "mes": 3,
-        "tempoCiclo": 87
+        "tempoCiclo": 88
       },
       {
         "descricao": "CD SUL LOGISTICA LTDA -  Porta Pallet - Restauração (Médio)",
@@ -25881,7 +25881,7 @@
         "dataRef": "2026-04-06",
         "ano": 2026,
         "mes": 3,
-        "tempoCiclo": 87
+        "tempoCiclo": 88
       },
       {
         "descricao": "Bourbon Assis Brasil Loja 20 -  Serralheria - Estruturas (1)",
@@ -25909,7 +25909,7 @@
         "dataRef": "2026-04-07",
         "ano": 2026,
         "mes": 3,
-        "tempoCiclo": 86
+        "tempoCiclo": 87
       },
       {
         "descricao": "Bourbon Assis Brasil Loja 20 -  Serralheria industrial - Ralo Inox",
@@ -26105,7 +26105,7 @@
         "dataRef": "2026-05-11",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 78
+        "tempoCiclo": 79
       },
       {
         "descricao": "Magna - Laudo 100% estruturas",
@@ -26133,7 +26133,7 @@
         "dataRef": "2026-05-04",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 78
+        "tempoCiclo": 79
       },
       {
         "descricao": "ZAFFARI - Menino Deus - LJ 19 -  Serralheria industrial - Ralo Inox",
@@ -26273,7 +26273,7 @@
         "dataRef": "2026-04-16",
         "ano": 2026,
         "mes": 3,
-        "tempoCiclo": 77
+        "tempoCiclo": 78
       },
       {
         "descricao": "LOJA 44 - ZAFF CARLOS GOMES -  Serralheria industrial - Ralo Inox (3)",
@@ -26553,7 +26553,7 @@
         "dataRef": "2026-04-22",
         "ano": 2026,
         "mes": 3,
-        "tempoCiclo": 71
+        "tempoCiclo": 72
       },
       {
         "descricao": "COOL SEED TECNOLOGIA DE POS COLHEITA LTDA -  Serralheria - Linha de Vida",
@@ -26609,7 +26609,7 @@
         "dataRef": "2026-05-11",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 71
+        "tempoCiclo": 72
       },
       {
         "descricao": "TAMPAS METÁLICAS",
@@ -26693,7 +26693,7 @@
         "dataRef": "2026-04-23",
         "ano": 2026,
         "mes": 3,
-        "tempoCiclo": 70
+        "tempoCiclo": 71
       },
       {
         "descricao": "ZAFFARI FERNANDES VIEIRA - LOJA 03 -  Serralheria industrial - Ralo Inox (1)",
@@ -26721,7 +26721,7 @@
         "dataRef": "2026-05-06",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 69
+        "tempoCiclo": 70
       },
       {
         "descricao": "ZAFFARI FERNANDES VIEIRA - LOJA 03 -  Serralheria industrial - Ralo Inox (2)",
@@ -26749,7 +26749,7 @@
         "dataRef": "2026-04-24",
         "ano": 2026,
         "mes": 3,
-        "tempoCiclo": 69
+        "tempoCiclo": 70
       },
       {
         "descricao": "SUPORTE PARA ROLOS (Mezanino)",
@@ -26833,7 +26833,7 @@
         "dataRef": "2026-05-06",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 69
+        "tempoCiclo": 70
       },
       {
         "descricao": "Escada  - Cotação para Direcional Engenharia",
@@ -26973,7 +26973,7 @@
         "dataRef": "2026-06-25",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 57
+        "tempoCiclo": 58
       },
       {
         "descricao": "LAUDO EPP - CALIBRE",
@@ -27029,7 +27029,7 @@
         "dataRef": "2026-05-08",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 57
+        "tempoCiclo": 58
       },
       {
         "descricao": "Trilho Guia Drive In - Bertolini",
@@ -27085,7 +27085,7 @@
         "dataRef": "2026-05-08",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 55
+        "tempoCiclo": 56
       },
       {
         "descricao": "Sapata Reg",
@@ -27141,7 +27141,7 @@
         "dataRef": "2026-05-08",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 55
+        "tempoCiclo": 56
       },
       {
         "descricao": "Trilho Guia Drive In - Bertolini 2",
@@ -27197,7 +27197,7 @@
         "dataRef": "2026-05-12",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 51
+        "tempoCiclo": 52
       },
       {
         "descricao": "SUPERFRIO - LDN I -  Porta Pallet - Restauração",
@@ -27225,7 +27225,7 @@
         "dataRef": "2026-05-14",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 49
+        "tempoCiclo": 50
       },
       {
         "descricao": "Desmontagem e Montagem de Porta Paletes",
@@ -27281,7 +27281,7 @@
         "dataRef": "2026-05-15",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 48
+        "tempoCiclo": 49
       },
       {
         "descricao": "LJ 200 - CESTTO WENCESLAU -  Serralheria industrial - Ralo Inox",
@@ -27309,7 +27309,7 @@
         "dataRef": "2026-05-22",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 41
+        "tempoCiclo": 42
       },
       {
         "descricao": "ZAFFARI RUA DA PRAIA 04 -  Serralheria industrial - Ralo Inox",
@@ -27421,7 +27421,7 @@
         "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 38
+        "tempoCiclo": 39
       },
       {
         "descricao": "Guia Pallet Drive In",
@@ -27505,7 +27505,7 @@
         "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 38
+        "tempoCiclo": 39
       },
       {
         "descricao": "ARTESTAMPO -  Pórtico - Sem talha",
@@ -27533,7 +27533,7 @@
         "dataRef": "2026-06-24",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 38
+        "tempoCiclo": 39
       },
       {
         "descricao": "TRANSFORMADORES -  Pórtico - Sem talha",
@@ -27561,7 +27561,7 @@
         "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 38
+        "tempoCiclo": 39
       },
       {
         "descricao": "Montagem Porta Pallet",
@@ -27589,7 +27589,7 @@
         "dataRef": "2026-06-03",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 38
+        "tempoCiclo": 39
       },
       {
         "descricao": "TDK ELECTRONICS DO BRASIL LTDA. -  Porta Pallet - Laudos",
@@ -27617,7 +27617,7 @@
         "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 38
+        "tempoCiclo": 39
       },
       {
         "descricao": "KIT REPARO",
@@ -27701,7 +27701,7 @@
         "dataRef": "2026-05-28",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 35
+        "tempoCiclo": 36
       },
       {
         "descricao": "KIT REPARO - RPS 12",
@@ -27981,7 +27981,7 @@
         "dataRef": "2026-06-01",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 31
+        "tempoCiclo": 32
       },
       {
         "descricao": "HERC - Grade",
@@ -28037,7 +28037,7 @@
         "dataRef": "2026-06-01",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 31
+        "tempoCiclo": 32
       },
       {
         "descricao": "LJ 200 - CESTTO WENCESLAU -  Serralheria - Estruturas (1)",
@@ -28345,7 +28345,7 @@
         "dataRef": "2026-06-10",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 29
+        "tempoCiclo": 30
       },
       {
         "descricao": "Venda e colocação de protetores de coluna",
@@ -28373,7 +28373,7 @@
         "dataRef": "2026-07-01",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 23
+        "tempoCiclo": 24
       },
       {
         "descricao": "MELITTA -  Reparo de porta paletes",
@@ -28401,7 +28401,7 @@
         "dataRef": "2026-06-12",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 20
+        "tempoCiclo": 21
       },
       {
         "descricao": "PLUGSOM LOCACAO DE EQUIPAMENTOS E SERVICOS PARA EVENTOS LTDA -  Porta Pallet - Venda peças",
@@ -28429,7 +28429,7 @@
         "dataRef": "2026-06-12",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 20
+        "tempoCiclo": 21
       },
       {
         "descricao": "REVITALIZAÇÃO GRAVITACIONAL - FASE II",
@@ -28457,7 +28457,7 @@
         "dataRef": "2026-06-25",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 16
+        "tempoCiclo": 17
       },
       {
         "descricao": "GDC ALIMENTOS S.A -  Porta Pallet - Restauração",
@@ -28485,7 +28485,7 @@
         "dataRef": "2026-06-16",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 16
+        "tempoCiclo": 17
       },
       {
         "descricao": "CALIBRE SCIENTIFIC BRASIL LTDA. -  Porta Pallet - Montagens",
@@ -28513,7 +28513,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 14
+        "tempoCiclo": 15
       },
       {
         "descricao": "ADIENT DO BRASIL BANCOS AUTOMOTIVOS - SJP/PR -  Porta Pallet - Laudos de Inspeção de P.P",
@@ -28597,7 +28597,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 10
+        "tempoCiclo": 11
       },
       {
         "descricao": "Bourbon Assis Brasil Loja 20 -  Serralheria industrial - Ralo Inox (1)",
@@ -28653,7 +28653,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 10
+        "tempoCiclo": 11
       },
       {
         "descricao": "BB. WALLIG - LOJA 25 -  Serralheria - Estruturas (1)",
@@ -28793,7 +28793,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 10
+        "tempoCiclo": 11
       },
       {
         "descricao": "ZAFFARI MALL HIPICA -  Serralheria - Estruturas",
@@ -28821,7 +28821,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 10
+        "tempoCiclo": 11
       },
       {
         "descricao": "BB SHOP TERESÓPOLIS -  Serralheria - Estruturas (1)",
@@ -28905,7 +28905,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 10
+        "tempoCiclo": 11
       },
       {
         "descricao": "LJ 201 - CESTTO PROTÁSIO -  Serralheria - Estruturas (3)",
@@ -28933,7 +28933,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 10
+        "tempoCiclo": 11
       },
       {
         "descricao": "Zaffari Ipiranga Loja 08 -  Serralheria - Estruturas (2)",
@@ -28961,7 +28961,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 10
+        "tempoCiclo": 11
       },
       {
         "descricao": "ZAFFARI LIMA E SlLVA -  Serralheria - Estruturas (2)",
@@ -28989,7 +28989,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 10
+        "tempoCiclo": 11
       },
       {
         "descricao": "ZAFFARI - SÃO LEOPOLDO - LOJA 31 -  Serralheria industrial - Ralo Inox (3)",
@@ -29021,7 +29021,7 @@
       },
       {
         "descricao": "Venda de Produtos (sapata, caneleira, guard-rail",
-        "fase": "03 Proposta",
+        "fase": "04 Negociação",
         "situacao": "Em Andamento",
         "ganho": false,
         "perdido": "",
@@ -29040,12 +29040,12 @@
         "anoPrev": 2026,
         "mesPrev": "Julho",
         "dataIncl": "2026-06-22",
-        "dataAtual": "2026-06-26",
+        "dataAtual": "2026-07-02",
         "dataConcl": null,
-        "dataRef": "2026-06-26",
+        "dataRef": "2026-07-02",
         "ano": 2026,
-        "mes": 5,
-        "tempoCiclo": 10
+        "mes": 6,
+        "tempoCiclo": 11
       },
       {
         "descricao": "ZAFFARI - SÃO LEOPOLDO - LOJA 31 -  Serralheria - Estruturas",
@@ -29073,7 +29073,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 10
+        "tempoCiclo": 11
       },
       {
         "descricao": "ZAFFARI MAL FLORIANO - LOJA 11 -  Serralheria - Estruturas (2)",
@@ -29101,7 +29101,7 @@
         "dataRef": "2026-06-23",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 9
+        "tempoCiclo": 10
       },
       {
         "descricao": "Bourbon Assis Brasil Loja 20 -  Serralheria - Estruturas (5)",
@@ -29129,7 +29129,7 @@
         "dataRef": "2026-06-23",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 9
+        "tempoCiclo": 10
       },
       {
         "descricao": "Valmont - Laudo (duplicada em 23/06/2026 às 16:32:47)",
@@ -29241,7 +29241,7 @@
         "dataRef": "2026-06-30",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 8
+        "tempoCiclo": 9
       },
       {
         "descricao": "Zaffari Ipiranga Loja 08 -  Serralheria - Estruturas (3)",
@@ -29297,7 +29297,7 @@
         "dataRef": "2026-06-29",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 8
+        "tempoCiclo": 9
       },
       {
         "descricao": "Venda de Produtos (protetor de montante, guard-rail ) (duplicada em 24/06/2026 às 12:45:09)",
@@ -29325,7 +29325,7 @@
         "dataRef": "2026-06-29",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 8
+        "tempoCiclo": 9
       },
       {
         "descricao": "Zaffari Ipiranga Loja 08 -  Serralheria - Estruturas (4)",
@@ -29353,7 +29353,7 @@
         "dataRef": "2026-06-24",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 8
+        "tempoCiclo": 9
       },
       {
         "descricao": "CONDOMINIO EDIFICIO MOINHOS SHOPPING E HOTEL 23 -  Serralheria industrial - Ralo Inox",
@@ -29409,7 +29409,7 @@
         "dataRef": "2026-06-24",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 8
+        "tempoCiclo": 9
       },
       {
         "descricao": "INDUSTRALIZAÇÃO LONGARINAS",
@@ -29437,7 +29437,7 @@
         "dataRef": "2026-06-25",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 7
+        "tempoCiclo": 8
       },
       {
         "descricao": "BB SHOP TERESÓPOLIS -  Serralheria industrial - Ralo Inox",
@@ -29465,7 +29465,7 @@
         "dataRef": "2026-06-26",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 6
+        "tempoCiclo": 7
       },
       {
         "descricao": "CONDOMINIO DO BOURBON SHOPPING NOVO HAMBURGO -  Serralheria - Estruturas (3)",
@@ -29493,7 +29493,7 @@
         "dataRef": "2026-06-26",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 6
+        "tempoCiclo": 7
       },
       {
         "descricao": "LJ 201 - CESTTO PROTÁSIO -  Serralheria - Estruturas (4)",
@@ -29521,7 +29521,7 @@
         "dataRef": "2026-06-26",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 6
+        "tempoCiclo": 7
       },
       {
         "descricao": "VLS FERRO E ACO - Portico Movel 4x4m + Trole + Talha Eletrica Industrial (Orc. 797)",
@@ -29549,7 +29549,7 @@
         "dataRef": "2026-06-29",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 6
+        "tempoCiclo": 7
       },
       {
         "descricao": "DRUL CHEMICALS - Protetores de Coluna (39un 400mm) + Guard-Rail 2500x400mm (Orc. 807)",
@@ -29577,7 +29577,7 @@
         "dataRef": "2026-06-29",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 3
+        "tempoCiclo": 4
       },
       {
         "descricao": "MAINTECH - 288x Longarinas 1760mm Cap.100kg + 576 travessas (Orc. 808)",
@@ -29605,21 +29605,105 @@
         "dataRef": "2026-06-29",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 3
+        "tempoCiclo": 4
+      },
+      {
+        "descricao": "ZAFF. HIGIENÓPOLIS - LJ 15 -  Serralheria - Estruturas",
+        "fase": "03 Proposta",
+        "situacao": "Em Andamento",
+        "ganho": false,
+        "perdido": "",
+        "aberto": true,
+        "motivo": "",
+        "vendedor": "maykon",
+        "origem": "Passivo - E-mail",
+        "tipo": "Cliente Corrente",
+        "produto": "Serralheria - Estruturas",
+        "conta": "ZAFF. HIGIENÓPOLIS - LJ 15",
+        "ticket": 2981.04,
+        "produtos": 0,
+        "servicos": 2981.04,
+        "recorrencia": 0,
+        "temperatura": 25,
+        "anoPrev": 2026,
+        "mesPrev": "Julho",
+        "dataIncl": "2026-07-02",
+        "dataAtual": "2026-07-02",
+        "dataConcl": null,
+        "dataRef": "2026-07-02",
+        "ano": 2026,
+        "mes": 6,
+        "tempoCiclo": 1
+      },
+      {
+        "descricao": "ZAFF. HIGIENÓPOLIS - LJ 15 -  Serralheria - Estruturas (1)",
+        "fase": "03 Proposta",
+        "situacao": "Em Andamento",
+        "ganho": false,
+        "perdido": "",
+        "aberto": true,
+        "motivo": "",
+        "vendedor": "maykon",
+        "origem": "Passivo - E-mail",
+        "tipo": "Cliente Corrente",
+        "produto": "Serralheria - Estruturas",
+        "conta": "ZAFF. HIGIENÓPOLIS - LJ 15",
+        "ticket": 13285.63,
+        "produtos": 0,
+        "servicos": 13285.63,
+        "recorrencia": 0,
+        "temperatura": 90,
+        "anoPrev": 2026,
+        "mesPrev": "Julho",
+        "dataIncl": "2026-07-02",
+        "dataAtual": "2026-07-02",
+        "dataConcl": null,
+        "dataRef": "2026-07-02",
+        "ano": 2026,
+        "mes": 6,
+        "tempoCiclo": 1
+      },
+      {
+        "descricao": "ARPEX - Piso de elevacao e cobertura para gerador + icamento (Orc. 817 produto + 2542 servico)",
+        "fase": "04 Negociação",
+        "situacao": "Em Andamento",
+        "ganho": false,
+        "perdido": "",
+        "aberto": true,
+        "motivo": "",
+        "vendedor": "Leonardo Aleff",
+        "origem": "Orgânico",
+        "tipo": "Cliente Novo",
+        "produto": "Serralheria - Estruturas",
+        "conta": "ARPEX ENGENHARIA LTDA",
+        "ticket": 36318.22,
+        "produtos": 29030.22,
+        "servicos": 7288,
+        "recorrencia": 0,
+        "temperatura": 80,
+        "anoPrev": 2026,
+        "mesPrev": "Agosto",
+        "dataIncl": "2026-07-02",
+        "dataAtual": "2026-07-02",
+        "dataConcl": null,
+        "dataRef": "2026-07-02",
+        "ano": 2026,
+        "mes": 6,
+        "tempoCiclo": 1
       }
     ],
     "funil": [
       {
         "fase": "Proposta",
         "chave": "03 Proposta",
-        "atual": 60,
-        "cumulativo": 323
+        "atual": 61,
+        "cumulativo": 326
       },
       {
         "fase": "Negociação",
         "chave": "04 Negociação",
-        "atual": 30,
-        "cumulativo": 263
+        "atual": 32,
+        "cumulativo": 265
       },
       {
         "fase": "Aguardando Pedido",
@@ -29635,16 +29719,16 @@
       }
     ],
     "totais": {
-      "totalLeads": 323,
+      "totalLeads": 326,
       "totalGanhos": 130,
       "totalPerdidos": 63,
-      "totalAbertos": 130,
-      "taxaConversao": 40.24767801857585,
-      "totalTicket": 25130722.250000007,
+      "totalAbertos": 133,
+      "taxaConversao": 39.87730061349693,
+      "totalTicket": 25183307.140000004,
       "totalGanhoTicket": 6296007.150000001,
-      "totalAbertoTicket": 7792500.159999999,
+      "totalAbertoTicket": 7845085.049999999,
       "totalPerdidoTicket": 11042214.94,
-      "ticketMedio": 77804.09365325079,
+      "ticketMedio": 77249.40840490798,
       "anoCRM": 2026
     },
     "porVendedor": [
@@ -29670,13 +29754,13 @@
       },
       {
         "name": "Leonardo Aleff",
-        "qtd": 51,
+        "qtd": 52,
         "ganhos": 9,
         "perdidos": 10,
-        "abertos": 32,
-        "ticket": 1507810.19,
+        "abertos": 33,
+        "ticket": 1544128.41,
         "ticketGanho": 123617.65,
-        "conversao": 17.647058823529413
+        "conversao": 17.307692307692307
       },
       {
         "name": "Helmut Radke",
@@ -29690,13 +29774,13 @@
       },
       {
         "name": "maykon",
-        "qtd": 102,
+        "qtd": 104,
         "ganhos": 67,
         "perdidos": 2,
-        "abertos": 33,
-        "ticket": 1196859.6700000002,
+        "abertos": 35,
+        "ticket": 1213126.34,
         "ticketGanho": 622981.3800000001,
-        "conversao": 65.68627450980392
+        "conversao": 64.42307692307693
       },
       {
         "name": "Rodrigo Almeida",
@@ -29722,13 +29806,13 @@
       },
       {
         "name": "Orgânico",
-        "qtd": 56,
+        "qtd": 57,
         "ganhos": 23,
         "perdidos": 14,
-        "abertos": 19,
-        "ticket": 5417792.9399999995,
+        "abertos": 20,
+        "ticket": 5454111.159999999,
         "ticketGanho": 1929078.0499999998,
-        "conversao": 41.07142857142857
+        "conversao": 40.35087719298245
       },
       {
         "name": "Indicação Cliente",
@@ -29752,13 +29836,13 @@
       },
       {
         "name": "Passivo - E-mail",
-        "qtd": 108,
+        "qtd": 110,
         "ganhos": 70,
         "perdidos": 2,
-        "abertos": 36,
-        "ticket": 1447170.4499999995,
+        "abertos": 38,
+        "ticket": 1463437.1199999994,
         "ticketGanho": 646703.8800000001,
-        "conversao": 64.81481481481481
+        "conversao": 63.63636363636363
       },
       {
         "name": "Ativo REPRESENTANTES",
@@ -29936,23 +30020,23 @@
     "porTipo": [
       {
         "name": "Cliente Novo",
-        "qtd": 236,
+        "qtd": 237,
         "ganhos": 84,
         "perdidos": 58,
-        "abertos": 94,
-        "ticket": 16498012.290000003,
+        "abertos": 95,
+        "ticket": 16534330.510000004,
         "ticketGanho": 3575959.5700000003,
-        "conversao": 35.59322033898305
+        "conversao": 35.44303797468354
       },
       {
         "name": "Cliente Corrente",
-        "qtd": 82,
+        "qtd": 84,
         "ganhos": 45,
         "perdidos": 3,
-        "abertos": 34,
-        "ticket": 7931010.740000003,
+        "abertos": 36,
+        "ticket": 7947277.410000003,
         "ticketGanho": 2712354.5799999996,
-        "conversao": 54.87804878048781
+        "conversao": 53.57142857142857
       },
       {
         "name": "Cliente Reciclado",
@@ -29988,13 +30072,13 @@
       },
       {
         "name": "Serralheria - Estruturas",
-        "qtd": 109,
+        "qtd": 112,
         "ganhos": 42,
         "perdidos": 16,
-        "abertos": 51,
-        "ticket": 5941856.520000001,
+        "abertos": 54,
+        "ticket": 5994441.410000001,
         "ticketGanho": 2125923.95,
-        "conversao": 38.53211009174312
+        "conversao": 37.5
       },
       {
         "name": "Porta Pallet - Montagens",
@@ -30322,18 +30406,18 @@
       },
       {
         "m": "jun",
-        "leads": 66,
+        "leads": 65,
         "ganhos": 21,
         "perdidos": 9,
-        "ticket": 14521110.480000004,
+        "ticket": 14382056.430000003,
         "ticketGanho": 2545745.58
       },
       {
         "m": "jul",
-        "leads": 3,
+        "leads": 7,
         "ganhos": 0,
         "perdidos": 1,
-        "ticket": 223092.12,
+        "ticket": 414731.05999999994,
         "ticketGanho": 0
       },
       {
