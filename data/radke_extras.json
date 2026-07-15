@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-07-15T06:57:42.020Z",
+  "fetched_at": "2026-07-15T17:59:43.758Z",
   "abc": {
     "rows": [
       {
@@ -11,9 +11,9 @@
         "valorFaturado": 434874.55,
         "qtdFaturada": 0.2,
         "abc": "A",
-        "pctValor": 15.421955712899047,
+        "pctValor": 14.925278393324714,
         "valorAcumulado": 434874.55,
-        "pctAcumulado": 15.421955712899047,
+        "pctAcumulado": 14.925278393324714,
         "ordem": 1
       },
       {
@@ -25,9 +25,9 @@
         "valorFaturado": 312816.53,
         "qtdFaturada": 2,
         "abc": "A",
-        "pctValor": 11.093412276995187,
+        "pctValor": 10.736139413731644,
         "valorAcumulado": 747691.0800000001,
-        "pctAcumulado": 26.515367989894234,
+        "pctAcumulado": 25.661417807056363,
         "ordem": 2
       },
       {
@@ -39,9 +39,9 @@
         "valorFaturado": 233676.14,
         "qtdFaturada": 15,
         "abc": "A",
-        "pctValor": 8.286856709000787,
+        "pctValor": 8.019971376521164,
         "valorAcumulado": 981367.2200000001,
-        "pctAcumulado": 34.802224698895024,
+        "pctAcumulado": 33.68138918357752,
         "ordem": 3
       },
       {
@@ -53,9 +53,9 @@
         "valorFaturado": 224083.48,
         "qtdFaturada": 2,
         "abc": "A",
-        "pctValor": 7.94667221742983,
+        "pctValor": 7.690742818463418,
         "valorAcumulado": 1205450.7000000002,
-        "pctAcumulado": 42.74889691632486,
+        "pctAcumulado": 41.37213200204094,
         "ordem": 4
       },
       {
@@ -67,9 +67,9 @@
         "valorFaturado": 207475.71,
         "qtdFaturada": 1,
         "abc": "A",
-        "pctValor": 7.357710887248485,
+        "pctValor": 7.120749493394599,
         "valorAcumulado": 1412926.4100000001,
-        "pctAcumulado": 50.10660780357335,
+        "pctAcumulado": 48.49288149543555,
         "ordem": 5
       },
       {
@@ -81,10 +81,24 @@
         "valorFaturado": 116563.06,
         "qtdFaturada": 470,
         "abc": "A",
-        "pctValor": 4.13367567515734,
+        "pctValor": 4.000547102325975,
         "valorAcumulado": 1529489.4700000002,
-        "pctAcumulado": 54.240283478730674,
+        "pctAcumulado": 52.49342859776153,
         "ordem": 6
+      },
+      {
+        "codigo": "",
+        "descricao": "DEFENSAS E BATE-RODAS - BATE-RODA GRANDE",
+        "marca": "",
+        "familia": "Sem Família",
+        "unidade": "",
+        "valorFaturado": 108352.58,
+        "qtdFaturada": 2,
+        "abc": "A",
+        "pctValor": 3.7187561818344803,
+        "valorAcumulado": 1637842.0500000003,
+        "pctAcumulado": 56.21218477959601,
+        "ordem": 7
       },
       {
         "codigo": "",
@@ -95,10 +109,10 @@
         "valorFaturado": 108029.28,
         "qtdFaturada": 1,
         "abc": "A",
-        "pctValor": 3.8310422439215417,
-        "valorAcumulado": 1637518.7500000002,
-        "pctAcumulado": 58.071325722652226,
-        "ordem": 7
+        "pctValor": 3.7076602404772263,
+        "valorAcumulado": 1745871.3300000003,
+        "pctAcumulado": 59.919845020073225,
+        "ordem": 8
       },
       {
         "codigo": "",
@@ -109,10 +123,10 @@
         "valorFaturado": 76205.70999999999,
         "qtdFaturada": 1,
         "abc": "A",
-        "pctValor": 2.702483014216463,
-        "valorAcumulado": 1713724.4600000002,
-        "pctAcumulado": 60.77380873686869,
-        "ordem": 8
+        "pctValor": 2.615447229346875,
+        "valorAcumulado": 1822077.0400000003,
+        "pctAcumulado": 62.5352922494201,
+        "ordem": 9
       },
       {
         "codigo": "",
@@ -123,10 +137,10 @@
         "valorFaturado": 74736.95,
         "qtdFaturada": 56,
         "abc": "A",
-        "pctValor": 2.650396379868977,
-        "valorAcumulado": 1788461.4100000001,
-        "pctAcumulado": 63.42420511673767,
-        "ordem": 9
+        "pctValor": 2.5650380897617246,
+        "valorAcumulado": 1896813.9900000002,
+        "pctAcumulado": 65.10033033918184,
+        "ordem": 10
       },
       {
         "codigo": "",
@@ -137,23 +151,9 @@
         "valorFaturado": 69244.61,
         "qtdFaturada": 1,
         "abc": "A",
-        "pctValor": 2.4556215321797206,
-        "valorAcumulado": 1857706.0200000003,
-        "pctAcumulado": 65.87982664891739,
-        "ordem": 10
-      },
-      {
-        "codigo": "",
-        "descricao": "MESA TOMBADORA DE IBC",
-        "marca": "",
-        "familia": "PROJETO ESPECIAL - SERRALHERIA",
-        "unidade": "",
-        "valorFaturado": 60920.119999999995,
-        "qtdFaturada": 6,
-        "abc": "A",
-        "pctValor": 2.160410151995548,
-        "valorAcumulado": 1918626.1400000001,
-        "pctAcumulado": 68.04023680091294,
+        "pctValor": 2.3765361332071433,
+        "valorAcumulado": 1966058.6000000003,
+        "pctAcumulado": 67.47686647238898,
         "ordem": 11
       },
       {
@@ -165,9 +165,9 @@
         "valorFaturado": 59998.58,
         "qtdFaturada": 390,
         "abc": "A",
-        "pctValor": 2.127729579937089,
-        "valorAcumulado": 1978624.7200000002,
-        "pctAcumulado": 70.16796638085002,
+        "pctValor": 2.059204222698625,
+        "valorAcumulado": 2026057.1800000004,
+        "pctAcumulado": 69.5360706950876,
         "ordem": 12
       },
       {
@@ -179,23 +179,23 @@
         "valorFaturado": 58926.08,
         "qtdFaturada": 1,
         "abc": "A",
-        "pctValor": 2.0896955135561424,
-        "valorAcumulado": 2037550.8000000003,
-        "pctAcumulado": 72.25766189440617,
+        "pctValor": 2.0223950760680833,
+        "valorAcumulado": 2084983.2600000005,
+        "pctAcumulado": 71.55846577115568,
         "ordem": 13
       },
       {
         "codigo": "",
-        "descricao": "DEFENSAS E BATE-RODAS - BATE-RODA GRANDE",
+        "descricao": "ESTRUTURA DE FECHAMENTO - DOUBLE FILTERS",
         "marca": "",
         "familia": "Sem Família",
         "unidade": "",
-        "valorFaturado": 55042.58,
-        "qtdFaturada": 1,
+        "valorFaturado": 55457.619999999995,
+        "qtdFaturada": 2,
         "abc": "A",
-        "pctValor": 1.951974957108212,
-        "valorAcumulado": 2092593.3800000004,
-        "pctAcumulado": 74.20963685151438,
+        "pctValor": 1.9033544674693252,
+        "valorAcumulado": 2140440.8800000004,
+        "pctAcumulado": 73.46182023862501,
         "ordem": 14
       },
       {
@@ -207,24 +207,38 @@
         "valorFaturado": 54820.91,
         "qtdFaturada": 63,
         "abc": "A",
-        "pctValor": 1.9441138741295036,
-        "valorAcumulado": 2147414.2900000005,
-        "pctAcumulado": 76.15375072564389,
+        "pctValor": 1.881502018284121,
+        "valorAcumulado": 2195261.7900000005,
+        "pctAcumulado": 75.34332225690915,
         "ordem": 15
       },
       {
         "codigo": "",
-        "descricao": "MESA IBC&apos;S SP3",
+        "descricao": "ESTRUTURA DE FECHAMENTO - SHUTTER AND FILTERS",
         "marca": "",
-        "familia": "PROJETO ESPECIAL - SERRALHERIA",
+        "familia": "Sem Família",
         "unidade": "",
-        "valorFaturado": 50466.979999999996,
+        "valorFaturado": 52094.36,
         "qtdFaturada": 2,
         "abc": "A",
-        "pctValor": 1.7897104590824227,
-        "valorAcumulado": 2197881.2700000005,
-        "pctAcumulado": 77.94346118472632,
+        "pctValor": 1.7879244157242113,
+        "valorAcumulado": 2247356.1500000004,
+        "pctAcumulado": 77.13124667263335,
         "ordem": 16
+      },
+      {
+        "codigo": "",
+        "descricao": "DEFENSAS E BATE-RODAS - BATE-RODA GRANDE EXTERNA ESTACIONAMENTO",
+        "marca": "",
+        "familia": "Sem Família",
+        "unidade": "",
+        "valorFaturado": 47487.33,
+        "qtdFaturada": 2,
+        "abc": "A",
+        "pctValor": 1.62980707977894,
+        "valorAcumulado": 2294843.4800000004,
+        "pctAcumulado": 78.76105375241228,
+        "ordem": 17
       },
       {
         "codigo": "",
@@ -234,11 +248,39 @@
         "unidade": "",
         "valorFaturado": 38576.27,
         "qtdFaturada": 3,
-        "abc": "A",
-        "pctValor": 1.3680302227592671,
-        "valorAcumulado": 2236457.5400000005,
-        "pctAcumulado": 79.31149140748558,
-        "ordem": 17
+        "abc": "B",
+        "pctValor": 1.3239716353280742,
+        "valorAcumulado": 2333419.7500000005,
+        "pctAcumulado": 80.08502538774036,
+        "ordem": 18
+      },
+      {
+        "codigo": "",
+        "descricao": "DEFENSAS E BATE-RODAS - BATE-RODA PEQUENA",
+        "marca": "",
+        "familia": "Sem Família",
+        "unidade": "",
+        "valorFaturado": 32215.94,
+        "qtdFaturada": 2,
+        "abc": "B",
+        "pctValor": 1.1056794958514942,
+        "valorAcumulado": 2365635.6900000004,
+        "pctAcumulado": 81.19070488359185,
+        "ordem": 19
+      },
+      {
+        "codigo": "",
+        "descricao": "MESA TOMBADORA DE IBC",
+        "marca": "",
+        "familia": "PROJETO ESPECIAL - SERRALHERIA",
+        "unidade": "",
+        "valorFaturado": 30947.12,
+        "qtdFaturada": 3,
+        "abc": "B",
+        "pctValor": 1.062132473541225,
+        "valorAcumulado": 2396582.8100000005,
+        "pctAcumulado": 82.25283735713307,
+        "ordem": 20
       },
       {
         "codigo": "",
@@ -249,10 +291,10 @@
         "valorFaturado": 30838,
         "qtdFaturada": 100,
         "abc": "B",
-        "pctValor": 1.093607961823429,
-        "valorAcumulado": 2267295.5400000005,
-        "pctAcumulado": 80.40509936930901,
-        "ordem": 18
+        "pctValor": 1.0583873788276357,
+        "valorAcumulado": 2427420.8100000005,
+        "pctAcumulado": 83.31122473596072,
+        "ordem": 21
       },
       {
         "codigo": "",
@@ -263,10 +305,10 @@
         "valorFaturado": 28732.409999999996,
         "qtdFaturada": 106,
         "abc": "B",
-        "pctValor": 1.0189374258504151,
-        "valorAcumulado": 2296027.9500000007,
-        "pctAcumulado": 81.42403679515942,
-        "ordem": 19
+        "pctValor": 0.9861216715513633,
+        "valorAcumulado": 2456153.2200000007,
+        "pctAcumulado": 84.29734640751208,
+        "ordem": 22
       },
       {
         "codigo": "",
@@ -277,38 +319,24 @@
         "valorFaturado": 28732.409999999996,
         "qtdFaturada": 106,
         "abc": "B",
-        "pctValor": 1.0189374258504151,
-        "valorAcumulado": 2324760.360000001,
-        "pctAcumulado": 82.44297422100985,
-        "ordem": 20
+        "pctValor": 0.9861216715513633,
+        "valorAcumulado": 2484885.630000001,
+        "pctAcumulado": 85.28346807906345,
+        "ordem": 23
       },
       {
         "codigo": "",
-        "descricao": "ESTRUTURA DE FECHAMENTO - DOUBLE FILTERS",
+        "descricao": "MESA IBC&apos;S SP3",
         "marca": "",
-        "familia": "Sem Família",
+        "familia": "PROJETO ESPECIAL - SERRALHERIA",
         "unidade": "",
-        "valorFaturado": 28172.199999999997,
+        "valorFaturado": 25636.98,
         "qtdFaturada": 1,
         "abc": "B",
-        "pctValor": 0.9990706992049421,
-        "valorAcumulado": 2352932.560000001,
-        "pctAcumulado": 83.4420449202148,
-        "ordem": 21
-      },
-      {
-        "codigo": "",
-        "descricao": "ESTRUTURA DE FECHAMENTO - SHUTTER AND FILTERS",
-        "marca": "",
-        "familia": "Sem Família",
-        "unidade": "",
-        "valorFaturado": 26463.68,
-        "qtdFaturada": 1,
-        "abc": "B",
-        "pctValor": 0.9384814562276231,
-        "valorAcumulado": 2379396.240000001,
-        "pctAcumulado": 84.38052637644243,
-        "ordem": 22
+        "pctValor": 0.879883781803506,
+        "valorAcumulado": 2510522.610000001,
+        "pctAcumulado": 86.16335186086695,
+        "ordem": 24
       },
       {
         "codigo": "",
@@ -319,24 +347,10 @@
         "valorFaturado": 25582.25,
         "qtdFaturada": 18,
         "abc": "B",
-        "pctValor": 0.9072233050573129,
-        "valorAcumulado": 2404978.490000001,
-        "pctAcumulado": 85.28774968149973,
-        "ordem": 23
-      },
-      {
-        "codigo": "",
-        "descricao": "DEFENSAS E BATE-RODAS - BATE-RODA GRANDE EXTERNA ESTACIONAMENTO",
-        "marca": "",
-        "familia": "Sem Família",
-        "unidade": "",
-        "valorFaturado": 24123.33,
-        "qtdFaturada": 1,
-        "abc": "B",
-        "pctValor": 0.8554856266195596,
-        "valorAcumulado": 2429101.820000001,
-        "pctAcumulado": 86.1432353081193,
-        "ordem": 24
+        "pctValor": 0.8780053998966626,
+        "valorAcumulado": 2536104.860000001,
+        "pctAcumulado": 87.04135726076362,
+        "ordem": 25
       },
       {
         "codigo": "",
@@ -347,10 +361,10 @@
         "valorFaturado": 23315.56,
         "qtdFaturada": 1,
         "abc": "B",
-        "pctValor": 0.8268396799523922,
-        "valorAcumulado": 2452417.3800000013,
-        "pctAcumulado": 86.9700749880717,
-        "ordem": 25
+        "pctValor": 0.8002105984272154,
+        "valorAcumulado": 2559420.420000001,
+        "pctAcumulado": 87.84156785919083,
+        "ordem": 26
       },
       {
         "codigo": "",
@@ -361,10 +375,10 @@
         "valorFaturado": 21900.25,
         "qtdFaturada": 570,
         "abc": "B",
-        "pctValor": 0.7766485428991358,
-        "valorAcumulado": 2474317.6300000013,
-        "pctAcumulado": 87.74672353097084,
-        "ordem": 26
+        "pctValor": 0.7516359100191298,
+        "valorAcumulado": 2581320.670000001,
+        "pctAcumulado": 88.59320376920998,
+        "ordem": 27
       },
       {
         "codigo": "",
@@ -375,10 +389,10 @@
         "valorFaturado": 20294.82,
         "qtdFaturada": 16,
         "abc": "B",
-        "pctValor": 0.719715180484252,
-        "valorAcumulado": 2494612.450000001,
-        "pctAcumulado": 88.46643871145507,
-        "ordem": 27
+        "pctValor": 0.6965361354036798,
+        "valorAcumulado": 2601615.4900000007,
+        "pctAcumulado": 89.28973990461364,
+        "ordem": 28
       },
       {
         "codigo": "",
@@ -389,23 +403,9 @@
         "valorFaturado": 16379.58,
         "qtdFaturada": 600,
         "abc": "B",
-        "pctValor": 0.580869028449439,
-        "valorAcumulado": 2510992.030000001,
-        "pctAcumulado": 89.04730773990453,
-        "ordem": 28
-      },
-      {
-        "codigo": "",
-        "descricao": "DEFENSAS E BATE-RODAS - BATE-RODA PEQUENA",
-        "marca": "",
-        "familia": "Sem Família",
-        "unidade": "",
-        "valorFaturado": 16365.539999999999,
-        "qtdFaturada": 1,
-        "abc": "B",
-        "pctValor": 0.5803711279440884,
-        "valorAcumulado": 2527357.570000001,
-        "pctAcumulado": 89.62767886784862,
+        "pctValor": 0.5621616428593801,
+        "valorAcumulado": 2617995.0700000008,
+        "pctAcumulado": 89.85190154747302,
         "ordem": 29
       },
       {
@@ -417,9 +417,9 @@
         "valorFaturado": 15281,
         "qtdFaturada": 4,
         "abc": "B",
-        "pctValor": 0.5419100870557045,
-        "valorAcumulado": 2542638.570000001,
-        "pctAcumulado": 90.16958895490431,
+        "pctValor": 0.5244574076096082,
+        "valorAcumulado": 2633276.0700000008,
+        "pctAcumulado": 90.37635895508264,
         "ordem": 30
       },
       {
@@ -431,9 +431,9 @@
         "valorFaturado": 14003.94,
         "qtdFaturada": 50,
         "abc": "B",
-        "pctValor": 0.49662170960819735,
-        "valorAcumulado": 2556642.510000001,
-        "pctAcumulado": 90.66621066451252,
+        "pctValor": 0.48062758122639204,
+        "valorAcumulado": 2647280.0100000007,
+        "pctAcumulado": 90.85698653630902,
         "ordem": 31
       },
       {
@@ -445,9 +445,9 @@
         "valorFaturado": 11827.289999999999,
         "qtdFaturada": 21,
         "abc": "B",
-        "pctValor": 0.41943117292932813,
-        "valorAcumulado": 2568469.800000001,
-        "pctAcumulado": 91.08564183744184,
+        "pctValor": 0.40592303202977836,
+        "valorAcumulado": 2659107.3000000007,
+        "pctAcumulado": 91.2629095683388,
         "ordem": 32
       },
       {
@@ -459,9 +459,9 @@
         "valorFaturado": 11736.05,
         "qtdFaturada": 7,
         "abc": "B",
-        "pctValor": 0.4161955289045286,
-        "valorAcumulado": 2580205.850000001,
-        "pctAcumulado": 91.50183736634636,
+        "pctValor": 0.4027915946977778,
+        "valorAcumulado": 2670843.3500000006,
+        "pctAcumulado": 91.66570116303657,
         "ordem": 33
       },
       {
@@ -473,9 +473,9 @@
         "valorFaturado": 11180.16,
         "qtdFaturada": 173,
         "abc": "B",
-        "pctValor": 0.3964820024145479,
-        "valorAcumulado": 2591386.010000001,
-        "pctAcumulado": 91.89831936876092,
+        "pctValor": 0.3837129592474732,
+        "valorAcumulado": 2682023.5100000007,
+        "pctAcumulado": 92.04941412228406,
         "ordem": 34
       },
       {
@@ -487,9 +487,9 @@
         "valorFaturado": 10273.89,
         "qtdFaturada": 7,
         "abc": "B",
-        "pctValor": 0.3643429503501559,
-        "valorAcumulado": 2601659.9000000013,
-        "pctAcumulado": 92.26266231911107,
+        "pctValor": 0.3526089729380458,
+        "valorAcumulado": 2692297.400000001,
+        "pctAcumulado": 92.4020230952221,
         "ordem": 35
       },
       {
@@ -501,9 +501,9 @@
         "valorFaturado": 10070.38,
         "qtdFaturada": 54,
         "abc": "B",
-        "pctValor": 0.3571258754324996,
-        "valorAcumulado": 2611730.280000001,
-        "pctAcumulado": 92.61978819454357,
+        "pctValor": 0.3456243301121423,
+        "valorAcumulado": 2702367.7800000007,
+        "pctAcumulado": 92.74764742533425,
         "ordem": 36
       },
       {
@@ -515,9 +515,9 @@
         "valorFaturado": 9711.31,
         "qtdFaturada": 171,
         "abc": "B",
-        "pctValor": 0.3443921763971556,
-        "valorAcumulado": 2621441.5900000012,
-        "pctAcumulado": 92.96418037094072,
+        "pctValor": 0.3333007307828849,
+        "valorAcumulado": 2712079.090000001,
+        "pctAcumulado": 93.08094815611713,
         "ordem": 37
       },
       {
@@ -529,9 +529,9 @@
         "valorFaturado": 8260,
         "qtdFaturada": 2,
         "abc": "B",
-        "pctValor": 0.29292437138146193,
-        "valorAcumulado": 2629701.5900000012,
-        "pctAcumulado": 93.2571047423222,
+        "pctValor": 0.2834904905997882,
+        "valorAcumulado": 2720339.090000001,
+        "pctAcumulado": 93.36443864671692,
         "ordem": 38
       },
       {
@@ -543,9 +543,9 @@
         "valorFaturado": 8024.59,
         "qtdFaturada": 8,
         "abc": "B",
-        "pctValor": 0.28457602679709026,
-        "valorAcumulado": 2637726.180000001,
-        "pctAcumulado": 93.54168076911927,
+        "pctValor": 0.27541101161769427,
+        "valorAcumulado": 2728363.6800000006,
+        "pctAcumulado": 93.63984965833461,
         "ordem": 39
       },
       {
@@ -557,9 +557,9 @@
         "valorFaturado": 7833.58,
         "qtdFaturada": 3,
         "abc": "B",
-        "pctValor": 0.2778022393663913,
-        "valorAcumulado": 2645559.760000001,
-        "pctAcumulado": 93.81948300848568,
+        "pctValor": 0.2688553798247808,
+        "valorAcumulado": 2736197.2600000007,
+        "pctAcumulado": 93.9087050381594,
         "ordem": 40
       },
       {
@@ -571,9 +571,9 @@
         "valorFaturado": 7807.35,
         "qtdFaturada": 20,
         "abc": "B",
-        "pctValor": 0.27687204490375994,
-        "valorAcumulado": 2653367.1100000013,
-        "pctAcumulado": 94.09635505338943,
+        "pctValor": 0.2679551430731546,
+        "valorAcumulado": 2744004.610000001,
+        "pctAcumulado": 94.17666018123255,
         "ordem": 41
       },
       {
@@ -585,9 +585,9 @@
         "valorFaturado": 7807.35,
         "qtdFaturada": 20,
         "abc": "B",
-        "pctValor": 0.27687204490375994,
-        "valorAcumulado": 2661174.4600000014,
-        "pctAcumulado": 94.3732270982932,
+        "pctValor": 0.2679551430731546,
+        "valorAcumulado": 2751811.960000001,
+        "pctAcumulado": 94.4446153243057,
         "ordem": 42
       },
       {
@@ -599,9 +599,9 @@
         "valorFaturado": 7619.85,
         "qtdFaturada": 1,
         "abc": "B",
-        "pctValor": 0.2702227325993986,
-        "valorAcumulado": 2668794.3100000015,
-        "pctAcumulado": 94.6434498308926,
+        "pctValor": 0.26151997757830464,
+        "valorAcumulado": 2759431.810000001,
+        "pctAcumulado": 94.706135301884,
         "ordem": 43
       },
       {
@@ -613,9 +613,9 @@
         "valorFaturado": 7508.34,
         "qtdFaturada": 17,
         "abc": "B",
-        "pctValor": 0.2662682535857489,
-        "valorAcumulado": 2676302.6500000013,
-        "pctAcumulado": 94.90971808447834,
+        "pctValor": 0.2576928559552075,
+        "valorAcumulado": 2766940.150000001,
+        "pctAcumulado": 94.96382815783922,
         "ordem": 44
       },
       {
@@ -627,9 +627,9 @@
         "valorFaturado": 7467.04,
         "qtdFaturada": 20,
         "abc": "C",
-        "pctValor": 0.2648036317288416,
-        "valorAcumulado": 2683769.6900000013,
-        "pctAcumulado": 95.17452171620718,
+        "pctValor": 0.25627540350220857,
+        "valorAcumulado": 2774407.190000001,
+        "pctAcumulado": 95.22010356134143,
         "ordem": 45
       },
       {
@@ -641,9 +641,9 @@
         "valorFaturado": 7467.04,
         "qtdFaturada": 20,
         "abc": "C",
-        "pctValor": 0.2648036317288416,
-        "valorAcumulado": 2691236.7300000014,
-        "pctAcumulado": 95.43932534793603,
+        "pctValor": 0.25627540350220857,
+        "valorAcumulado": 2781874.230000001,
+        "pctAcumulado": 95.47637896484363,
         "ordem": 46
       },
       {
@@ -655,9 +655,9 @@
         "valorFaturado": 7151.92,
         "qtdFaturada": 20,
         "abc": "C",
-        "pctValor": 0.25362853149763986,
-        "valorAcumulado": 2698388.6500000013,
-        "pctAcumulado": 95.69295387943366,
+        "pctValor": 0.245460206964944,
+        "valorAcumulado": 2789026.150000001,
+        "pctAcumulado": 95.72183917180858,
         "ordem": 47
       },
       {
@@ -669,9 +669,9 @@
         "valorFaturado": 7151.92,
         "qtdFaturada": 20,
         "abc": "C",
-        "pctValor": 0.25362853149763986,
-        "valorAcumulado": 2705540.570000001,
-        "pctAcumulado": 95.9465824109313,
+        "pctValor": 0.245460206964944,
+        "valorAcumulado": 2796178.0700000008,
+        "pctAcumulado": 95.96729937877352,
         "ordem": 48
       },
       {
@@ -683,9 +683,9 @@
         "valorFaturado": 6984.86,
         "qtdFaturada": 20,
         "abc": "C",
-        "pctValor": 0.24770408289195137,
-        "valorAcumulado": 2712525.430000001,
-        "pctAcumulado": 96.19428649382324,
+        "pctValor": 0.23972656031123935,
+        "valorAcumulado": 2803162.9300000006,
+        "pctAcumulado": 96.20702593908476,
         "ordem": 49
       },
       {
@@ -697,9 +697,9 @@
         "valorFaturado": 6984.86,
         "qtdFaturada": 20,
         "abc": "C",
-        "pctValor": 0.24770408289195137,
-        "valorAcumulado": 2719510.290000001,
-        "pctAcumulado": 96.4419905767152,
+        "pctValor": 0.23972656031123935,
+        "valorAcumulado": 2810147.7900000005,
+        "pctAcumulado": 96.44675249939598,
         "ordem": 50
       },
       {
@@ -711,9 +711,9 @@
         "valorFaturado": 6879.55,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.24396947447183248,
-        "valorAcumulado": 2726389.840000001,
-        "pctAcumulado": 96.68596005118702,
+        "pctValor": 0.23611222816050526,
+        "valorAcumulado": 2817027.3400000003,
+        "pctAcumulado": 96.68286472755648,
         "ordem": 51
       },
       {
@@ -725,9 +725,9 @@
         "valorFaturado": 6504.76,
         "qtdFaturada": 28,
         "abc": "C",
-        "pctValor": 0.23067829709289084,
-        "valorAcumulado": 2732894.6000000006,
-        "pctAcumulado": 96.9166383482799,
+        "pctValor": 0.22324910455615962,
+        "valorAcumulado": 2823532.1,
+        "pctAcumulado": 96.90611383211264,
         "ordem": 52
       },
       {
@@ -739,9 +739,9 @@
         "valorFaturado": 6244.56,
         "qtdFaturada": 8,
         "abc": "C",
-        "pctValor": 0.22145082476438524,
-        "valorAcumulado": 2739139.1600000006,
-        "pctAcumulado": 97.13808917304429,
+        "pctValor": 0.2143188108934399,
+        "valorAcumulado": 2829776.66,
+        "pctAcumulado": 97.12043264300608,
         "ordem": 53
       },
       {
@@ -753,9 +753,9 @@
         "valorFaturado": 5297.31,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.1878584990027521,
-        "valorAcumulado": 2744436.4700000007,
-        "pctAcumulado": 97.32594767204704,
+        "pctValor": 0.18180835481345817,
+        "valorAcumulado": 2835073.97,
+        "pctAcumulado": 97.30224099781954,
         "ordem": 54
       },
       {
@@ -767,9 +767,9 @@
         "valorFaturado": 4872.110000000001,
         "qtdFaturada": 4,
         "abc": "C",
-        "pctValor": 0.17277963184640857,
-        "valorAcumulado": 2749308.5800000005,
-        "pctAcumulado": 97.49872730389345,
+        "pctValor": 0.16721511551527052,
+        "valorAcumulado": 2839946.08,
+        "pctAcumulado": 97.4694561133348,
         "ordem": 55
       },
       {
@@ -781,9 +781,9 @@
         "valorFaturado": 4460.4,
         "qtdFaturada": 4,
         "abc": "C",
-        "pctValor": 0.15817916054598943,
-        "valorAcumulado": 2753768.9800000004,
-        "pctAcumulado": 97.65690646443943,
+        "pctValor": 0.15308486492388565,
+        "valorAcumulado": 2844406.48,
+        "pctAcumulado": 97.62254097825868,
         "ordem": 56
       },
       {
@@ -795,9 +795,9 @@
         "valorFaturado": 4325.5599999999995,
         "qtdFaturada": 20,
         "abc": "C",
-        "pctValor": 0.15339732976668236,
-        "valorAcumulado": 2758094.5400000005,
-        "pctAcumulado": 97.81030379420612,
+        "pctValor": 0.14845703710881597,
+        "valorAcumulado": 2848732.04,
+        "pctAcumulado": 97.77099801536751,
         "ordem": 57
       },
       {
@@ -809,9 +809,9 @@
         "valorFaturado": 4325.5599999999995,
         "qtdFaturada": 20,
         "abc": "C",
-        "pctValor": 0.15339732976668236,
-        "valorAcumulado": 2762420.1000000006,
-        "pctAcumulado": 97.9637011239728,
+        "pctValor": 0.14845703710881597,
+        "valorAcumulado": 2853057.6,
+        "pctAcumulado": 97.91945505247632,
         "ordem": 58
       },
       {
@@ -823,9 +823,9 @@
         "valorFaturado": 4292.5,
         "qtdFaturada": 27,
         "abc": "C",
-        "pctValor": 0.1522249230211774,
-        "valorAcumulado": 2766712.6000000006,
-        "pctAcumulado": 98.11592604699399,
+        "pctValor": 0.14732238872876405,
+        "valorAcumulado": 2857350.1,
+        "pctAcumulado": 98.06677744120509,
         "ordem": 59
       },
       {
@@ -837,9 +837,9 @@
         "valorFaturado": 4078.38,
         "qtdFaturada": 5,
         "abc": "C",
-        "pctValor": 0.1446315856845916,
-        "valorAcumulado": 2770790.9800000004,
-        "pctAcumulado": 98.26055763267857,
+        "pctValor": 0.13997360133805864,
+        "valorAcumulado": 2861428.48,
+        "pctAcumulado": 98.20675104254313,
         "ordem": 60
       },
       {
@@ -851,9 +851,9 @@
         "valorFaturado": 3727.33,
         "qtdFaturada": 38,
         "abc": "C",
-        "pctValor": 0.13218229990087949,
-        "valorAcumulado": 2774518.3100000005,
-        "pctAcumulado": 98.39273993257946,
+        "pctValor": 0.12792525548756764,
+        "valorAcumulado": 2865155.81,
+        "pctAcumulado": 98.33467629803071,
         "ordem": 61
       },
       {
@@ -865,9 +865,9 @@
         "valorFaturado": 3531.15,
         "qtdFaturada": 2,
         "abc": "C",
-        "pctValor": 0.125225168765575,
-        "valorAcumulado": 2778049.4600000004,
-        "pctAcumulado": 98.51796510134503,
+        "pctValor": 0.12119218473140948,
+        "valorAcumulado": 2868686.96,
+        "pctAcumulado": 98.45586848276213,
         "ordem": 62
       },
       {
@@ -879,9 +879,9 @@
         "valorFaturado": 3252.51,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.11534375873630978,
-        "valorAcumulado": 2781301.97,
-        "pctAcumulado": 98.63330886008133,
+        "pctValor": 0.11162901399282292,
+        "valorAcumulado": 2871939.4699999997,
+        "pctAcumulado": 98.56749749675492,
         "ordem": 63
       },
       {
@@ -893,10 +893,24 @@
         "valorFaturado": 3252.38,
         "qtdFaturada": 7,
         "abc": "C",
-        "pctValor": 0.11533914854644542,
-        "valorAcumulado": 2784554.35,
-        "pctAcumulado": 98.74864800862777,
+        "pctValor": 0.11162455227807981,
+        "valorAcumulado": 2875191.8499999996,
+        "pctAcumulado": 98.67912204903301,
         "ordem": 64
+      },
+      {
+        "codigo": "",
+        "descricao": "FRETE / OUTRAS DESPESAS",
+        "marca": "",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "unidade": "",
+        "valorFaturado": 3200,
+        "qtdFaturada": 0,
+        "abc": "C",
+        "pctValor": 0.10982682444543855,
+        "valorAcumulado": 2878391.8499999996,
+        "pctAcumulado": 98.78894887347846,
+        "ordem": 65
       },
       {
         "codigo": "",
@@ -907,10 +921,10 @@
         "valorFaturado": 2598.34,
         "qtdFaturada": 8,
         "abc": "C",
-        "pctValor": 0.09214492870887504,
-        "valorAcumulado": 2787152.69,
-        "pctAcumulado": 98.84079293733664,
-        "ordem": 65
+        "pctValor": 0.08917732219673775,
+        "valorAcumulado": 2880990.1899999995,
+        "pctAcumulado": 98.8781261956752,
+        "ordem": 66
       },
       {
         "codigo": "",
@@ -921,10 +935,10 @@
         "valorFaturado": 2524.4700000000003,
         "qtdFaturada": 3,
         "abc": "C",
-        "pctValor": 0.08952527697595149,
-        "valorAcumulado": 2789677.16,
-        "pctAcumulado": 98.93031821431259,
-        "ordem": 66
+        "pctValor": 0.08664203859618008,
+        "valorAcumulado": 2883514.6599999997,
+        "pctAcumulado": 98.96476823427138,
+        "ordem": 67
       },
       {
         "codigo": "",
@@ -935,10 +949,10 @@
         "valorFaturado": 2501.72,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.08871849374968896,
-        "valorAcumulado": 2792178.8800000004,
-        "pctAcumulado": 99.01903670806229,
-        "ordem": 67
+        "pctValor": 0.08586123851613829,
+        "valorAcumulado": 2886016.38,
+        "pctAcumulado": 99.0506294727875,
+        "ordem": 68
       },
       {
         "codigo": "",
@@ -949,10 +963,10 @@
         "valorFaturado": 2224.42,
         "qtdFaturada": 8,
         "abc": "C",
-        "pctValor": 0.07888460413902561,
-        "valorAcumulado": 2794403.3000000003,
-        "pctAcumulado": 99.09792131220131,
-        "ordem": 68
+        "pctValor": 0.07634405776028826,
+        "valorAcumulado": 2888240.8,
+        "pctAcumulado": 99.1269735305478,
+        "ordem": 69
       },
       {
         "codigo": "",
@@ -963,10 +977,10 @@
         "valorFaturado": 2224.42,
         "qtdFaturada": 8,
         "abc": "C",
-        "pctValor": 0.07888460413902561,
-        "valorAcumulado": 2796627.72,
-        "pctAcumulado": 99.17680591634034,
-        "ordem": 69
+        "pctValor": 0.07634405776028826,
+        "valorAcumulado": 2890465.2199999997,
+        "pctAcumulado": 99.20331758830808,
+        "ordem": 70
       },
       {
         "codigo": "",
@@ -977,10 +991,10 @@
         "valorFaturado": 2156.33,
         "qtdFaturada": 2,
         "abc": "C",
-        "pctValor": 0.07646992854007116,
-        "valorAcumulado": 2798784.0500000003,
-        "pctAcumulado": 99.2532758448804,
-        "ordem": 70
+        "pctValor": 0.07400714886138515,
+        "valorAcumulado": 2892621.55,
+        "pctAcumulado": 99.27732473716947,
+        "ordem": 71
       },
       {
         "codigo": "",
@@ -991,10 +1005,10 @@
         "valorFaturado": 2137.28,
         "qtdFaturada": 2,
         "abc": "C",
-        "pctValor": 0.07579435840994807,
-        "valorAcumulado": 2800921.33,
-        "pctAcumulado": 99.32907020329034,
-        "ordem": 71
+        "pctValor": 0.07335333604710842,
+        "valorAcumulado": 2894758.8299999996,
+        "pctAcumulado": 99.35067807321659,
+        "ordem": 72
       },
       {
         "codigo": "",
@@ -1005,10 +1019,10 @@
         "valorFaturado": 1744.51,
         "qtdFaturada": 40,
         "abc": "C",
-        "pctValor": 0.06186555630976685,
-        "valorAcumulado": 2802665.84,
-        "pctAcumulado": 99.39093575960011,
-        "ordem": 72
+        "pctValor": 0.05987312297291,
+        "valorAcumulado": 2896503.3399999994,
+        "pctAcumulado": 99.41055119618947,
+        "ordem": 73
       },
       {
         "codigo": "",
@@ -1019,10 +1033,10 @@
         "valorFaturado": 1590.1200000000001,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.05639042390085839,
-        "valorAcumulado": 2804255.96,
-        "pctAcumulado": 99.44732618350098,
-        "ordem": 73
+        "pctValor": 0.05457432190224398,
+        "valorAcumulado": 2898093.4599999995,
+        "pctAcumulado": 99.46512551809172,
+        "ordem": 74
       },
       {
         "codigo": "",
@@ -1033,10 +1047,10 @@
         "valorFaturado": 1528.1,
         "qtdFaturada": 2,
         "abc": "C",
-        "pctValor": 0.05419100870557045,
-        "valorAcumulado": 2805784.06,
-        "pctAcumulado": 99.50151719220655,
-        "ordem": 74
+        "pctValor": 0.05244574076096083,
+        "valorAcumulado": 2899621.5599999996,
+        "pctAcumulado": 99.51757125885268,
+        "ordem": 75
       },
       {
         "codigo": "",
@@ -1047,10 +1061,10 @@
         "valorFaturado": 1428.98,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.05067591624899291,
-        "valorAcumulado": 2807213.04,
-        "pctAcumulado": 99.55219310845554,
-        "ordem": 75
+        "pctValor": 0.04904385487376337,
+        "valorAcumulado": 2901050.5399999996,
+        "pctAcumulado": 99.56661511372646,
+        "ordem": 76
       },
       {
         "codigo": "",
@@ -1061,10 +1075,10 @@
         "valorFaturado": 1345.87,
         "qtdFaturada": 11,
         "abc": "C",
-        "pctValor": 0.04772858640571043,
-        "valorAcumulado": 2808558.91,
-        "pctAcumulado": 99.59992169486125,
-        "ordem": 76
+        "pctValor": 0.04619144631761949,
+        "valorAcumulado": 2902396.4099999997,
+        "pctAcumulado": 99.61280656004408,
+        "ordem": 77
       },
       {
         "codigo": "",
@@ -1075,10 +1089,10 @@
         "valorFaturado": 1345.87,
         "qtdFaturada": 11,
         "abc": "C",
-        "pctValor": 0.04772858640571043,
-        "valorAcumulado": 2809904.7800000003,
-        "pctAcumulado": 99.64765028126696,
-        "ordem": 77
+        "pctValor": 0.04619144631761949,
+        "valorAcumulado": 2903742.28,
+        "pctAcumulado": 99.6589980063617,
+        "ordem": 78
       },
       {
         "codigo": "",
@@ -1089,10 +1103,10 @@
         "valorFaturado": 1161.56,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.04119240106802069,
-        "valorAcumulado": 2811066.3400000003,
-        "pctAcumulado": 99.688842682335,
-        "ordem": 78
+        "pctValor": 0.03986576443838862,
+        "valorAcumulado": 2904903.84,
+        "pctAcumulado": 99.69886377080009,
+        "ordem": 79
       },
       {
         "codigo": "",
@@ -1103,10 +1117,10 @@
         "valorFaturado": 1120.49,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.0397359357008734,
-        "valorAcumulado": 2812186.8300000005,
-        "pctAcumulado": 99.72857861803587,
-        "ordem": 79
+        "pctValor": 0.0384562057883967,
+        "valorAcumulado": 2906024.33,
+        "pctAcumulado": 99.7373199765885,
+        "ordem": 80
       },
       {
         "codigo": "",
@@ -1117,10 +1131,10 @@
         "valorFaturado": 1109.52,
         "qtdFaturada": 54,
         "abc": "C",
-        "pctValor": 0.03934690660231957,
-        "valorAcumulado": 2813296.3500000006,
-        "pctAcumulado": 99.76792552463819,
-        "ordem": 80
+        "pctValor": 0.03807970570584468,
+        "valorAcumulado": 2907133.85,
+        "pctAcumulado": 99.77539968229433,
+        "ordem": 81
       },
       {
         "codigo": "",
@@ -1131,10 +1145,10 @@
         "valorFaturado": 1022.18,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.036249568273450695,
-        "valorAcumulado": 2814318.5300000007,
-        "pctAcumulado": 99.80417509291165,
-        "ordem": 81
+        "pctValor": 0.035082119816136986,
+        "valorAcumulado": 2908156.0300000003,
+        "pctAcumulado": 99.81048180211049,
+        "ordem": 82
       },
       {
         "codigo": "",
@@ -1145,10 +1159,10 @@
         "valorFaturado": 893.11,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.03167235899812318,
-        "valorAcumulado": 2815211.6400000006,
-        "pctAcumulado": 99.83584745190977,
-        "ordem": 82
+        "pctValor": 0.030652323493895507,
+        "valorAcumulado": 2909049.14,
+        "pctAcumulado": 99.84113412560437,
+        "ordem": 83
       },
       {
         "codigo": "",
@@ -1159,10 +1173,10 @@
         "valorFaturado": 765.9,
         "qtdFaturada": 24,
         "abc": "C",
-        "pctValor": 0.027161110900854924,
-        "valorAcumulado": 2815977.5400000005,
-        "pctAcumulado": 99.86300856281062,
-        "ordem": 83
+        "pctValor": 0.026286364013362932,
+        "valorAcumulado": 2909815.04,
+        "pctAcumulado": 99.86742048961773,
+        "ordem": 84
       },
       {
         "codigo": "",
@@ -1173,10 +1187,10 @@
         "valorFaturado": 743.73,
         "qtdFaturada": 8,
         "abc": "C",
-        "pctValor": 0.02637489621398725,
-        "valorAcumulado": 2816721.2700000005,
-        "pctAcumulado": 99.8893834590246,
-        "ordem": 84
+        "pctValor": 0.02552547004525188,
+        "valorAcumulado": 2910558.77,
+        "pctAcumulado": 99.89294595966298,
+        "ordem": 85
       },
       {
         "codigo": "",
@@ -1187,10 +1201,10 @@
         "valorFaturado": 671.13,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.023800282489738565,
-        "valorAcumulado": 2817392.4000000004,
-        "pctAcumulado": 99.91318374151435,
-        "ordem": 85
+        "pctValor": 0.02303377396564599,
+        "valorAcumulado": 2911229.9,
+        "pctAcumulado": 99.91597973362862,
+        "ordem": 86
       },
       {
         "codigo": "",
@@ -1201,10 +1215,10 @@
         "valorFaturado": 629.83,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.022335660632831256,
-        "valorAcumulado": 2818022.2300000004,
-        "pctAcumulado": 99.93551940214718,
-        "ordem": 86
+        "pctValor": 0.02161632151264705,
+        "valorAcumulado": 2911859.73,
+        "pctAcumulado": 99.93759605514127,
+        "ordem": 87
       },
       {
         "codigo": "",
@@ -1215,10 +1229,10 @@
         "valorFaturado": 627.76,
         "qtdFaturada": 2,
         "abc": "C",
-        "pctValor": 0.022262252224991105,
-        "valorAcumulado": 2818649.99,
-        "pctAcumulado": 99.95778165437216,
-        "ordem": 87
+        "pctValor": 0.021545277285583905,
+        "valorAcumulado": 2912487.4899999998,
+        "pctAcumulado": 99.95914133242685,
+        "ordem": 88
       },
       {
         "codigo": "",
@@ -1229,10 +1243,10 @@
         "valorFaturado": 505.93,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.017941795062109325,
-        "valorAcumulado": 2819155.9200000004,
-        "pctAcumulado": 99.97572344943427,
-        "ordem": 88
+        "pctValor": 0.017363964153650227,
+        "valorAcumulado": 2912993.42,
+        "pctAcumulado": 99.97650529658051,
+        "ordem": 89
       },
       {
         "codigo": "",
@@ -1243,10 +1257,10 @@
         "valorFaturado": 485.64,
         "qtdFaturada": 76,
         "abc": "C",
-        "pctValor": 0.017222250813280042,
-        "valorAcumulado": 2819641.5600000005,
-        "pctAcumulado": 99.99294570024756,
-        "ordem": 89
+        "pctValor": 0.016667593444900868,
+        "valorAcumulado": 2913479.06,
+        "pctAcumulado": 99.99317289002542,
+        "ordem": 90
       },
       {
         "codigo": "",
@@ -1257,30 +1271,30 @@
         "valorFaturado": 198.92,
         "qtdFaturada": 1,
         "abc": "C",
-        "pctValor": 0.00705429975244557,
-        "valorAcumulado": 2819840.4800000004,
+        "pctValor": 0.006827109974589573,
+        "valorAcumulado": 2913677.98,
         "pctAcumulado": 100,
-        "ordem": 90
+        "ordem": 91
       }
     ],
     "counts": {
       "A": 17,
       "B": 27,
-      "C": 46
+      "C": 47
     },
-    "total": 90
+    "total": 91
   },
   "faturamento": {
     "porFamilia": [
       {
-        "name": "PROJETO ESPECIAL - SERRALHERIA",
-        "value": 1102033.53,
-        "qtd": 25
+        "name": "Sem Família",
+        "value": 1150307.1700000002,
+        "qtd": 50.2
       },
       {
-        "name": "Sem Família",
-        "value": 1004866.6700000002,
-        "qtd": 45.2
+        "name": "PROJETO ESPECIAL - SERRALHERIA",
+        "value": 1047230.53,
+        "qtd": 21
       },
       {
         "name": "COMERCIAL",
@@ -1331,17 +1345,22 @@
         "name": "FIXADORES",
         "value": 3738.15,
         "qtd": 77
+      },
+      {
+        "name": "FRETE / OUTRAS DESPESAS",
+        "value": 3200,
+        "qtd": 0
       }
     ],
     "porVendedor": [
       {
         "name": "Sem Vendedor",
-        "value": 1464342.9100000006,
-        "qtd": 518
+        "value": 1554980.4100000004,
+        "qtd": 519
       },
       {
         "name": "DIOGO ALMEIDA",
-        "value": 1162350.34,
+        "value": 1164350.34,
         "qtd": 2386.2
       },
       {
@@ -1361,15 +1380,15 @@
       },
       {
         "name": "NISS SALES",
-        "value": 11389.789999999999,
+        "value": 12589.789999999999,
         "qtd": 56
       }
     ],
     "porCliente": [
       {
         "name": "FITESA NAOTECIDOS S/A",
-        "value": 1655548.3200000008,
-        "qtd": 51
+        "value": 1746185.8200000005,
+        "qtd": 52
       },
       {
         "name": "CARREFOUR COMERCIO E INDUSTRIA LTDA",
@@ -1378,12 +1397,12 @@
       },
       {
         "name": "BERTOLINI S/A",
-        "value": 311390.94999999995,
+        "value": 311890.94999999995,
         "qtd": 1894
       },
       {
         "name": "CD SUL LOGISTICA LTDA",
-        "value": 185499.99,
+        "value": 186999.99,
         "qtd": 355
       },
       {
@@ -1408,7 +1427,7 @@
       },
       {
         "name": "COMFRIO SOLUCOES LOGISTICAS S/A",
-        "value": 11389.789999999999,
+        "value": 12589.789999999999,
         "qtd": 56
       },
       {
@@ -1450,18 +1469,18 @@
       },
       {
         "m": "mar",
-        "valor": 482458.77,
+        "valor": 483658.77,
         "qtd": 765
       },
       {
         "m": "abr",
-        "valor": 209083.33,
-        "qtd": 408
+        "valor": 356023.82999999996,
+        "qtd": 413
       },
       {
         "m": "mai",
-        "valor": 550818.6399999999,
-        "qtd": 673
+        "valor": 496515.64000000013,
+        "qtd": 669
       },
       {
         "m": "jun",
@@ -1531,6 +1550,11 @@
         "qtd": 470
       },
       {
+        "name": "Sem Família ▸ DEFENSAS E BATE-RODAS - BATE-RODA GRANDE",
+        "value": 108352.58,
+        "qtd": 2
+      },
+      {
         "name": "PROJETO ESPECIAL - SERRALHERIA ▸ DESCARREGADORES DE BIG BAG",
         "value": 108029.28,
         "qtd": 1
@@ -1551,11 +1575,6 @@
         "qtd": 1
       },
       {
-        "name": "PROJETO ESPECIAL - SERRALHERIA ▸ MESA TOMBADORA DE IBC",
-        "value": 60920.119999999995,
-        "qtd": 6
-      },
-      {
         "name": "PROJETO ESPECIAL - NIVELAMENTO PISO ▸ RADKE COLUNA SIMPLES - 150",
         "value": 59998.58,
         "qtd": 390
@@ -1566,9 +1585,9 @@
         "qtd": 1
       },
       {
-        "name": "Sem Família ▸ DEFENSAS E BATE-RODAS - BATE-RODA GRANDE",
-        "value": 55042.58,
-        "qtd": 1
+        "name": "Sem Família ▸ ESTRUTURA DE FECHAMENTO - DOUBLE FILTERS",
+        "value": 55457.619999999995,
+        "qtd": 2
       },
       {
         "name": "COMERCIAL ▸ RADKE COLUNA SIMPLES - 1200",
@@ -1576,13 +1595,28 @@
         "qtd": 63
       },
       {
-        "name": "PROJETO ESPECIAL - SERRALHERIA ▸ MESA IBC&apos;S SP3",
-        "value": 50466.979999999996,
+        "name": "Sem Família ▸ ESTRUTURA DE FECHAMENTO - SHUTTER AND FILTERS",
+        "value": 52094.36,
+        "qtd": 2
+      },
+      {
+        "name": "Sem Família ▸ DEFENSAS E BATE-RODAS - BATE-RODA GRANDE EXTERNA ESTACIONAMENTO",
+        "value": 47487.33,
         "qtd": 2
       },
       {
         "name": "PROJETO ESPECIAL - SERRALHERIA ▸ MOEGA SC SP3",
         "value": 38576.27,
+        "qtd": 3
+      },
+      {
+        "name": "Sem Família ▸ DEFENSAS E BATE-RODAS - BATE-RODA PEQUENA",
+        "value": 32215.94,
+        "qtd": 2
+      },
+      {
+        "name": "PROJETO ESPECIAL - SERRALHERIA ▸ MESA TOMBADORA DE IBC",
+        "value": 30947.12,
         "qtd": 3
       },
       {
@@ -1601,24 +1635,14 @@
         "qtd": 106
       },
       {
-        "name": "Sem Família ▸ ESTRUTURA DE FECHAMENTO - DOUBLE FILTERS",
-        "value": 28172.199999999997,
-        "qtd": 1
-      },
-      {
-        "name": "Sem Família ▸ ESTRUTURA DE FECHAMENTO - SHUTTER AND FILTERS",
-        "value": 26463.68,
+        "name": "PROJETO ESPECIAL - SERRALHERIA ▸ MESA IBC&apos;S SP3",
+        "value": 25636.98,
         "qtd": 1
       },
       {
         "name": "COMERCIAL ▸ RADKE COLUNA DUPLA - 700",
         "value": 25582.25,
         "qtd": 18
-      },
-      {
-        "name": "Sem Família ▸ DEFENSAS E BATE-RODAS - BATE-RODA GRANDE EXTERNA ESTACIONAMENTO",
-        "value": 24123.33,
-        "qtd": 1
       },
       {
         "name": "Sem Família ▸ GRADIS DE PISO",
@@ -1639,11 +1663,6 @@
         "name": "TRILHO GUIA - DRIVE IN ▸ TRILHO GUIA  - TRAVESSA",
         "value": 16379.58,
         "qtd": 600
-      },
-      {
-        "name": "Sem Família ▸ DEFENSAS E BATE-RODAS - BATE-RODA PEQUENA",
-        "value": 16365.539999999999,
-        "qtd": 1
       },
       {
         "name": "PROJETO ESPECIAL - SERRALHERIA ▸ EXTENSÃO DE DOCA",
@@ -1819,6 +1838,11 @@
         "name": "COMERCIAL ▸ RADKE COLUNA SIMPLES - 300",
         "value": 3252.38,
         "qtd": 7
+      },
+      {
+        "name": "FRETE / OUTRAS DESPESAS ▸ FRETE / OUTRAS DESPESAS",
+        "value": 3200,
+        "qtd": 0
       },
       {
         "name": "PROTETORES ▸ BARRA P/ PROTETOR DE MONTANTE 1200mm (Par)",
@@ -2061,6 +2085,24 @@
         ]
       },
       {
+        "nome": "DEFENSAS E BATE-RODAS - BATE-RODA GRANDE",
+        "total": 108352.58,
+        "meses": [
+          0,
+          0,
+          55042.58,
+          53310,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
         "nome": "DESCARREGADORES DE BIG BAG",
         "total": 108029.28,
         "meses": [
@@ -2133,24 +2175,6 @@
         ]
       },
       {
-        "nome": "MESA TOMBADORA DE IBC",
-        "total": 60920.119999999995,
-        "meses": [
-          0,
-          0,
-          30947.12,
-          0,
-          29973,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ]
-      },
-      {
         "nome": "RADKE COLUNA SIMPLES - 150",
         "total": 59998.58,
         "meses": [
@@ -2170,14 +2194,14 @@
       }
     ],
     "totais": {
-      "totalValor": 2819840.48,
-      "totalQtd": 3650.2,
-      "numItens": 132,
-      "numNFs": 39,
+      "totalValor": 2913677.979999999,
+      "totalQtd": 3651.2,
+      "numItens": 138,
+      "numNFs": 40,
       "numClientes": 14,
-      "numProdutos": 90,
+      "numProdutos": 91,
       "anoRef": 2026,
-      "ticketMedio": 72303.60205128205
+      "ticketMedio": 72841.94949999997
     },
     "items": [
       {
@@ -2400,6 +2424,23 @@
         "valorSemIPI": 1081.5,
         "ipi": 38.99,
         "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "629",
+        "dataEmissao": "24/03/2026",
+        "mes": 2,
+        "ano": 2026,
+        "cliente": "COMFRIO SOLUCOES LOGISTICAS S/A",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "NISS SALES",
+        "qtd": 0,
+        "valor": 1200,
+        "valorSemIPI": 1200,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -3407,23 +3448,6 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
-        "nf": "703",
-        "dataEmissao": "29/05/2026",
-        "mes": 4,
-        "ano": 2026,
-        "cliente": "FITESA NAOTECIDOS S/A",
-        "produto": "MESA TOMBADORA DE IBC",
-        "familia": "PROJETO ESPECIAL - SERRALHERIA",
-        "vendedor": "Sem Vendedor",
-        "qtd": 3,
-        "valor": 29973,
-        "valorSemIPI": 29973,
-        "ipi": 0,
-        "cfop": "6101"
-      },
-      {
-        "operacao": "PEDIDO",
-        "situacao": "Autorizado",
         "nf": "707",
         "dataEmissao": "11/03/2026",
         "mes": 2,
@@ -3645,6 +3669,40 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "732",
+        "dataEmissao": "13/04/2026",
+        "mes": 3,
+        "ano": 2026,
+        "cliente": "FITESA NAOTECIDOS S/A",
+        "produto": "DEFENSAS E BATE-RODAS - BATE-RODA GRANDE",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 53310,
+        "valorSemIPI": 53310,
+        "ipi": 0,
+        "cfop": "6116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "732",
+        "dataEmissao": "13/04/2026",
+        "mes": 3,
+        "ano": 2026,
+        "cliente": "FITESA NAOTECIDOS S/A",
+        "produto": "DEFENSAS E BATE-RODAS - BATE-RODA GRANDE EXTERNA ESTACIONAMENTO",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 23364,
+        "valorSemIPI": 23364,
+        "ipi": 0,
+        "cfop": "6116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "733",
         "dataEmissao": "27/04/2026",
         "mes": 3,
@@ -3658,6 +3716,57 @@
         "valorSemIPI": 4804,
         "ipi": 156.13,
         "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "734",
+        "dataEmissao": "10/04/2026",
+        "mes": 3,
+        "ano": 2026,
+        "cliente": "FITESA NAOTECIDOS S/A",
+        "produto": "DEFENSAS E BATE-RODAS - BATE-RODA PEQUENA",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 15850.4,
+        "valorSemIPI": 15850.4,
+        "ipi": 0,
+        "cfop": "6116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "735",
+        "dataEmissao": "10/04/2026",
+        "mes": 3,
+        "ano": 2026,
+        "cliente": "FITESA NAOTECIDOS S/A",
+        "produto": "ESTRUTURA DE FECHAMENTO - SHUTTER AND FILTERS",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 25630.68,
+        "valorSemIPI": 25630.68,
+        "ipi": 0,
+        "cfop": "6116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "735",
+        "dataEmissao": "10/04/2026",
+        "mes": 3,
+        "ano": 2026,
+        "cliente": "FITESA NAOTECIDOS S/A",
+        "produto": "ESTRUTURA DE FECHAMENTO - DOUBLE FILTERS",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 27285.42,
+        "valorSemIPI": 27285.42,
+        "ipi": 0,
+        "cfop": "6116"
       },
       {
         "operacao": "PEDIDO",
@@ -3815,19 +3924,19 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
-        "nf": "758",
-        "dataEmissao": "08/05/2026",
-        "mes": 4,
+        "nf": "739",
+        "dataEmissao": "16/04/2026",
+        "mes": 3,
         "ano": 2026,
-        "cliente": "FITESA NAOTECIDOS S/A",
-        "produto": "MESA IBC&apos;S SP3",
-        "familia": "PROJETO ESPECIAL - SERRALHERIA",
-        "vendedor": "Sem Vendedor",
-        "qtd": 1,
-        "valor": 24830,
-        "valorSemIPI": 24830,
+        "cliente": "CD SUL LOGISTICA LTDA",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "DIOGO ALMEIDA",
+        "qtd": 0,
+        "valor": 1500,
+        "valorSemIPI": 1500,
         "ipi": 0,
-        "cfop": "6101"
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -4049,6 +4158,23 @@
         "valorSemIPI": 10812.5,
         "ipi": 367.66,
         "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "764",
+        "dataEmissao": "28/05/2026",
+        "mes": 4,
+        "ano": 2026,
+        "cliente": "BERTOLINI S/A",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "DIOGO ALMEIDA",
+        "qtd": 0,
+        "valor": 500,
+        "valorSemIPI": 500,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -5704,6 +5830,244 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "55",
+        "dataEmissao": "24/05/2022",
+        "mes": 4,
+        "ano": 2022,
+        "cliente": "SCHUMACHER INDUSTRIAL LTDA",
+        "produto": "SISTEMA DE LINHA DE VIDA - HORIZONTAL",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 31200,
+        "valorSemIPI": 31200,
+        "ipi": 0,
+        "cfop": "5116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "55",
+        "dataEmissao": "24/05/2022",
+        "mes": 4,
+        "ano": 2022,
+        "cliente": "SCHUMACHER INDUSTRIAL LTDA",
+        "produto": "ESCADA DE MARINHEIRO",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 18900,
+        "valorSemIPI": 18900,
+        "ipi": 0,
+        "cfop": "5116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "55",
+        "dataEmissao": "24/05/2022",
+        "mes": 4,
+        "ano": 2022,
+        "cliente": "SCHUMACHER INDUSTRIAL LTDA",
+        "produto": "SISTEMA DE LINHA DE VIDA - INSTALAÇÃO",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 4800,
+        "valorSemIPI": 4800,
+        "ipi": 0,
+        "cfop": "5116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "55",
+        "dataEmissao": "24/05/2022",
+        "mes": 4,
+        "ano": 2022,
+        "cliente": "SCHUMACHER INDUSTRIAL LTDA",
+        "produto": "ESCADA DE MARINHEIRO",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 16250,
+        "valorSemIPI": 16250,
+        "ipi": 0,
+        "cfop": "5116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "55",
+        "dataEmissao": "24/05/2022",
+        "mes": 4,
+        "ano": 2022,
+        "cliente": "SCHUMACHER INDUSTRIAL LTDA",
+        "produto": "ESCADA DE MARINHEIRO",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 4500,
+        "valorSemIPI": 4500,
+        "ipi": 0,
+        "cfop": "5116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "55",
+        "dataEmissao": "24/05/2022",
+        "mes": 4,
+        "ano": 2022,
+        "cliente": "SCHUMACHER INDUSTRIAL LTDA",
+        "produto": "SISTEMA DE LINHA DE VIDA - HORIZONTAL",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 10400,
+        "valorSemIPI": 10400,
+        "ipi": 0,
+        "cfop": "5116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "55",
+        "dataEmissao": "24/05/2022",
+        "mes": 4,
+        "ano": 2022,
+        "cliente": "SCHUMACHER INDUSTRIAL LTDA",
+        "produto": "SISTEMA DE LINHA DE VIDA - INSTALAÇÃO",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 440,
+        "valorSemIPI": 440,
+        "ipi": 0,
+        "cfop": "5116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "55",
+        "dataEmissao": "24/05/2022",
+        "mes": 4,
+        "ano": 2022,
+        "cliente": "SCHUMACHER INDUSTRIAL LTDA",
+        "produto": "SISTEMA DE LINHA DE VIDA - HORIZONTAL",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 23400,
+        "valorSemIPI": 23400,
+        "ipi": 0,
+        "cfop": "5116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "55",
+        "dataEmissao": "24/05/2022",
+        "mes": 4,
+        "ano": 2022,
+        "cliente": "SCHUMACHER INDUSTRIAL LTDA",
+        "produto": "SISTEMA DE LINHA DE VIDA - INSTALAÇÃO",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 3600,
+        "valorSemIPI": 3600,
+        "ipi": 0,
+        "cfop": "5116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "55",
+        "dataEmissao": "24/05/2022",
+        "mes": 4,
+        "ano": 2022,
+        "cliente": "SCHUMACHER INDUSTRIAL LTDA",
+        "produto": "SISTEMA DE LINHA DE VIDA - INSTALAÇÃO",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 1600,
+        "valorSemIPI": 1600,
+        "ipi": 0,
+        "cfop": "5116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "55",
+        "dataEmissao": "24/05/2022",
+        "mes": 4,
+        "ano": 2022,
+        "cliente": "SCHUMACHER INDUSTRIAL LTDA",
+        "produto": "SISTEMA DE LINHA DE VIDA - INSTALAÇÃO",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 240,
+        "valorSemIPI": 240,
+        "ipi": 0,
+        "cfop": "5116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "55",
+        "dataEmissao": "24/05/2022",
+        "mes": 4,
+        "ano": 2022,
+        "cliente": "SCHUMACHER INDUSTRIAL LTDA",
+        "produto": "SISTEMA DE LINHA DE VIDA - HORIZONTAL",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 1560,
+        "valorSemIPI": 1560,
+        "ipi": 0,
+        "cfop": "5116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "55",
+        "dataEmissao": "24/05/2022",
+        "mes": 4,
+        "ano": 2022,
+        "cliente": "SCHUMACHER INDUSTRIAL LTDA",
+        "produto": "SISTEMA DE LINHA DE VIDA - HORIZONTAL",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 2860,
+        "valorSemIPI": 2860,
+        "ipi": 0,
+        "cfop": "5116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "55",
+        "dataEmissao": "24/05/2022",
+        "mes": 4,
+        "ano": 2022,
+        "cliente": "SCHUMACHER INDUSTRIAL LTDA",
+        "produto": "ESCADA DE MARINHEIRO",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 4500,
+        "valorSemIPI": 4500,
+        "ipi": 0,
+        "cfop": "5116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "56",
         "dataEmissao": "28/06/2022",
         "mes": 5,
@@ -6588,6 +6952,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "95",
+        "dataEmissao": "26/12/2023",
+        "mes": 11,
+        "ano": 2023,
+        "cliente": "BR COLD CASCAVEL ARMAZENAGEM FRIGORIFICADA LTDA",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "Sem Vendedor",
+        "qtd": 0,
+        "valor": 10794.19,
+        "valorSemIPI": 10794.19,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "99",
         "dataEmissao": "19/01/2024",
         "mes": 0,
@@ -7013,6 +7394,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "126",
+        "dataEmissao": "26/04/2024",
+        "mes": 3,
+        "ano": 2024,
+        "cliente": "SUPERFRIO ARMAZENS GERAIS S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "RODRIGO",
+        "qtd": 0,
+        "valor": 4801.94,
+        "valorSemIPI": 4801.94,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "127",
         "dataEmissao": "26/04/2024",
         "mes": 3,
@@ -7132,6 +7530,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "127",
+        "dataEmissao": "26/04/2024",
+        "mes": 3,
+        "ano": 2024,
+        "cliente": "SUPERFRIO ARMAZENS GERAIS S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "Sem Vendedor",
+        "qtd": 0,
+        "valor": 4801.94,
+        "valorSemIPI": 4801.94,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "128",
         "dataEmissao": "01/04/2024",
         "mes": 3,
@@ -7230,6 +7645,23 @@
         "valorSemIPI": 592,
         "ipi": 20,
         "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "128",
+        "dataEmissao": "01/04/2024",
+        "mes": 3,
+        "ano": 2024,
+        "cliente": "MOINHO CATARINENSE S A",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "PAULO VALE",
+        "qtd": 0,
+        "valor": 1524,
+        "valorSemIPI": 1524,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -9138,6 +9570,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "171",
+        "dataEmissao": "29/04/2024",
+        "mes": 3,
+        "ano": 2024,
+        "cliente": "MOINHO CATARINENSE S A",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "PAULO VALE",
+        "qtd": 0,
+        "valor": 1524,
+        "valorSemIPI": 1524,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "108",
         "dataEmissao": "22/05/2024",
         "mes": 4,
@@ -9886,6 +10335,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "224",
+        "dataEmissao": "13/12/2024",
+        "mes": 11,
+        "ano": 2024,
+        "cliente": "SUPERFRIO ARMAZENS GERAIS S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "Sem Vendedor",
+        "qtd": 0,
+        "valor": 350,
+        "valorSemIPI": 350,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "225",
         "dataEmissao": "13/12/2024",
         "mes": 11,
@@ -9950,6 +10416,23 @@
         "valorSemIPI": 976.5,
         "ipi": 32.73,
         "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "225",
+        "dataEmissao": "13/12/2024",
+        "mes": 11,
+        "ano": 2024,
+        "cliente": "SUPERFRIO ARMAZENS GERAIS S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "Sem Vendedor",
+        "qtd": 0,
+        "valor": 300,
+        "valorSemIPI": 300,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -10273,6 +10756,23 @@
         "valorSemIPI": 1468,
         "ipi": 53.19,
         "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "260",
+        "dataEmissao": "08/07/2025",
+        "mes": 6,
+        "ano": 2025,
+        "cliente": "SUPERFRIO ARMAZENS GERAIS S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "RODRIGO",
+        "qtd": 0,
+        "valor": 1500,
+        "valorSemIPI": 1500,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -10617,6 +11117,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "312",
+        "dataEmissao": "19/02/2025",
+        "mes": 1,
+        "ano": 2025,
+        "cliente": "SUPERFRIO ARMAZENS GERAIS S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "Sem Vendedor",
+        "qtd": 0,
+        "valor": 2000,
+        "valorSemIPI": 2000,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "316",
         "dataEmissao": "29/11/2024",
         "mes": 10,
@@ -10800,6 +11317,23 @@
         "valorSemIPI": 1435.5,
         "ipi": 50.25,
         "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "336",
+        "dataEmissao": "13/03/2025",
+        "mes": 2,
+        "ano": 2025,
+        "cliente": "MULTITECNICA INDUSTRIAL S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "GIOVANNI LABBATE",
+        "qtd": 0,
+        "valor": 242.52,
+        "valorSemIPI": 242.52,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -11076,6 +11610,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "353",
+        "dataEmissao": "01/05/2025",
+        "mes": 4,
+        "ano": 2025,
+        "cliente": "SUPERFRIO ARMAZENS GERAIS S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "RODRIGO",
+        "qtd": 0,
+        "valor": 5000,
+        "valorSemIPI": 5000,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "359",
         "dataEmissao": "01/04/2025",
         "mes": 3,
@@ -11191,6 +11742,23 @@
         "valorSemIPI": 1395,
         "ipi": 51.53,
         "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "362",
+        "dataEmissao": "08/07/2025",
+        "mes": 6,
+        "ano": 2025,
+        "cliente": "SUPERFRIO ARMAZENS GERAIS S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "RODRIGO",
+        "qtd": 0,
+        "valor": 3500,
+        "valorSemIPI": 3500,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -11314,6 +11882,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "363",
+        "dataEmissao": "08/07/2025",
+        "mes": 6,
+        "ano": 2025,
+        "cliente": "SUPERFRIO ARMAZENS GERAIS S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "RODRIGO",
+        "qtd": 0,
+        "valor": 4500,
+        "valorSemIPI": 4500,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "364",
         "dataEmissao": "08/07/2025",
         "mes": 6,
@@ -11382,6 +11967,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "364",
+        "dataEmissao": "08/07/2025",
+        "mes": 6,
+        "ano": 2025,
+        "cliente": "SUPERFRIO ARMAZENS GERAIS S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "RODRIGO",
+        "qtd": 0,
+        "valor": 1350,
+        "valorSemIPI": 1350,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "366",
         "dataEmissao": "26/03/2025",
         "mes": 2,
@@ -11429,6 +12031,23 @@
         "valorSemIPI": 13860,
         "ipi": 465.23,
         "cfop": "5101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "376",
+        "dataEmissao": "12/08/2025",
+        "mes": 7,
+        "ano": 2025,
+        "cliente": "SAF-HOLLAND DO BRASIL INDUSTRIA E PRODUCAO DE EIXOS E EQUIPA",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "ARCETEC CONSULTORIA E REPRESENTAÇÃO LTDA",
+        "qtd": 0,
+        "valor": 800,
+        "valorSemIPI": 800,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -11582,6 +12201,23 @@
         "valorSemIPI": 1507,
         "ipi": 50.62,
         "cfop": "5101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "397",
+        "dataEmissao": "09/04/2025",
+        "mes": 3,
+        "ano": 2025,
+        "cliente": "RAIA DROGASIL S/A",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "RODRIGO",
+        "qtd": 0,
+        "valor": 150,
+        "valorSemIPI": 150,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -11790,6 +12426,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "402",
+        "dataEmissao": "08/07/2025",
+        "mes": 6,
+        "ano": 2025,
+        "cliente": "SUPERFRIO ARMAZENS GERAIS S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "Sem Vendedor",
+        "qtd": 0,
+        "valor": 1300,
+        "valorSemIPI": 1300,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "414",
         "dataEmissao": "10/06/2025",
         "mes": 5,
@@ -11820,6 +12473,23 @@
         "valorSemIPI": 1160,
         "ipi": 40.12,
         "cfop": "5101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "414",
+        "dataEmissao": "10/06/2025",
+        "mes": 5,
+        "ano": 2025,
+        "cliente": "SAF-HOLLAND DO BRASIL INDUSTRIA E PRODUCAO DE EIXOS E EQUIPA",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "ARCETEC CONSULTORIA E REPRESENTAÇÃO LTDA",
+        "qtd": 0,
+        "valor": 200,
+        "valorSemIPI": 200,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -11888,6 +12558,23 @@
         "valorSemIPI": 1507,
         "ipi": 50.62,
         "cfop": "5101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "416",
+        "dataEmissao": "20/03/2025",
+        "mes": 2,
+        "ano": 2025,
+        "cliente": "RAIA DROGASIL S/A",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "RODRIGO",
+        "qtd": 0,
+        "valor": 150,
+        "valorSemIPI": 150,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -12249,6 +12936,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "423",
+        "dataEmissao": "20/06/2025",
+        "mes": 5,
+        "ano": 2025,
+        "cliente": "BR COLD CASCAVEL ARMAZENAGEM FRIGORIFICADA LTDA",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "RODRIGO",
+        "qtd": 0,
+        "valor": 6500,
+        "valorSemIPI": 6500,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "429",
         "dataEmissao": "17/04/2025",
         "mes": 3,
@@ -12330,6 +13034,23 @@
         "valorSemIPI": 4672.8,
         "ipi": 170.13,
         "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "432",
+        "dataEmissao": "25/09/2025",
+        "mes": 8,
+        "ano": 2025,
+        "cliente": "SUPERFRIO ARMAZENS GERAIS S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "Sem Vendedor",
+        "qtd": 0,
+        "valor": 800,
+        "valorSemIPI": 800,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -12521,6 +13242,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "433",
+        "dataEmissao": "25/09/2025",
+        "mes": 8,
+        "ano": 2025,
+        "cliente": "TAC LOGISTICA LTDA",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "Sem Vendedor",
+        "qtd": 0,
+        "valor": 133.3,
+        "valorSemIPI": 133.3,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "434",
         "dataEmissao": "14/04/2025",
         "mes": 3,
@@ -12657,6 +13395,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "434",
+        "dataEmissao": "14/04/2025",
+        "mes": 3,
+        "ano": 2025,
+        "cliente": "SUPERFRIO ARMAZENS GERAIS S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "Sem Vendedor",
+        "qtd": 0,
+        "valor": 285.93,
+        "valorSemIPI": 285.93,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "435",
         "dataEmissao": "25/09/2025",
         "mes": 8,
@@ -12721,6 +13476,23 @@
         "valorSemIPI": 1690,
         "ipi": 55.41,
         "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "435",
+        "dataEmissao": "25/09/2025",
+        "mes": 8,
+        "ano": 2025,
+        "cliente": "TAC LOGISTICA LTDA",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "Sem Vendedor",
+        "qtd": 0,
+        "valor": 201.4,
+        "valorSemIPI": 201.4,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -13320,6 +14092,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "457",
+        "dataEmissao": "24/09/2025",
+        "mes": 8,
+        "ano": 2025,
+        "cliente": "INDUSTRIA DE PLASTICOS HERC LTDA",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "RODRIGO",
+        "qtd": 0,
+        "valor": 240,
+        "valorSemIPI": 240,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "458",
         "dataEmissao": "24/06/2025",
         "mes": 5,
@@ -13333,6 +14122,23 @@
         "valorSemIPI": 4743.12,
         "ipi": 157.08,
         "cfop": "5101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "458",
+        "dataEmissao": "24/06/2025",
+        "mes": 5,
+        "ano": 2025,
+        "cliente": "INDUSTRIA DE PLASTICOS HERC LTDA",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "RODRIGO",
+        "qtd": 0,
+        "valor": 90,
+        "valorSemIPI": 90,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -13354,6 +14160,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "459",
+        "dataEmissao": "24/06/2025",
+        "mes": 5,
+        "ano": 2025,
+        "cliente": "INDUSTRIA DE PLASTICOS HERC LTDA",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "RODRIGO",
+        "qtd": 0,
+        "valor": 90,
+        "valorSemIPI": 90,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "460",
         "dataEmissao": "10/07/2025",
         "mes": 6,
@@ -13367,6 +14190,23 @@
         "valorSemIPI": 4743.12,
         "ipi": 156.75,
         "cfop": "5101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "460",
+        "dataEmissao": "10/07/2025",
+        "mes": 6,
+        "ano": 2025,
+        "cliente": "INDUSTRIA DE PLASTICOS HERC LTDA",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "RODRIGO",
+        "qtd": 0,
+        "valor": 80,
+        "valorSemIPI": 80,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -14272,6 +15112,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "546",
+        "dataEmissao": "31/10/2025",
+        "mes": 9,
+        "ano": 2025,
+        "cliente": "PROMA BRASIL AUTOMOTIVA LTDA",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "GIOVANNI LABBATE",
+        "qtd": 0,
+        "valor": 770,
+        "valorSemIPI": 770,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "549",
         "dataEmissao": "22/10/2025",
         "mes": 9,
@@ -14578,6 +15435,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "549",
+        "dataEmissao": "22/10/2025",
+        "mes": 9,
+        "ano": 2025,
+        "cliente": "OESA COMERCIO E REPRESENTACOES S/A",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "CARLOS POTERALA",
+        "qtd": 0,
+        "valor": 6000,
+        "valorSemIPI": 6000,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "550",
         "dataEmissao": "03/10/2025",
         "mes": 9,
@@ -14612,6 +15486,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "554",
+        "dataEmissao": "14/11/2025",
+        "mes": 10,
+        "ano": 2025,
+        "cliente": "TMD FRICTION DO BRASIL S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "NISS SALES",
+        "qtd": 0,
+        "valor": 2700,
+        "valorSemIPI": 2700,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "555",
         "dataEmissao": "14/11/2025",
         "mes": 10,
@@ -14625,6 +15516,23 @@
         "valorSemIPI": 4755,
         "ipi": 175.13,
         "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "555",
+        "dataEmissao": "14/11/2025",
+        "mes": 10,
+        "ano": 2025,
+        "cliente": "TMD FRICTION DO BRASIL S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "NISS SALES",
+        "qtd": 0,
+        "valor": 633.57,
+        "valorSemIPI": 633.57,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -14646,6 +15554,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "556",
+        "dataEmissao": "14/11/2025",
+        "mes": 10,
+        "ano": 2025,
+        "cliente": "TMD FRICTION DO BRASIL S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "NISS SALES",
+        "qtd": 0,
+        "valor": 3800,
+        "valorSemIPI": 3800,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "557",
         "dataEmissao": "14/11/2025",
         "mes": 10,
@@ -14663,6 +15588,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "557",
+        "dataEmissao": "14/11/2025",
+        "mes": 10,
+        "ano": 2025,
+        "cliente": "TMD FRICTION DO BRASIL S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "NISS SALES",
+        "qtd": 0,
+        "valor": 8300,
+        "valorSemIPI": 8300,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "558",
         "dataEmissao": "14/11/2025",
         "mes": 10,
@@ -14676,6 +15618,23 @@
         "valorSemIPI": 106999.2,
         "ipi": 3591.22,
         "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "558",
+        "dataEmissao": "14/11/2025",
+        "mes": 10,
+        "ano": 2025,
+        "cliente": "TMD FRICTION DO BRASIL S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "NISS SALES",
+        "qtd": 0,
+        "valor": 3500,
+        "valorSemIPI": 3500,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -14867,6 +15826,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "571",
+        "dataEmissao": "29/09/2025",
+        "mes": 8,
+        "ano": 2025,
+        "cliente": "SUPERFRIO ARMAZENS GERAIS S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "RODRIGO",
+        "qtd": 0,
+        "valor": 1500,
+        "valorSemIPI": 1500,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "572",
         "dataEmissao": "29/09/2025",
         "mes": 8,
@@ -15020,6 +15996,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "572",
+        "dataEmissao": "29/09/2025",
+        "mes": 8,
+        "ano": 2025,
+        "cliente": "SUPERFRIO ARMAZENS GERAIS S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "Sem Vendedor",
+        "qtd": 0,
+        "valor": 1300,
+        "valorSemIPI": 1300,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "573",
         "dataEmissao": "29/09/2025",
         "mes": 8,
@@ -15084,6 +16077,23 @@
         "valorSemIPI": 5192,
         "ipi": 193.14,
         "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "573",
+        "dataEmissao": "29/09/2025",
+        "mes": 8,
+        "ano": 2025,
+        "cliente": "SUPERFRIO ARMAZENS GERAIS S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "RODRIGO",
+        "qtd": 0,
+        "valor": 1350,
+        "valorSemIPI": 1350,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -15207,6 +16217,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "574",
+        "dataEmissao": "29/09/2025",
+        "mes": 8,
+        "ano": 2025,
+        "cliente": "SUPERFRIO ARMAZENS GERAIS S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "RODRIGO",
+        "qtd": 0,
+        "valor": 4500,
+        "valorSemIPI": 4500,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "575",
         "dataEmissao": "29/09/2025",
         "mes": 8,
@@ -15305,6 +16332,23 @@
         "valorSemIPI": 1395,
         "ipi": 51.53,
         "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "575",
+        "dataEmissao": "29/09/2025",
+        "mes": 8,
+        "ano": 2025,
+        "cliente": "SUPERFRIO ARMAZENS GERAIS S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "RODRIGO",
+        "qtd": 0,
+        "valor": 3500,
+        "valorSemIPI": 3500,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -15853,6 +16897,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "585",
+        "dataEmissao": "22/12/2025",
+        "mes": 11,
+        "ano": 2025,
+        "cliente": "PRIMA SOLE COMPONENTES PERNAMBUCO LTDA",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "Sem Vendedor",
+        "qtd": 0,
+        "valor": 13200,
+        "valorSemIPI": 13200,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "589",
         "dataEmissao": "06/11/2025",
         "mes": 10,
@@ -16002,6 +17063,23 @@
         "valorSemIPI": 2449.68,
         "ipi": 86.64,
         "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "605",
+        "dataEmissao": "09/12/2025",
+        "mes": 11,
+        "ano": 2025,
+        "cliente": "SUPERFRIO ARMAZENS GERAIS S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "Sem Vendedor",
+        "qtd": 0,
+        "valor": 1500,
+        "valorSemIPI": 1500,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -16325,6 +17403,23 @@
         "valorSemIPI": 1128,
         "ipi": 37.86,
         "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "616",
+        "dataEmissao": "20/11/2025",
+        "mes": 10,
+        "ano": 2025,
+        "cliente": "OESA COMERCIO E REPRESENTACOES S/A",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "CARLOS POTERALA",
+        "qtd": 0,
+        "valor": 6000,
+        "valorSemIPI": 6000,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -16720,6 +17815,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "629",
+        "dataEmissao": "24/03/2026",
+        "mes": 2,
+        "ano": 2026,
+        "cliente": "COMFRIO SOLUCOES LOGISTICAS S/A",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "NISS SALES",
+        "qtd": 0,
+        "valor": 1200,
+        "valorSemIPI": 1200,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "631",
         "dataEmissao": "18/02/2026",
         "mes": 1,
@@ -16801,6 +17913,23 @@
         "valorSemIPI": 4672.8,
         "ipi": 170.13,
         "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "635",
+        "dataEmissao": "09/12/2025",
+        "mes": 11,
+        "ano": 2025,
+        "cliente": "SUPERFRIO ARMAZENS GERAIS S.A.",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "Sem Vendedor",
+        "qtd": 0,
+        "valor": 800,
+        "valorSemIPI": 800,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -16992,6 +18121,23 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "637",
+        "dataEmissao": "09/12/2025",
+        "mes": 11,
+        "ano": 2025,
+        "cliente": "TAC LOGISTICA LTDA",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "Sem Vendedor",
+        "qtd": 0,
+        "valor": 5500,
+        "valorSemIPI": 5500,
+        "ipi": 0,
+        "cfop": ""
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "638",
         "dataEmissao": "09/12/2025",
         "mes": 11,
@@ -17056,6 +18202,23 @@
         "valorSemIPI": 1521,
         "ipi": 55.41,
         "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "638",
+        "dataEmissao": "09/12/2025",
+        "mes": 11,
+        "ano": 2025,
+        "cliente": "TAC LOGISTICA LTDA",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "Sem Vendedor",
+        "qtd": 0,
+        "valor": 2500,
+        "valorSemIPI": 2500,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -17243,6 +18406,23 @@
         "valorSemIPI": 281.2,
         "ipi": 10.18,
         "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "639",
+        "dataEmissao": "09/12/2025",
+        "mes": 11,
+        "ano": 2025,
+        "cliente": "TAC LOGISTICA LTDA",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "Sem Vendedor",
+        "qtd": 0,
+        "valor": 4800,
+        "valorSemIPI": 4800,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -18233,23 +19413,6 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
-        "nf": "703",
-        "dataEmissao": "29/05/2026",
-        "mes": 4,
-        "ano": 2026,
-        "cliente": "FITESA NAOTECIDOS S/A",
-        "produto": "MESA TOMBADORA DE IBC",
-        "familia": "PROJETO ESPECIAL - SERRALHERIA",
-        "vendedor": "Sem Vendedor",
-        "qtd": 3,
-        "valor": 29973,
-        "valorSemIPI": 29973,
-        "ipi": 0,
-        "cfop": "6101"
-      },
-      {
-        "operacao": "PEDIDO",
-        "situacao": "Autorizado",
         "nf": "707",
         "dataEmissao": "11/03/2026",
         "mes": 2,
@@ -18471,6 +19634,40 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
+        "nf": "732",
+        "dataEmissao": "13/04/2026",
+        "mes": 3,
+        "ano": 2026,
+        "cliente": "FITESA NAOTECIDOS S/A",
+        "produto": "DEFENSAS E BATE-RODAS - BATE-RODA GRANDE",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 53310,
+        "valorSemIPI": 53310,
+        "ipi": 0,
+        "cfop": "6116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "732",
+        "dataEmissao": "13/04/2026",
+        "mes": 3,
+        "ano": 2026,
+        "cliente": "FITESA NAOTECIDOS S/A",
+        "produto": "DEFENSAS E BATE-RODAS - BATE-RODA GRANDE EXTERNA ESTACIONAMENTO",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 23364,
+        "valorSemIPI": 23364,
+        "ipi": 0,
+        "cfop": "6116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
         "nf": "733",
         "dataEmissao": "27/04/2026",
         "mes": 3,
@@ -18484,6 +19681,57 @@
         "valorSemIPI": 4804,
         "ipi": 156.13,
         "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "734",
+        "dataEmissao": "10/04/2026",
+        "mes": 3,
+        "ano": 2026,
+        "cliente": "FITESA NAOTECIDOS S/A",
+        "produto": "DEFENSAS E BATE-RODAS - BATE-RODA PEQUENA",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 15850.4,
+        "valorSemIPI": 15850.4,
+        "ipi": 0,
+        "cfop": "6116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "735",
+        "dataEmissao": "10/04/2026",
+        "mes": 3,
+        "ano": 2026,
+        "cliente": "FITESA NAOTECIDOS S/A",
+        "produto": "ESTRUTURA DE FECHAMENTO - SHUTTER AND FILTERS",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 25630.68,
+        "valorSemIPI": 25630.68,
+        "ipi": 0,
+        "cfop": "6116"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "735",
+        "dataEmissao": "10/04/2026",
+        "mes": 3,
+        "ano": 2026,
+        "cliente": "FITESA NAOTECIDOS S/A",
+        "produto": "ESTRUTURA DE FECHAMENTO - DOUBLE FILTERS",
+        "familia": "Sem Família",
+        "vendedor": "Sem Vendedor",
+        "qtd": 1,
+        "valor": 27285.42,
+        "valorSemIPI": 27285.42,
+        "ipi": 0,
+        "cfop": "6116"
       },
       {
         "operacao": "PEDIDO",
@@ -18641,19 +19889,19 @@
       {
         "operacao": "PEDIDO",
         "situacao": "Autorizado",
-        "nf": "758",
-        "dataEmissao": "08/05/2026",
-        "mes": 4,
+        "nf": "739",
+        "dataEmissao": "16/04/2026",
+        "mes": 3,
         "ano": 2026,
-        "cliente": "FITESA NAOTECIDOS S/A",
-        "produto": "MESA IBC&apos;S SP3",
-        "familia": "PROJETO ESPECIAL - SERRALHERIA",
-        "vendedor": "Sem Vendedor",
-        "qtd": 1,
-        "valor": 24830,
-        "valorSemIPI": 24830,
+        "cliente": "CD SUL LOGISTICA LTDA",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "DIOGO ALMEIDA",
+        "qtd": 0,
+        "valor": 1500,
+        "valorSemIPI": 1500,
         "ipi": 0,
-        "cfop": "6101"
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -18875,6 +20123,23 @@
         "valorSemIPI": 10812.5,
         "ipi": 367.66,
         "cfop": "6101"
+      },
+      {
+        "operacao": "PEDIDO",
+        "situacao": "Autorizado",
+        "nf": "764",
+        "dataEmissao": "28/05/2026",
+        "mes": 4,
+        "ano": 2026,
+        "cliente": "BERTOLINI S/A",
+        "produto": "FRETE / OUTRAS DESPESAS",
+        "familia": "FRETE / OUTRAS DESPESAS",
+        "vendedor": "DIOGO ALMEIDA",
+        "qtd": 0,
+        "valor": 500,
+        "valorSemIPI": 500,
+        "ipi": 0,
+        "cfop": ""
       },
       {
         "operacao": "PEDIDO",
@@ -22877,7 +24142,7 @@
         "dataRef": "2026-03-03",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 182
+        "tempoCiclo": 183
       },
       {
         "descricao": "BERTOLINI - Porta paletes TRILHO GUIA - Venda peças",
@@ -23101,7 +24366,7 @@
         "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 181
+        "tempoCiclo": 182
       },
       {
         "descricao": "SUPERFRIO - CWB III -  Porta Pallet - Restauração",
@@ -23129,7 +24394,7 @@
         "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 181
+        "tempoCiclo": 182
       },
       {
         "descricao": "SUPERFRIO -CAMBÉ/PR (LDNII) -  Porta Pallet - Restauração",
@@ -23157,7 +24422,7 @@
         "dataRef": "2026-05-13",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 181
+        "tempoCiclo": 182
       },
       {
         "descricao": "SUPERFRIO- CWB II - Porta Pallet - Restauração",
@@ -23185,7 +24450,7 @@
         "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 181
+        "tempoCiclo": 182
       },
       {
         "descricao": "PLATAFORMA CALANDRA",
@@ -23269,7 +24534,7 @@
         "dataRef": "2026-07-07",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 181
+        "tempoCiclo": 182
       },
       {
         "descricao": "UNIQUE  -  EXPEDIÇÃO - Porta Pallet - Restauração",
@@ -23297,7 +24562,7 @@
         "dataRef": "2026-07-07",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 180
+        "tempoCiclo": 181
       },
       {
         "descricao": "UNIQUE  -  MATÉRIA PRIMA - Porta Pallet - Restauração",
@@ -23325,7 +24590,7 @@
         "dataRef": "2026-07-07",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 180
+        "tempoCiclo": 181
       },
       {
         "descricao": "UNIQUE  - EMBALAGEM - Porta Pallet - Restauração",
@@ -23353,7 +24618,7 @@
         "dataRef": "2026-07-07",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 180
+        "tempoCiclo": 181
       },
       {
         "descricao": "UNIQUE  - ACABADOS - Porta Pallet - Restauração",
@@ -23381,7 +24646,7 @@
         "dataRef": "2026-07-07",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 180
+        "tempoCiclo": 181
       },
       {
         "descricao": "UNIQUE - PROTEÇÃO TELADA",
@@ -23409,7 +24674,7 @@
         "dataRef": "2026-07-07",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 180
+        "tempoCiclo": 181
       },
       {
         "descricao": "UNIQUE - Desmontagem e Montagem de modulos p.palete",
@@ -23437,7 +24702,7 @@
         "dataRef": "2026-07-07",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 180
+        "tempoCiclo": 181
       },
       {
         "descricao": "COMPANHIA ZAFFARI COMERCIO E INDUSTRIA -  Serralheria - Estruturas",
@@ -23465,7 +24730,7 @@
         "dataRef": "2026-02-04",
         "ano": 2026,
         "mes": 1,
-        "tempoCiclo": 180
+        "tempoCiclo": 181
       },
       {
         "descricao": "Restauro porta paletes (duplicada em 18/01/2026 às 15:47:32)",
@@ -23661,7 +24926,7 @@
         "dataRef": "2026-02-05",
         "ano": 2026,
         "mes": 1,
-        "tempoCiclo": 175
+        "tempoCiclo": 176
       },
       {
         "descricao": "LJ 200 - CESTTO WENCESLAU -  Serralheria - Estruturas",
@@ -23801,7 +25066,7 @@
         "dataRef": "2026-07-07",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 172
+        "tempoCiclo": 173
       },
       {
         "descricao": "IMEC -  Porta Pallet - Restauração (Galpão Novo)",
@@ -23857,7 +25122,7 @@
         "dataRef": "2026-07-09",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 169
+        "tempoCiclo": 170
       },
       {
         "descricao": "COMERCIAL GOLLUB DE ALIMENTOS LTDA -  Guarda corpo modular",
@@ -24081,7 +25346,7 @@
         "dataRef": "2026-02-05",
         "ano": 2026,
         "mes": 1,
-        "tempoCiclo": 167
+        "tempoCiclo": 168
       },
       {
         "descricao": "CONDOMINIO DO BOURBON SHOPPING NOVO HAMBURGO -  Serralheria - Estruturas (1)",
@@ -24389,7 +25654,7 @@
         "dataRef": "2026-03-05",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 160
+        "tempoCiclo": 161
       },
       {
         "descricao": "CD ZAFFARI SERTORIO -  Serralheria - Estruturas",
@@ -24529,7 +25794,7 @@
         "dataRef": "2026-03-05",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 156
+        "tempoCiclo": 157
       },
       {
         "descricao": "LOJA 44 - ZAFF CARLOS GOMES -  Serralheria - Estruturas",
@@ -24557,7 +25822,7 @@
         "dataRef": "2026-03-05",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 156
+        "tempoCiclo": 157
       },
       {
         "descricao": "SUPERFRIO - BSB -  Mobilização",
@@ -24613,7 +25878,7 @@
         "dataRef": "2026-03-05",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 155
+        "tempoCiclo": 156
       },
       {
         "descricao": "MIBA SINTER  -  Porta Pallet - Venda 128 longarinas",
@@ -24837,7 +26102,7 @@
         "dataRef": "2026-02-20",
         "ano": 2026,
         "mes": 1,
-        "tempoCiclo": 145
+        "tempoCiclo": 146
       },
       {
         "descricao": "UNIDASUL  Serralheria - Linha de vida",
@@ -24865,7 +26130,7 @@
         "dataRef": "2026-02-20",
         "ano": 2026,
         "mes": 1,
-        "tempoCiclo": 145
+        "tempoCiclo": 146
       },
       {
         "descricao": "UNIDASUL  Serralheria - Linha de vida (duplicada em 20/02/2026 às 15:27:57)",
@@ -24893,7 +26158,7 @@
         "dataRef": "2026-02-20",
         "ano": 2026,
         "mes": 1,
-        "tempoCiclo": 145
+        "tempoCiclo": 146
       },
       {
         "descricao": "VETLOG DISTRIBUIDORA DE PRODUTOS PARA ANIMAIS LTDA -  Desmontagem / Montagem (mezanino)",
@@ -25005,7 +26270,7 @@
         "dataRef": "2026-03-05",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 139
+        "tempoCiclo": 140
       },
       {
         "descricao": "Bourbon Assis Brasil Loja 20 -  Serralheria - Estruturas",
@@ -25089,7 +26354,7 @@
         "dataRef": "2026-03-05",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 139
+        "tempoCiclo": 140
       },
       {
         "descricao": "VETLOG DISTRIBUIDORA DE PRODUTOS PARA ANIMAIS LTDA -  Instalação de P.P em POA (duplicada em 27/02/2",
@@ -25117,7 +26382,7 @@
         "dataRef": "2026-06-29",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 138
+        "tempoCiclo": 139
       },
       {
         "descricao": "VETLOG DISTRIBUIDORA DE PRODUTOS PARA ANIMAIS LTDA -  Instalação de produtos de segurança",
@@ -25397,7 +26662,7 @@
         "dataRef": "2026-03-16",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 121
+        "tempoCiclo": 122
       },
       {
         "descricao": "LJ 201 - CESTTO PROTÁSIO -  Serralheria - Estruturas (1)",
@@ -25453,7 +26718,7 @@
         "dataRef": "2026-03-17",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 120
+        "tempoCiclo": 121
       },
       {
         "descricao": "LOJA 44 - ZAFF CARLOS GOMES -  Serralheria industrial - Ralo Inox",
@@ -25565,7 +26830,7 @@
         "dataRef": "2026-06-18",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 118
+        "tempoCiclo": 119
       },
       {
         "descricao": "CÉLULA DE CARGA",
@@ -25649,7 +26914,7 @@
         "dataRef": "2026-03-26",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 111
+        "tempoCiclo": 112
       },
       {
         "descricao": "AGCO DO BRASIL - CANOAS -  Serralheria - Estruturas - RACK VIDROS",
@@ -25677,7 +26942,7 @@
         "dataRef": "2026-03-26",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 111
+        "tempoCiclo": 112
       },
       {
         "descricao": "AGCO DO BRASIL - CANOAS - PROT. COLUNA",
@@ -25705,7 +26970,7 @@
         "dataRef": "2026-03-26",
         "ano": 2026,
         "mes": 2,
-        "tempoCiclo": 111
+        "tempoCiclo": 112
       },
       {
         "descricao": "ATC - Reparo P.P",
@@ -25873,7 +27138,7 @@
         "dataRef": "2026-04-06",
         "ano": 2026,
         "mes": 3,
-        "tempoCiclo": 100
+        "tempoCiclo": 101
       },
       {
         "descricao": "CD SUL LOGISTICA LTDA -  Porta Pallet - Restauração (Médio)",
@@ -25901,7 +27166,7 @@
         "dataRef": "2026-04-06",
         "ano": 2026,
         "mes": 3,
-        "tempoCiclo": 100
+        "tempoCiclo": 101
       },
       {
         "descricao": "Bourbon Assis Brasil Loja 20 -  Serralheria - Estruturas (1)",
@@ -25929,7 +27194,7 @@
         "dataRef": "2026-04-07",
         "ano": 2026,
         "mes": 3,
-        "tempoCiclo": 99
+        "tempoCiclo": 100
       },
       {
         "descricao": "Bourbon Assis Brasil Loja 20 -  Serralheria industrial - Ralo Inox",
@@ -26293,7 +27558,7 @@
         "dataRef": "2026-04-16",
         "ano": 2026,
         "mes": 3,
-        "tempoCiclo": 90
+        "tempoCiclo": 91
       },
       {
         "descricao": "LOJA 44 - ZAFF CARLOS GOMES -  Serralheria industrial - Ralo Inox (3)",
@@ -26573,7 +27838,7 @@
         "dataRef": "2026-04-22",
         "ano": 2026,
         "mes": 3,
-        "tempoCiclo": 84
+        "tempoCiclo": 85
       },
       {
         "descricao": "COOL SEED TECNOLOGIA DE POS COLHEITA LTDA -  Serralheria - Linha de Vida",
@@ -26741,7 +28006,7 @@
         "dataRef": "2026-05-06",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 82
+        "tempoCiclo": 83
       },
       {
         "descricao": "ZAFFARI FERNANDES VIEIRA - LOJA 03 -  Serralheria industrial - Ralo Inox (2)",
@@ -26769,7 +28034,7 @@
         "dataRef": "2026-04-24",
         "ano": 2026,
         "mes": 3,
-        "tempoCiclo": 82
+        "tempoCiclo": 83
       },
       {
         "descricao": "SUPORTE PARA ROLOS (Mezanino)",
@@ -26993,7 +28258,7 @@
         "dataRef": "2026-06-25",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 70
+        "tempoCiclo": 71
       },
       {
         "descricao": "LAUDO EPP - CALIBRE",
@@ -27105,7 +28370,7 @@
         "dataRef": "2026-05-08",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 68
+        "tempoCiclo": 69
       },
       {
         "descricao": "Sapata Reg",
@@ -27217,7 +28482,7 @@
         "dataRef": "2026-05-12",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 64
+        "tempoCiclo": 65
       },
       {
         "descricao": "SUPERFRIO - LDN I -  Porta Pallet - Restauração",
@@ -27245,7 +28510,7 @@
         "dataRef": "2026-05-14",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 62
+        "tempoCiclo": 63
       },
       {
         "descricao": "Desmontagem e Montagem de Porta Paletes",
@@ -27329,7 +28594,7 @@
         "dataRef": "2026-05-22",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 54
+        "tempoCiclo": 55
       },
       {
         "descricao": "ZAFFARI RUA DA PRAIA 04 -  Serralheria industrial - Ralo Inox",
@@ -27441,7 +28706,7 @@
         "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 51
+        "tempoCiclo": 52
       },
       {
         "descricao": "Guia Pallet Drive In",
@@ -27525,7 +28790,7 @@
         "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 51
+        "tempoCiclo": 52
       },
       {
         "descricao": "ARTESTAMPO -  Pórtico - Sem talha",
@@ -27581,7 +28846,7 @@
         "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 51
+        "tempoCiclo": 52
       },
       {
         "descricao": "Montagem Porta Pallet",
@@ -27609,7 +28874,7 @@
         "dataRef": "2026-06-03",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 51
+        "tempoCiclo": 52
       },
       {
         "descricao": "TDK ELECTRONICS DO BRASIL LTDA. -  Porta Pallet - Laudos",
@@ -27637,7 +28902,7 @@
         "dataRef": "2026-05-25",
         "ano": 2026,
         "mes": 4,
-        "tempoCiclo": 51
+        "tempoCiclo": 52
       },
       {
         "descricao": "KIT REPARO",
@@ -28001,7 +29266,7 @@
         "dataRef": "2026-06-01",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 44
+        "tempoCiclo": 45
       },
       {
         "descricao": "HERC - Grade",
@@ -28057,7 +29322,7 @@
         "dataRef": "2026-06-01",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 44
+        "tempoCiclo": 45
       },
       {
         "descricao": "LJ 200 - CESTTO WENCESLAU -  Serralheria - Estruturas (1)",
@@ -28365,7 +29630,7 @@
         "dataRef": "2026-07-14",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 42
+        "tempoCiclo": 43
       },
       {
         "descricao": "Venda e colocação de protetores de coluna",
@@ -28393,7 +29658,7 @@
         "dataRef": "2026-07-01",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 36
+        "tempoCiclo": 37
       },
       {
         "descricao": "MELITTA -  Reparo de porta paletes",
@@ -28421,7 +29686,7 @@
         "dataRef": "2026-06-12",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 33
+        "tempoCiclo": 34
       },
       {
         "descricao": "PLUGSOM LOCACAO DE EQUIPAMENTOS E SERVICOS PARA EVENTOS LTDA -  Porta Pallet - Venda peças",
@@ -28477,7 +29742,7 @@
         "dataRef": "2026-06-25",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 29
+        "tempoCiclo": 30
       },
       {
         "descricao": "GDC ALIMENTOS S.A -  Porta Pallet - Restauração",
@@ -28505,7 +29770,7 @@
         "dataRef": "2026-06-16",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 29
+        "tempoCiclo": 30
       },
       {
         "descricao": "CALIBRE SCIENTIFIC BRASIL LTDA. -  Porta Pallet - Montagens",
@@ -28533,7 +29798,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 27
+        "tempoCiclo": 28
       },
       {
         "descricao": "ADIENT DO BRASIL BANCOS AUTOMOTIVOS - SJP/PR -  Porta Pallet - Laudos de Inspeção de P.P",
@@ -28617,7 +29882,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 23
+        "tempoCiclo": 24
       },
       {
         "descricao": "Bourbon Assis Brasil Loja 20 -  Serralheria industrial - Ralo Inox (1)",
@@ -28673,7 +29938,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 23
+        "tempoCiclo": 24
       },
       {
         "descricao": "BB. WALLIG - LOJA 25 -  Serralheria - Estruturas (1)",
@@ -28813,7 +30078,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 23
+        "tempoCiclo": 24
       },
       {
         "descricao": "ZAFFARI MALL HIPICA -  Serralheria - Estruturas",
@@ -28841,7 +30106,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 23
+        "tempoCiclo": 24
       },
       {
         "descricao": "BB SHOP TERESÓPOLIS -  Serralheria - Estruturas (1)",
@@ -28925,7 +30190,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 23
+        "tempoCiclo": 24
       },
       {
         "descricao": "LJ 201 - CESTTO PROTÁSIO -  Serralheria - Estruturas (3)",
@@ -28953,7 +30218,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 23
+        "tempoCiclo": 24
       },
       {
         "descricao": "Zaffari Ipiranga Loja 08 -  Serralheria - Estruturas (2)",
@@ -28981,7 +30246,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 23
+        "tempoCiclo": 24
       },
       {
         "descricao": "ZAFFARI LIMA E SlLVA -  Serralheria - Estruturas (2)",
@@ -29009,7 +30274,7 @@
         "dataRef": "2026-06-22",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 23
+        "tempoCiclo": 24
       },
       {
         "descricao": "ZAFFARI - SÃO LEOPOLDO - LOJA 31 -  Serralheria industrial - Ralo Inox (3)",
@@ -29065,7 +30330,7 @@
         "dataRef": "2026-07-09",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 23
+        "tempoCiclo": 24
       },
       {
         "descricao": "ZAFFARI - SÃO LEOPOLDO - LOJA 31 -  Serralheria - Estruturas",
@@ -29093,7 +30358,7 @@
         "dataRef": "2026-07-09",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 23
+        "tempoCiclo": 24
       },
       {
         "descricao": "ZAFFARI MAL FLORIANO - LOJA 11 -  Serralheria - Estruturas (2)",
@@ -29121,7 +30386,7 @@
         "dataRef": "2026-06-23",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 22
+        "tempoCiclo": 23
       },
       {
         "descricao": "Bourbon Assis Brasil Loja 20 -  Serralheria - Estruturas (5)",
@@ -29317,7 +30582,7 @@
         "dataRef": "2026-07-09",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 21
+        "tempoCiclo": 22
       },
       {
         "descricao": "Venda de Produtos (protetor de montante, guard-rail ) (duplicada em 24/06/2026 às 12:45:09)",
@@ -29345,7 +30610,7 @@
         "dataRef": "2026-07-09",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 21
+        "tempoCiclo": 22
       },
       {
         "descricao": "tela milimetrica",
@@ -29429,7 +30694,7 @@
         "dataRef": "2026-06-24",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 21
+        "tempoCiclo": 22
       },
       {
         "descricao": "INDUSTRALIZAÇÃO LONGARINAS",
@@ -29457,7 +30722,7 @@
         "dataRef": "2026-06-25",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 20
+        "tempoCiclo": 21
       },
       {
         "descricao": "BB SHOP TERESÓPOLIS -  Serralheria industrial - Ralo Inox",
@@ -29513,7 +30778,7 @@
         "dataRef": "2026-06-26",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 19
+        "tempoCiclo": 20
       },
       {
         "descricao": "LJ 201 - CESTTO PROTÁSIO -  Serralheria - Estruturas (4)",
@@ -29541,7 +30806,7 @@
         "dataRef": "2026-06-26",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 19
+        "tempoCiclo": 20
       },
       {
         "descricao": "VLS FERRO E ACO - Portico Movel 4x4m + Trole + Talha Eletrica Industrial (Orc. 797)",
@@ -29569,7 +30834,7 @@
         "dataRef": "2026-06-29",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 19
+        "tempoCiclo": 20
       },
       {
         "descricao": "DRUL CHEMICALS - Protetores de Coluna (39un 400mm) + Guard-Rail 2500x400mm (Orc. 807)",
@@ -29597,7 +30862,7 @@
         "dataRef": "2026-06-29",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 16
+        "tempoCiclo": 17
       },
       {
         "descricao": "MAINTECH - 288x Longarinas 1760mm Cap.100kg + 576 travessas (Orc. 808)",
@@ -29625,7 +30890,7 @@
         "dataRef": "2026-06-29",
         "ano": 2026,
         "mes": 5,
-        "tempoCiclo": 16
+        "tempoCiclo": 17
       },
       {
         "descricao": "ZAFF. HIGIENÓPOLIS - LJ 15 -  Serralheria - Estruturas",
@@ -29681,7 +30946,7 @@
         "dataRef": "2026-07-02",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 13
+        "tempoCiclo": 14
       },
       {
         "descricao": "ARPEX - Piso de elevacao e cobertura para gerador + icamento (Orc. 817 produto + 2542 servico)",
@@ -29709,7 +30974,7 @@
         "dataRef": "2026-07-02",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 13
+        "tempoCiclo": 14
       },
       {
         "descricao": "CEVA LOGISTICS - GARUVA_SC -  Porta Pallet - Laudos",
@@ -29793,7 +31058,7 @@
         "dataRef": "2026-07-08",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 7
+        "tempoCiclo": 8
       },
       {
         "descricao": "CONDOMINIO DO BOURBON SHOPPING COUNTRY -  Serralheria - Estruturas (1)",
@@ -29821,7 +31086,7 @@
         "dataRef": "2026-07-08",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 7
+        "tempoCiclo": 8
       },
       {
         "descricao": "BB. WALLIG - LOJA 25 -  Serralheria industrial - Ralo Inox",
@@ -29905,7 +31170,7 @@
         "dataRef": "2026-07-08",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 7
+        "tempoCiclo": 8
       },
       {
         "descricao": "KIT REPARO STIHL",
@@ -29933,7 +31198,7 @@
         "dataRef": "2026-07-14",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 7
+        "tempoCiclo": 8
       },
       {
         "descricao": "BB. WALLIG - LOJA 25 -  Serralheria - Estruturas (2)",
@@ -29961,7 +31226,7 @@
         "dataRef": "2026-07-09",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 6
+        "tempoCiclo": 7
       },
       {
         "descricao": "ZAFFARI LUCAS DE OLIVEIRA - LJ 38 -  Serralheria - Estruturas",
@@ -29989,7 +31254,7 @@
         "dataRef": "2026-07-09",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 6
+        "tempoCiclo": 7
       },
       {
         "descricao": "BARREIRAS MODULARES",
@@ -30017,7 +31282,7 @@
         "dataRef": "2026-07-14",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 5
+        "tempoCiclo": 6
       },
       {
         "descricao": "ZAFFARI - PARK SHOPP CANOAS - LJ 42 -  Serralheria industrial - Ralo Inox",
@@ -30045,7 +31310,7 @@
         "dataRef": "2026-07-10",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 5
+        "tempoCiclo": 6
       },
       {
         "descricao": "ZAFFARI - PARK SHOPP CANOAS - LJ 42 -  Serralheria industrial - Ralo Inox (duplicada em 10/07/2026 à",
@@ -30073,7 +31338,7 @@
         "dataRef": "2026-07-10",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 5
+        "tempoCiclo": 6
       },
       {
         "descricao": "SUPERFRIO -CAMBÉ/PR (LDNI) -  Porta Pallet - Restauração",
@@ -30101,7 +31366,7 @@
         "dataRef": "2026-07-10",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 5
+        "tempoCiclo": 6
       },
       {
         "descricao": "TRILHO GUIA BRF",
@@ -30129,7 +31394,7 @@
         "dataRef": "2026-07-13",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 2
+        "tempoCiclo": 3
       },
       {
         "descricao": "GKN -  Porta Pallet 07_26",
@@ -30185,7 +31450,7 @@
         "dataRef": "2026-07-14",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 1
+        "tempoCiclo": 2
       },
       {
         "descricao": "BB. WALLIG - LOJA 25 -  Serralheria - Estruturas (3)",
@@ -30213,7 +31478,7 @@
         "dataRef": "2026-07-14",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 1
+        "tempoCiclo": 2
       },
       {
         "descricao": "BB. WALLIG - LOJA 25 -  Serralheria - Estruturas (3) (duplicada em 14/07/2026 às 09:45:31)",
@@ -30241,7 +31506,7 @@
         "dataRef": "2026-07-14",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 1
+        "tempoCiclo": 2
       }
     ],
     "funil": [
