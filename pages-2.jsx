@@ -11,7 +11,7 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
   const [view, setView] = useState("horizontal");
   const [range, setRange] = useState("12M");
   const months6 = B.MONTHS_FULL.slice(0, 6);
-  const refYear = (B.META && B.META.ref_year) || new Date().getFullYear();
+  const refYear = year || (B.META && B.META.ref_year) || new Date().getFullYear();
   const handleMonthHeader = (i) => {
     const mm = String(i + 1).padStart(2, "0");
     const ym = `${refYear}-${mm}`;
@@ -237,7 +237,7 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
         <h2 className="card-title">Saldos acumulados por mês</h2>
         <TrendChart
           values={B.SALDOS_MES}
-          labels={B.MONTHS.map(m => m.charAt(0).toUpperCase() + m.slice(1) + " " + String((B.META && B.META.ref_year) || "").slice(-2))}
+          labels={B.MONTHS.map(m => m.charAt(0).toUpperCase() + m.slice(1) + " " + String(refYear || "").slice(-2))}
           color="var(--cyan)"
           height={isMobile ? 200 : 300}
           showLabels={!isMobile}
@@ -465,7 +465,7 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
       <div className="page-title">
         <div>
           <h1>Tesouraria</h1>
-          <div className="status-line"><span className="live-dot" /> Saldos e pulso · {(B.META && B.META.ref_year) || "—"}</div>
+          <div className="status-line"><span className="live-dot" /> Saldos e pulso · {refYear || "—"}</div>
         </div>
         <div className="actions">
         </div>

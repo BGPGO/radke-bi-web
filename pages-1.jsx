@@ -339,7 +339,10 @@ const PageOverview = ({ filters, setFilters, onOpenFilters, statusFilter, drilld
     }));
   }, [isTudoMode, B.MONTH_DATA, drilldown, year, months]);
   const [indicator, setIndicator] = useState("Valor líquido");
-  const refYear = (B.META && B.META.ref_year) || new Date().getFullYear();
+  // year = ano SELECIONADO no header (prop); ref_year do META é só fallback de build-time.
+  // Sem o prop, o segmento roxo (não faturados), labels e drilldowns ficavam cravados
+  // no ano do build mesmo com 2025 selecionado (bug reportado pelo cliente 15/07).
+  const refYear = year || (B.META && B.META.ref_year) || new Date().getFullYear();
   // descobre o indice ativo se o drilldown for de mes (pra destacar a barra)
   const activeMonthIdx = (drilldown && drilldown.type === "mes")
     ? B.MONTHS_FULL.findIndex(mn => {
@@ -580,7 +583,10 @@ const PageIndicators = ({ statusFilter, drilldown, setDrilldown, year, months })
   const totalDespesa = B.TOTAL_DESPESA;
   const valorLiq = B.VALOR_LIQUIDO;
   const margemLiq = B.MARGEM_LIQUIDA;
-  const refYear = (B.META && B.META.ref_year) || new Date().getFullYear();
+  // year = ano SELECIONADO no header (prop); ref_year do META é só fallback de build-time.
+  // Sem o prop, o segmento roxo (não faturados), labels e drilldowns ficavam cravados
+  // no ano do build mesmo com 2025 selecionado (bug reportado pelo cliente 15/07).
+  const refYear = year || (B.META && B.META.ref_year) || new Date().getFullYear();
   // Adiantamento de lucros aos sócios — excluído das despesas operacionais
   // no build, exposto via aggregateAdiantamentoLucros runtime pra reagir
   // a year/months/statusFilter. selectedSocio filtra o chart pra um sócio
@@ -713,7 +719,10 @@ const PageReceita = ({ filters, setFilters, onOpenFilters, statusFilter, drilldo
   // (Versão anterior recalculava por COMPETÊNCIA/emissão r[9], divergindo da
   //  âncora em ~R$ 596k no realizado — 144 NFs emitidas em ano != recebimento.)
   const B = useMemo(() => window.getBit(statusFilter, drilldown, year, months), [statusFilter, drilldown, year, months]);
-  const refYear = (B.META && B.META.ref_year) || new Date().getFullYear();
+  // year = ano SELECIONADO no header (prop); ref_year do META é só fallback de build-time.
+  // Sem o prop, o segmento roxo (não faturados), labels e drilldowns ficavam cravados
+  // no ano do build mesmo com 2025 selecionado (bug reportado pelo cliente 15/07).
+  const refYear = year || (B.META && B.META.ref_year) || new Date().getFullYear();
   const MONTHS_FULL = B.MONTHS_FULL || [];
   const [range, setRange] = useState("12M");
   const pad2 = (n) => String(n).padStart(2, "0");
@@ -832,7 +841,10 @@ const PageDespesa = ({ filters, setFilters, onOpenFilters, statusFilter, drilldo
   const numFornec = B.NUM_FORNECEDORES != null ? B.NUM_FORNECEDORES : B.DESPESA_FORNECEDORES.length;
   const mediaDesp = numFornec > 0 ? totalDespesa / numFornec : 0;
   const [range, setRange] = useState("12M");
-  const refYear = (B.META && B.META.ref_year) || new Date().getFullYear();
+  // year = ano SELECIONADO no header (prop); ref_year do META é só fallback de build-time.
+  // Sem o prop, o segmento roxo (não faturados), labels e drilldowns ficavam cravados
+  // no ano do build mesmo com 2025 selecionado (bug reportado pelo cliente 15/07).
+  const refYear = year || (B.META && B.META.ref_year) || new Date().getFullYear();
 
   const handleBarMes = (v, i) => {
     const mm = String(i + 1).padStart(2, "0");
