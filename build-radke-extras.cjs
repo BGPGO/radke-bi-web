@@ -98,15 +98,26 @@ if (abcRaw) {
 
 console.log('\n=== Faturamento por Produto (API Omie — pedidos de venda) ===');
 // Fonte: data/pedidos.json (fetch-omie-pedidos.cjs). Substitui FaturamentoPorProduto.xlsx (#5).
-// Metodologia validada centavo-a-centavo contra o XLSX/PBI em 2026-06-04:
-//   faturado='S' && cancelado!=='S', mês por dFat, valor_mercadoria por item
-//   → jan/fev/abr 2026 EXATOS; mar +0,27% (pedido faturado após o export manual).
-// #4 — REMESSA FUTURA: venda p/ entrega futura gera DOIS pedidos faturados:
-//   5922/6922 (simples faturamento = a VENDA, na data da venda) e
-//   5116/6116 (a entrega/remessa, meses depois). O PBI somava os dois (bug reportado
-//   pelo cliente). Mantemos 5922/6922 e excluímos 5116/6116 (e 5117/6117).
+// METODOLOGIA (reconciliada 15/07/2026 na vírgula com a tela "Pedidos de Venda" do Omie
+// do cliente — abril/2026 = R$ 356.023,83 exato):
+//   faturado='S' && cancelado!=='S', mês por dFat,
+//   EXCLUI pedidos com Categoria financeira "Remessa" (é o filtro que a tela do cliente usa
+//   — nível PEDIDO, não CFOP), e o total do pedido = valor_total_pedido (mercadoria + IPI
+//   + frete). A diferença entre valor_total_pedido e a soma dos itens entra como linha
+//   "FRETE / OUTRAS DESPESAS" pra bater no centavo.
+// ATENÇÃO: a exclusão por CFOP 5116/6116 (#4, regra antiga) foi substituída — a tela do
+// cliente confia na Categoria digitada no pedido. Se uma nota de entrega futura for
+// categorizada como venda (ex.: pedidos 732/734/735 de abr/2026, itens idênticos ao 6922
+// do pedido 684 de março), ela CONTA de novo — semântica escolhida pelo cliente em 15/07.
 // #6/#8 — valor = vMerc + IPI (valor total do produto c/ IPI). valorSemIPI preservado.
-const REMESSA_FUTURA_RE = /^(5116|6116|5117|6117)$/;
+const REMESSA_FUTURA_RE = /^(5116|6116|5117|6117)$/; // ainda usada nos NÃO-faturados (#14)
+// Categorias "Remessa" pelo cadastro (1.04.99 / 2.08.93 hoje) — resolvidas pelo nome.
+const remessaCats = (function () {
+  try {
+    const cats = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'categorias.json'), 'utf8'));
+    return new Set((Array.isArray(cats) ? cats : []).filter(c => /remessa/i.test(c.descricao || '')).map(c => c.codigo));
+  } catch { return new Set(); }
+})();
 let pedidosData = null;
 try { pedidosData = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'pedidos.json'), 'utf8')); }
 catch (e) { console.error('  [SKIP] data/pedidos.json: ' + (e.message || '').slice(0, 60) + ' — preserva snapshot anterior'); }
@@ -145,14 +156,26 @@ function aggBy(items, keyFn, valueFn = (x) => x.valor) {
 let fatPorFamilia, fatPorVendedor, fatPorCliente, fatPorMes, fatTotais, fatDetalhado, fatProdutoMes, fatItemsAno, fatItemsAll, naoFaturados;
 if (pedidosData && Array.isArray(pedidosData.pedidos)) {
   const fatItems = [];
-  let remessaFuturaExcl = 0, remessaFuturaValor = 0;
+  let remessaPedExcl = 0, remessaPedValor = 0, freteTotal = 0;
+  // fallback: pedidos.json antigo (sem codCategoria) → mantém regra CFOP antiga pra não zerar
+  const temCategoria = pedidosData.pedidos.some(p => p.codCategoria !== undefined);
+  if (!temCategoria) console.error('  [AVISO] pedidos.json sem codCategoria — usando regra CFOP antiga (refetch necessário)');
   for (const p of pedidosData.pedidos) {
     if (p.faturado !== 'S' || p.cancelado === 'S') continue;
     const dEm = parseBRdate(p.dFat);
     if (!dEm) continue;
+    // Exclusão nível PEDIDO pela Categoria financeira (regra da tela do Omie do cliente)
+    if (temCategoria && remessaCats.has(p.codCategoria)) {
+      remessaPedExcl++;
+      remessaPedValor += p.valorTotalPedido || (p.itens || []).reduce((s, i) => s + (i.vMerc || 0) + (i.ipi || 0), 0);
+      continue;
+    }
     const cliente = cliNomeById.get(p.codCliente) || `Cliente ${p.codCliente || '?'}`;
+    let somaItens = 0;
     for (const it of (p.itens || [])) {
-      if (REMESSA_FUTURA_RE.test(it.cfop)) { remessaFuturaExcl++; remessaFuturaValor += it.vMerc; continue; } // #4
+      if (!temCategoria && REMESSA_FUTURA_RE.test(it.cfop)) continue; // fallback regra antiga (#4)
+      const valor = (it.vMerc || 0) + (it.ipi || 0);
+      somaItens += valor;
       fatItems.push({
         operacao: 'PEDIDO',
         situacao: 'Autorizado',
@@ -165,15 +188,28 @@ if (pedidosData && Array.isArray(pedidosData.pedidos)) {
         familia: it.familia || 'Sem Família',
         vendedor: p.vendedor || 'Sem Vendedor',
         qtd: it.qtd,
-        valor: (it.vMerc || 0) + (it.ipi || 0), // #6 — total c/ IPI
+        valor, // #6 — total c/ IPI
         valorSemIPI: it.vMerc || 0,
         ipi: it.ipi || 0,
         cfop: it.cfop,
       });
     }
+    // Frete/despesas do cabeçalho: valor_total_pedido − Σ itens. Entra como linha própria
+    // pra Σ do BI == Σ "Valor Total do Pedido" da tela do Omie (na vírgula).
+    const diff = temCategoria ? (p.valorTotalPedido || 0) - somaItens : 0;
+    if (diff > 0.005) {
+      freteTotal += diff;
+      fatItems.push({
+        operacao: 'PEDIDO', situacao: 'Autorizado', nf: p.numero || '',
+        dataEmissao: p.dFat, mes: dEm.getMonth(), ano: dEm.getFullYear(),
+        cliente, produto: 'FRETE / OUTRAS DESPESAS', familia: 'FRETE / OUTRAS DESPESAS',
+        vendedor: p.vendedor || 'Sem Vendedor', qtd: 0,
+        valor: Math.round(diff * 100) / 100, valorSemIPI: Math.round(diff * 100) / 100, ipi: 0, cfop: '',
+      });
+    }
   }
-  console.log('  pedidos faturados → ' + fatItems.length + ' itens · remessa futura excluída (#4): '
-    + remessaFuturaExcl + ' itens / R$ ' + remessaFuturaValor.toFixed(2));
+  console.log('  pedidos faturados → ' + fatItems.length + ' itens · pedidos Categoria=Remessa excluídos: '
+    + remessaPedExcl + ' / R$ ' + remessaPedValor.toFixed(2) + ' · frete/despesas: R$ ' + freteTotal.toFixed(2));
   fatItemsAll = fatItems.filter(x => x.valor > 0); // multi-ano (#9 — Curva ABC com filtro de ano)
 
   // #14 — PEDIDOS/OS AINDA NÃO FATURADOS, separados por tipo (produto vs serviço) e status.

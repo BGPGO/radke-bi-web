@@ -110,6 +110,12 @@ async function pullPaged(label, apiPath, method, baseParam, listKey, pageSize = 
       devolvido: inf.devolvido || 'N',
       codCliente: cab.codigo_cliente || null,
       vendedor: vendNome,
+      // Categoria financeira do pedido — é o que a tela "Pedidos de Venda" do Omie usa
+      // pra separar venda de remessa (reconciliação 15/07: bater com a visão do cliente).
+      codCategoria: adic.codigo_categoria || '',
+      // valor_total_pedido = mercadorias + IPI + frete (bate com "Valor Total do Pedido" da tela)
+      valorTotalPedido: (p.total_pedido || {}).valor_total_pedido || 0,
+      valorFrete: (p.frete || {}).valor_frete || 0,
       itens: (p.det || []).map(d => {
         const pr = d.produto || {};
         const lookup = produtoById.get(pr.codigo_produto) || {};
