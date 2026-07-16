@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-07-15T17:59:43.758Z",
+  "fetched_at": "2026-07-16T07:20:02.031Z",
   "abc": {
     "rows": [
       {
@@ -31370,12 +31370,12 @@
       },
       {
         "descricao": "TRILHO GUIA BRF",
-        "fase": "03 Proposta",
+        "fase": "06 Conclusão",
         "situacao": "Em Andamento",
         "ganho": false,
-        "perdido": "",
-        "aberto": true,
-        "motivo": "",
+        "perdido": true,
+        "aberto": false,
+        "motivo": "Orçamento",
         "vendedor": "DIOGO DE BEM ALMEIDA",
         "origem": "ATIVO - BERTOLINI",
         "tipo": "Cliente Corrente",
@@ -31389,12 +31389,12 @@
         "anoPrev": 2026,
         "mesPrev": "Julho",
         "dataIncl": "2026-07-13",
-        "dataAtual": "2026-07-13",
-        "dataConcl": null,
-        "dataRef": "2026-07-13",
+        "dataAtual": "2026-07-15",
+        "dataConcl": "2026-07-15",
+        "dataRef": "2026-07-15",
         "ano": 2026,
         "mes": 6,
-        "tempoCiclo": 3
+        "tempoCiclo": 2
       },
       {
         "descricao": "GKN -  Porta Pallet 07_26",
@@ -31513,38 +31513,38 @@
       {
         "fase": "Proposta",
         "chave": "03 Proposta",
-        "atual": 62,
+        "atual": 61,
         "cumulativo": 345
       },
       {
         "fase": "Negociação",
         "chave": "04 Negociação",
         "atual": 31,
-        "cumulativo": 283
+        "cumulativo": 284
       },
       {
         "fase": "Aguardando Pedido",
         "chave": "05 Aguardando Pedido",
         "atual": 1,
-        "cumulativo": 252
+        "cumulativo": 253
       },
       {
         "fase": "Conclusão",
         "chave": "06 Conclusão",
-        "atual": 251,
-        "cumulativo": 251
+        "atual": 252,
+        "cumulativo": 252
       }
     ],
     "totais": {
       "totalLeads": 345,
       "totalGanhos": 140,
-      "totalPerdidos": 81,
-      "totalAbertos": 124,
+      "totalPerdidos": 82,
+      "totalAbertos": 123,
       "taxaConversao": 40.57971014492754,
       "totalTicket": 25967691.150000006,
       "totalGanhoTicket": 6406673.370000001,
-      "totalAbertoTicket": 7783349.430000002,
-      "totalPerdidoTicket": 11777668.349999998,
+      "totalAbertoTicket": 7650979.880000002,
+      "totalPerdidoTicket": 11910037.899999999,
       "ticketMedio": 75268.67000000001,
       "anoCRM": 2026
     },
@@ -31553,8 +31553,8 @@
         "name": "DIOGO DE BEM ALMEIDA",
         "qtd": 73,
         "ganhos": 31,
-        "perdidos": 17,
-        "abertos": 25,
+        "perdidos": 18,
+        "abertos": 24,
         "ticket": 17906815.96,
         "ticketGanho": 3876196.2499999995,
         "conversao": 42.465753424657535
@@ -31615,8 +31615,8 @@
         "name": "ATIVO - BERTOLINI",
         "qtd": 17,
         "ganhos": 11,
-        "perdidos": 3,
-        "abertos": 3,
+        "perdidos": 4,
+        "abertos": 2,
         "ticket": 10065654.750000004,
         "ticketGanho": 312417.39999999997,
         "conversao": 64.70588235294117
@@ -31765,13 +31765,13 @@
       },
       {
         "name": "Orçamento",
-        "qtd": 93,
+        "qtd": 94,
         "ganhos": 79,
-        "perdidos": 14,
+        "perdidos": 15,
         "abertos": 0,
-        "ticket": 5086307.050000001,
+        "ticket": 5218676.600000001,
         "ticketGanho": 4747790.430000001,
-        "conversao": 84.94623655913979
+        "conversao": 84.04255319148936
       },
       {
         "name": "Ordem da Matriz",
@@ -31849,8 +31849,8 @@
         "name": "Cliente Corrente",
         "qtd": 99,
         "ganhos": 52,
-        "perdidos": 17,
-        "abertos": 30,
+        "perdidos": 18,
+        "abertos": 29,
         "ticket": 8713667.620000003,
         "ticketGanho": 2783469.13,
         "conversao": 52.52525252525253
@@ -31871,8 +31871,8 @@
         "name": "Porta Pallet - Venda peças",
         "qtd": 44,
         "ganhos": 15,
-        "perdidos": 19,
-        "abertos": 10,
+        "perdidos": 20,
+        "abertos": 9,
         "ticket": 9542880.620000001,
         "ticketGanho": 559688.16,
         "conversao": 34.090909090909086
@@ -31983,8 +31983,8 @@
         "name": "BERTOLINI - COLATINA/ES",
         "qtd": 20,
         "ganhos": 11,
-        "perdidos": 7,
-        "abertos": 2,
+        "perdidos": 8,
+        "abertos": 1,
         "ticket": 8508243.420000004,
         "ticketGanho": 312417.39999999997,
         "conversao": 55.00000000000001
@@ -32233,7 +32233,7 @@
         "m": "jul",
         "leads": 53,
         "ganhos": 10,
-        "perdidos": 19,
+        "perdidos": 20,
         "ticket": 2106022.3400000003,
         "ticketGanho": 110666.21999999999
       },
